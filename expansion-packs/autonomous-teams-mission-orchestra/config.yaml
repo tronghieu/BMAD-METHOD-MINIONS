@@ -1,0 +1,105 @@
+# Autonomous Teams Mission Orchestra Pack Configuration
+pack:
+  id: autonomous-teams-mission-orchestra
+  name: Autonomous Teams Mission Orchestra Pack
+  version: 1.0.0
+  description: |
+    Orchestrates autonomous teams through federated repository development,
+    supporting mission-level planning and cross-team coordination while
+    maintaining team independence.
+  author: BMad Method Community
+  compatibility:
+    bmad-core: ">=1.0.0"
+
+# Dependencies on core BMAD agents and resources
+dependencies:
+  core-agents:
+    - analyst    # For brainstorming and project briefs
+    - pm        # For PRD creation (extended for missions)
+    - architect # For system architecture
+    - po        # For validation and sharding
+    - qa        # For cross-team quality gates (optional)
+
+  core-tasks:
+    - create-doc
+    - shard-doc
+    - advanced-elicitation
+    - facilitate-brainstorming-session
+    - create-deep-research-prompt
+    - document-project
+
+  core-templates:
+    - project-brief-tmpl
+    - market-research-tmpl
+    - competitor-analysis-tmpl
+    - prd-template  # Will be extended for missions
+
+# Pack-specific agents
+agents:
+  - triage-master
+  - mission-orchestrator
+  - integration-specialist
+
+# Pack workflows
+workflows:
+  - mission-planning
+  - triage-routing
+
+# Pack templates
+templates:
+  - mission-prd-tmpl
+  - alignment-meeting-tmpl
+  - team-handoff-tmpl
+
+# Pack tasks
+tasks:
+  - orchestrate-mission
+  - shard-to-teams
+  - facilitate-alignment
+  - route-work-item
+
+# Pack data files
+data:
+  - orchestra-config
+
+# Extension points for core agents
+extensions:
+  pm:
+    additional-templates:
+      - mission-prd-tmpl
+    additional-tasks:
+      - orchestrate-mission
+
+  architect:
+    focus-areas:
+      - integration-architecture
+      - api-contract-design
+      - cross-team-data-flow
+
+  po:
+    additional-tasks:
+      - shard-to-teams
+
+# Default configuration
+defaults:
+  triage:
+    bug-severity-levels: [critical, high, medium, low]
+    enhancement-priority: backlog
+    feature-workflow: mission-planning
+
+  alignment:
+    meeting-duration: 90  # minutes
+    required-attendees: [pm, architect, team-leads]
+    commitment-type: formal  # formal | informal
+
+  integration:
+    contract-format: openapi  # openapi | graphql | grpc
+    versioning-strategy: semver
+    breaking-change-notice: 30  # days
+
+# Integration with federated repositories
+federation:
+  enabled: true
+  structure: submodules  # submodules | monorepo | polyrepo
+  coordination-model: mission-based
+  team-autonomy: high

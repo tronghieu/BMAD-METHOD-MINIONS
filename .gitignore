@@ -1,0 +1,24 @@
+#Ignore all bmad original files and folders
+
+/bmad-core
+/common
+/dist
+/docs
+/tools
+CHANGELOG.md
+CONTRIBUTING.md
+eslint.config.mjs
+LICENSE
+package-lock.json
+package.json
+PR-opencode-agents-generator.md
+prettier.config.mjs
+
+# Ignore expansion packs
+/expansion-packs/bmad-2d-phaser-game-dev/
+/expansion-packs/bmad-2d-unity-game-dev/
+/expansion-packs/bmad-creative-writing/
+/expansion-packs/bmad-godot-game-dev/
+/expansion-packs/bmad-infrastructure-devops/
+
+.DS_STORE

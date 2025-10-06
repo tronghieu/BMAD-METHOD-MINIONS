@@ -1,0 +1,343 @@
+# Mission Planning Workflow for Federated Teams
+workflow:
+  id: mission-planning-workflow-v1
+  name: Mission Planning for Autonomous Teams
+  description: |
+    End-to-end workflow for planning and coordinating missions across autonomous teams
+    in a federated repository structure. Takes ideas from inception through team handoffs.
+  version: 1.0
+
+metadata:
+  estimated_duration: 2-3 weeks
+  required_roles:
+    - product_manager
+    - architect
+    - team_leads
+    - mission_orchestrator
+  ideal_team_size: 5-10 teams max
+
+phases:
+  - id: discovery
+    name: Discovery & Ideation
+    duration: 3-5 days
+    description: Initial exploration and validation of the mission concept
+
+    steps:
+      - id: trigger_assessment
+        name: Assess Mission Trigger
+        agent: triage-master
+        description: Determine if work item requires mission planning
+        inputs:
+          - work_request
+          - initial_scope
+        outputs:
+          - classification (feature requiring mission)
+          - affected_teams_estimate
+        decision_point:
+          question: Does this require multi-team coordination?
+          yes: Continue to ideation
+          no: Route to single team backlog
+
+      - id: ideation
+        name: Brainstorming & Ideation
+        agent: analyst
+        task: facilitate-brainstorming-session
+        optional: true
+        description: Creative exploration of solution space
+        inputs:
+          - problem_statement
+          - constraints
+        outputs:
+          - brainstorming_results
+          - initial_ideas
+          - key_themes
+
+      - id: market_research
+        name: Market & Competitive Research
+        agent: analyst
+        task: create-doc
+        template: market-research-tmpl
+        optional: true
+        description: Understand market context and competition
+        when: Market validation needed
+        outputs:
+          - market_opportunity
+          - competitive_landscape
+          - user_needs
+
+      - id: project_brief
+        name: Create Project Brief
+        agent: analyst
+        task: create-doc
+        template: project-brief-tmpl
+        description: Consolidate discovery into actionable brief
+        inputs:
+          - brainstorming_results
+          - market_research
+          - stakeholder_input
+        outputs:
+          - project_brief
+          - success_criteria
+          - initial_scope
+
+  - id: mission_definition
+    name: Mission Definition
+    duration: 3-5 days
+    description: Transform project brief into mission PRD with cross-team epics
+
+    steps:
+      - id: create_mission_prd
+        name: Create Mission PRD
+        agent: pm
+        task: create-doc
+        template: mission-prd-tmpl
+        description: Define shared goals and cross-team epics
+        inputs:
+          - project_brief
+          - team_capabilities
+          - constraints
+        outputs:
+          - mission_prd_draft
+          - team_assignments
+          - dependency_map
+
+      - id: technical_architecture
+        name: Design System Architecture
+        agent: architect
+        task: create-doc
+        template: architecture-tmpl
+        description: Define technical approach and integration points
+        inputs:
+          - mission_prd_draft
+          - existing_systems
+          - technical_constraints
+        outputs:
+          - architecture_design
+          - integration_contracts
+          - technology_decisions
+
+      - id: integration_design
+        name: Design Integration Contracts
+        agent: integration-specialist
+        task: design-api-contract
+        description: Detail API contracts between teams
+        inputs:
+          - architecture_design
+          - team_boundaries
+        outputs:
+          - api_specifications
+          - data_schemas
+          - mock_strategies
+
+      - id: risk_assessment
+        name: Mission Risk Assessment
+        agent: mission-orchestrator
+        description: Identify and plan for mission risks
+        outputs:
+          - risk_register
+          - mitigation_plans
+          - contingencies
+
+  - id: alignment
+    name: Team Alignment
+    duration: 2-3 days
+    description: Achieve team commitment through formal alignment process
+
+    steps:
+      - id: pre_alignment_prep
+        name: Prepare for Alignment
+        agent: mission-orchestrator
+        task: orchestrate-mission
+        description: Set up alignment meeting for success
+        activities:
+          - distribute_pre_read
+          - confirm_attendance
+          - prepare_materials
+          - setup_tools
+        outputs:
+          - meeting_agenda
+          - pre_read_package
+          - facilitation_plan
+
+      - id: alignment_meeting
+        name: Facilitate Alignment Meeting
+        agent: mission-orchestrator
+        task: facilitate-alignment
+        description: Get formal team commitments
+        duration: 90 minutes
+        inputs:
+          - mission_prd
+          - architecture_design
+          - team_representatives
+        outputs:
+          - team_commitments
+          - dependency_agreements
+          - action_items
+          - meeting_notes
+
+      - id: commitment_confirmation
+        name: Confirm Commitments
+        agent: mission-orchestrator
+        description: Get written confirmation from all teams
+        duration: 48 hours
+        outputs:
+          - written_confirmations
+          - conditions_documented
+          - escalations_identified
+
+      - id: resolve_blockers
+        name: Resolve Blocking Issues
+        agent: mission-orchestrator
+        conditional: true
+        when: Blockers identified
+        description: Address any issues preventing commitment
+        outputs:
+          - blocker_resolutions
+          - updated_commitments
+
+  - id: decomposition
+    name: Mission Decomposition
+    duration: 2-3 days
+    description: Break down mission into team-specific work
+
+    steps:
+      - id: shard_mission
+        name: Shard Mission to Teams
+        agent: po
+        task: shard-to-teams
+        description: Create team-specific handoff documents
+        inputs:
+          - aligned_mission_prd
+          - team_commitments
+          - integration_contracts
+        outputs:
+          - team_handoff_docs
+          - team_specific_epics
+          - dependency_matrix
+
+      - id: validate_sharding
+        name: Validate Team Handoffs
+        agent: mission-orchestrator
+        description: Ensure consistency across team documents
+        activities:
+          - cross_reference_dependencies
+          - verify_completeness
+          - check_boundaries
+        outputs:
+          - validated_handoffs
+          - consistency_report
+
+      - id: team_kickoffs
+        name: Conduct Team Kickoffs
+        agent: mission-orchestrator
+        description: Hand off work to each team
+        parallel: true
+        for_each: team
+        activities:
+          - review_handoff_doc
+          - answer_questions
+          - confirm_understanding
+        outputs:
+          - kickoff_confirmations
+          - team_questions_answered
+
+  - id: enablement
+    name: Team Enablement
+    duration: 3-5 days
+    description: Enable teams to begin execution
+
+    steps:
+      - id: team_planning
+        name: Support Team Planning
+        agent: mission-orchestrator
+        description: Help teams create their PRDs and plans
+        parallel: true
+        optional: true
+        activities:
+          - review_team_prds
+          - clarify_requirements
+          - resolve_conflicts
+        outputs:
+          - team_prds_created
+          - sprint_plans_ready
+
+      - id: setup_coordination
+        name: Setup Coordination Rhythm
+        agent: mission-orchestrator
+        description: Establish ongoing coordination
+        activities:
+          - schedule_sync_meetings
+          - setup_channels
+          - create_dashboards
+        outputs:
+          - meeting_cadence
+          - communication_plan
+          - monitoring_setup
+
+      - id: mission_launch
+        name: Launch Mission Execution
+        agent: mission-orchestrator
+        description: Official mission kick-off
+        activities:
+          - all_hands_kickoff
+          - success_criteria_review
+          - first_sprint_start
+        outputs:
+          - mission_launched
+          - teams_executing
+
+workflow_automation:
+  triggers:
+    - type: work_item_created
+      condition: classification == 'feature' AND affects_teams > 2
+      action: start_workflow
+
+    - type: manual
+      condition: product_manager_initiated
+      action: start_workflow
+
+  notifications:
+    - event: alignment_meeting_scheduled
+      recipients: [all_team_leads]
+      message: Mission alignment meeting scheduled
+
+    - event: commitments_received
+      recipients: [stakeholders]
+      message: All teams committed to mission
+
+    - event: mission_launched
+      recipients: [all_participants]
+      message: Mission execution begun
+
+  gates:
+    - id: brief_approval
+      after_step: project_brief
+      approval_required: product_manager
+
+    - id: prd_approval
+      after_step: create_mission_prd
+      approval_required: [product_manager, architect]
+
+    - id: commitment_gate
+      after_step: commitment_confirmation
+      condition: all_teams_committed == true
+      fail_action: escalate_to_leadership
+
+success_metrics:
+  process_metrics:
+    - all_teams_committed: target >= 90%
+    - alignment_meeting_duration: target <= 90 minutes
+    - time_to_alignment: target <= 10 days
+    - handoff_clarity_score: target >= 8/10
+
+  outcome_metrics:
+    - mission_delivered_on_time: track
+    - integration_issues_during_execution: target < 3
+    - team_satisfaction_score: target >= 7/10
+
+tools_required:
+  - collaboration: [Miro, Mural, Figma]
+  - documentation: [Confluence, Notion, Google Docs]
+  - communication: [Slack, Teams, Discord]
+  - tracking: [Jira, Linear, GitHub Issues]
+  - repository: [Git with submodules]

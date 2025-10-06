@@ -1,0 +1,314 @@
+# Team Handoff Template - Mission to Team Transition
+template:
+  id: team-handoff-template-v1
+  name: Team Handoff Document
+  version: 1.0
+  output:
+    format: markdown
+    filename: docs/handoff-{{team_name}}-{{mission_code}}.md
+    title: "Team Handoff: {{team_name}} - Mission {{mission_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: false  # This is generated from mission PRD
+
+sections:
+  - id: handoff-header
+    title: Handoff Summary
+    template: |
+      **Mission:** {{mission_name}} ({{mission_code}})
+      **Team:** {{team_name}}
+      **Handoff Date:** {{handoff_date}}
+      **Team Lead:** {{team_lead}}
+      **Expected Duration:** {{expected_duration}}
+
+      This document contains everything the {{team_name}} team needs to execute their part of the mission.
+
+  - id: mission-context
+    title: Mission Context for {{team_name}}
+    sections:
+      - id: your-role
+        title: Your Role in the Mission
+        template: |
+          {{team_role_description}}
+
+          **Your Success Directly Impacts:**
+          {{#each impacted_teams}}
+          - {{team}}: {{how_impacted}}
+          {{/each}}
+      - id: mission-goals
+        title: Mission Goals You're Supporting
+        template: |
+          **Primary Mission Goal:** {{primary_goal}}
+
+          **Your Contribution:**
+          - {{team_contribution}}
+          - **Success Metric:** {{team_metric}}
+          - **Target:** {{team_target}}
+
+  - id: team-epics
+    title: Your Team's Epics
+    instruction: Extract team-specific epics from the mission PRD
+    repeatable: true
+    sections:
+      - id: epic-details
+        title: "Epic: {{epic_title}}"
+        template: |
+          **Epic ID:** {{epic_id}}
+          **Priority:** {{priority}}
+
+          ### User Story
+          As a {{user_type}}, I want to {{goal}} so that {{benefit}}
+
+          ### Your Deliverables
+          {{#each deliverables}}
+          - [ ] {{deliverable}}
+          {{/each}}
+
+          ### Acceptance Criteria
+          {{#each criteria}}
+          - {{criterion}}
+          {{/each}}
+
+          ### Definition of Done
+          {{#each done_criteria}}
+          - [ ] {{criterion}}
+          {{/each}}
+
+  - id: dependencies
+    title: Dependencies & Integration Points
+    sections:
+      - id: dependencies-on-others
+        title: What You Need From Other Teams
+        template: |
+          {{#each inbound_dependencies}}
+          ### From {{provider_team}} Team
+
+          **What:** {{dependency_description}}
+          **Format:** {{format}}
+          **When Needed:** {{needed_by}}
+          **Status:** {{current_status}}
+          **Contact:** {{contact_person}}
+          **Fallback Plan:** {{fallback}}
+
+          {{/each}}
+      - id: dependencies-from-you
+        title: What Other Teams Need From You
+        template: |
+          {{#each outbound_dependencies}}
+          ### To {{consumer_team}} Team
+
+          **What:** {{dependency_description}}
+          **Format:** {{format}}
+          **When Needed:** {{needed_by}}
+          **Priority:** {{priority}}
+          **Contact:** {{contact_person}}
+          **Impact if Delayed:** {{impact}}
+
+          {{/each}}
+
+  - id: integration-contracts
+    title: Integration Contracts
+    sections:
+      - id: apis-to-consume
+        title: APIs You'll Consume
+        repeatable: true
+        template: |
+          ### {{api_name}}
+
+          **Provider:** {{provider_team}}
+          **Documentation:** {{doc_link}}
+          **Environment URLs:**
+          - Dev: {{dev_url}}
+          - Staging: {{staging_url}}
+          - Prod: {{prod_url}}
+
+          **Key Endpoints:**
+          {{#each endpoints}}
+          - `{{method}} {{path}}` - {{description}}
+          {{/each}}
+
+          **Authentication:** {{auth_method}}
+          **Rate Limits:** {{rate_limits}}
+      - id: apis-to-provide
+        title: APIs You'll Provide
+        repeatable: true
+        template: |
+          ### {{api_name}}
+
+          **Consumers:** {{consumer_teams}}
+          **Contract Location:** {{contract_file}}
+          **Mock Available By:** {{mock_date}}
+          **Full Implementation By:** {{impl_date}}
+
+          **Required Endpoints:**
+          {{#each endpoints}}
+          - `{{method}} {{path}}` - {{description}}
+            - SLA: {{sla}}
+          {{/each}}
+
+  - id: technical-requirements
+    title: Technical Requirements & Constraints
+    sections:
+      - id: technical-specs
+        title: Technical Specifications
+        template: |
+          ### Performance Requirements
+          {{#each performance_reqs}}
+          - {{requirement}}: {{target}}
+          {{/each}}
+
+          ### Security Requirements
+          {{#each security_reqs}}
+          - {{requirement}}
+          {{/each}}
+
+          ### Compatibility Requirements
+          {{#each compatibility_reqs}}
+          - {{requirement}}
+          {{/each}}
+      - id: constraints
+        title: Constraints & Limitations
+        template: |
+          {{#each constraints}}
+          **{{constraint_type}}:** {{description}}
+          - Impact: {{impact}}
+          - Workaround: {{workaround}}
+
+          {{/each}}
+
+  - id: timeline
+    title: Timeline & Milestones
+    sections:
+      - id: team-milestones
+        title: Your Team's Milestones
+        template: |
+          | Milestone | Date | Deliverables | Dependencies |
+          |-----------|------|--------------|--------------|
+          {{#each milestones}}
+          | {{name}} | {{date}} | {{deliverables}} | {{dependencies}} |
+          {{/each}}
+      - id: integration-milestones
+        title: Integration Milestones
+        template: |
+          | Date | Milestone | Teams Involved | Your Deliverable |
+          |------|-----------|----------------|------------------|
+          {{#each integration_milestones}}
+          | {{date}} | {{milestone}} | {{teams}} | {{your_deliverable}} |
+          {{/each}}
+
+  - id: resources
+    title: Resources & Support
+    sections:
+      - id: documentation
+        title: Key Documentation
+        template: |
+          {{#each documents}}
+          - **{{doc_name}}**: {{doc_link}}
+            - {{description}}
+          {{/each}}
+      - id: contacts
+        title: Key Contacts
+        template: |
+          | Role | Name | Team | Contact | For |
+          |------|------|------|---------|-----|
+          {{#each contacts}}
+          | {{role}} | {{name}} | {{team}} | {{contact}} | {{for_what}} |
+          {{/each}}
+      - id: tools-access
+        title: Tools & Access Required
+        template: |
+          {{#each tools}}
+          - **{{tool_name}}**: {{purpose}}
+            - Access Status: {{access_status}}
+            - Request Process: {{how_to_request}}
+          {{/each}}
+
+  - id: risks
+    title: Risks & Mitigation
+    template: |
+      {{#each risks}}
+      ### {{risk_level}}: {{risk_title}}
+
+      **Description:** {{description}}
+      **Probability:** {{probability}}
+      **Impact on Your Team:** {{impact}}
+      **Mitigation:** {{mitigation}}
+      **Escalation Path:** {{escalation}}
+
+      {{/each}}
+
+  - id: startup-checklist
+    title: Team Startup Checklist
+    template: |
+      ### Before Starting Development
+
+      #### Understanding & Planning
+      - [ ] Review this handoff document completely
+      - [ ] Review Mission PRD for full context
+      - [ ] Create Team PRD with detailed stories
+      - [ ] Identify any gaps or clarifications needed
+      - [ ] Plan first sprint
+
+      #### Technical Setup
+      - [ ] Access all required tools and systems
+      - [ ] Set up development environment
+      - [ ] Clone necessary repositories
+      - [ ] Verify API access and credentials
+
+      #### Communication
+      - [ ] Join mission communication channels
+      - [ ] Schedule kick-off with team
+      - [ ] Confirm integration points with other teams
+      - [ ] Set up regular sync meetings
+
+      #### Dependencies
+      - [ ] Verify all inbound dependencies timeline
+      - [ ] Confirm your delivery commitments
+      - [ ] Identify any blockers
+      - [ ] Create mock services if needed
+
+  - id: communication-plan
+    title: Communication During Execution
+    template: |
+      ### Regular Communications
+
+      **Status Reports**
+      - Frequency: {{status_frequency}}
+      - Format: {{status_format}}
+      - Send To: {{status_recipients}}
+
+      **Team Syncs**
+      {{#each syncs}}
+      - **{{sync_name}}**: {{frequency}} with {{participants}}
+      {{/each}}
+
+      **Escalation Path**
+      1. {{escalation_level_1}}
+      2. {{escalation_level_2}}
+      3. {{escalation_level_3}}
+
+      **Integration Testing**
+      - Coordination Channel: {{integration_channel}}
+      - Test Environment: {{test_environment}}
+      - Schedule: {{test_schedule}}
+
+  - id: success-criteria
+    title: Success Criteria for Your Team
+    template: |
+      ### Definition of Success
+
+      **Your team's work is complete when:**
+      {{#each success_criteria}}
+      - [ ] {{criterion}}
+      {{/each}}
+
+      **Quality Gates:**
+      {{#each quality_gates}}
+      - {{gate}}: {{requirement}}
+      {{/each}}
+
+      **Sign-off Required From:**
+      {{#each signoffs}}
+      - {{role}} for {{component}}
+      {{/each}}

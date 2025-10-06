@@ -1,0 +1,258 @@
+# Mission PRD Template for Cross-Team Coordination
+template:
+  id: mission-prd-template-v1
+  name: Mission Product Requirements Document
+  version: 1.0
+  output:
+    format: markdown
+    filename: docs/mission-prd.md
+    title: "Mission PRD: {{mission_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+sections:
+  - id: mission-header
+    title: Mission Overview
+    instruction: |
+      Provide a high-level overview of the mission that will guide all teams.
+      This should inspire and align teams around a shared vision.
+    elicit: true
+    sections:
+      - id: mission-statement
+        title: Mission Statement
+        template: |
+          {{mission_statement}}
+
+          **Mission Code:** {{mission_code}}
+          **Duration:** {{estimated_duration}}
+          **Teams Involved:** {{team_list}}
+
+  - id: shared-goals
+    title: Shared Goals & Success Metrics
+    instruction: |
+      Define the measurable outcomes that ALL teams will work toward.
+      These should be business/user outcomes, not implementation details.
+    elicit: true
+    sections:
+      - id: primary-goal
+        title: Primary Goal
+        template: |
+          {{primary_goal_description}}
+
+          **Success Metric:** {{primary_metric}}
+          **Target:** {{target_value}}
+          **Measurement Method:** {{how_measured}}
+      - id: supporting-goals
+        title: Supporting Goals
+        type: bullet-list
+        template: |
+          - **Goal:** {{goal_description}}
+            - **Metric:** {{metric}}
+            - **Target:** {{target}}
+
+  - id: background-context
+    title: Background & Strategic Context
+    instruction: |
+      Provide the full context for why this mission is critical.
+      Include market forces, user feedback, competitive pressures, etc.
+    template: |
+      ### Problem Statement
+      {{problem_description}}
+
+      ### Strategic Importance
+      {{why_now}}
+
+      ### Risks of Not Acting
+      {{risks_of_inaction}}
+
+  - id: high-level-epics
+    title: High-Level Mission Epics
+    instruction: |
+      Define 3-5 user-centric epics that span multiple teams.
+      These are broad capabilities, not team-specific implementations.
+    elicit: true
+    sections:
+      - id: epic-list
+        title: Cross-Team Epics
+        repeatable: true
+        template: |
+          ### Epic {{epic_number}}: {{epic_title}}
+
+          **User Story:** As a {{user_type}}, I want to {{goal}} so that {{benefit}}
+
+          **Teams Involved:**
+          {{#each teams}}
+          - **{{team_name}}:** {{team_responsibility}}
+          {{/each}}
+
+          **Acceptance Criteria:**
+          {{#each criteria}}
+          - {{criterion}}
+          {{/each}}
+
+          **Dependencies:** {{dependencies}}
+
+  - id: team-responsibilities
+    title: Team Responsibility Matrix
+    instruction: |
+      Create a RACI matrix showing each team's role for major mission components.
+      R=Responsible, A=Accountable, C=Consulted, I=Informed
+    elicit: true
+    sections:
+      - id: raci-matrix
+        title: RACI Matrix
+        type: table
+        columns: ["Component", "Mobile", "Backend", "AI", "Web", "DevOps"]
+        rows:
+          - ["User Interface", "R/A", "C", "I", "R/A", "I"]
+          - ["API Development", "C", "R/A", "C", "C", "I"]
+          - ["Data Processing", "I", "R", "R/A", "I", "C"]
+          - ["ML Models", "I", "C", "R/A", "I", "I"]
+          - ["Infrastructure", "I", "C", "C", "I", "R/A"]
+
+  - id: integration-points
+    title: Integration Points & Contracts
+    instruction: |
+      Define the key integration points between teams.
+      These become the contracts that teams must honor.
+    elicit: true
+    sections:
+      - id: api-contracts
+        title: API Contracts
+        repeatable: true
+        template: |
+          ### {{service_name}} API
+
+          **Provider Team:** {{provider_team}}
+          **Consumer Teams:** {{consumer_teams}}
+          **Contract Type:** {{api_type}} (REST/GraphQL/gRPC)
+
+          **Key Endpoints:**
+          {{#each endpoints}}
+          - {{method}} {{path}} - {{description}}
+          {{/each}}
+
+          **SLA Requirements:**
+          - Availability: {{availability_target}}
+          - Latency p99: {{latency_target}}
+          - Throughput: {{throughput_target}}
+
+      - id: data-contracts
+        title: Data Contracts
+        repeatable: true
+        template: |
+          ### {{data_flow_name}}
+
+          **Source:** {{source_team}}
+          **Destination:** {{destination_team}}
+          **Format:** {{data_format}}
+          **Frequency:** {{update_frequency}}
+
+          **Schema:** {{schema_location}}
+
+  - id: cross-team-dependencies
+    title: Cross-Team Dependencies
+    instruction: |
+      Map critical dependencies between teams that could impact delivery.
+    sections:
+      - id: dependency-map
+        title: Dependency Map
+        template: |
+          ```mermaid
+          graph LR
+            A[Mobile Team] -->|API Contract| B[Backend Team]
+            B -->|Data Feed| C[AI Team]
+            C -->|Model API| B
+            B -->|Updates| A
+            D[Web Team] -->|API Contract| B
+          ```
+      - id: critical-paths
+        title: Critical Path Items
+        type: bullet-list
+        template: |
+          - {{dependency_description}} ({{from_team}} → {{to_team}})
+            - **Required by:** {{required_date}}
+            - **Impact if delayed:** {{impact}}
+
+  - id: milestones-timeline
+    title: Mission Milestones & Timeline
+    instruction: |
+      Define major milestones that require team coordination.
+    sections:
+      - id: milestone-list
+        title: Key Milestones
+        repeatable: true
+        template: |
+          ### Milestone {{milestone_number}}: {{milestone_name}}
+
+          **Date:** {{target_date}}
+          **Description:** {{milestone_description}}
+
+          **Team Deliverables:**
+          {{#each deliverables}}
+          - **{{team}}:** {{deliverable}}
+          {{/each}}
+
+          **Success Criteria:** {{success_criteria}}
+          **Integration Test Required:** {{integration_test}}
+
+  - id: risk-mitigation
+    title: Mission Risks & Mitigation
+    instruction: |
+      Identify risks that could impact the entire mission.
+    sections:
+      - id: risk-register
+        title: Risk Register
+        repeatable: true
+        template: |
+          ### Risk: {{risk_title}}
+
+          **Probability:** {{probability}} (High/Medium/Low)
+          **Impact:** {{impact}} (High/Medium/Low)
+          **Affected Teams:** {{affected_teams}}
+
+          **Mitigation Strategy:** {{mitigation}}
+          **Owner:** {{risk_owner}}
+          **Contingency Plan:** {{contingency}}
+
+  - id: communication-plan
+    title: Communication & Coordination Plan
+    instruction: |
+      Define how teams will stay synchronized during the mission.
+    template: |
+      ### Regular Sync Points
+      {{#each sync_meetings}}
+      - **{{meeting_name}}:** {{frequency}} - {{attendees}}
+      {{/each}}
+
+      ### Communication Channels
+      - **Primary:** {{primary_channel}}
+      - **Escalation:** {{escalation_channel}}
+      - **Documentation:** {{doc_location}}
+
+      ### Status Reporting
+      - **Frequency:** {{status_frequency}}
+      - **Format:** {{status_format}}
+      - **Audience:** {{status_audience}}
+
+  - id: success-criteria
+    title: Mission Success Criteria
+    instruction: |
+      Define what "done" means for this mission.
+    template: |
+      ### Definition of Done
+      {{#each done_criteria}}
+      - [ ] {{criterion}}
+      {{/each}}
+
+      ### Launch Criteria
+      {{#each launch_criteria}}
+      - [ ] {{criterion}}
+      {{/each}}
+
+      ### Success Metrics (30/60/90 days)
+      - **30 days:** {{thirty_day_metrics}}
+      - **60 days:** {{sixty_day_metrics}}
+      - **90 days:** {{ninety_day_metrics}}

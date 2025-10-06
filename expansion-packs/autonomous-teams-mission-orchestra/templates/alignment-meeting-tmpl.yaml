@@ -1,0 +1,286 @@
+# Alignment Meeting Template for Cross-Team Coordination
+template:
+  id: alignment-meeting-template-v1
+  name: PRD Alignment Meeting Documentation
+  version: 1.0
+  output:
+    format: markdown
+    filename: docs/alignment-meeting-{{date}}.md
+    title: "Alignment Meeting: {{mission_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: false  # This is more documentary
+
+sections:
+  - id: meeting-header
+    title: Meeting Information
+    template: |
+      **Date:** {{meeting_date}}
+      **Duration:** {{duration}}
+      **Facilitator:** {{facilitator_name}}
+      **Mission:** {{mission_name}}
+      **Meeting Type:** PRD Alignment & Commitment Ceremony
+
+  - id: attendees
+    title: Attendees
+    sections:
+      - id: required-attendees
+        title: Required Attendees
+        template: |
+          {{#each required_attendees}}
+          - [{{attendance_status}}] **{{name}}** - {{role}} ({{team}})
+          {{/each}}
+      - id: optional-attendees
+        title: Optional Attendees
+        template: |
+          {{#each optional_attendees}}
+          - [{{attendance_status}}] **{{name}}** - {{role}} ({{team}})
+          {{/each}}
+
+  - id: agenda-coverage
+    title: Agenda & Time Allocation
+    template: |
+      | Time | Duration | Topic | Owner | Status |
+      |------|----------|-------|-------|--------|
+      | {{start_time}} | 10 min | Mission Overview | PM | {{status}} |
+      | +10 min | 20 min | Epic Review & Discussion | PM | {{status}} |
+      | +30 min | 20 min | Dependency Identification | Architect | {{status}} |
+      | +50 min | 20 min | Team Commitment Ceremony | All Teams | {{status}} |
+      | +70 min | 15 min | Integration Planning | Integration Specialist | {{status}} |
+      | +85 min | 5 min | Next Steps & Action Items | Facilitator | {{status}} |
+
+  - id: mission-review
+    title: Mission Review
+    sections:
+      - id: mission-summary
+        title: Mission Summary (As Presented)
+        template: |
+          {{mission_summary}}
+
+          **Key Success Metrics:**
+          {{#each metrics}}
+          - {{metric}}: {{target}}
+          {{/each}}
+      - id: clarifications
+        title: Clarifications & Questions
+        template: |
+          {{#each clarifications}}
+          **Q:** {{question}} ({{asker}})
+          **A:** {{answer}}
+
+          {{/each}}
+
+  - id: epic-discussion
+    title: Epic Review & Team Mapping
+    repeatable: true
+    sections:
+      - id: epic-review
+        title: "Epic {{epic_number}}: {{epic_title}}"
+        template: |
+          **Description:** {{epic_description}}
+
+          **Team Assignments Discussed:**
+          {{#each team_assignments}}
+          - **{{team}}:** {{responsibility}}
+            - Feasibility: {{feasibility_assessment}}
+            - Concerns: {{concerns}}
+            - Resources Needed: {{resources}}
+          {{/each}}
+
+          **Consensus Reached:** {{consensus_status}}
+
+  - id: dependency-mapping
+    title: Cross-Team Dependencies Identified
+    sections:
+      - id: dependency-list
+        title: Critical Dependencies
+        template: |
+          {{#each dependencies}}
+          ### Dependency {{number}}: {{title}}
+
+          - **From:** {{provider_team}}
+          - **To:** {{consumer_team}}
+          - **Type:** {{dependency_type}}
+          - **Description:** {{description}}
+          - **Required By:** {{required_date}}
+          - **Risk Level:** {{risk_level}}
+          - **Mitigation:** {{mitigation_plan}}
+
+          {{/each}}
+      - id: blocker-analysis
+        title: Potential Blockers
+        template: |
+          {{#each blockers}}
+          ⚠️ **{{blocker_title}}**
+          - Teams Affected: {{affected_teams}}
+          - Impact: {{impact_description}}
+          - Resolution Plan: {{resolution}}
+          - Owner: {{owner}}
+
+          {{/each}}
+
+  - id: commitment-ceremony
+    title: Team Commitment Ceremony
+    sections:
+      - id: commitment-matrix
+        title: Team Commitments
+        template: |
+          | Team | Epic/Component | Commitment Level | Timeline | Conditions |
+          |------|---------------|-----------------|----------|------------|
+          {{#each commitments}}
+          | {{team}} | {{component}} | {{level}} | {{timeline}} | {{conditions}} |
+          {{/each}}
+
+          **Commitment Levels:**
+          - ✅ **Full Commit**: Team commits to delivery within timeline
+          - ⚠️ **Conditional**: Commitment depends on stated conditions
+          - ❌ **Cannot Commit**: Team cannot deliver in current form
+          - 🤔 **Needs Investigation**: Requires spike/research first
+      - id: capacity-concerns
+        title: Capacity & Resource Concerns
+        template: |
+          {{#each capacity_concerns}}
+          **{{team}} Team:**
+          - Current Capacity: {{current_capacity}}
+          - Required for Mission: {{required_capacity}}
+          - Gap: {{capacity_gap}}
+          - Proposed Solution: {{solution}}
+
+          {{/each}}
+
+  - id: integration-planning
+    title: Integration & Coordination Planning
+    sections:
+      - id: integration-points
+        title: Integration Points Confirmed
+        template: |
+          {{#each integration_points}}
+          ### {{integration_name}}
+
+          **Teams:** {{team1}} ↔️ {{team2}}
+          **Type:** {{integration_type}}
+          **Timeline:**
+          - Design Complete: {{design_date}}
+          - Mock Available: {{mock_date}}
+          - Integration Test: {{test_date}}
+
+          **Agreed Approach:** {{approach}}
+
+          {{/each}}
+      - id: coordination-rhythm
+        title: Coordination Rhythm
+        template: |
+          ### Regular Sync Points Agreed
+
+          {{#each sync_points}}
+          **{{meeting_name}}**
+          - Frequency: {{frequency}}
+          - Duration: {{duration}}
+          - Required: {{required_attendees}}
+          - First Meeting: {{first_meeting_date}}
+
+          {{/each}}
+
+  - id: decisions-made
+    title: Key Decisions Made
+    template: |
+      {{#each decisions}}
+      ### Decision {{number}}: {{decision_title}}
+
+      **Context:** {{context}}
+      **Decision:** {{decision}}
+      **Rationale:** {{rationale}}
+      **Impact:** {{impact}}
+      **Owner:** {{owner}}
+
+      {{/each}}
+
+  - id: action-items
+    title: Action Items
+    sections:
+      - id: immediate-actions
+        title: Immediate Actions (Next 48 hours)
+        template: |
+          | Action | Owner | Team | Due Date | Status |
+          |--------|-------|------|----------|--------|
+          {{#each immediate_actions}}
+          | {{action}} | {{owner}} | {{team}} | {{due_date}} | ⏳ Pending |
+          {{/each}}
+      - id: follow-up-actions
+        title: Follow-up Actions
+        template: |
+          | Action | Owner | Team | Due Date | Status |
+          |--------|-------|------|----------|--------|
+          {{#each follow_up_actions}}
+          | {{action}} | {{owner}} | {{team}} | {{due_date}} | ⏳ Pending |
+          {{/each}}
+
+  - id: risks-and-concerns
+    title: Risks & Concerns Raised
+    template: |
+      {{#each risks}}
+      ### {{risk_level}} Risk: {{risk_title}}
+
+      **Raised By:** {{raised_by}}
+      **Description:** {{description}}
+      **Probability:** {{probability}}
+      **Impact:** {{impact}}
+      **Proposed Mitigation:** {{mitigation}}
+      **Owner:** {{mitigation_owner}}
+
+      {{/each}}
+
+  - id: next-steps
+    title: Next Steps
+    template: |
+      ### Immediate Next Steps
+
+      1. **Document Distribution:** Meeting notes to all teams by {{distribution_date}}
+      2. **Team Planning:** Each team to create team PRDs by {{team_prd_date}}
+      3. **Commitment Confirmation:** Written confirmation from team leads by {{confirmation_date}}
+      4. **Kick-off Meeting:** Mission kick-off scheduled for {{kickoff_date}}
+
+      ### Success Criteria for Mission Start
+
+      - [ ] All team PRDs completed and reviewed
+      - [ ] Integration contracts drafted
+      - [ ] Resource allocation confirmed
+      - [ ] First sprint planned for each team
+      - [ ] Communication channels established
+
+  - id: meeting-notes
+    title: Additional Meeting Notes
+    template: |
+      ### Key Discussion Points
+
+      {{meeting_notes}}
+
+      ### Parking Lot Items
+
+      {{#each parking_lot}}
+      - {{item}} (Owner: {{owner}})
+      {{/each}}
+
+      ### Follow-up Required
+
+      {{#each follow_ups}}
+      - {{item}}: {{responsible_party}} to follow up by {{date}}
+      {{/each}}
+
+  - id: approval-signatures
+    title: Commitment Approval
+    template: |
+      ### Team Lead Approvals
+
+      By signing below, team leads confirm their team's commitment to the mission as discussed:
+
+      {{#each teams}}
+      **{{team_name}} Team**
+      - Team Lead: {{lead_name}}
+      - Commitment Status: {{commitment_status}}
+      - Signature: ______________________
+      - Date: {{date}}
+      - Notes: {{notes}}
+
+      {{/each}}

@@ -1,0 +1,413 @@
+# Triage and Routing Workflow for Work Items
+workflow:
+  id: triage-routing-workflow-v1
+  name: Work Item Triage and Routing
+  description: |
+    Rapid classification and routing workflow for incoming work items.
+    Routes bugs, enhancements, and features to appropriate teams and workflows.
+  version: 1.0
+
+metadata:
+  estimated_duration: < 4 hours per item
+  sla_targets:
+    critical_bug: 2 hours
+    high_priority: 4 hours
+    normal: 24 hours
+    low_priority: 48 hours
+
+entry_points:
+  - source: customer_support
+    channel: support_tickets
+    priority_boost: true
+
+  - source: monitoring_system
+    channel: alerts
+    auto_classify: bug
+
+  - source: product_team
+    channel: feature_requests
+    default_workflow: product_backlog
+
+  - source: engineering_team
+    channel: github_issues
+    preserve_labels: true
+
+  - source: stakeholders
+    channel: email
+    requires_acknowledgment: true
+
+decision_tree:
+  - id: initial_classification
+    name: Initial Classification
+    agent: triage-master
+    task: route-work-item
+
+    branches:
+      - id: is_broken
+        question: Is something broken that was working?
+        yes:
+          next: bug_flow
+        no:
+          next: enhancement_or_feature
+
+      - id: enhancement_or_feature
+        question: Is this a minor improvement or major new capability?
+        minor_improvement:
+          next: enhancement_flow
+        major_capability:
+          next: feature_flow
+        unclear:
+          next: needs_clarification
+
+  - id: bug_flow
+    name: Bug Classification Flow
+    type: sequential
+
+    steps:
+      - id: assess_severity
+        name: Assess Bug Severity
+        agent: triage-master
+
+        severity_matrix:
+          critical:
+            indicators:
+              - system_down
+              - data_loss
+              - security_breach
+              - revenue_impact
+            response: immediate
+            escalation: automatic
+
+          high:
+            indicators:
+              - major_feature_broken
+              - many_users_affected
+              - no_workaround
+            response: same_day
+            escalation: if_not_acknowledged
+
+          medium:
+            indicators:
+              - feature_impaired
+              - workaround_exists
+              - some_users_affected
+            response: within_sprint
+            escalation: none
+
+          low:
+            indicators:
+              - cosmetic_issue
+              - minor_inconvenience
+              - edge_case
+            response: as_capacity_allows
+            escalation: none
+
+      - id: identify_team
+        name: Identify Responsible Team
+        agent: triage-master
+
+        team_mapping:
+          rules:
+            - condition: component == 'mobile_ui'
+              team: mobile
+              backup: web
+
+            - condition: component == 'api'
+              team: backend
+              backup: architecture
+
+            - condition: component == 'ml_model'
+              team: ai
+              backup: data
+
+            - condition: component == 'infrastructure'
+              team: devops
+              backup: backend
+
+            - condition: affects_multiple_teams
+              team: architecture
+              action: coordinate_resolution
+
+      - id: route_to_team
+        name: Route to Team Backlog
+        agent: triage-master
+
+        routing_actions:
+          critical:
+            - create_incident
+            - page_on_call
+            - notify_stakeholders
+            - start_war_room
+
+          high:
+            - add_to_current_sprint
+            - notify_team_lead
+            - set_due_date
+
+          medium:
+            - add_to_backlog
+            - set_priority
+            - schedule_review
+
+          low:
+            - add_to_backlog
+            - tag_as_low_priority
+            - batch_with_similar
+
+  - id: enhancement_flow
+    name: Enhancement Classification Flow
+    type: sequential
+
+    steps:
+      - id: estimate_effort
+        name: Estimate Enhancement Effort
+        agent: triage-master
+
+        effort_sizing:
+          small:
+            definition: < 1 day effort
+            routing: team_backlog
+            approval: team_lead
+
+          medium:
+            definition: 1-3 days effort
+            routing: product_backlog
+            approval: product_owner
+
+          large:
+            definition: > 3 days effort
+            routing: product_review
+            approval: product_manager
+
+      - id: check_dependencies
+        name: Check for Dependencies
+        agent: triage-master
+
+        dependency_check:
+          - internal_dependencies
+          - external_dependencies
+          - cross_team_dependencies
+
+        if_dependencies_found:
+          action: flag_for_coordination
+          notify: affected_teams
+
+      - id: route_enhancement
+        name: Route Enhancement
+        agent: triage-master
+
+        routing_logic:
+          single_team:
+            action: add_to_team_backlog
+            priority: based_on_value
+
+          multiple_teams:
+            action: architecture_review
+            then: coordinate_implementation
+
+          unclear_ownership:
+            action: product_review
+            then: assign_owner
+
+  - id: feature_flow
+    name: Feature Classification Flow
+    type: sequential
+
+    steps:
+      - id: assess_scope
+        name: Assess Feature Scope
+        agent: triage-master
+
+        scope_assessment:
+          questions:
+            - how_many_teams_affected
+            - requires_new_architecture
+            - requires_new_infrastructure
+            - customer_facing_changes
+            - regulatory_implications
+
+        scope_categories:
+          single_team_feature:
+            teams: 1
+            complexity: low_medium
+            action: team_product_backlog
+
+          multi_team_feature:
+            teams: 2-3
+            complexity: medium_high
+            action: architecture_review
+
+          mission_level_feature:
+            teams: 3+
+            complexity: high
+            action: mission_planning_workflow
+
+      - id: strategic_assessment
+        name: Assess Strategic Importance
+        agent: triage-master
+
+        strategic_factors:
+          - revenue_impact
+          - competitive_advantage
+          - customer_satisfaction
+          - technical_innovation
+          - market_expansion
+
+        if_strategic:
+          action: executive_review
+          documentation: business_case
+
+      - id: route_feature
+        name: Route Feature Request
+        agent: triage-master
+
+        routing_decisions:
+          mission_planning:
+            trigger: mission-planning-workflow
+            handoff_to: mission-orchestrator
+
+          architecture_review:
+            assign_to: architect
+            action: technical_feasibility
+
+          product_planning:
+            assign_to: product_manager
+            action: roadmap_consideration
+
+          defer:
+            action: add_to_future_considerations
+            review_cycle: quarterly
+
+  - id: needs_clarification
+    name: Clarification Flow
+    type: interactive
+
+    steps:
+      - id: request_information
+        name: Request Additional Information
+        agent: triage-master
+
+        information_needed:
+          - detailed_description
+          - reproduction_steps
+          - expected_behavior
+          - business_impact
+          - urgency_justification
+
+        communication:
+          template: clarification_request
+          timeout: 48_hours
+          follow_up: 24_hours
+
+      - id: wait_for_response
+        name: Wait for Response
+
+        outcomes:
+          response_received:
+            action: restart_classification
+
+          timeout:
+            action: close_with_note
+            note: insufficient_information
+
+      - id: reclassify
+        name: Reclassify with New Information
+        agent: triage-master
+        action: return_to_initial_classification
+
+automation_rules:
+  auto_classification:
+    - pattern: "error|crash|down|broken"
+      classify_as: bug
+      confidence: high
+
+    - pattern: "add|improve|enhance|better"
+      classify_as: enhancement
+      confidence: medium
+
+    - pattern: "new|build|create|implement"
+      classify_as: feature
+      confidence: medium
+
+  auto_routing:
+    - condition: title contains 'mobile' OR 'ios' OR 'android'
+      route_to: mobile_team
+      confidence: high
+
+    - condition: title contains 'api' OR 'backend' OR 'service'
+      route_to: backend_team
+      confidence: high
+
+    - condition: reporter.type == 'customer'
+      add_flag: customer_reported
+      increase_priority: true
+
+  escalation:
+    - condition: severity == 'critical' AND not_acknowledged_in(30_minutes)
+      action: escalate_to_manager
+
+    - condition: customer_reported AND not_responded_in(2_hours)
+      action: escalate_to_product
+
+    - condition: blocked_for(2_days)
+      action: escalate_to_architecture
+
+notifications:
+  templates:
+    bug_routed:
+      to: [assigned_team, reporter]
+      subject: "Bug {{id}}: {{title}} - Routed to {{team}}"
+      body: |
+        Severity: {{severity}}
+        Expected Response: {{sla}}
+
+    enhancement_routed:
+      to: [assigned_team, product_owner]
+      subject: "Enhancement {{id}}: {{title}} - Added to backlog"
+
+    feature_routed:
+      to: [product_manager, architect]
+      subject: "Feature Request {{id}}: {{title}} - Requires review"
+
+  channels:
+    slack:
+      - critical_bugs: #incidents
+      - features: #product-planning
+      - general: #triage-updates
+
+metrics:
+  tracking:
+    - classification_accuracy
+    - routing_accuracy
+    - time_to_triage
+    - time_to_acknowledgment
+    - reroute_rate
+    - clarification_rate
+
+  targets:
+    classification_accuracy: > 90%
+    routing_accuracy: > 85%
+    average_triage_time: < 4 hours
+    critical_response_time: < 2 hours
+    reroute_rate: < 10%
+
+  reporting:
+    frequency: weekly
+    dashboard: triage_metrics_dashboard
+    recipients: [engineering_leads, product_team]
+
+continuous_improvement:
+  review_cycle: monthly
+
+  activities:
+    - analyze_rerouted_items
+    - update_classification_rules
+    - refine_team_mappings
+    - optimize_automation_rules
+    - gather_team_feedback
+
+  feedback_sources:
+    - team_satisfaction_survey
+    - reporter_satisfaction_survey
+    - triage_time_analysis
+    - routing_accuracy_audit
