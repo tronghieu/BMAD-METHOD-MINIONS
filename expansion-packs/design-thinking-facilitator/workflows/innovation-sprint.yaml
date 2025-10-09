@@ -1,0 +1,166 @@
+name: Innovation Sprint
+description: >
+  A 5-day Design Thinking sprint for rapid problem-solving and solution validation.
+  Based on the Google Ventures Sprint methodology, enhanced with BMAD's agentic
+  collaboration for comprehensive innovation.
+type: design-sprint
+duration: 5-days
+
+agents:
+  - dt-master
+  - empathy-researcher
+  - problem-definer
+  - ideation-coach
+  - prototype-builder
+  - test-analyst
+
+phases:
+  - name: Day 1 - Map & Target
+    description: Understand the problem space and choose focus area
+    duration: 8-hours
+    lead-agent: dt-master
+    supporting-agents:
+      - empathy-researcher
+      - problem-definer
+    activities:
+      - expert-interviews:
+          duration: 2-hours
+          output: stakeholder-insights
+      - journey-mapping:
+          duration: 2-hours
+          output: current-state-map
+      - problem-definition:
+          duration: 2-hours
+          output: hmw-questions
+      - target-selection:
+          duration: 2-hours
+          output: sprint-focus
+    deliverables:
+      - journey-map
+      - problem-statement
+      - sprint-questions
+
+  - name: Day 2 - Sketch
+    description: Generate solutions through structured ideation
+    duration: 8-hours
+    lead-agent: ideation-coach
+    supporting-agents:
+      - dt-master
+    activities:
+      - lightning-demos:
+          duration: 2-hours
+          output: inspiration-board
+      - idea-generation:
+          duration: 3-hours
+          output: solution-sketches
+      - crazy-8s:
+          duration: 1-hour
+          output: rapid-concepts
+      - solution-sketch:
+          duration: 2-hours
+          output: detailed-concepts
+    deliverables:
+      - solution-gallery
+      - concept-sketches
+      - feature-list
+
+  - name: Day 3 - Decide
+    description: Choose the best solution and create storyboard
+    duration: 8-hours
+    lead-agent: dt-master
+    supporting-agents:
+      - ideation-coach
+      - prototype-builder
+    activities:
+      - solution-review:
+          duration: 2-hours
+          output: heat-map
+      - solution-critique:
+          duration: 2-hours
+          output: decision-matrix
+      - storyboarding:
+          duration: 3-hours
+          output: prototype-plan
+      - task-assignment:
+          duration: 1-hour
+          output: build-plan
+    deliverables:
+      - winning-concept
+      - storyboard
+      - prototype-specification
+
+  - name: Day 4 - Prototype
+    description: Build realistic prototype for testing
+    duration: 8-hours
+    lead-agent: prototype-builder
+    supporting-agents:
+      - dt-master
+      - test-analyst
+    activities:
+      - asset-gathering:
+          duration: 2-hours
+          output: prototype-materials
+      - prototype-building:
+          duration: 5-hours
+          output: test-prototype
+      - test-preparation:
+          duration: 1-hour
+          output: test-protocol
+    deliverables:
+      - functional-prototype
+      - test-scenarios
+      - interview-guide
+
+  - name: Day 5 - Test
+    description: Validate with target users and gather insights
+    duration: 8-hours
+    lead-agent: test-analyst
+    supporting-agents:
+      - dt-master
+      - empathy-researcher
+    activities:
+      - user-interviews:
+          duration: 5-hours
+          output: test-sessions
+      - observation-notes:
+          duration: concurrent
+          output: observation-log
+      - synthesis:
+          duration: 2-hours
+          output: findings-summary
+      - next-steps:
+          duration: 1-hour
+          output: iteration-plan
+    deliverables:
+      - test-report
+      - key-insights
+      - recommendation-deck
+
+success-metrics:
+  - validated-assumptions: boolean
+  - user-satisfaction: rating
+  - feasibility-confirmed: boolean
+  - clear-next-steps: boolean
+  - team-alignment: rating
+
+tools-required:
+  - digital-whiteboard
+  - prototyping-software
+  - video-conferencing
+  - user-recruitment-platform
+
+templates:
+  - sprint-brief
+  - journey-map
+  - solution-sketch
+  - storyboard
+  - test-protocol
+  - findings-report
+
+best-practices:
+  - recruit-participants-early
+  - time-box-all-activities
+  - defer-perfection
+  - document-everything
+  - include-diverse-perspectives
+  - maintain-energy

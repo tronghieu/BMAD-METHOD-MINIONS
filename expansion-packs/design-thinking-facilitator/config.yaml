@@ -1,0 +1,13 @@
+# <!-- Powered by BMAD™ Core -->
+name: design-thinking-facilitator
+version: 1.0.0
+short-title: Design Thinking Facilitator
+description: >-
+  Comprehensive BMAD-powered Design Thinking facilitation framework that guides teams
+  through the five phases of Design Thinking (Empathize, Define, Ideate, Prototype, Test).
+  Includes 6 specialized agents, 5 workflows for different problem types, 20+ templates
+  for design thinking activities, and extensive checklists for quality assurance.
+  Integrates BMAD's agentic planning and context-engineered development principles
+  with human-centered design methodology.
+author: Design Thinking BMAD Team
+slashPrefix: bmad-dt

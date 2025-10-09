@@ -1,0 +1,184 @@
+name: Product Development Cycle
+description: >
+  Complete Design Thinking process for new product development, from initial
+  discovery through market launch. Integrates BMAD's systematic approach with
+  iterative design thinking principles for comprehensive product innovation.
+type: product-design
+duration: 8-12-weeks
+
+agents:
+  - dt-master
+  - empathy-researcher
+  - problem-definer
+  - ideation-coach
+  - prototype-builder
+  - test-analyst
+
+phases:
+  - name: Discovery
+    description: Deep user research and market understanding
+    duration: 2-weeks
+    lead-agent: empathy-researcher
+    supporting-agents:
+      - dt-master
+    activities:
+      - market-research:
+          output: competitive-analysis
+      - user-interviews:
+          output: interview-transcripts
+      - ethnographic-observation:
+          output: observation-insights
+      - stakeholder-mapping:
+          output: ecosystem-map
+      - journey-mapping:
+          output: current-experience-map
+    deliverables:
+      - research-report
+      - user-personas
+      - empathy-maps
+      - opportunity-areas
+
+  - name: Definition
+    description: Frame the right problem to solve
+    duration: 1-week
+    lead-agent: problem-definer
+    supporting-agents:
+      - dt-master
+      - empathy-researcher
+    activities:
+      - synthesis-workshop:
+          output: insight-themes
+      - problem-framing:
+          output: problem-statements
+      - success-metrics:
+          output: kpi-framework
+      - vision-setting:
+          output: product-vision
+    deliverables:
+      - problem-definition
+      - point-of-view-statements
+      - how-might-we-questions
+      - success-criteria
+
+  - name: Ideation
+    description: Generate and develop solution concepts
+    duration: 2-weeks
+    lead-agent: ideation-coach
+    supporting-agents:
+      - dt-master
+      - prototype-builder
+    activities:
+      - brainstorming-sessions:
+          output: idea-bank
+      - concept-development:
+          output: detailed-concepts
+      - feature-prioritization:
+          output: feature-roadmap
+      - technical-feasibility:
+          output: feasibility-assessment
+    deliverables:
+      - concept-portfolio
+      - feature-specifications
+      - value-proposition
+      - concept-validation-plan
+
+  - name: Prototyping
+    description: Build and refine solution iterations
+    duration: 3-weeks
+    lead-agent: prototype-builder
+    supporting-agents:
+      - dt-master
+      - test-analyst
+    activities:
+      - low-fi-prototyping:
+          output: paper-prototypes
+      - digital-mockups:
+          output: interactive-prototype
+      - technical-proof-of-concept:
+          output: poc-demo
+      - iteration-cycles:
+          output: refined-prototypes
+    deliverables:
+      - prototype-versions
+      - technical-architecture
+      - design-system
+      - test-ready-prototype
+
+  - name: Testing & Validation
+    description: Validate with users and refine
+    duration: 2-weeks
+    lead-agent: test-analyst
+    supporting-agents:
+      - dt-master
+      - empathy-researcher
+      - prototype-builder
+    activities:
+      - usability-testing:
+          output: usability-findings
+      - a-b-testing:
+          output: variant-performance
+      - beta-testing:
+          output: beta-feedback
+      - iteration-planning:
+          output: improvement-backlog
+    deliverables:
+      - test-report
+      - validated-learning
+      - iteration-recommendations
+      - go-to-market-readiness
+
+  - name: Implementation Planning
+    description: Prepare for development and launch
+    duration: 1-week
+    lead-agent: dt-master
+    supporting-agents:
+      - all
+    activities:
+      - handoff-preparation:
+          output: development-specs
+      - launch-planning:
+          output: go-to-market-strategy
+      - metrics-setup:
+          output: analytics-plan
+      - team-alignment:
+          output: project-charter
+    deliverables:
+      - product-requirements-document
+      - design-specifications
+      - launch-plan
+      - success-monitoring-plan
+
+iteration-cycles:
+  - trigger: major-issue-found
+    action: return-to-ideation
+  - trigger: assumption-invalidated
+    action: return-to-discovery
+  - trigger: technical-blocker
+    action: explore-alternatives
+
+success-metrics:
+  - user-satisfaction-score: target-85
+  - problem-solution-fit: validated
+  - technical-feasibility: confirmed
+  - business-viability: positive-roi
+  - time-to-market: on-schedule
+
+artifacts:
+  - research-repository
+  - design-system
+  - prototype-archive
+  - test-results-database
+  - product-documentation
+
+collaboration-model:
+  - daily-standups: true
+  - weekly-reviews: true
+  - stakeholder-demos: bi-weekly
+  - user-feedback-sessions: continuous
+
+risk-mitigation:
+  - early-technical-spikes
+  - continuous-user-validation
+  - iterative-development
+  - fallback-options
+  - clear-pivot-criteria
