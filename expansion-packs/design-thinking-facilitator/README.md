@@ -8,11 +8,11 @@ The Design Thinking Facilitator is a comprehensive BMAD-powered expansion pack t
 
 Design Thinking is a non-linear, iterative process that teams use to understand users, challenge assumptions, redefine problems, and create innovative solutions. This expansion pack provides AI-powered facilitation through all five phases:
 
-1. **Empathize** - Understand the user
-2. **Define** - Frame the problem
-3. **Ideate** - Generate creative solutions
-4. **Prototype** - Build tangible solutions
-5. **Test** - Learn from feedback
+1.  **Empathize** - Understand the user
+2.  **Define** - Frame the problem
+3.  **Ideate** - Generate creative solutions
+4.  **Prototype** - Build tangible solutions
+5.  **Test** - Learn from feedback
 
 ## Key Features
 
@@ -25,11 +25,11 @@ Design Thinking is a non-linear, iterative process that teams use to understand 
 - **Test Analyst** - Manages user testing and feedback analysis
 
 ### 📋 Workflows
-- **Innovation Sprint** - 5-day rapid innovation process
-- **Product Development** - Full product design lifecycle
-- **Service Design** - Customer journey and service blueprint creation
-- **Process Improvement** - Organizational process optimization
-- **Strategy Workshop** - Strategic problem-solving sessions
+- **Innovation Sprint** - 5-day rapid innovation process for digital products.
+- **Product Development** - A full lifecycle process for creating new products.
+- **Service Design** - For designing or improving customer service experiences.
+- **Process Improvement** - For optimizing internal business processes.
+- **Strategy Workshop** - For tackling complex strategic questions.
 
 ### 📝 Templates & Tools
 - User interview guides and empathy maps
@@ -40,85 +40,371 @@ Design Thinking is a non-linear, iterative process that teams use to understand 
 - Testing protocols and feedback trackers
 
 ### ✅ Quality Checklists
+
 - Research quality assessment
+
 - Problem statement validation
+
 - Ideation session effectiveness
+
 - Prototype readiness checklist
+
 - Testing protocol verification
 
-## Installation & Usage
 
-### For IDE Users (Cursor, VS Code, etc.)
 
-1. Copy the entire `design-thinking-facilitator` directory to your project
-2. Load the appropriate agent by referencing the agent file:
-   ```
-   @design-thinking-facilitator/agents/dt-master.md
-   ```
+## Usage Guidelines
 
-### For Web UI Users (ChatGPT, Claude, Gemini)
 
-Use the bundled version from the `dist` folder or reference individual components as needed.
 
 ### Quick Start
 
-1. **Start with the DT Master**: Load the `dt-master.md` agent
-2. **Choose a workflow**: Select based on your problem type
-3. **Follow the phases**: The agent will guide you through each Design Thinking phase
-4. **Use templates**: Leverage pre-built templates for each activity
-5. **Check quality**: Use checklists to ensure thoroughness
+
+
+1.  **Start with the DT Master**: Load the `dt-master.md` agent. This is your main entry point.
+
+2.  **Choose a workflow**: The agent will ask what you want to accomplish and help you select the right workflow (e.g., Product Development, Service Design).
+
+3.  **Follow the phases**: The agent will guide you through each Design Thinking phase, calling on specialist agents as needed.
+
+4.  **Trust the Process**: Rely on the agents to manage the complexity of the underlying tasks and templates.
+
+
+
+## How It Works: Understanding the Tasks
+
+
+
+This pack contains many tasks and templates, which can seem complex. However, it is designed to be managed by the agents. You, the user, primarily interact with the main **`DT Master Facilitator`** agent.
+
+
+
+The system works on two levels:
+
+
+
+1.  **Phase Tasks (What you'll see):** The `DT Master Facilitator` will guide you using a few high-level tasks that cover an entire Design Thinking phase (e.g., `facilitate-empathy-session.md`, `run-ideation-session.md`).
+
+
+
+2.  **Granular Tasks (What the agents use):** The specialist agents (`Empathy Researcher`, `Ideation Coach`, etc.) use many smaller, more detailed tasks to execute their work within a phase (e.g., `create-empathy-map.md`, `evaluate-and-prioritize.md`).
+
+
+
+**Your experience is simple:** You follow the lead of the `DT Master Facilitator`, and it handles the underlying complexity by using the right agent and the right granular task at the right time.
+
+
+
+## Visual Workflows: A Step-by-Step Guide
+
+
+
+Here is a visual guide to the most common user-agent collaboration flow for a new product.
+
+
+
+### Phase 1: Empathize (Understand Your User)
+
+
+
+**Goal:** To gain a deep understanding of your users' needs, behaviors, and motivations.
+
+
+
+```mermaid
+
+graph TD
+
+    A[Start: You have a general topic] --> B{Activate Empathy Researcher};
+
+    B --> C[User asks agent to run 'conduct-user-research.md'];
+
+    C --> D(Agent facilitates interviews & observations);
+
+    D --> E[User asks agent to run 'synthesize-research-findings.md'];
+
+    E --> F(Agent produces Personas, Journey Maps, and Research Insights);
+
+    F --> G[Handoff to Problem Definer];
+
+```
+
+
+
+### Phase 2: Define (Frame the Problem)
+
+
+
+**Goal:** To synthesize your research into a clear, actionable problem statement.
+
+
+
+```mermaid
+
+graph TD
+
+    A[Start: You have research findings] --> B{Activate Problem Definer};
+
+    B --> C[User asks agent to run 'craft-problem-statement.md'];
+
+    C --> D(Agent produces clear POV Statements);
+
+    D --> E[User asks agent to run 'generate-hmw-questions.md'];
+
+    E --> F(Agent produces "How Might We..." questions);
+
+    F --> G[Handoff to Ideation Coach];
+
+```
+
+
+
+### Phase 3: Ideate (Generate Solutions)
+
+
+
+**Goal:** To brainstorm a wide range of creative solutions to the defined problem.
+
+
+
+```mermaid
+
+graph TD
+
+    A[Start: You have HMW questions] --> B{Activate Ideation Coach};
+
+    B --> C[User asks agent to run 'run-brainstorm-session.md'];
+
+    C --> D(Agent facilitates brainstorming, producing many raw ideas);
+
+    D --> E[User asks agent to run 'evaluate-and-prioritize.md'];
+
+    E --> F(Agent produces 3-5 prioritized concepts);
+
+    F --> G[Handoff to Prototype Builder];
+
+```
+
+
+
+### Phase 4: Prototype (Build Your Ideas)
+
+
+
+**Goal:** To create tangible, testable versions of your best ideas.
+
+
+
+```mermaid
+
+graph TD
+
+    A[Start: You have prioritized concepts] --> B{Activate Prototype Builder};
+
+    B --> C[User asks agent to run 'plan-prototype-strategy.md'];
+
+    C --> D(Agent helps decide fidelity and scope);
+
+    D --> E[User asks agent to run 'build-rapid-prototype.md'];
+
+    E --> F(Agent produces a testable prototype - paper or digital);
+
+    F --> G[Handoff to Test Analyst];
+
+```
+
+
+
+### Phase 5: Test (Learn from Users)
+
+
+
+**Goal:** To get feedback on your prototypes from real users.
+
+
+
+```mermaid
+
+graph TD
+
+    A[Start: You have a testable prototype] --> B{Activate Test Analyst};
+
+    B --> C[User asks agent to run 'design-test-protocol.md'];
+
+    C --> D(Agent produces a testing plan and script);
+
+    D --> E[User asks agent to run 'conduct-usability-test.md'];
+
+    E --> F(Agent facilitates test sessions);
+
+    F --> G[User asks agent to run 'analyze-test-results.md'];
+
+    G --> H(Agent produces a Test Report with an Iteration Plan);
+
+    H --> I[Cycle Repeats: User decides whether to Iterate, Pivot, or Proceed];
+
+```
+
+
 
 ## Workflow Examples
 
+
+
 ### Innovation Sprint (5 Days)
-```
-Day 1: Empathize & Define
-Day 2: Define & Ideate
-Day 3: Ideate & Prototype
-Day 4: Prototype & Test
-Day 5: Test & Iterate
+
 ```
 
+Day 1: Empathize & Define
+
+Day 2: Define & Ideate
+
+Day 3: Ideate & Prototype
+
+Day 4: Prototype & Test
+
+Day 5: Test & Iterate
+
+```
+
+
+
 ### Product Development Cycle
+
 ```
+
 1. Market Research & User Discovery
+
 2. Problem Definition & Opportunity Mapping
+
 3. Concept Generation & Evaluation
+
 4. Rapid Prototyping & MVP Development
+
 5. User Testing & Product Iteration
+
 ```
+
+
+
+### Service Design Cycle
+
+```
+
+1. Service Discovery & Blueprinting
+
+2. Touchpoint Ideation
+
+3. Service Prototyping (e.g., Role-playing)
+
+4. Live Piloting & Feedback
+
+```
+
+
+
+### Process Improvement Flow
+
+```
+
+1. Current State Process Mapping
+
+2. Employee Empathy & Pain Point Analysis
+
+3. Future State Process Design
+
+4. Pilot New Process with Small Group
+
+5. Measure & Iterate
+
+```
+
+
+
+### Strategy Workshop (3 Days)
+
+```
+
+Day 1: Challenge Framing & Opportunity Mapping
+
+Day 2: Strategic Ideation & Scenario Modeling
+
+Day 3: Decision & Action Planning
+
+```
+
+
 
 ## Integration with BMAD Method
 
+
+
 This expansion pack leverages BMAD's core principles:
 
+
+
 - **Agentic Planning**: Specialized agents collaborate to create comprehensive design solutions
+
 - **Context-Engineered Development**: Each phase builds upon previous insights with full context preservation
+
 - **Human-in-the-Loop**: Continuous refinement through user feedback and iteration
+
 - **Domain Expertise**: Deep integration of Design Thinking best practices
+
+
 
 ## Best Practices
 
-1. **Start with Empathy**: Always begin by understanding your users
-2. **Defer Judgment**: Keep ideation phases open and non-critical
-3. **Bias Toward Action**: Build quick prototypes to test assumptions
-4. **Embrace Failure**: Learn from what doesn't work
-5. **Iterate Continuously**: Design Thinking is cyclical, not linear
+
+
+1.  **Start with Empathy**: Always begin by understanding your users
+
+2.  **Defer Judgment**: Keep ideation phases open and non-critical
+
+3.  **Bias Toward Action**: Build quick prototypes to test assumptions
+
+4.  **Embrace Failure**: Learn from what doesn't work
+
+5.  **Iterate Continuously**: Design Thinking is cyclical, not linear
+
+
 
 ## Support & Contribution
 
+
+
 - Report issues: [GitHub Issues](https://github.com/bmad-code-org/BMAD-METHOD/issues)
+
 - Contribute: Follow BMAD contribution guidelines
+
 - Documentation: See `/docs` folder for detailed guides
+
+
 
 ## Version History
 
-- v1.0.0 - Initial release with core Design Thinking framework
+
+
+- **v1.1.0** - Added new workflows and enhancing assets.
+
+  - 3 new workflows (`Service Design`, `Process Improvement`, `Strategy Workshop`)
+
+  - 2 new assets (`assumption-mapping-checklist.md`, `iteration-learnings-template.yaml`)
+
+- **v1.0.0** - Initial release with core Design Thinking framework
+
   - 6 specialized agents
+
   - 5 comprehensive workflows
+
   - 20+ templates and tools
+
   - Complete quality assurance checklists
 
+
+
 ## License
+
+
 
 This expansion pack is part of the BMAD-METHOD project and follows its licensing terms.

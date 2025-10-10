@@ -1,0 +1,481 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: observation-guide
+  name: Test Observation Guide
+  version: 1.0
+  description: Structured guide for observers during user testing
+  output:
+    format: markdown
+    filename: "testing/{{project_name}}-observation-guide.md"
+    title: "Observation Guide: {{project_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: test-analyst
+  editable_sections:
+    - Observation Framework
+    - Notes Template
+
+sections:
+  - id: guide-overview
+    title: Observation Guide Overview
+    type: structured-data
+    instruction: |
+      Guide details:
+      - Test name/project
+      - Date created
+      - For which test sessions
+      - Observer role (note-taker, stakeholder, etc.)
+      - Number of sessions to observe
+    elicit: true
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: observer-role
+    title: Observer Role & Responsibilities
+    instruction: |
+      What observers should do:
+      - Watch and listen actively
+      - Take detailed notes
+      - Document quotes verbatim
+      - Note behaviors and emotions
+      - Stay silent (don't interrupt)
+      - Avoid influencing participant
+      - Save questions for debrief
+
+      Observers are witnesses, not participants
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: what-to-observe
+    title: What to Observe
+    instruction: |
+      Multi-dimensional observation framework
+    sections:
+      - id: task-performance
+        title: "1. Task Performance"
+        type: bullet-list
+        instruction: |
+          Track how user completes tasks:
+          - **Success**: Did they complete it?
+          - **Path taken**: Expected vs. actual route
+          - **Efficiency**: Direct vs. exploratory
+          - **Errors made**: Mistakes, mis-clicks, wrong paths
+          - **Recovery**: How they fixed errors
+          - **Time**: How long did it take?
+          - **Assistance needed**: Did they need help?
+        template: |
+          Task [#]: [Observation notes]
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: user-behavior
+        title: "2. User Behavior"
+        type: bullet-list
+        instruction: |
+          Physical and digital behaviors:
+          - **Mouse movement**: Hovering, searching, precision
+          - **Scrolling patterns**: Fast scroll, careful reading
+          - **Reading vs. scanning**: How they process content
+          - **Button interactions**: Hesitation before clicking
+          - **Input behavior**: Fast typing, cautious entry
+          - **Navigation style**: Menu vs. search, back button use
+          - **Workarounds**: Creative problem-solving
+        template: |
+          - [Behavior observed]: [Context and notes]
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: verbal-cues
+        title: "3. Verbal Cues"
+        type: bullet-list
+        instruction: |
+          What users say (capture exact quotes):
+          - **Expectations**: "I thought this would..."
+          - **Confusion**: "Where is...", "I don't understand..."
+          - **Frustration**: "Why won't this...", "This is annoying..."
+          - **Discovery**: "Oh! I see now..."
+          - **Satisfaction**: "That's nice!", "Perfect."
+          - **Questions**: "What does this mean?"
+          - **Assumptions**: "This probably..."
+
+          Use quotation marks for exact words
+        template: |
+          - "[Exact quote]" - Context: [When/where said]
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: emotional-reactions
+        title: "4. Emotional Reactions"
+        instruction: |
+          Track emotional journey:
+          - **Facial expressions**: Smiles, frowns, puzzled looks
+          - **Body language**: Leaning in, leaning back, tension
+          - **Tone of voice**: Excited, frustrated, uncertain
+          - **Pauses**: Thinking or confused?
+          - **Sighs**: Relief or exasperation?
+          - **Exclamations**: Positive or negative surprise
+
+          Map emotional highs and lows through session
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: pain-points
+        title: "5. Pain Points & Friction"
+        type: bullet-list
+        instruction: |
+          Where users struggle:
+          - **Confusion points**: Can't find, don't understand
+          - **Error-prone areas**: Repeated mistakes
+          - **Abandonment points**: Give up, move on
+          - **Workarounds**: Have to find alternative path
+          - **Delays**: Excessive time spent
+          - **Complaints**: Explicit negative feedback
+
+          Rate severity: Critical/High/Medium/Low
+        template: |
+          - [Pain point]: Severity [X], Frequency [Y]
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: delight-moments
+        title: "6. Moments of Delight"
+        type: bullet-list
+        instruction: |
+          What exceeds expectations:
+          - **Positive surprises**: "Wow!", "That's cool!"
+          - **Smooth experiences**: Effortless completion
+          - **Helpful features**: "This is exactly what I needed"
+          - **Smart defaults**: "It knew what I wanted"
+          - **Aesthetic appreciation**: Comments on design
+
+          Capture what works well too!
+        template: |
+          - [Delight moment]: [User reaction]
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: session-observation-template
+    title: Session Observation Template
+    instruction: |
+      Fill out for each participant session
+    sections:
+      - id: session-info
+        title: Session Information
+        instruction: |
+          - Participant ID: [P01, P02, etc.]
+          - Date and time: [Date/Time]
+          - Observer name: [Your name]
+          - Session duration: [X minutes]
+          - Technical issues: [None or describe]
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: participant-profile
+        title: Participant Profile
+        instruction: |
+          Quick context:
+          - Persona match: [Which persona]
+          - Experience level: [Novice/Intermediate/Expert]
+          - Device used: [Desktop/Mobile/Tablet]
+          - First impressions: [Initial reactions]
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: task-by-task-observations
+        title: Task-by-Task Observations
+        instruction: |
+          For each task/scenario tested:
+        sections:
+          - id: task-observation
+            title: "Task [Number]: [Task Name]"
+            repeatable: true
+            instruction: Duplicate for each task
+            sections:
+              - id: task-outcome
+                title: Outcome
+                type: choice
+                choices: [Success, Success with help, Partial success, Failure, Skipped]
+                instruction: |
+                  Task completion result:
+                  - **Success**: Completed independently
+                  - **Success with help**: Needed hint/guidance
+                  - **Partial success**: Got close but not complete
+                  - **Failure**: Could not complete
+                  - **Skipped**: Moved on without completing
+                elicit: true
+                owner: test-analyst
+                editors: [test-analyst]
+
+              - id: time-taken
+                title: Time Taken
+                instruction: |
+                  - Start time: [HH:MM:SS]
+                  - End time: [HH:MM:SS]
+                  - Duration: [X min Y sec]
+                  - Expected time: [Benchmark]
+                owner: test-analyst
+                editors: [test-analyst]
+
+              - id: path-taken
+                title: Path Taken
+                type: numbered-list
+                instruction: |
+                  Document user's journey:
+                  1. [First action/screen]
+                  2. [Next action/screen]
+                  3. [Next action/screen]
+                  ...
+
+                  Compare to expected path
+                owner: test-analyst
+                editors: [test-analyst]
+
+              - id: errors-made
+                title: Errors & Recovery
+                type: bullet-list
+                instruction: |
+                  Mistakes and how handled:
+                  - [Error]: [How user recovered]
+                  - [Error]: [Got stuck, needed help]
+                template: |
+                  - [Error description]: Recovery [successful/unsuccessful]
+                owner: test-analyst
+                editors: [test-analyst]
+
+              - id: key-observations
+                title: Key Observations
+                type: bullet-list
+                instruction: |
+                  Notable moments for this task:
+                  - Confusion points
+                  - Aha moments
+                  - Unexpected behaviors
+                  - Strong reactions (+ or -)
+                template: |
+                  - [Observation]: [Context]
+                owner: test-analyst
+                editors: [test-analyst]
+
+              - id: quotes
+                title: Memorable Quotes
+                type: bullet-list
+                instruction: |
+                  Direct quotes from user:
+                  - "[Quote]"
+                  - "[Quote]"
+
+                  Capture exact words
+                owner: test-analyst
+                editors: [test-analyst]
+
+  - id: overall-session-notes
+    title: Overall Session Notes
+    instruction: |
+      Cross-task observations
+    sections:
+      - id: general-impressions
+        title: General Impressions
+        type: long-text
+        instruction: |
+          Overall user experience:
+          - What was their attitude?
+          - Energy level throughout?
+          - Growing confidence or frustration?
+          - Willingness to use this product?
+          - Comparison to current solutions?
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: recurring-issues
+        title: Recurring Issues
+        type: bullet-list
+        instruction: |
+          Problems that appeared multiple times:
+          - Across different tasks
+          - Pattern of confusion
+          - Consistent pain points
+          - Repeated errors
+
+          Frequency matters for prioritization
+        template: |
+          - [Issue]: Occurred [X] times in tasks [list]
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: surprises
+        title: Surprises
+        type: bullet-list
+        instruction: |
+          Unexpected findings:
+          - Behaviors not anticipated
+          - Features ignored or loved
+          - Different mental models
+          - Creative uses
+
+          Challenge assumptions
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: suggestions-made
+        title: User Suggestions
+        type: bullet-list
+        instruction: |
+          User-proposed improvements:
+          - Features they wanted
+          - Changes suggested
+          - Comparisons to other products
+          - "It would be better if..."
+
+          Users often have great ideas
+        template: |
+          - "[Suggestion]" - Why: [User's rationale]
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: rating-scales
+    title: Rating Scales
+    instruction: |
+      Quantify subjective observations:
+    sections:
+      - id: ease-of-use
+        title: Ease of Use
+        type: choice
+        choices: [Very Easy, Easy, Moderate, Difficult, Very Difficult]
+        instruction: Observer's assessment of overall usability
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: user-confidence
+        title: User Confidence
+        type: choice
+        choices: [Very Confident, Confident, Uncertain, Frustrated, Very Frustrated]
+        instruction: User's apparent confidence level throughout
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: value-perception
+        title: Value Perception
+        type: choice
+        choices: [High Value, Moderate Value, Low Value, No Value, Negative]
+        instruction: Did user see value in the solution?
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: hypotheses-validation
+    title: Hypotheses Validation
+    type: table
+    columns: [Hypothesis, Confirmed, Refuted, Inconclusive, Evidence]
+    instruction: |
+      Track assumption testing:
+
+      | Hypothesis | Confirmed | Refuted | Inconclusive | Evidence |
+      |------------|-----------|---------|--------------|----------|
+      | Users will understand X | ✓ | | | "All participants..." |
+      | Feature Y is valuable | | ✓ | | "No one used it..." |
+
+      Check off based on observations
+    owner: test-analyst
+    editors: [test-analyst, prototype-builder]
+
+  - id: session-quality-check
+    title: Session Quality Assessment
+    type: checklist
+    instruction: |
+      Was this a good test session:
+    template: |
+      - [ ] Participant matched target profile
+      - [ ] Participant engaged and honest
+      - [ ] Think-aloud protocol followed
+      - [ ] All tasks attempted
+      - [ ] Good quality observations captured
+      - [ ] Technical issues didn't block testing
+      - [ ] Observer stayed neutral
+      - [ ] Recording successful (if applicable)
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: immediate-actions
+    title: Immediate Actions Needed
+    type: bullet-list
+    instruction: |
+      Urgent issues to address:
+      - Critical bugs to fix before next session
+      - Scenario adjustments needed
+      - Participant screening improvements
+      - Technical setup changes
+
+      Don't wait for full analysis if critical
+    template: |
+      - [Action]: [Why urgent]
+    owner: test-analyst
+    editors: [test-analyst, prototype-builder]
+
+  - id: observer-reflections
+    title: Observer Reflections
+    type: long-text
+    instruction: |
+      Personal observations and insights:
+      - What stood out most?
+      - What surprised you?
+      - What patterns are emerging?
+      - What questions arose?
+      - What should we explore more?
+
+      Fresh perspectives are valuable
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: next-session-focus
+    title: Focus for Next Session
+    type: bullet-list
+    instruction: |
+      What to watch for in upcoming sessions:
+      - Validate emerging patterns
+      - Test alternative hypotheses
+      - Explore unexpected behaviors
+      - Confirm/refute findings
+
+      Iterative observation and learning
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: observation-tips
+    title: Observation Best Practices
+    type: bullet-list
+    instruction: |
+      Reminders for effective observation:
+      - Stay present and focused
+      - Note exact quotes (use "")
+      - Observe, don't interpret yet
+      - Record facts, not opinions
+      - Watch for non-verbal cues
+      - Note timestamps for key moments
+      - Stay silent during session
+      - Be thorough - over-document
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - Test protocol
+      - Test scenarios
+      - Session recordings
+      - Facilitator notes
+      - Test results summary
+      - Analysis synthesis
+    owner: test-analyst
+    editors: [test-analyst]

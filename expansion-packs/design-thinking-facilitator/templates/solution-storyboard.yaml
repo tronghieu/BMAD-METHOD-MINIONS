@@ -1,0 +1,438 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: solution-storyboard
+  name: Solution Storyboard Template
+  version: 1.0
+  description: Visual narrative showing solution in user's context
+  output:
+    format: markdown
+    filename: "ideation/storyboards/{{concept_name}}-storyboard.md"
+    title: "Storyboard: {{concept_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: ideation-coach
+  editable_sections:
+    - Storyboard Frames
+    - Narrative
+
+sections:
+  - id: storyboard-header
+    title: Storyboard Header
+    type: structured-data
+    instruction: |
+      Storyboard details:
+      - Concept name
+      - Date created
+      - Storyboard author(s)
+      - Persona featured
+      - Scenario type (typical use, edge case, aspirational)
+      - Number of frames
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: storyboard-purpose
+    title: Storyboard Purpose
+    type: choice
+    choices: [Show user journey, Demonstrate value, Explain how it works, Pitch to stakeholders, Guide prototype]
+    instruction: |
+      Why are we creating this storyboard:
+      - **Show user journey**: Illustrate complete experience
+      - **Demonstrate value**: Prove concept solves problem
+      - **Explain how it works**: Communicate functionality
+      - **Pitch to stakeholders**: Build buy-in and excitement
+      - **Guide prototype**: Blueprint for building
+
+      Primary purpose: [Select]
+      Secondary purpose: [Optional]
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: persona-context
+    title: Persona & Context
+    instruction: |
+      Set the scene:
+      - Which persona is the protagonist?
+      - What's their current situation?
+      - What goal are they trying to achieve?
+      - What problem are they facing?
+      - When/where does this take place?
+
+      Example:
+      "Sarah, a busy working parent, needs to plan healthy dinners
+      for her family but has limited time after work. It's Tuesday
+      evening, she's just gotten home, and kids are hungry."
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, empathy-researcher]
+
+  - id: storyboard-structure
+    title: Storyboard Structure
+    instruction: |
+      Choose narrative arc (typically 6-12 frames):
+
+      **Classic 3-Act Structure:**
+      - Act 1: Setup (problem/need)
+      - Act 2: Confrontation (solution encounter)
+      - Act 3: Resolution (success/transformation)
+
+      **Before-During-After:**
+      - Before: Pain point
+      - During: Using solution
+      - After: Improved state
+
+      **Step-by-Step Flow:**
+      - Linear walkthrough of interaction
+
+      Selected structure: [Choose approach]
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach]
+
+  - id: storyboard-frames
+    title: Storyboard Frames
+    instruction: |
+      Create visual narrative frame by frame.
+      Each frame = one moment in time with sketch + description.
+    sections:
+      - id: frame-template
+        title: "Frame {{number}}: {{title}}"
+        repeatable: true
+        instruction: Duplicate for each frame (recommend 6-12 frames total)
+        sections:
+          - id: frame-number
+            title: Frame Number
+            type: number
+            instruction: Sequential frame number (1, 2, 3...)
+            elicit: true
+            owner: ideation-coach
+            editors: [ideation-coach]
+
+          - id: frame-title
+            title: Frame Title
+            type: text
+            instruction: |
+              Short title for this frame:
+              - Describes the moment
+              - Action-oriented
+              - Clear and specific
+
+              Example: "Sarah arrives home", "She opens the app", "Dinner suggestions appear"
+            elicit: true
+            owner: ideation-coach
+            editors: [ideation-coach]
+
+          - id: frame-sketch
+            title: Visual Sketch
+            instruction: |
+              Draw or describe the visual:
+              - Character placement and expression
+              - Environment/context
+              - Product/interface shown
+              - Key elements to illustrate
+              - Arrows or annotations
+
+              Can be:
+              - Hand-drawn sketch (reference image file)
+              - Digital illustration
+              - Wireframe screenshot
+              - Text description of visual
+
+              Image reference: [filename or detailed description]
+            elicit: true
+            owner: ideation-coach
+            editors: [ideation-coach, prototype-builder]
+
+          - id: frame-description
+            title: Frame Description
+            type: long-text
+            instruction: |
+              Narrative description (2-3 sentences):
+              - What's happening in this moment
+              - What user is thinking/feeling
+              - What they see or interact with
+              - System response (if applicable)
+
+              Write in present tense, user's perspective when possible
+            elicit: true
+            owner: ideation-coach
+            editors: [ideation-coach]
+
+          - id: user-thought
+            title: User Thought/Quote
+            type: quote
+            instruction: |
+              What's the user thinking or saying:
+              "Quote from user's internal monologue or dialogue"
+
+              Captures emotional state and mindset
+            elicit: true
+            owner: ideation-coach
+            editors: [ideation-coach]
+
+          - id: user-emotion
+            title: User Emotion
+            type: choice
+            choices: [Frustrated, Confused, Neutral, Hopeful, Pleased, Delighted, Relieved, Confident]
+            instruction: |
+              Emotional state at this moment:
+              - Track emotional arc through story
+              - Shows impact of solution on feelings
+            elicit: true
+            owner: ideation-coach
+            editors: [ideation-coach]
+
+          - id: frame-notes
+            title: Frame Notes
+            instruction: |
+              Additional details:
+              - Technical notes
+              - Design considerations
+              - Questions to resolve
+              - Alternatives considered
+            owner: ideation-coach
+            editors: [ideation-coach, prototype-builder]
+
+  - id: emotional-arc
+    title: Emotional Arc
+    instruction: |
+      Track emotional journey across frames:
+
+      ```
+      High  ^        ★        ★
+      (Joy) |       /        /
+            |      /  ★     /
+      Med   |     /  /     /
+            |  ★ /  /  ★  /
+      Low   | / \/  /  / /
+      (Pain)|/      \/  \/
+            +──────────────────→
+            Frame 1 → 2 → 3 → ...
+      ```
+
+      Key emotional moments:
+      - Lowest point (pain): Frame [#]
+      - Turning point (solution): Frame [#]
+      - Highest point (delight): Frame [#]
+      - Resolution (satisfaction): Frame [#]
+
+      Emotional arc shows value of solution
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, empathy-researcher]
+
+  - id: before-after-comparison
+    title: Before & After Comparison
+    instruction: |
+      Contrast the states:
+    sections:
+      - id: before-solution
+        title: Before (Problem State)
+        instruction: |
+          User's situation without solution:
+          - What they currently do
+          - Pain points experienced
+          - Time/effort required
+          - Emotional state
+          - Workarounds used
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach]
+
+      - id: after-solution
+        title: After (With Solution)
+        instruction: |
+          User's transformed situation:
+          - New capability enabled
+          - Pain eliminated/reduced
+          - Time/effort saved
+          - Emotional improvement
+          - Goals achieved
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach]
+
+      - id: transformation-impact
+        title: Transformation Impact
+        instruction: |
+          Quantify the improvement:
+          - Time saved: [X minutes/hours]
+          - Effort reduction: [X% fewer steps]
+          - Error reduction: [X% fewer mistakes]
+          - Satisfaction increase: [Qualitative]
+          - Additional benefits: [List]
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach, problem-definer]
+
+  - id: solution-touchpoints
+    title: Solution Touchpoints
+    type: bullet-list
+    instruction: |
+      Where user interacts with solution in story:
+      - App screens/features
+      - Notifications or prompts
+      - Physical touchpoints
+      - Human interactions
+      - Third-party integrations
+
+      Map which frames show each touchpoint
+    template: |
+      - [Touchpoint name]: Appears in frame(s) [#, #]
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: key-features-shown
+    title: Key Features Demonstrated
+    type: bullet-list
+    instruction: |
+      Which solution features appear in storyboard:
+      - Frame(s) where shown
+      - How feature helps user
+      - User reaction to feature
+
+      Ensures all critical features are illustrated
+    template: |
+      - **[Feature]**: Frame [#] - [How it helps]
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: wow-moments
+    title: "Wow" Moments
+    type: bullet-list
+    instruction: |
+      Highlight moments of delight or surprise:
+      - Frame number
+      - What creates the "wow"
+      - User reaction
+      - Why it matters
+
+      These are your story's climax points
+    template: |
+      - Frame [#]: [Wow moment description] - Impact: [Why special]
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach]
+
+  - id: narrative-summary
+    title: Narrative Summary
+    type: long-text
+    instruction: |
+      Write the complete story as flowing narrative (3-5 paragraphs):
+
+      Should read like a short story, covering:
+      - Introduction (persona, context, problem)
+      - Complication (challenge or obstacle)
+      - Solution encounter (how they find/use it)
+      - Resolution (successful outcome)
+      - Transformation (lasting impact)
+
+      Use this for presentations and pitches
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, dt-master]
+
+  - id: storyboard-validation
+    title: Storyboard Validation Checklist
+    type: checklist
+    template: |
+      - [ ] Persona is realistic and relatable
+      - [ ] Problem is clearly established
+      - [ ] Solution is easy to understand
+      - [ ] Value proposition is clear
+      - [ ] Emotional arc is compelling
+      - [ ] All key features are shown
+      - [ ] Ending shows clear benefit
+      - [ ] Story feels authentic (not forced)
+      - [ ] Visual quality is sufficient for purpose
+      - [ ] Length is appropriate (not too short/long)
+    owner: ideation-coach
+    editors: [ideation-coach, empathy-researcher]
+
+  - id: variations-edge-cases
+    title: Variations & Edge Cases
+    instruction: |
+      Alternative scenarios to consider:
+      - Different personas using solution
+      - Edge cases or error states
+      - First-time vs. returning user
+      - Mobile vs. desktop experience
+      - Success and failure paths
+
+      Should we storyboard these too?
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: prototype-guidance
+    title: Guidance for Prototype
+    instruction: |
+      How this storyboard informs prototype:
+      - Which frames need to be functional?
+      - What can be simulated or faked?
+      - Critical interaction points to build
+      - Fidelity requirements per frame
+      - Test scenarios derived from story
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: presentation-tips
+    title: Presentation Tips
+    instruction: |
+      How to present this storyboard:
+      - Walk through frame-by-frame
+      - Act out the scenario
+      - Emphasize emotional moments
+      - Pause at "wow" moments
+      - End with before/after comparison
+      - Invite feedback on specific frames
+    owner: ideation-coach
+    editors: [ideation-coach, dt-master]
+
+  - id: feedback-received
+    title: Feedback Received
+    instruction: |
+      When presented, what feedback was given:
+      - What resonated most
+      - What confused people
+      - Questions asked
+      - Concerns raised
+      - Suggested improvements
+      - Emotional reactions
+
+      Use to refine storyboard and concept
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: next-steps
+    title: Next Steps
+    type: checklist
+    template: |
+      - [ ] Refine storyboard based on feedback
+      - [ ] Create higher-fidelity visuals if needed
+      - [ ] Use storyboard to guide prototype design
+      - [ ] Develop test scenarios from story
+      - [ ] Present to stakeholders for buy-in
+      - [ ] Create alternative scenario storyboards
+      - [ ] Document design decisions informed by story
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - Concept poster for this solution
+      - Persona profile
+      - User journey map (comparison)
+      - Prototype specifications
+      - Test scenarios
+      - Presentation deck (if created)
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder, empathy-researcher]

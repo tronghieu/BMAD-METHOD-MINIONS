@@ -1,0 +1,423 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: research-synthesis-board
+  name: Research Synthesis Board Template
+  version: 1.0
+  description: Collaborative workspace for organizing and synthesizing research findings
+  output:
+    format: markdown
+    filename: "research-synthesis/{{project_name}}-synthesis-board.md"
+    title: "Research Synthesis: {{project_name}}"
+
+workflow:
+  mode: collaborative
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: empathy-researcher
+  editable_sections:
+    - Raw Findings
+    - Affinity Clusters
+    - Insight Statements
+    - Opportunity Areas
+
+sections:
+  - id: synthesis-overview
+    title: Synthesis Board Overview
+    type: structured-data
+    instruction: |
+      Document synthesis session details:
+      - Project name
+      - Synthesis session date
+      - Participants in synthesis
+      - Research scope (dates, number of interviews/observations)
+      - Synthesis method (affinity diagramming, thematic analysis, etc.)
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher, dt-master]
+
+  - id: research-sources
+    title: Research Sources
+    type: table
+    columns: [Source Type, Count, Date Range, Participants]
+    instruction: |
+      Inventory all research inputs being synthesized:
+
+      Example:
+      | Source Type | Count | Date Range | Participants |
+      |-------------|-------|------------|--------------|
+      | User Interviews | 12 | Jan 1-15 | 12 unique users |
+      | Observations | 5 | Jan 10-20 | 15 users observed |
+      | Surveys | 1 | Jan 5-12 | 150 responses |
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: raw-findings
+    title: Raw Findings Collection
+    instruction: |
+      Capture individual observations, quotes, and data points before clustering.
+      Each finding should be atomic (one idea per entry).
+    sections:
+      - id: observations
+        title: Behavioral Observations
+        type: bullet-list
+        instruction: |
+          List specific behaviors observed:
+          - What users do (actions, workflows)
+          - How they do it (approach, methods)
+          - Context around behaviors
+
+          Format: [Observation] - Source: [Interview #/Observation #]
+        template: |
+          - [Observed behavior] - Source: [Reference]
+        elicit: true
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: quotes
+        title: Key Quotes
+        type: bullet-list
+        instruction: |
+          Collect memorable quotes from research:
+          - Direct user quotes
+          - Statements revealing attitudes
+          - Emotional expressions
+
+          Format: "Quote" - [Participant ID/Name], [Context]
+        template: |
+          - "Quote here" - Participant X, [Context]
+        elicit: true
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: pain-points
+        title: Pain Points Identified
+        type: bullet-list
+        instruction: |
+          List frustrations and challenges mentioned:
+          - Specific problems encountered
+          - Friction in processes
+          - Unmet needs
+          - Workarounds created
+
+          Format: [Pain point] - Frequency: X, Severity: Y - Source: Z
+        template: |
+          - [Pain point] - Freq: [daily/weekly/rare], Sev: [H/M/L] - Source: [Ref]
+        elicit: true
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: needs-and-goals
+        title: Needs & Goals
+        type: bullet-list
+        instruction: |
+          Capture stated and observed needs:
+          - Explicit goals mentioned
+          - Implicit needs observed
+          - Motivations driving behavior
+          - Desired outcomes
+        template: |
+          - [Need or goal] - Source: [Reference]
+        elicit: true
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: context-factors
+        title: Contextual Factors
+        type: bullet-list
+        instruction: |
+          Environmental and situational factors:
+          - Constraints affecting users
+          - Resources available or lacking
+          - Organizational/cultural factors
+          - External pressures
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+  - id: affinity-clustering
+    title: Affinity Diagram Clusters
+    instruction: |
+      Group related findings into themes. This is an iterative process:
+      1. Group similar findings together
+      2. Name each cluster with a theme
+      3. Create higher-level categories from cluster groups
+      4. Identify relationships between clusters
+    sections:
+      - id: cluster-template
+        title: "Cluster: {{cluster_name}}"
+        repeatable: true
+        instruction: Duplicate for each thematic cluster
+        sections:
+          - id: cluster-name
+            title: Cluster Theme Name
+            type: text
+            instruction: |
+              Name this cluster:
+              - Descriptive of grouped findings
+              - User-centered language
+              - Action-oriented if possible
+            elicit: true
+            owner: empathy-researcher
+            editors: [empathy-researcher]
+
+          - id: cluster-findings
+            title: Findings in This Cluster
+            type: bullet-list
+            instruction: |
+              List all findings that belong to this theme:
+              - Quote references
+              - Observation references
+              - Pain point references
+
+              Show count: (X findings from Y sources)
+            elicit: true
+            owner: empathy-researcher
+            editors: [empathy-researcher]
+
+          - id: cluster-pattern
+            title: Pattern Description
+            type: long-text
+            instruction: |
+              Describe the pattern across these findings:
+              - What ties these together?
+              - How consistent is this across users?
+              - Who does this affect most?
+              - When/where does this occur?
+            elicit: true
+            owner: empathy-researcher
+            editors: [empathy-researcher]
+
+          - id: cluster-significance
+            title: Why This Matters
+            instruction: |
+              Explain the significance:
+              - Impact on users
+              - Frequency or prevalence
+              - Connection to user goals
+              - Business implications
+            owner: empathy-researcher
+            editors: [empathy-researcher, problem-definer]
+
+  - id: higher-level-themes
+    title: Higher-Level Themes
+    type: bullet-list
+    instruction: |
+      Group clusters into broader categories:
+      - What meta-themes emerge?
+      - How do clusters relate to each other?
+      - What are the 3-5 big themes?
+
+      Format: **Theme Name**: Clusters included [list clusters]
+    template: |
+      - **[Theme name]**: Includes clusters [A], [B], [C]
+        - Description: [What this theme represents]
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher, problem-definer]
+
+  - id: insight-statements
+    title: Key Insights
+    instruction: |
+      Transform patterns into insight statements.
+      Insight formula: When [context], users [behavior] because [reason], resulting in [impact]
+    sections:
+      - id: insight-template
+        title: "Insight {{number}}"
+        repeatable: true
+        instruction: Duplicate for each major insight (aim for 10-15 total)
+        sections:
+          - id: insight-statement
+            title: Insight Statement
+            type: long-text
+            instruction: |
+              Write the complete insight:
+              "When [context], users [behavior] because [reason], resulting in [impact]"
+
+              Example: "When checking out, users abandon carts because unexpected
+              shipping costs appear, resulting in 40% drop-off and lost sales"
+            elicit: true
+            owner: empathy-researcher
+            editors: [empathy-researcher]
+
+          - id: supporting-evidence
+            title: Supporting Evidence
+            type: bullet-list
+            instruction: |
+              Link to evidence:
+              - Interview quotes
+              - Observation notes
+              - Quantitative data
+              - Number of users who exhibited this
+            template: |
+              - [Evidence] - Source: [Reference]
+            owner: empathy-researcher
+            editors: [empathy-researcher]
+
+          - id: insight-implications
+            title: Design Implications
+            type: bullet-list
+            instruction: |
+              What does this mean for design:
+              - Opportunities suggested
+              - Features needed
+              - Experiences to create/avoid
+            owner: empathy-researcher
+            editors: [empathy-researcher, problem-definer]
+
+          - id: confidence-level
+            title: Confidence Level
+            type: choice
+            choices: [High, Medium, Low]
+            instruction: |
+              Rate confidence in this insight:
+              - High: Multiple sources, strong evidence
+              - Medium: Some evidence, emerging pattern
+              - Low: Single source, needs validation
+            elicit: true
+            owner: empathy-researcher
+            editors: [empathy-researcher]
+
+  - id: user-needs-synthesis
+    title: Synthesized User Needs
+    type: bullet-list
+    instruction: |
+      Distill core user needs from research:
+      Format: [User type] needs [need] because [insight]
+
+      Aim for 5-10 key needs that will drive problem definition
+    template: |
+      - [User] needs [need] because [insight]
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher, problem-definer]
+
+  - id: opportunity-areas
+    title: Opportunity Areas
+    type: bullet-list
+    instruction: |
+      Identify areas ripe for innovation:
+      - Where are the biggest pain points?
+      - Where are unmet needs?
+      - Where is there misalignment between need and solution?
+      - Where can we create the most value?
+
+      Prioritize by:
+      - Impact (how many users affected, how severely)
+      - Feasibility (can we realistically address this)
+      - Strategic fit (aligns with business goals)
+    template: |
+      - [Opportunity area] - Impact: [H/M/L], Feasibility: [H/M/L], Strategic: [H/M/L]
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher, problem-definer, dt-master]
+
+  - id: personas-informed
+    title: Personas to Create/Update
+    type: bullet-list
+    instruction: |
+      What personas emerged from this research:
+      - Distinct user types identified
+      - Behavioral patterns that differ
+      - Need profiles that vary
+
+      List personas that should be created or updated based on findings
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: assumptions-validated
+    title: Assumptions Validated or Challenged
+    instruction: |
+      Track what you learned about initial assumptions
+    sections:
+      - id: validated-assumptions
+        title: Validated Assumptions
+        type: bullet-list
+        instruction: What did research confirm?
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: challenged-assumptions
+        title: Challenged Assumptions
+        type: bullet-list
+        instruction: |
+          What did research disprove:
+          - Original assumption
+          - What we learned instead
+          - Why this matters
+        template: |
+          - Assumed: [assumption] → Found: [reality] → Implication: [impact]
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+  - id: knowledge-gaps
+    title: Knowledge Gaps & Questions
+    type: bullet-list
+    instruction: |
+      What questions remain unanswered:
+      - What do we still need to learn?
+      - Who should we talk to next?
+      - What contexts need more exploration?
+      - What hypotheses need testing?
+    template: |
+      - Question: [What we need to learn]
+      - Why it matters: [Importance]
+      - How to investigate: [Method]
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: quantitative-support
+    title: Quantitative Data Points
+    instruction: |
+      If available, include supporting quantitative data:
+      - Survey statistics
+      - Analytics metrics
+      - Usage data
+      - Market research numbers
+
+      Use to validate or quantify qualitative findings
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: next-phase-prep
+    title: Preparation for Define Phase
+    type: checklist
+    instruction: |
+      Transition to problem definition:
+    template: |
+      - [ ] Share synthesis with stakeholders
+      - [ ] Create/update persona documents
+      - [ ] Draft initial problem statements
+      - [ ] Generate "How Might We" questions
+      - [ ] Prioritize opportunity areas
+      - [ ] Schedule Define phase workshop
+      - [ ] Prepare research artifacts for problem definer
+    owner: empathy-researcher
+    editors: [empathy-researcher, problem-definer, dt-master]
+
+  - id: team-reflections
+    title: Team Reflections
+    type: long-text
+    instruction: |
+      Collective team thoughts on synthesis:
+      - What surprised the team most?
+      - Where is there alignment/disagreement?
+      - What feels most actionable?
+      - What needs more discussion?
+    owner: empathy-researcher
+    editors: [empathy-researcher, dt-master, problem-definer]
+
+  - id: artifact-links
+    title: Related Research Artifacts
+    instruction: |
+      Link to all source documents:
+      - Interview transcripts
+      - Observation notes
+      - Survey results
+      - Persona documents
+      - Journey maps
+      - Photos and recordings
+    owner: empathy-researcher
+    editors: [empathy-researcher]

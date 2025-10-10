@@ -1,0 +1,101 @@
+name: Service Design
+description: >
+  A workflow for designing or improving end-to-end customer service experiences,
+  focusing on all touchpoints and the underlying systems that support them.
+type: service-design
+duration: 6-10 weeks
+
+agents:
+  - dt-master
+  - empathy-researcher
+  - problem-definer
+  - ideation-coach
+  - prototype-builder
+  - test-analyst
+
+phases:
+  - name: Service Discovery
+    description: Understand the existing service ecosystem and user/employee experiences.
+    duration: 2-weeks
+    lead-agent: empathy-researcher
+    activities:
+      - stakeholder-interviews:
+          output: business-goals-and-constraints
+      - user-and-employee-research:
+          output: interview-transcripts-and-observations
+      - service-safari:
+          output: analogous-service-inspiration
+      - current-state-journey-mapping:
+          output: as-is-journey-map
+    deliverables:
+      - research-report
+      - key-personas-customer-and-employee
+      - initial-pain-point-log
+
+  - name: Journey & Blueprinting
+    description: Visualize the service and define the core problem to solve.
+    duration: 2-weeks
+    lead-agent: problem-definer
+    activities:
+      - synthesis-workshop:
+          output: insight-themes
+      - service-blueprint-creation:
+          output: service-blueprint-v1
+      - problem-framing:
+          output: hmw-questions
+      - success-metrics-definition:
+          output: service-kpis
+    deliverables:
+      - service-blueprint
+      - prioritized-opportunity-areas
+      - problem-statements
+
+  - name: Touchpoint Ideation
+    description: Brainstorm solutions for specific interaction points.
+    duration: 1-week
+    lead-agent: ideation-coach
+    activities:
+      - brainstorming-sessions:
+          output: idea-bank
+      - concept-development:
+          output: solution-concepts
+      - future-state-journey-mapping:
+          output: to-be-journey-map
+    deliverables:
+      - concept-portfolio
+      - updated-service-blueprint
+
+  - name: Service Prototyping
+    description: Create tangible prototypes of service touchpoints.
+    duration: 2-weeks
+    lead-agent: prototype-builder
+    activities:
+      - role-playing-scenarios:
+          output: interaction-scripts
+      - physical-prototyping:
+          output: environment-mockups-props
+      - digital-prototyping:
+          output: screen-mockups-and-tools
+      - test-protocol-design:
+          output: pilot-test-plan
+    deliverables:
+      - testable-service-prototype
+      - facilitator-guide
+
+  - name: Live Piloting & Testing
+    description: Test the service experience with real users and employees.
+    duration: 2-weeks
+    lead-agent: test-analyst
+    activities:
+      - pilot-test-execution:
+          output: session-recordings-and-notes
+      - feedback-analysis:
+          output: findings-summary
+      - kpi-measurement:
+          output: performance-dashboard
+      - iteration-planning:
+          output: improvement-backlog
+    deliverables:
+      - validated-learnings
+      - final-service-blueprint
+      - implementation-roadmap

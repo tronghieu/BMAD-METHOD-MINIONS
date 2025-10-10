@@ -1,0 +1,382 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: observation-protocol
+  name: Observation Protocol Template
+  version: 1.0
+  description: Structured guide for ethnographic observation and field research
+  output:
+    format: markdown
+    filename: "observations/{{project_name}}-observation-{{session_id}}.md"
+    title: "Observation Session: {{session_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: empathy-researcher
+  editable_sections:
+    - Observation Planning
+    - Field Notes
+    - Analysis & Synthesis
+
+sections:
+  - id: observation-metadata
+    title: Observation Metadata
+    type: structured-data
+    instruction: |
+      Capture session details:
+      - Session ID and name
+      - Date, time, and duration
+      - Location (physical address or online)
+      - Observer name(s)
+      - Observation type (participant, non-participant, shadowing)
+      - Recording method (notes, photo, video, audio)
+      - Consent obtained (yes/no)
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: observation-objectives
+    title: Observation Objectives
+    type: bullet-list
+    instruction: |
+      Define what you're trying to learn:
+      - What behaviors are you observing?
+      - What contexts are you exploring?
+      - What questions are you trying to answer?
+      - What hypotheses are you testing?
+    template: |
+      - Observe [behavior/interaction]
+      - Understand [context/environment]
+      - Answer: [research question]
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: participant-context
+    title: Participant Context
+    instruction: |
+      Who are you observing:
+      - Number of people
+      - Roles and relationships
+      - Relevant demographics
+      - Experience level with activity
+      - Anonymization approach
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: aeiou-framework
+    title: AEIOU Observation Framework
+    instruction: Use the AEIOU framework to structure observations
+    sections:
+      - id: activities
+        title: Activities
+        type: long-text
+        instruction: |
+          What are people DOING?
+          - Goal-directed actions
+          - Sequential steps in processes
+          - Workflows and tasks
+          - Rituals or routines
+          - Starting and stopping points
+
+          Document:
+          - What activity is taking place?
+          - What is the sequence of actions?
+          - How long does it take?
+          - What variations did you observe?
+        elicit: true
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: environments
+        title: Environments
+        type: long-text
+        instruction: |
+          WHERE are activities happening?
+          - Physical space characteristics
+          - Layout and organization
+          - Ambient conditions (noise, light, temperature)
+          - Tools and equipment present
+          - Public vs. private spaces
+
+          Document:
+          - Describe the physical environment
+          - What's on walls, desks, screens?
+          - How is space organized?
+          - How does environment affect behavior?
+        elicit: true
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: interactions
+        title: Interactions
+        type: long-text
+        instruction: |
+          HOW are people interacting?
+          - Person-to-person interactions
+          - Person-to-object interactions
+          - Person-to-technology interactions
+          - Communication methods
+          - Collaboration patterns
+
+          Document:
+          - Who interacts with whom?
+          - How do they communicate?
+          - What triggers interactions?
+          - What is the quality of interactions?
+        elicit: true
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: objects
+        title: Objects
+        type: long-text
+        instruction: |
+          WHAT objects are being used?
+          - Tools and equipment
+          - Technology and devices
+          - Documents and materials
+          - Personal items
+          - Objects created or consumed
+
+          Document:
+          - What objects are essential?
+          - How are objects used?
+          - What's the condition of objects?
+          - What's missing or improvised?
+        elicit: true
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: users
+        title: Users
+        type: long-text
+        instruction: |
+          WHO is involved?
+          - Roles and relationships
+          - Skill levels and experience
+          - Demographics (if relevant)
+          - Power dynamics
+          - Attitudes and preferences
+
+          Document:
+          - Who are the key actors?
+          - What are their roles?
+          - How do they differ from each other?
+          - What cultural factors are visible?
+        elicit: true
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+  - id: field-notes
+    title: Chronological Field Notes
+    type: long-text
+    instruction: |
+      Document everything you observe in chronological order:
+      - Timestamp each observation
+      - Describe behaviors objectively (what you see, not interpretations)
+      - Note direct quotes (mark with quotation marks)
+      - Capture non-verbal cues
+      - Record surprises and anomalies
+      - Distinguish facts from interpretations
+
+      Format:
+      [TIME] - Observation: [Description]
+      [TIME] - Quote: "Exact words"
+      [TIME] - Note: [Insight or question]
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: behavioral-observations
+    title: Key Behavioral Observations
+    instruction: Synthesize patterns and notable behaviors
+    sections:
+      - id: workflows
+        title: Workflows & Processes
+        type: bullet-list
+        instruction: |
+          Document how work gets done:
+          - Standard operating procedures observed
+          - Variations from standard process
+          - Efficiency or delays
+          - Handoffs between people or systems
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: workarounds
+        title: Workarounds & Hacks
+        type: bullet-list
+        instruction: |
+          Capture creative solutions and adaptations:
+          - What problems are being worked around?
+          - What improvisations did you see?
+          - What unofficial processes exist?
+          - What tools are repurposed?
+        template: |
+          - [Workaround] - Solves: [Problem]
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: pain-points
+        title: Pain Points & Friction
+        type: bullet-list
+        instruction: |
+          Visible frustrations and difficulties:
+          - Where did people struggle?
+          - What caused delays or errors?
+          - What complaints were voiced?
+          - What required repeated attempts?
+        template: |
+          - [Pain point] - Severity: [High/Med/Low]
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: positive-moments
+        title: Positive Moments & Flow States
+        type: bullet-list
+        instruction: |
+          When did things work well:
+          - Smooth interactions
+          - Expressions of satisfaction
+          - Efficient processes
+          - Moments of delight or pride
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+  - id: contextual-factors
+    title: Contextual Factors
+    type: bullet-list
+    instruction: |
+      Environmental and situational factors that influenced behavior:
+      - Time pressures
+      - Social dynamics
+      - Organizational culture
+      - Available resources
+      - External interruptions
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: quotes-and-statements
+    title: Memorable Quotes & Statements
+    type: bullet-list
+    instruction: |
+      Capture exact words that reveal insights:
+      - Direct quotes from participants
+      - Overheard conversations
+      - Repeated phrases or expressions
+      - Emotional statements
+
+      Include context for each quote
+    template: |
+      - "Quote here" - Context: [Situation when said]
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: photos-and-artifacts
+    title: Photos & Artifacts Collected
+    instruction: |
+      Document visual evidence:
+      - Photo descriptions and file references
+      - Sketches or diagrams created
+      - Artifacts collected (with permission)
+      - Screenshots or printouts
+      - Environmental documentation
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: surprises
+    title: Surprises & Anomalies
+    type: bullet-list
+    instruction: |
+      What was unexpected:
+      - Behaviors that contradicted assumptions
+      - Unusual patterns
+      - Outliers or edge cases
+      - Things that didn't make sense initially
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: researcher-reflections
+    title: Researcher Reflections
+    type: long-text
+    instruction: |
+      Personal reflections and interpretations:
+      - What stood out most?
+      - What patterns are emerging?
+      - What questions arise?
+      - What biases might you have?
+      - What should be explored further?
+
+      Separate facts (what you observed) from interpretations (what you think it means)
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: preliminary-insights
+    title: Preliminary Insights
+    type: bullet-list
+    instruction: |
+      Early insights from this observation:
+      - Hypotheses confirmed or refuted
+      - New hypotheses generated
+      - Patterns across multiple observations
+      - Design implications
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: follow-up-questions
+    title: Follow-up Questions for Interviews
+    type: bullet-list
+    instruction: |
+      Questions to ask in follow-up interviews:
+      - Why did they do X?
+      - How often does Y happen?
+      - What were they thinking when Z occurred?
+      - What would they change about this process?
+    template: |
+      - Why [observed behavior]?
+      - How [question about pattern]?
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: next-observation-focus
+    title: Next Observation Focus Areas
+    type: bullet-list
+    instruction: |
+      What to observe more closely next time:
+      - Behaviors to watch for
+      - Contexts to explore
+      - People to shadow
+      - Times/situations to observe
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: related-research
+    title: Related Research Artifacts
+    instruction: |
+      Link to connected research:
+      - Related interview documents
+      - Previous observations in same context
+      - Relevant personas or journey maps
+      - Survey data that connects
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: sharing-checklist
+    title: Post-Observation Actions
+    type: checklist
+    template: |
+      - [ ] Send thank you to participants
+      - [ ] Organize and label photos/artifacts
+      - [ ] Transcribe detailed notes within 24 hours
+      - [ ] Share key insights with team
+      - [ ] Add observations to research synthesis board
+      - [ ] Update research questions based on findings
+      - [ ] Schedule follow-up interviews if needed
+    owner: empathy-researcher
+    editors: [empathy-researcher]

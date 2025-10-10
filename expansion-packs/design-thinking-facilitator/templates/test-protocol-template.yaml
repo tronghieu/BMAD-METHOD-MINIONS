@@ -1,0 +1,588 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: test-protocol-template
+  name: Test Protocol Template
+  version: 1.0
+  description: Comprehensive protocol for conducting user testing sessions
+  output:
+    format: markdown
+    filename: "testing/{{project_name}}-test-protocol.md"
+    title: "Test Protocol: {{project_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: test-analyst
+  editable_sections:
+    - Test Setup
+    - Session Guide
+    - Data Collection
+
+sections:
+  - id: protocol-overview
+    title: Protocol Overview
+    type: structured-data
+    instruction: |
+      Test protocol details:
+      - Test name/project
+      - Protocol version
+      - Date created
+      - Test type (usability, concept, A/B, etc.)
+      - Prototype/product being tested
+      - Protocol author(s)
+    elicit: true
+    owner: test-analyst
+    editors: [test-analyst, prototype-builder]
+
+  - id: test-objectives
+    title: Test Objectives
+    type: bullet-list
+    instruction: |
+      What we want to learn:
+      - Research questions to answer
+      - Hypotheses to validate
+      - Usability issues to identify
+      - Feature value to assess
+      - Design decisions to inform
+
+      Be specific and measurable
+    template: |
+      - [Objective/Question]
+    elicit: true
+    owner: test-analyst
+    editors: [test-analyst, prototype-builder]
+
+  - id: test-methodology
+    title: Test Methodology
+    instruction: |
+      Testing approach:
+    sections:
+      - id: test-type
+        title: Test Type
+        type: choice
+        choices: [Moderated Usability, Unmoderated Remote, Guerrilla, A/B Test, Wizard of Oz, Concept Test]
+        instruction: |
+          Select testing method:
+          - **Moderated Usability**: In-person or remote with facilitator
+          - **Unmoderated Remote**: Async, users complete alone
+          - **Guerrilla**: Quick public space testing
+          - **A/B Test**: Compare two versions
+          - **Wizard of Oz**: Simulated functionality
+          - **Concept Test**: Early idea validation
+
+          Selected: [Choose]
+          Why: [Rationale]
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: session-format
+        title: Session Format
+        instruction: |
+          - Location: [In-person/Remote/Hybrid]
+          - Duration per session: [X minutes]
+          - Number of sessions: [X]
+          - Group or individual: [Which]
+          - Recording method: [Video/Audio/Screen/Notes]
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: facilitation-approach
+        title: Facilitation Approach
+        instruction: |
+          - Think-aloud protocol: [Yes/No]
+          - Task-based: [Yes/No]
+          - Open exploration: [Yes/No]
+          - Retrospective recall: [Yes/No]
+          - Co-discovery (pairs): [Yes/No]
+
+          How much guidance: [Minimal/Moderate/High]
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: participant-criteria
+    title: Participant Criteria
+    instruction: |
+      Who to recruit:
+    sections:
+      - id: target-users
+        title: Target User Profile
+        instruction: |
+          Required characteristics:
+          - Demographics (age, location, etc.)
+          - Experience level
+          - Current behaviors/tools used
+          - Domain expertise
+          - Persona match
+
+          Be specific to get right participants
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst, empathy-researcher]
+
+      - id: screener-questions
+        title: Screener Questions
+        type: numbered-list
+        instruction: |
+          Questions to qualify participants:
+
+          1. [Question] - Looking for: [Desired answer]
+          2. [Question] - Looking for: [Desired answer]
+          ...
+
+          Identify qualified participants
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: sample-size
+        title: Sample Size
+        instruction: |
+          - Target participants: [X]
+          - Minimum for valid results: [Y]
+          - By persona/segment: [Breakdown]
+          - Rationale: [Why this number]
+
+          Typical usability testing: 5-8 per user type
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: exclusion-criteria
+        title: Exclusion Criteria
+        type: bullet-list
+        instruction: |
+          Who NOT to recruit:
+          - Company employees/family
+          - Professional testers
+          - Participated in recent studies
+          - Extreme edge cases
+          - Conflicting demographics
+
+          Ensure unbiased sample
+        template: |
+          - [Exclusion]: [Why]
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: test-materials
+    title: Test Materials Checklist
+    type: checklist
+    instruction: |
+      Everything needed for testing:
+    template: |
+      Logistics:
+      - [ ] Prototype (version, access links)
+      - [ ] Device/equipment (laptop, phone, etc.)
+      - [ ] Recording equipment (camera, mic, software)
+      - [ ] Backup devices (if primary fails)
+      - [ ] Internet connection tested
+      - [ ] Test account credentials
+      - [ ] Consent forms
+      - [ ] Incentive/compensation ready
+
+      Documents:
+      - [ ] Session script
+      - [ ] Test scenarios
+      - [ ] Task cards
+      - [ ] Observation guide
+      - [ ] Post-test questionnaire
+      - [ ] Demographic survey
+
+      Space Setup (if in-person):
+      - [ ] Quiet room reserved
+      - [ ] Comfortable seating
+      - [ ] Good lighting
+      - [ ] No distractions
+      - [ ] Water/snacks available
+    owner: test-analyst
+    editors: [test-analyst, prototype-builder]
+
+  - id: session-script
+    title: Session Script
+    instruction: |
+      Complete facilitation guide for test sessions
+    sections:
+      - id: pre-session-setup
+        title: "Pre-Session Setup (10 min before)"
+        instruction: |
+          Facilitator preparation:
+          - Test all equipment
+          - Load prototype
+          - Set up recording
+          - Review participant profile
+          - Prepare materials
+          - Clear browser/reset state
+          - Take deep breath!
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: welcome-intro
+        title: "1. Welcome & Introduction (5 min)"
+        instruction: |
+          Script:
+          "Hi [Name], thanks for joining us today! I'm [Your Name].
+
+          Today we're testing [prototype/website/app] to see how it works
+          for people like you. I want to emphasize a few things:
+
+          - **We're testing the design, not you.** There are no wrong answers.
+          - **Please think out loud** as you work. Tell me what you're thinking,
+            what you're looking for, any confusion or frustration.
+          - **Be honest!** You won't hurt our feelings. We want to know what
+            really works and what doesn't.
+          - **This is a prototype**, so some things might not work perfectly.
+            That's okay and expected.
+          - **Ask questions any time**, though I might not answer during tasks
+            so we can see how you'd handle it naturally.
+
+          Do you have any questions before we begin?"
+
+          [Get verbal consent to record if needed]
+          [Start recording]
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: background-questions
+        title: "2. Background Questions (5 min)"
+        type: bullet-list
+        instruction: |
+          Warm-up questions to understand context:
+          - "Tell me a bit about yourself and what you do"
+          - "How do you currently [relevant activity]?"
+          - "What tools or products do you use for [domain]?"
+          - "[Context-specific questions]"
+
+          Build rapport, gather context
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst, empathy-researcher]
+
+      - id: task-scenarios
+        title: "3. Task Scenarios (30-40 min)"
+        instruction: |
+          Main testing section - present scenarios one by one.
+
+          For each scenario:
+          1. **Set up context** (read scenario aloud)
+          2. **Present task** (what they should accomplish)
+          3. **Start timing** (if measuring)
+          4. **Observe silently** (let them work)
+          5. **Probe gently** if stuck >2 minutes
+          6. **Note observations** (behaviors, comments, emotions)
+          7. **After completion**, ask follow-up questions
+
+          Link to test-scenarios document for full scenarios
+
+          Facilitation tips:
+          - Give them space to struggle (don't jump in)
+          - Encourage think-aloud
+          - Stay neutral (don't lead)
+          - Note everything, interpret later
+        owner: test-analyst
+        editors: [test-analyst, prototype-builder]
+
+      - id: probing-techniques
+        title: "Probing Techniques"
+        instruction: |
+          When to probe and how:
+
+          **If user is silent:**
+          - "What are you thinking right now?"
+          - "What are you looking for?"
+
+          **If user is stuck:**
+          - "What do you expect to happen?"
+          - "What would you try next?"
+          - (After 2-3 min) "Would you like a hint?"
+
+          **After confusing moment:**
+          - "Tell me what just happened there"
+          - "Was that what you expected?"
+
+          **General probes:**
+          - "Why did you click that?"
+          - "How did you know to do that?"
+          - "What does that mean to you?"
+
+          Stay curious, not leading
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: post-task-questions
+        title: "4. Post-Task Questions (10 min)"
+        type: bullet-list
+        instruction: |
+          After all tasks, ask reflective questions:
+          - "Overall, how would you describe that experience?"
+          - "What did you like most about it?"
+          - "What was most frustrating or confusing?"
+          - "How does this compare to what you use now?"
+          - "What would you change if you could?"
+          - "Would you use this if it were available? Why/why not?"
+          - "What's missing that you expected to see?"
+          - "On a scale of 1-5, how easy was this to use?"
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: closing
+        title: "5. Closing & Thank You (5 min)"
+        instruction: |
+          Wrap up professionally:
+
+          "Thank you so much for your time and honest feedback. You've been
+          incredibly helpful. Everything you shared will help us make this
+          better for people like you.
+
+          A few final things:
+          - Do you have any questions for me?
+          - [Explain next steps if applicable]
+          - [Provide compensation/incentive]
+          - Can we contact you for future studies?
+
+          Thanks again, and have a great day!"
+
+          [Stop recording]
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: observation-guide
+    title: Observation Guide
+    instruction: |
+      What to observe and document during sessions
+    sections:
+      - id: behavioral-observations
+        title: Behavioral Observations
+        type: bullet-list
+        instruction: |
+          Watch for:
+          - Hesitation or confusion points
+          - Error recovery attempts
+          - Workarounds created
+          - Skipped or ignored elements
+          - Repeated actions
+          - Mouse movement patterns
+          - Reading vs. scanning behavior
+        template: |
+          - [Behavior to watch]: [Why it matters]
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: verbal-indicators
+        title: Verbal Indicators
+        type: bullet-list
+        instruction: |
+          Listen for:
+          - "I expected..."
+          - "Where is..."
+          - "I'm not sure..."
+          - "Oh!" (surprise)
+          - "Finally!" (relief)
+          - "That's annoying..."
+          - Silence (concentration or confusion?)
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: emotional-reactions
+        title: Emotional Reactions
+        instruction: |
+          Note emotional shifts:
+          - Frustration (sighs, furrowed brow)
+          - Delight (smiles, positive comments)
+          - Confusion (head tilting, squinting)
+          - Confidence (quick actions, certainty)
+          - Resignation (giving up, defeated tone)
+
+          Track emotional journey
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: data-collection
+    title: Data Collection Methods
+    instruction: |
+      How to capture findings:
+    sections:
+      - id: quantitative-metrics
+        title: Quantitative Metrics
+        type: table
+        columns: [Metric, How Measured, Tool, Per Session or Aggregate]
+        instruction: |
+          Numbers to track:
+
+          | Metric | How Measured | Tool | Per Session or Aggregate |
+          |--------|--------------|------|--------------------------|
+          | Task success rate | Complete/incomplete | Manual tally | Aggregate |
+          | Time on task | Start to finish | Timer | Per session |
+          | Error count | Clicks/actions off path | Manual count | Per session |
+          | SUS score | Post-test survey | Form | Per session |
+
+          Define what "success" means for each task
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: qualitative-data
+        title: Qualitative Data
+        instruction: |
+          Rich insights to capture:
+          - Verbatim quotes (especially revealing)
+          - Observed behaviors
+          - Emotional reactions
+          - Workarounds attempted
+          - Questions asked
+          - Suggestions made
+          - Context shared
+
+          Method: Note-taking, recording transcription
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: recording-approach
+        title: Recording Approach
+        instruction: |
+          What to record:
+          - Video (face + screen): Full context
+          - Screen only: Focus on interactions
+          - Audio only: Less intrusive
+          - Notes only: Quick, flexible
+
+          Selected: [Method]
+          Tool: [Software/device]
+          Backup: [Alternative if tech fails]
+
+          Always get consent!
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: post-session-debrief
+    title: Post-Session Debrief
+    instruction: |
+      Immediately after each session:
+      - Review notes while fresh
+      - Highlight key findings
+      - Note surprises
+      - Document critical quotes
+      - Rate session quality
+      - Identify urgent issues
+      - Update hypothesis status
+
+      Spend 10-15 minutes documenting
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: facilitator-guidelines
+    title: Facilitator Guidelines
+    type: bullet-list
+    instruction: |
+      Best practices for facilitators:
+      - Stay neutral (no leading)
+      - Listen more than talk
+      - Comfortable with silence
+      - No defending the design
+      - Probe for understanding
+      - Manage time gently
+      - Stay curious
+      - Take thorough notes
+      - Show appreciation
+
+      The user is always right about their experience
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: common-issues
+    title: Common Issues & Solutions
+    instruction: |
+      Handling challenges:
+    sections:
+      - id: participant-issues
+        title: Participant Issues
+        instruction: |
+          **Issue**: User isn't thinking aloud
+          **Solution**: Gentle reminders "Tell me what you're thinking"
+
+          **Issue**: User is too polite/positive
+          **Solution**: "What would you change to make it better?"
+
+          **Issue**: User asks "Is this right?"
+          **Solution**: "There's no right or wrong, what do you think?"
+
+          **Issue**: User is completely stuck
+          **Solution**: After 2+ min, offer hint or move on
+
+          Stay supportive and flexible
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: technical-issues
+        title: Technical Issues
+        instruction: |
+          **Issue**: Prototype breaks
+          **Solution**: Have backup or paper version
+
+          **Issue**: Recording fails
+          **Solution**: Take detailed notes, restart recording
+
+          **Issue**: Internet drops
+          **Solution**: Switch to mobile hotspot, reschedule if needed
+
+          **Issue**: Wrong browser/device
+          **Solution**: Have backup device ready
+
+          Always have contingency plans
+        owner: test-analyst
+        editors: [test-analyst, prototype-builder]
+
+  - id: ethical-considerations
+    title: Ethical Considerations
+    type: checklist
+    instruction: |
+      Ensure ethical testing:
+    template: |
+      - [ ] Informed consent obtained
+      - [ ] Privacy explained (recording, data use)
+      - [ ] Right to stop anytime communicated
+      - [ ] No coercion or pressure
+      - [ ] Compensation fair and disclosed upfront
+      - [ ] Data anonymization plan
+      - [ ] Participant wellbeing prioritized
+      - [ ] Debriefing provided
+      - [ ] Contact info for questions given
+    owner: test-analyst
+    editors: [test-analyst, dt-master]
+
+  - id: next-steps
+    title: Next Steps After Testing
+    type: checklist
+    template: |
+      - [ ] Complete all test sessions
+      - [ ] Compile all recordings and notes
+      - [ ] Thank all participants
+      - [ ] Process incentive payments
+      - [ ] Begin data analysis
+      - [ ] Create test results summary
+      - [ ] Share findings with team
+      - [ ] Plan iterations based on learnings
+    owner: test-analyst
+    editors: [test-analyst, prototype-builder, dt-master]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - Test scenarios
+      - Prototype specification
+      - Observation guide (detailed)
+      - Feedback collection form
+      - Test results summary template
+      - Participant consent forms
+      - Recording/transcription files
+    owner: test-analyst
+    editors: [test-analyst, prototype-builder]

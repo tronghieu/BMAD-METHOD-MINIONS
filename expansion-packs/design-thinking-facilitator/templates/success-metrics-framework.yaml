@@ -1,0 +1,431 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: success-metrics-framework
+  name: Success Metrics Framework
+  version: 1.0
+  description: Define measurable success criteria for design solutions
+  output:
+    format: markdown
+    filename: "problem-definition/{{project_name}}-success-metrics.md"
+    title: "Success Metrics: {{project_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: problem-definer
+  editable_sections:
+    - Success Definition
+    - Metrics
+    - Measurement Plan
+
+sections:
+  - id: metrics-overview
+    title: Success Metrics Overview
+    type: structured-data
+    instruction: |
+      Framework details:
+      - Project name
+      - Date created
+      - Opportunity areas being measured
+      - Baseline data available (yes/no)
+      - Measurement timeline
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: success-vision
+    title: Success Vision Statement
+    type: long-text
+    instruction: |
+      Paint a picture of success:
+      - What does success look like 6-12 months from now?
+      - How will users' lives be different?
+      - What business outcomes will be achieved?
+      - What recognition/evidence will show success?
+
+      This qualitative vision guides quantitative metrics
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: success-levels
+    title: Success Level Definitions
+    instruction: |
+      Define three levels of success to set realistic expectations
+    sections:
+      - id: minimum-success
+        title: Minimum Viable Success
+        type: long-text
+        instruction: |
+          Baseline success threshold:
+          - What must be achieved at minimum?
+          - Below this, solution isn't viable
+          - Minimum user adoption/satisfaction
+          - Minimum business impact
+
+          Example: "At least 60% of users can complete core task without help"
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer, dt-master]
+
+      - id: target-success
+        title: Target Success
+        type: long-text
+        instruction: |
+          Desired success level:
+          - What are we aiming for?
+          - Realistic and achievable
+          - Represents solid product-market fit
+          - Meets business objectives
+
+          Example: "80% task completion, 4.2/5 satisfaction, 25% time savings"
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer, dt-master]
+
+      - id: extraordinary-success
+        title: Extraordinary Success
+        type: long-text
+        instruction: |
+          Stretch goal success:
+          - Best-case scenario
+          - Exceeds expectations
+          - Category-defining performance
+          - Breakthrough outcomes
+
+          Example: "95% task completion, viral adoption, industry recognition"
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer, dt-master]
+
+  - id: metrics-framework
+    title: Metrics Framework
+    instruction: |
+      Organize metrics across three categories:
+      - User Metrics (user behavior and satisfaction)
+      - Business Metrics (business outcomes)
+      - Experience Metrics (quality of experience)
+    sections:
+      - id: user-metrics
+        title: User Metrics
+        instruction: |
+          Measure user behavior, adoption, and satisfaction
+        sections:
+          - id: behavioral-metrics
+            title: Behavioral Metrics
+            type: bullet-list
+            instruction: |
+              What users do:
+              - Task completion rate
+              - Time on task
+              - Error rate
+              - Feature adoption rate
+              - Usage frequency
+              - Retention rate
+              - Return visit rate
+
+              For each metric:
+              - Metric name
+              - How measured
+              - Current baseline (if known)
+              - Target value
+            template: |
+              - **[Metric name]**: [Definition]
+                - Measurement: [How tracked]
+                - Baseline: [Current value or "TBD"]
+                - Target: [Desired value]
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer, test-analyst]
+
+          - id: satisfaction-metrics
+            title: Satisfaction Metrics
+            type: bullet-list
+            instruction: |
+              How users feel:
+              - Customer Satisfaction (CSAT)
+              - Net Promoter Score (NPS)
+              - System Usability Scale (SUS)
+              - Customer Effort Score (CES)
+              - Feature satisfaction ratings
+              - Sentiment analysis
+
+              Include measurement approach and targets
+            template: |
+              - **[Metric name]**: [What it measures]
+                - Survey method: [Approach]
+                - Baseline: [If known]
+                - Target: [Goal]
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer, test-analyst]
+
+          - id: adoption-metrics
+            title: Adoption Metrics
+            type: bullet-list
+            instruction: |
+              User growth and engagement:
+              - New user sign-ups
+              - Activation rate (completed onboarding)
+              - Daily/Weekly/Monthly Active Users
+              - User journey completion
+              - Feature discovery rate
+              - Time to first value
+            template: |
+              - **[Metric]**: Target [X]% or [Y] users
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer, dt-master]
+
+      - id: business-metrics
+        title: Business Metrics
+        instruction: |
+          Measure business impact and ROI
+        sections:
+          - id: revenue-metrics
+            title: Revenue Metrics
+            type: bullet-list
+            instruction: |
+              Financial performance:
+              - Revenue growth
+              - Average revenue per user (ARPU)
+              - Customer lifetime value (LTV)
+              - Conversion rate
+              - Upsell/cross-sell rate
+              - Cart abandonment reduction
+            template: |
+              - **[Metric]**: Baseline [X], Target [Y], ROI [Z]
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer, dt-master]
+
+          - id: cost-metrics
+            title: Cost & Efficiency Metrics
+            type: bullet-list
+            instruction: |
+              Cost savings and efficiency:
+              - Support ticket reduction
+              - Customer acquisition cost (CAC)
+              - Operational cost savings
+              - Time savings per user/transaction
+              - Process efficiency gains
+            template: |
+              - **[Metric]**: Current [X], Target [Y] ([Z]% improvement)
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer, dt-master]
+
+          - id: retention-metrics
+            title: Retention & Loyalty Metrics
+            type: bullet-list
+            instruction: |
+              Customer retention:
+              - Churn rate reduction
+              - Retention rate by cohort
+              - Repeat purchase rate
+              - Customer lifetime
+              - Re-engagement rate
+            template: |
+              - **[Metric]**: Target improvement [X]%
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer, dt-master]
+
+      - id: experience-metrics
+        title: Experience Quality Metrics
+        instruction: |
+          Measure quality of user experience
+        sections:
+          - id: usability-metrics
+            title: Usability Metrics
+            type: bullet-list
+            instruction: |
+              Ease of use:
+              - Task success rate
+              - Error frequency
+              - Recovery time
+              - Learning curve (time to proficiency)
+              - Help/support usage
+              - Task completion time
+            template: |
+              - **[Usability metric]**: Target [performance level]
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer, test-analyst]
+
+          - id: accessibility-metrics
+            title: Accessibility Metrics
+            type: bullet-list
+            instruction: |
+              Inclusive design measures:
+              - WCAG compliance level
+              - Assistive technology compatibility
+              - Success rates for users with disabilities
+              - Keyboard navigation completeness
+              - Color contrast compliance
+            owner: problem-definer
+            editors: [problem-definer, test-analyst]
+
+          - id: performance-metrics
+            title: Performance Metrics
+            type: bullet-list
+            instruction: |
+              Technical performance:
+              - Page load time
+              - Response time
+              - Uptime/availability
+              - Mobile performance
+              - Error rates
+            template: |
+              - **[Performance metric]**: Target [threshold]
+            owner: problem-definer
+            editors: [problem-definer, dt-master]
+
+  - id: leading-indicators
+    title: Leading Indicators
+    type: bullet-list
+    instruction: |
+      Early signals of success (before final outcomes):
+      - Prototype testing results
+      - Early adopter feedback
+      - Usage patterns in beta
+      - Engagement trends
+      - Social proof indicators
+
+      These help course-correct before launch
+    template: |
+      - **[Leading indicator]**: What to watch for
+    owner: problem-definer
+    editors: [problem-definer, test-analyst]
+
+  - id: measurement-plan
+    title: Measurement Plan
+    instruction: |
+      How and when to collect metrics
+    sections:
+      - id: data-collection
+        title: Data Collection Methods
+        type: table
+        columns: [Metric, Collection Method, Tool/System, Frequency, Owner]
+        instruction: |
+          Plan for gathering each metric:
+
+          | Metric | Collection Method | Tool/System | Frequency | Owner |
+          |--------|-------------------|-------------|-----------|-------|
+          | Task completion | Analytics | Google Analytics | Daily | PM |
+          | CSAT | Survey | SurveyMonkey | Monthly | UX |
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer, test-analyst, dt-master]
+
+      - id: baseline-establishment
+        title: Baseline Establishment
+        type: checklist
+        instruction: |
+          Plan to establish baselines:
+        template: |
+          - [ ] Measure current state before changes
+          - [ ] Document existing metrics (if available)
+          - [ ] Set up analytics/tracking systems
+          - [ ] Run initial user research for benchmarks
+          - [ ] Gather competitive benchmarks
+        owner: problem-definer
+        editors: [problem-definer, test-analyst]
+
+      - id: measurement-timeline
+        title: Measurement Timeline
+        instruction: |
+          When to measure:
+          - **During prototyping**: Prototype testing metrics
+          - **At launch**: Initial adoption and usage
+          - **1 month post-launch**: Early trends
+          - **3 months post-launch**: Pattern establishment
+          - **6 months post-launch**: Long-term impact
+          - **12 months post-launch**: Full year assessment
+
+          Define specific measurement points for your project
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer, dt-master]
+
+  - id: metrics-dashboard
+    title: Metrics Dashboard Plan
+    instruction: |
+      Plan for visualizing and monitoring metrics:
+      - Dashboard tool (Tableau, Data Studio, custom)
+      - Refresh frequency (real-time, daily, weekly)
+      - Audience (team, stakeholders, executives)
+      - Key visualizations needed
+      - Alert thresholds for critical metrics
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: decision-criteria
+    title: Decision Criteria
+    type: long-text
+    instruction: |
+      How metrics inform decisions:
+      - At what metric values do we declare success?
+      - At what values do we pivot or iterate?
+      - At what values do we kill the project?
+      - How do we balance competing metrics?
+      - What's the minimum data needed to decide?
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: qualitative-feedback
+    title: Qualitative Feedback Plan
+    instruction: |
+      Complement quantitative metrics with qualitative insights:
+      - User interview schedule
+      - Feedback collection mechanisms
+      - Support ticket analysis
+      - Social media monitoring
+      - Beta tester feedback loops
+
+      Numbers tell what, stories tell why
+    owner: problem-definer
+    editors: [problem-definer, empathy-researcher, test-analyst]
+
+  - id: reporting-plan
+    title: Reporting & Review Cadence
+    instruction: |
+      Regular metric reviews:
+      - Who reviews metrics (team, stakeholders)
+      - Review frequency (weekly, monthly, quarterly)
+      - Report format and content
+      - Decision-making process
+      - Escalation criteria
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: metrics-evolution
+    title: Metrics Evolution
+    type: table
+    columns: [Date, Metric Changed, Reason, New Target]
+    instruction: |
+      Track how success criteria evolve:
+      - Metrics added or removed
+      - Target adjustments
+      - Why changes were made
+      - Impact on strategy
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - POV statements
+      - Opportunity map
+      - Business requirements
+      - Analytics setup documentation
+      - Test plans
+      - Research reports
+    owner: problem-definer
+    editors: [problem-definer]

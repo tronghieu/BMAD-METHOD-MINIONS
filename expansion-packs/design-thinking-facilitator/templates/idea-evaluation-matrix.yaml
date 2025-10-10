@@ -1,0 +1,394 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: idea-evaluation-matrix
+  name: Idea Evaluation Matrix
+  version: 1.0
+  description: Structured framework for evaluating and prioritizing ideas
+  output:
+    format: markdown
+    filename: "ideation/{{project_name}}-idea-evaluation.md"
+    title: "Idea Evaluation: {{project_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: ideation-coach
+  editable_sections:
+    - Evaluation Criteria
+    - Idea Scoring
+    - Selection Results
+
+sections:
+  - id: evaluation-overview
+    title: Evaluation Overview
+    type: structured-data
+    instruction: |
+      Evaluation session details:
+      - Project name
+      - Date of evaluation
+      - Number of ideas being evaluated
+      - Evaluation participants
+      - Selection method(s) used
+      - Goal (how many ideas to select)
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer]
+
+  - id: evaluation-criteria
+    title: Evaluation Criteria
+    instruction: |
+      Define how ideas will be judged.
+      Choose 4-6 criteria that matter most for your project.
+    sections:
+      - id: user-impact
+        title: "Criterion 1: User Impact"
+        instruction: |
+          How much does this solve the user problem:
+          - **High**: Directly addresses critical pain point
+          - **Medium**: Improves experience meaningfully
+          - **Low**: Nice-to-have improvement
+
+          Weight: [Assign 0-100%, e.g. 30%]
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach, problem-definer]
+
+      - id: feasibility
+        title: "Criterion 2: Feasibility"
+        instruction: |
+          How realistic is it to build:
+          - **High**: Can build with current resources/tech
+          - **Medium**: Requires new capabilities but achievable
+          - **Low**: Significant technical or resource challenges
+
+          Weight: [Assign 0-100%, e.g., 25%]
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach, prototype-builder]
+
+      - id: innovation
+        title: "Criterion 3: Innovation/Differentiation"
+        instruction: |
+          How novel or differentiated:
+          - **High**: Unique approach, competitive advantage
+          - **Medium**: Fresh take on existing solution
+          - **Low**: Incremental improvement, table stakes
+
+          Weight: [Assign 0-100%, e.g., 20%]
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach, problem-definer]
+
+      - id: strategic-fit
+        title: "Criterion 4: Strategic Fit"
+        instruction: |
+          Alignment with business strategy:
+          - **High**: Core to strategy, strong business case
+          - **Medium**: Supports strategy, decent ROI
+          - **Low**: Tangential benefit
+
+          Weight: [Assign 0-100%, e.g., 15%]
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach, dt-master]
+
+      - id: time-to-value
+        title: "Criterion 5: Time to Value"
+        instruction: |
+          How quickly can users get value:
+          - **High**: Quick wins, immediate impact
+          - **Medium**: Moderate timeline (3-6 months)
+          - **Low**: Long-term play (6+ months)
+
+          Weight: [Assign 0-100%, e.g., 10%]
+        owner: ideation-coach
+        editors: [ideation-coach, dt-master]
+
+      - id: custom-criterion
+        title: "Additional Custom Criteria (Optional)"
+        instruction: |
+          Add project-specific criteria if needed:
+          - Scalability
+          - Brand alignment
+          - Risk level
+          - Market demand
+          - Resource availability
+          - Regulatory compliance
+
+          Criterion name: [Name]
+          Definition: [What it means]
+          Scoring: [High/Med/Low definitions]
+          Weight: [0-100%]
+        owner: ideation-coach
+        editors: [ideation-coach, dt-master]
+
+  - id: criteria-weights-check
+    title: Criteria Weight Validation
+    instruction: |
+      Verify weights add up to 100%:
+
+      Total weight: [Sum of all weights above]
+
+      If not 100%, adjust weights before proceeding
+    owner: ideation-coach
+    editors: [ideation-coach]
+
+  - id: scoring-method
+    title: Scoring Method
+    type: choice
+    choices: [Individual then average, Group consensus, Dot voting, Delphi method]
+    instruction: |
+      How to assign scores to ideas:
+      - **Individual then average**: Each person scores, then average
+      - **Group consensus**: Discuss and agree on each score
+      - **Dot voting**: Visual voting on criteria
+      - **Delphi method**: Anonymous rounds with feedback
+
+      Selected method: [Choose one]
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach]
+
+  - id: idea-evaluation-table
+    title: Idea Evaluation Scores
+    type: table
+    columns: [Idea, User Impact, Feasibility, Innovation, Strategic Fit, Time to Value, Weighted Score]
+    instruction: |
+      Score each idea on all criteria (H/M/L or 1-5 scale):
+
+      | Idea | User Impact | Feasibility | Innovation | Strategic Fit | Time to Value | **Weighted Score** |
+      |------|-------------|-------------|------------|---------------|---------------|-------------------|
+      | Idea A | H (5) | M (3) | H (5) | H (5) | M (3) | **4.2** |
+      | Idea B | M (3) | H (5) | M (3) | M (3) | H (5) | **3.7** |
+
+      Calculate weighted score:
+      Score = (Impact × Weight) + (Feasibility × Weight) + ...
+
+      If using H/M/L: H=5, M=3, L=1
+      Then multiply by criterion weight and sum
+
+      List all ideas being evaluated (typically 10-20)
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer, dt-master]
+
+  - id: impact-effort-matrix
+    title: Impact-Effort Matrix Visualization
+    instruction: |
+      Plot ideas on 2x2 matrix for visual prioritization:
+
+      ```
+                  HIGH IMPACT
+                       │
+      ─────────────────┼─────────────────
+      MAJOR       │    │    │  QUICK
+      PROJECTS    │    │    │   WINS
+                  │    │    │
+      ────────────┴────┴────┴────────────
+      HIGH              │      LOW
+      EFFORT            │     EFFORT
+      ─────────────────┼─────────────────
+                  │    │    │
+      AVOID       │    │    │  FILL-INS
+      (Time Sinks)│    │    │
+                  │    │    │
+      ──────────────────┼─────────────────
+                  LOW IMPACT
+      ```
+
+      **Quick Wins (High Impact, Low Effort):**
+      - [Idea name]
+      - [Idea name]
+
+      **Major Projects (High Impact, High Effort):**
+      - [Idea name]
+      - [Idea name]
+
+      **Fill-ins (Low Impact, Low Effort):**
+      - [Idea name]
+
+      **Avoid (Low Impact, High Effort):**
+      - [Idea name]
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer]
+
+  - id: nuf-test
+    title: NUF Test Results
+    instruction: |
+      Rate ideas on NEW, USEFUL, FEASIBLE:
+    type: table
+    columns: [Idea, New (1-10), Useful (1-10), Feasible (1-10), NUF Score]
+    instruction: |
+      NUF Test scoring:
+
+      | Idea | New (1-10) | Useful (1-10) | Feasible (1-10) | **NUF Score** |
+      |------|------------|---------------|-----------------|---------------|
+      | Idea A | 8 | 9 | 7 | **24** |
+      | Idea B | 5 | 10 | 9 | **24** |
+
+      - **New**: How novel? (10 = completely new, 1 = already exists)
+      - **Useful**: How valuable? (10 = critical need, 1 = trivial)
+      - **Feasible**: How realistic? (10 = easy to build, 1 = impossible)
+
+      NUF Score = Sum of three scores
+      Minimum threshold for consideration: [Set threshold, e.g., 18+]
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer]
+
+  - id: top-ranked-ideas
+    title: Top Ranked Ideas
+    type: numbered-list
+    instruction: |
+      Final ranking based on evaluation:
+
+      1. [Idea name] - Score: [X] - Why it's #1: [Brief rationale]
+      2. [Idea name] - Score: [Y] - Why it's #2: [Brief rationale]
+      3. [Idea name] - Score: [Z] - Why it's #3: [Brief rationale]
+      ...
+
+      List top 10-15 ideas
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer]
+
+  - id: selection-decisions
+    title: Selection Decisions
+    instruction: |
+      Which ideas are moving forward:
+    sections:
+      - id: selected-for-prototyping
+        title: Selected for Prototyping
+        type: numbered-list
+        instruction: |
+          Ideas to prototype (typically 3-7):
+
+          For each:
+          1. [Idea name]
+             - Evaluation score: [X]
+             - Why selected: [Rationale]
+             - Prototype approach: [Paper/Digital/Coded]
+             - Key assumption to test: [What]
+             - Owner: [Person]
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach, prototype-builder, dt-master]
+
+      - id: backlog
+        title: Backlog (High Potential, Future Phases)
+        type: bullet-list
+        instruction: |
+          Strong ideas not prototyping now:
+          - Good scores but lower priority
+          - Require Phase 1 learnings first
+          - Resource constraints
+          - Strategic timing considerations
+
+          When to revisit: [Timeline]
+        template: |
+          - [Idea]: Score [X], Revisit [When]
+        owner: ideation-coach
+        editors: [ideation-coach, dt-master]
+
+      - id: rejected
+        title: Rejected Ideas
+        type: bullet-list
+        instruction: |
+          Ideas explicitly rejected:
+          - Low scores across criteria
+          - Critical flaws identified
+          - Outside scope
+          - Already validated as not viable
+
+          Document why to avoid revisiting
+        template: |
+          - [Idea]: Rejected because [Clear reason]
+        owner: ideation-coach
+        editors: [ideation-coach]
+
+  - id: decision-rationale
+    title: Decision Rationale
+    type: long-text
+    instruction: |
+      Explain the overall selection logic:
+      - How did we balance criteria?
+      - What trade-offs were made?
+      - Were there disagreements? How resolved?
+      - What risks are we accepting?
+      - What are we betting on?
+
+      Transparent decision-making record
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, dt-master]
+
+  - id: portfolio-balance
+    title: Portfolio Balance Check
+    instruction: |
+      Analyze selected portfolio:
+      - Mix of quick wins vs. major projects?
+      - Range of innovation levels (incremental to breakthrough)?
+      - Coverage of different user needs?
+      - Resource allocation reasonable?
+      - Risk diversification?
+
+      Does the portfolio make strategic sense?
+    owner: ideation-coach
+    editors: [ideation-coach, dt-master]
+
+  - id: stakeholder-input
+    title: Stakeholder Input
+    instruction: |
+      Document stakeholder perspectives:
+      - Who was consulted
+      - Key feedback received
+      - Concerns raised
+      - Priorities emphasized
+      - Final approval status
+    owner: ideation-coach
+    editors: [ideation-coach, dt-master]
+
+  - id: evaluation-reflections
+    title: Evaluation Process Reflections
+    instruction: |
+      How did the evaluation go:
+      - Were criteria appropriate?
+      - Did scoring method work well?
+      - Clear winners or difficult decisions?
+      - What would we do differently?
+      - Confidence in selections (1-5)?
+    owner: ideation-coach
+    editors: [ideation-coach, dt-master]
+
+  - id: next-steps
+    title: Next Steps
+    type: checklist
+    template: |
+      - [ ] Share evaluation results with team
+      - [ ] Get stakeholder approval on selections
+      - [ ] Create detailed concept posters for selected ideas
+      - [ ] Plan prototype development approach
+      - [ ] Assign owners to each selected concept
+      - [ ] Set prototype completion timeline
+      - [ ] Schedule prototype review session
+      - [ ] Archive deferred ideas for future reference
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder, dt-master]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - Idea capture board
+      - Evaluation criteria definitions
+      - Concept posters
+      - Prototype plans
+      - Success metrics framework
+      - Stakeholder requirements
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer, prototype-builder]

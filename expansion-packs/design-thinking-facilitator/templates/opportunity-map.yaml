@@ -1,0 +1,420 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: opportunity-map
+  name: Opportunity Map Template
+  version: 1.0
+  description: Visual mapping of opportunity areas from research and problem definition
+  output:
+    format: markdown
+    filename: "problem-definition/{{project_name}}-opportunity-map.md"
+    title: "Opportunity Map: {{project_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: problem-definer
+  editable_sections:
+    - Opportunity Areas
+    - Prioritization
+
+sections:
+  - id: opportunity-map-overview
+    title: Opportunity Map Overview
+    type: structured-data
+    instruction: |
+      Map session details:
+      - Project name
+      - Date created
+      - Based on research/insights from
+      - Team members involved
+      - Strategic goals informing prioritization
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: strategic-context
+    title: Strategic Context
+    instruction: |
+      Define the strategic frame for opportunity evaluation:
+      - Business goals and objectives
+      - Target user segments
+      - Market positioning
+      - Resource constraints
+      - Timeline requirements
+      - Competitive landscape
+
+      This context helps prioritize which opportunities to pursue
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: opportunity-sources
+    title: Opportunity Sources
+    instruction: |
+      Where opportunities came from:
+      - Research synthesis insights
+      - User pain points
+      - Unmet needs identified
+      - POV statements
+      - Journey map gaps
+      - Competitive analysis
+      - Stakeholder input
+    owner: problem-definer
+    editors: [problem-definer, empathy-researcher]
+
+  - id: opportunity-areas
+    title: Opportunity Areas
+    instruction: |
+      Map distinct opportunity areas for innovation.
+      Each area represents a meaningful design space to explore.
+    sections:
+      - id: opportunity-template
+        title: "Opportunity: {{opportunity_name}}"
+        repeatable: true
+        instruction: Create entry for each opportunity area (aim for 8-15 total)
+        sections:
+          - id: opportunity-name
+            title: Opportunity Name
+            type: text
+            instruction: |
+              Give this opportunity a clear, memorable name:
+              - Descriptive of the design space
+              - User-centered language
+              - Action-oriented if possible
+
+              Example: "Streamline Onboarding Experience"
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer]
+
+          - id: opportunity-description
+            title: Opportunity Description
+            type: long-text
+            instruction: |
+              Describe what this opportunity represents:
+              - What problem or need does it address?
+              - What user experience gap exists?
+              - What value could be created?
+              - What's the vision for this area?
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer]
+
+          - id: user-impact
+            title: User Impact
+            instruction: |
+              How would addressing this opportunity benefit users:
+              - Pain points eliminated
+              - Needs fulfilled
+              - Goals enabled
+              - Experience improved
+
+              Be specific about impact
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer]
+
+          - id: evidence
+            title: Supporting Evidence
+            type: bullet-list
+            instruction: |
+              Research evidence for this opportunity:
+              - Interview quotes
+              - Observation findings
+              - Journey map insights
+              - Data points (if quantitative)
+              - Number of users affected
+            template: |
+              - [Evidence] - Source: [Reference]
+            owner: problem-definer
+            editors: [problem-definer, empathy-researcher]
+
+          - id: related-pov-hmw
+            title: Related POV & HMW Questions
+            instruction: |
+              Connect to problem definition:
+              - POV statements this addresses
+              - HMW questions related
+              - Problem themes connected
+            owner: problem-definer
+            editors: [problem-definer]
+
+          - id: opportunity-sizing
+            title: Opportunity Sizing
+            instruction: |
+              Estimate scale of opportunity:
+              - User reach (how many people?)
+              - Frequency (how often encountered?)
+              - Current cost/pain level
+              - Potential value creation
+              - Market size (if applicable)
+            owner: problem-definer
+            editors: [problem-definer, dt-master]
+
+          - id: innovation-potential
+            title: Innovation Potential
+            type: choice
+            choices: [Incremental, Significant, Breakthrough]
+            instruction: |
+              Level of innovation possible:
+              - **Incremental**: Improve existing solution
+              - **Significant**: New approach to existing problem
+              - **Breakthrough**: Redefine problem or create new category
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer]
+
+          - id: initial-ideas
+            title: Initial Solution Ideas
+            type: bullet-list
+            instruction: |
+              Early ideas for addressing this opportunity:
+              - Potential approaches (not fully formed)
+              - Analogies from other domains
+              - Technology enablers
+              - Quick wins vs. long-term plays
+
+              (These are prompts, not constraints for ideation)
+            owner: problem-definer
+            editors: [problem-definer, ideation-coach]
+
+  - id: opportunity-prioritization
+    title: Opportunity Prioritization Matrix
+    type: table
+    columns: [Opportunity, User Impact, Business Value, Feasibility, Strategic Fit, Priority Score]
+    instruction: |
+      Evaluate opportunities across key dimensions:
+
+      | Opportunity | User Impact | Business Value | Feasibility | Strategic Fit | Priority Score |
+      |-------------|-------------|----------------|-------------|---------------|----------------|
+      | [Name] | H/M/L | H/M/L | H/M/L | H/M/L | Calculate |
+
+      Scoring guide:
+      - **User Impact**: H = Critical need, M = Important, L = Nice-to-have
+      - **Business Value**: H = High ROI, M = Moderate ROI, L = Low ROI
+      - **Feasibility**: H = Easy to implement, M = Moderate effort, L = Very difficult
+      - **Strategic Fit**: H = Core to strategy, M = Aligned, L = Tangential
+
+      Priority calculation: Weight scores and rank
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: impact-effort-matrix
+    title: Impact-Effort Matrix
+    instruction: |
+      Plot opportunities on 2x2 matrix:
+
+      ```
+      High Impact │ MAJOR      │ QUICK
+                  │ PROJECTS   │ WINS
+                  │            │
+      ────────────┼────────────┼────────────
+                  │            │
+      Low Impact  │ AVOID      │ FILL-INS
+                  │            │
+                  └────────────┴────────────
+                  High Effort   Low Effort
+      ```
+
+      **Quick Wins** (High Impact, Low Effort):
+      - [List opportunities here]
+
+      **Major Projects** (High Impact, High Effort):
+      - [List opportunities here]
+
+      **Fill-ins** (Low Impact, Low Effort):
+      - [List opportunities here]
+
+      **Avoid** (Low Impact, High Effort):
+      - [List opportunities here]
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: opportunity-dependencies
+    title: Opportunity Dependencies & Relationships
+    instruction: |
+      Map how opportunities relate:
+      - Which opportunities enable others?
+      - Which opportunities conflict?
+      - Which should be addressed sequentially?
+      - Which can be pursued in parallel?
+      - Which are foundational vs. additive?
+    owner: problem-definer
+    editors: [problem-definer]
+
+  - id: phasing-recommendation
+    title: Phasing Recommendation
+    instruction: |
+      Suggest implementation phases:
+    sections:
+      - id: phase1
+        title: Phase 1 (Now)
+        type: bullet-list
+        instruction: |
+          High-priority opportunities to pursue immediately:
+          - Quick wins
+          - Foundation opportunities
+          - High impact, strategically critical
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer, dt-master]
+
+      - id: phase2
+        title: Phase 2 (Next)
+        type: bullet-list
+        instruction: |
+          Second-wave opportunities:
+          - Build on Phase 1
+          - Moderate complexity
+          - Important but not urgent
+        owner: problem-definer
+        editors: [problem-definer, dt-master]
+
+      - id: phase3
+        title: Phase 3 (Future)
+        type: bullet-list
+        instruction: |
+          Future opportunities:
+          - Longer-term bets
+          - Breakthrough innovations
+          - Requires more validation
+        owner: problem-definer
+        editors: [problem-definer, dt-master]
+
+      - id: deferred
+        title: Deferred / Out of Scope
+        type: bullet-list
+        instruction: |
+          Opportunities not pursuing now:
+          - Why deferred
+          - When to revisit
+        owner: problem-definer
+        editors: [problem-definer, dt-master]
+
+  - id: selected-opportunities
+    title: Selected Opportunities for Ideation
+    type: numbered-list
+    instruction: |
+      Final selection of 1-3 opportunity areas to explore in ideation:
+
+      For each selected opportunity:
+      1. Opportunity name
+      2. Why selected (rationale)
+      3. Success criteria
+      4. Key constraints
+      5. Primary HMW questions to explore
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, ideation-coach, dt-master]
+
+  - id: risks-and-assumptions
+    title: Risks & Assumptions
+    instruction: |
+      For selected opportunities, document:
+    sections:
+      - id: risks
+        title: Risks
+        type: bullet-list
+        instruction: |
+          What could go wrong:
+          - User adoption risks
+          - Technical risks
+          - Business risks
+          - Market risks
+          - Resource risks
+        template: |
+          - [Risk] - Likelihood: [H/M/L], Impact: [H/M/L], Mitigation: [Strategy]
+        owner: problem-definer
+        editors: [problem-definer, dt-master]
+
+      - id: assumptions
+        title: Key Assumptions
+        type: bullet-list
+        instruction: |
+          Assumptions that need validation:
+          - About users
+          - About solutions
+          - About business model
+          - About technical feasibility
+
+          Plan to test during prototyping
+        template: |
+          - Assumption: [Statement]
+          - How to validate: [Method]
+        owner: problem-definer
+        editors: [problem-definer, prototype-builder]
+
+  - id: stakeholder-input
+    title: Stakeholder Input & Alignment
+    instruction: |
+      Document stakeholder perspectives:
+      - Who was consulted
+      - Key feedback received
+      - Areas of alignment
+      - Areas of concern
+      - Decisions made
+      - Approval status
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: success-metrics
+    title: Success Metrics by Opportunity
+    type: table
+    columns: [Opportunity, User Metrics, Business Metrics, Experience Metrics]
+    instruction: |
+      Define how to measure success for each opportunity:
+
+      | Opportunity | User Metrics | Business Metrics | Experience Metrics |
+      |-------------|--------------|------------------|--------------------|
+      | [Name] | Task completion, satisfaction | Revenue, retention | NPS, effort score |
+
+      Link to success-metrics-framework document for details
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: next-steps
+    title: Next Steps
+    type: checklist
+    template: |
+      - [ ] Share opportunity map with stakeholders
+      - [ ] Get alignment on selected opportunities
+      - [ ] Define detailed success metrics
+      - [ ] Prepare HMW questions for selected opportunities
+      - [ ] Schedule ideation sessions
+      - [ ] Brief ideation coach on opportunities
+      - [ ] Prepare research artifacts for ideation reference
+    owner: problem-definer
+    editors: [problem-definer, ideation-coach, dt-master]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - Research synthesis
+      - POV statements
+      - HMW questions
+      - Success metrics framework
+      - Journey maps
+      - Personas
+      - Competitive analysis
+    owner: problem-definer
+    editors: [problem-definer, empathy-researcher]
+
+  - id: evolution-log
+    title: Opportunity Map Evolution
+    type: table
+    columns: [Date, Changes, Reason, Updated By]
+    instruction: |
+      Track how opportunity map evolves:
+      - New opportunities identified
+      - Priority shifts
+      - Scope adjustments
+      - Deferred opportunities
+    owner: problem-definer
+    editors: [problem-definer, dt-master]

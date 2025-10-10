@@ -1,0 +1,443 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: prototype-planning-canvas
+  name: Prototype Planning Canvas
+  version: 1.0
+  description: Strategic planning framework for rapid prototyping
+  output:
+    format: markdown
+    filename: "prototypes/{{concept_name}}-prototype-plan.md"
+    title: "Prototype Plan: {{concept_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: prototype-builder
+  editable_sections:
+    - Prototype Strategy
+    - Build Plan
+    - Test Plan
+
+sections:
+  - id: planning-overview
+    title: Planning Overview
+    type: structured-data
+    instruction: |
+      Prototype planning details:
+      - Concept name
+      - Date created
+      - Prototype owner/builder
+      - Target completion date
+      - Testing date
+      - Budget/resources available
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: concept-summary
+    title: Concept Summary
+    type: long-text
+    instruction: |
+      Quick recap of what we're prototyping:
+      - Core concept (1-2 sentences)
+      - User problem it solves
+      - Key value proposition
+      - Primary persona
+
+      Link to full concept poster
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, ideation-coach]
+
+  - id: prototyping-goals
+    title: Prototyping Goals
+    type: bullet-list
+    instruction: |
+      What do we want to learn from this prototype:
+      - Specific questions to answer
+      - Assumptions to validate
+      - Risks to mitigate
+      - User reactions to gauge
+      - Technical feasibility to prove
+
+      Be specific about learning objectives
+    template: |
+      - [Question or assumption to test]
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: prototype-fidelity
+    title: Prototype Fidelity Level
+    type: choice
+    choices: [Paper Prototype, Digital Wireframe, Interactive Mockup, Functional MVP, Wizard of Oz, Video Prototype]
+    instruction: |
+      Choose appropriate fidelity:
+
+      **Paper Prototype** (Hours):
+      - Hand-drawn screens
+      - Role-play interactions
+      - Test basic flow and concept
+
+      **Digital Wireframe** (1-2 days):
+      - Low-fidelity digital screens
+      - Basic clickability
+      - Test information architecture
+
+      **Interactive Mockup** (3-5 days):
+      - High-fidelity visuals
+      - Realistic interactions
+      - Test complete experience
+
+      **Functional MVP** (1-3 weeks):
+      - Working code
+      - Core features only
+      - Test in real environment
+
+      **Wizard of Oz** (Varies):
+      - Fake the backend manually
+      - Simulated AI/automation
+      - Test concept before building
+
+      **Video Prototype** (2-3 days):
+      - Produced video showing concept
+      - No actual functionality
+      - Test value proposition
+
+      Selected fidelity: [Choose one]
+      Why this level: [Rationale]
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: scope-definition
+    title: Prototype Scope
+    instruction: |
+      Define what's in and out of scope
+    sections:
+      - id: must-have-features
+        title: Must-Have Features
+        type: bullet-list
+        instruction: |
+          Core features essential to test concept:
+          - Minimum required for feedback
+          - Critical user interactions
+          - Key value moments
+          - Assumption testing points
+
+          Keep list SHORT (3-7 items)
+        template: |
+          - [Feature]: Why critical: [Reason]
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder, ideation-coach]
+
+      - id: nice-to-have-features
+        title: Nice-to-Have Features
+        instruction: |
+          Features to include if time allows:
+          - Polish elements
+          - Secondary flows
+          - Edge cases
+          - Enhanced interactions
+
+          Include only if doesn't delay testing
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+      - id: explicitly-out-of-scope
+        title: Explicitly Out of Scope
+        type: bullet-list
+        instruction: |
+          What we're NOT prototyping:
+          - Features to fake or skip
+          - Edge cases to ignore
+          - Technical details not needed
+          - Secondary user flows
+
+          Be clear about limitations
+        template: |
+          - [Feature/Aspect]: Why excluded: [Reason]
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+  - id: user-flows
+    title: User Flows to Prototype
+    instruction: |
+      Map key flows to build:
+    sections:
+      - id: primary-flow
+        title: Primary User Flow
+        type: numbered-list
+        instruction: |
+          Main happy path (step-by-step):
+
+          1. User [action]
+          2. System [response]
+          3. User [next action]
+          ...
+
+          This is the core flow users will test
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder, ideation-coach]
+
+      - id: alternate-flows
+        title: Alternate Flows
+        instruction: |
+          Other paths to consider:
+          - Error states
+          - First-time vs. returning user
+          - Different entry points
+          - Success and failure paths
+
+          Which to include in prototype?
+        owner: prototype-builder
+        editors: [prototype-builder, test-analyst]
+
+  - id: fidelity-by-component
+    title: Fidelity by Component
+    type: table
+    columns: [Component, Fidelity Level, Reason]
+    instruction: |
+      Different parts may need different fidelity:
+
+      | Component | Fidelity Level | Reason |
+      |-----------|----------------|--------|
+      | Onboarding | High | Critical first impression |
+      | Core feature | High | Main testing focus |
+      | Settings | Low | Not testing this |
+      | Error handling | Paper/fake | Not priority |
+
+      Optimize effort where it matters most
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: content-and-data
+    title: Content & Data Strategy
+    instruction: |
+      What content/data does prototype need:
+      - Realistic sample data (not lorem ipsum)
+      - User-generated content examples
+      - Placeholder images
+      - Copy and microcopy
+      - Error messages
+      - Success states
+
+      How to source:
+      - Real data (if available)
+      - Realistic fake data
+      - Borrowed from similar products
+      - Generated/mocked
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, ideation-coach]
+
+  - id: tools-and-technology
+    title: Tools & Technology
+    instruction: |
+      What tools will be used:
+    sections:
+      - id: design-tools
+        title: Design Tools
+        instruction: |
+          For creating prototype:
+          - Figma, Sketch, Adobe XD
+          - Paper and markers
+          - PowerPoint/Keynote
+          - Framer, Proto.io
+          - Code (HTML/CSS/JS, framework)
+
+          Selected tool: [Tool name]
+          Why: [Rationale]
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+      - id: assets-and-resources
+        title: Assets & Resources Needed
+        type: bullet-list
+        instruction: |
+          What's required:
+          - UI component libraries
+          - Icon sets
+          - Stock images
+          - Fonts
+          - Template files
+          - Code libraries/frameworks
+        template: |
+          - [Asset/Resource]: Source: [Where to get]
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+  - id: build-timeline
+    title: Build Timeline
+    type: table
+    columns: [Phase, Tasks, Duration, Owner, Dependencies]
+    instruction: |
+      Break down the build process:
+
+      | Phase | Tasks | Duration | Owner | Dependencies |
+      |-------|-------|----------|-------|--------------|
+      | Setup | Gather assets, setup files | 2 hours | [Name] | - |
+      | Design | Create screens | 1 day | [Name] | Assets |
+      | Build | Add interactions | 1 day | [Name] | Design |
+      | Polish | Refine details | 4 hours | [Name] | Build |
+      | Test | Internal QA | 2 hours | [Name] | Polish |
+
+      Total time estimate: [X hours/days]
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: prototype-constraints
+    title: Prototype Constraints
+    type: bullet-list
+    instruction: |
+      Known limitations:
+      - Time constraints (deadline)
+      - Budget/resource limits
+      - Technical constraints
+      - Skill constraints
+      - Tool limitations
+
+      How will these affect prototype?
+    template: |
+      - [Constraint]: Impact: [How it affects approach]
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: assumptions-and-fakes
+    title: What We're Faking/Simulating
+    type: bullet-list
+    instruction: |
+      Explicitly document what's not real:
+      - Backend data (using fake data)
+      - AI/ML features (manual simulation)
+      - Third-party integrations (mocked)
+      - Performance (won't be realistic)
+      - Error handling (limited)
+
+      Important for test interpretation
+    template: |
+      - [What's fake]: [How we're simulating it]
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: test-scenarios
+    title: Test Scenarios
+    type: numbered-list
+    instruction: |
+      How users will test this prototype:
+
+      For each scenario:
+      1. **Scenario Name**: [Title]
+         - **Context**: [Setup the situation]
+         - **Task**: [What user should accomplish]
+         - **Success criteria**: [How to know if successful]
+         - **What we're testing**: [Specific assumption/question]
+
+      Link to full testing-scenario-builder document
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: success-criteria-for-prototype
+    title: Prototype Success Criteria
+    type: checklist
+    instruction: |
+      How do we know prototype is ready to test:
+    template: |
+      - [ ] Core user flow is complete
+      - [ ] Can demonstrate key value proposition
+      - [ ] Realistic enough for useful feedback
+      - [ ] All test scenarios are possible
+      - [ ] No critical bugs that block testing
+      - [ ] Looks professional enough (appropriate to fidelity)
+      - [ ] Team has reviewed and approved
+      - [ ] Test facilitator understands how to use it
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: risks-and-mitigation
+    title: Risks & Mitigation
+    type: table
+    columns: [Risk, Likelihood, Impact, Mitigation Strategy]
+    instruction: |
+      Identify prototyping risks:
+
+      | Risk | Likelihood | Impact | Mitigation Strategy |
+      |------|------------|--------|---------------------|
+      | Takes longer than planned | Medium | High | Time-box, cut scope if needed |
+      | Technical limitation | Low | High | Test tool capabilities early |
+      | Missing assets/content | Medium | Medium | Create placeholder checklist |
+
+      Plan for contingencies
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: team-coordination
+    title: Team Coordination
+    instruction: |
+      Who's involved and how:
+      - Prototype builder(s): [Name(s)]
+      - Content writer: [Name]
+      - Reviewer/approver: [Name]
+      - Test facilitator: [Name]
+
+      Communication plan:
+      - Daily standup? [Yes/No]
+      - Check-ins: [Frequency]
+      - Review milestone: [When]
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: documentation-plan
+    title: Documentation Plan
+    instruction: |
+      How to document the prototype:
+      - Prototype specification document
+      - Screen flow diagrams
+      - Interaction notes
+      - Known limitations list
+      - Test facilitator guide
+
+      What format and level of detail?
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: next-steps
+    title: Next Steps
+    type: checklist
+    template: |
+      - [ ] Get approval on prototype plan
+      - [ ] Gather all required assets
+      - [ ] Set up tools and files
+      - [ ] Build prototype (per timeline)
+      - [ ] Internal team review
+      - [ ] Create test facilitator guide
+      - [ ] Recruit test participants
+      - [ ] Schedule testing sessions
+      - [ ] Conduct user testing
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst, dt-master]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - Concept poster
+      - Solution storyboard
+      - Prototype specification (detailed)
+      - Test scenarios
+      - Test protocol
+      - User flows/wireframes
+    owner: prototype-builder
+    editors: [prototype-builder, ideation-coach, test-analyst]

@@ -1,0 +1,568 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: test-results-summary
+  name: Test Results Summary
+  version: 1.0
+  description: Comprehensive synthesis of user testing results and insights
+  output:
+    format: markdown
+    filename: "testing/{{project_name}}-test-results.md"
+    title: "Test Results: {{project_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: test-analyst
+  editable_sections:
+    - Results Analysis
+    - Findings
+    - Recommendations
+
+sections:
+  - id: summary-overview
+    title: Results Summary Overview
+    type: structured-data
+    instruction: |
+      Test results details:
+      - Test name/project
+      - Date range of testing
+      - Number of sessions conducted
+      - Prototype/product version tested
+      - Analysis completed by
+      - Report date
+    elicit: true
+    owner: test-analyst
+    editors: [test-analyst, dt-master]
+
+  - id: executive-summary
+    title: Executive Summary
+    type: long-text
+    instruction: |
+      High-level summary (2-3 paragraphs):
+      - What was tested and why
+      - Who participated (user profile)
+      - Key findings (top 3-5)
+      - Overall success/failure assessment
+      - Critical recommendations
+
+      Make it scannable for busy stakeholders
+    elicit: true
+    owner: test-analyst
+    editors: [test-analyst, dt-master]
+
+  - id: test-overview
+    title: Test Overview
+    instruction: |
+      Testing context and methodology
+    sections:
+      - id: objectives-recap
+        title: Test Objectives
+        type: bullet-list
+        instruction: |
+          What we set out to learn:
+          - Research questions
+          - Hypotheses tested
+          - Assumptions validated
+        template: |
+          - [Objective]: [Outcome - Answered/Partially/Not answered]
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: methodology-recap
+        title: Methodology
+        instruction: |
+          - Test type: [Moderated usability, etc.]
+          - Session duration: [X minutes]
+          - Location: [In-person/remote]
+          - Date range: [Dates]
+          - Facilitator(s): [Names]
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: participants-summary
+        title: Participants
+        instruction: |
+          - Total participants: [X]
+          - Demographic breakdown: [Summary]
+          - Persona distribution: [X primary, Y secondary]
+          - Experience levels: [Novice/Intermediate/Expert split]
+          - Recruitment method: [How sourced]
+          - Compensation: [If applicable]
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: quantitative-results
+    title: Quantitative Results
+    instruction: |
+      The numbers - what we measured
+    sections:
+      - id: task-success-rates
+        title: Task Success Rates
+        type: table
+        columns: [Task, Success Rate, Avg Time, Error Rate, Notes]
+        instruction: |
+          Performance metrics by task:
+
+          | Task | Success Rate | Avg Time | Error Rate | Notes |
+          |------|--------------|----------|------------|-------|
+          | Task 1 | 80% (8/10) | 2m 15s | 15% | Most succeeded |
+          | Task 2 | 50% (5/10) | 5m 30s | 40% | Confusion at step 3 |
+          | Task 3 | 90% (9/10) | 1m 45s | 5% | Very smooth |
+
+          Benchmark if possible (e.g., industry standard 75%)
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: satisfaction-scores
+        title: Satisfaction & Usability Scores
+        instruction: |
+          Aggregate ratings:
+          - Overall satisfaction: [X.X/5.0] (n=[Y])
+          - Ease of use: [X.X/5.0]
+          - Value perception: [X.X/5.0]
+          - Likelihood to use: [X.X/5.0]
+          - System Usability Scale (SUS): [XX/100]
+          - Net Promoter Score (NPS): [XX]
+
+          Context:
+          - SUS Score interpretation: <68 Below Average, 68+ Above Average, 80+ Excellent
+          - NPS interpretation: <0 Poor, 0-30 Good, 30-70 Great, 70+ Excellent
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: feature-usage
+        title: Feature Usage Statistics
+        type: table
+        columns: [Feature, Discovered, Understood, Used Successfully, Valued]
+        instruction: |
+          Feature adoption and understanding:
+
+          | Feature | Discovered | Understood | Used Successfully | Valued |
+          |---------|------------|------------|-------------------|--------|
+          | Feature A | 100% | 90% | 80% | High |
+          | Feature B | 60% | 40% | 30% | Low |
+          | Feature C | 80% | 80% | 75% | High |
+
+          - **Discovered**: % who found it
+          - **Understood**: % who got what it does
+          - **Used Successfully**: % who completed with it
+          - **Valued**: Qualitative assessment
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: error-frequency
+        title: Error Frequency
+        type: table
+        columns: [Error Type, Frequency, Severity, Affected Users]
+        instruction: |
+          Common errors encountered:
+
+          | Error Type | Frequency | Severity | Affected Users |
+          |------------|-----------|----------|----------------|
+          | Couldn't find X | 15 occurrences | High | 80% |
+          | Clicked wrong button | 8 occurrences | Medium | 40% |
+          | Form validation fail | 12 occurrences | High | 60% |
+
+          - **Frequency**: Total count across all sessions
+          - **Severity**: Impact on task completion
+          - **Affected Users**: % who experienced this
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: qualitative-findings
+    title: Qualitative Findings
+    instruction: |
+      The stories - what we observed
+    sections:
+      - id: key-insights
+        title: Key Insights
+        type: numbered-list
+        instruction: |
+          Top 10 insights from testing:
+
+          For each insight:
+          1. **[Insight title]**
+             - Finding: [What we learned]
+             - Evidence: [Quotes, observations]
+             - Impact: [Why it matters]
+             - Recommendation: [What to do]
+
+          Prioritize by importance and frequency
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst, dt-master]
+
+      - id: pain-points-identified
+        title: Pain Points Identified
+        type: table
+        columns: [Pain Point, Severity, Frequency, User Quote, Recommendation]
+        instruction: |
+          Problems users encountered:
+
+          | Pain Point | Severity | Frequency | User Quote | Recommendation |
+          |------------|----------|-----------|------------|----------------|
+          | Can't find search | Critical | 8/10 users | "Where's the search?" | Add prominent search bar |
+          | Confusing labels | High | 6/10 users | "What does X mean?" | Simplify terminology |
+
+          - **Severity**: Critical/High/Medium/Low
+          - **Frequency**: How many users affected
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst, prototype-builder]
+
+      - id: success-moments
+        title: Success Moments & Delights
+        type: bullet-list
+        instruction: |
+          What worked really well:
+          - Features users loved
+          - Moments of delight
+          - Smooth interactions
+          - Exceeded expectations
+
+          Include quotes showing enthusiasm
+        template: |
+          - [Success]: "[User quote]" - [X] users appreciated this
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: user-quotes
+        title: Memorable User Quotes
+        instruction: |
+          Quotes organized by theme:
+
+          **Positive**:
+          - "[Quote showing satisfaction]" - P03
+          - "[Quote showing value]" - P07
+
+          **Negative**:
+          - "[Quote showing frustration]" - P02
+          - "[Quote showing confusion]" - P05
+
+          **Suggestions**:
+          - "[User improvement idea]" - P04
+          - "[Feature request]" - P09
+
+          Use actual participant IDs
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: behavioral-patterns
+        title: Behavioral Patterns
+        type: bullet-list
+        instruction: |
+          Recurring behaviors observed:
+          - Navigation strategies used
+          - Mental models revealed
+          - Workarounds created
+          - Learning curves
+          - Abandonment triggers
+
+          What users DO vs. what they SAY
+        template: |
+          - **[Pattern]**: Observed in [X/Y] users - [Implication]
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: hypotheses-validation
+    title: Hypotheses Validation Results
+    type: table
+    columns: [Hypothesis, Result, Evidence, Confidence]
+    instruction: |
+      Test of assumptions:
+
+      | Hypothesis | Result | Evidence | Confidence |
+      |------------|--------|----------|------------|
+      | Users will understand feature X | ✓ Confirmed | 9/10 used it correctly | High |
+      | Feature Y is essential | ✗ Refuted | Only 2/10 valued it | High |
+      | Onboarding is clear | ~ Partial | Mixed feedback, 6/10 clear | Medium |
+
+      - **Result**: ✓ Confirmed, ✗ Refuted, ~ Partial
+      - **Confidence**: High/Medium/Low based on sample size and consistency
+    elicit: true
+    owner: test-analyst
+    editors: [test-analyst, prototype-builder, ideation-coach]
+
+  - id: usability-issues
+    title: Usability Issues by Priority
+    instruction: |
+      Prioritized list of issues to fix
+    sections:
+      - id: critical-issues
+        title: "P0: Critical Issues (Fix Now)"
+        type: bullet-list
+        instruction: |
+          Blockers that prevent task completion:
+          - Affects majority of users
+          - No workaround available
+          - Causes failure or abandonment
+
+          Must fix before launch
+        template: |
+          - **[Issue]**: [Description]
+            - Impact: [Effect on users]
+            - Frequency: [X/Y users]
+            - Quote: "[User quote]"
+            - Recommendation: [Solution]
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst, prototype-builder]
+
+      - id: high-priority
+        title: "P1: High Priority (Fix Soon)"
+        type: bullet-list
+        instruction: |
+          Significant problems:
+          - Affects many users
+          - Workaround exists but painful
+          - Reduces satisfaction
+
+          Fix in next iteration
+        template: |
+          - **[Issue]**: [Brief description] - [X/Y] users affected
+        owner: test-analyst
+        editors: [test-analyst, prototype-builder]
+
+      - id: medium-priority
+        title: "P2: Medium Priority (Fix If Time)"
+        type: bullet-list
+        instruction: |
+          Notable issues:
+          - Affects some users
+          - Easy workaround
+          - Quality improvement
+
+          Address in future releases
+        owner: test-analyst
+        editors: [test-analyst, prototype-builder]
+
+      - id: low-priority
+        title: "P3: Low Priority (Polish)"
+        type: bullet-list
+        instruction: |
+          Minor issues:
+          - Rare occurrence
+          - Minimal impact
+          - Nice-to-have improvements
+
+          Backlog for later
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: feature-feedback-summary
+    title: Feature-Specific Feedback
+    type: bullet-list
+    instruction: |
+      For each major feature tested:
+
+      **Feature Name:**
+      - Usage: [X/Y] users tried it
+      - Success: [X/Y] used successfully
+      - Value: Rated [X/5] average
+      - Key feedback: [Summary]
+      - Recommendation: [Keep/Improve/Remove/Add]
+    elicit: true
+    owner: test-analyst
+    editors: [test-analyst, prototype-builder]
+
+  - id: comparative-insights
+    title: Comparative Insights
+    instruction: |
+      How users compared to alternatives:
+
+      **vs. Current Solution:**
+      - What's better: [List]
+      - What's worse: [List]
+      - Switching motivators: [Reasons to switch]
+      - Switching barriers: [Reasons not to switch]
+
+      **vs. Competitors:**
+      - Advantages: [Where we win]
+      - Disadvantages: [Where we lose]
+      - Unique value: [Our differentiator]
+    owner: test-analyst
+    editors: [test-analyst, dt-master]
+
+  - id: segment-differences
+    title: Differences by User Segment
+    instruction: |
+      How findings varied across segments:
+
+      **By Persona:**
+      - Persona A: [Key differences]
+      - Persona B: [Key differences]
+
+      **By Experience Level:**
+      - Novice users: [Patterns]
+      - Expert users: [Patterns]
+
+      **By Device:**
+      - Desktop: [Observations]
+      - Mobile: [Observations]
+
+      Tailor solutions to segments
+    owner: test-analyst
+    editors: [test-analyst, empathy-researcher]
+
+  - id: recommendations
+    title: Recommendations
+    instruction: |
+      Actionable next steps based on findings
+    sections:
+      - id: immediate-actions
+        title: Immediate Actions (This Week)
+        type: numbered-list
+        instruction: |
+          Quick fixes and critical issues:
+
+          1. [Action]: [Why] - Owner: [Who]
+          2. [Action]: [Why] - Owner: [Who]
+          ...
+
+          Highest ROI improvements
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst, prototype-builder, dt-master]
+
+      - id: short-term-changes
+        title: Short-Term Changes (2-4 Weeks)
+        type: bullet-list
+        instruction: |
+          Next iteration improvements:
+          - Design changes
+          - Feature modifications
+          - Content updates
+          - Flow optimizations
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst, prototype-builder]
+
+      - id: long-term-considerations
+        title: Long-Term Considerations (Future)
+        type: bullet-list
+        instruction: |
+          Strategic implications:
+          - New features to consider
+          - Platform decisions
+          - Target audience refinement
+          - Positioning insights
+        owner: test-analyst
+        editors: [test-analyst, dt-master]
+
+  - id: what-worked-well
+    title: What Worked Well (Keep These!)
+    type: bullet-list
+    instruction: |
+      Positive findings to preserve:
+      - Successful features
+      - Clear interactions
+      - Valued capabilities
+      - Smooth workflows
+
+      Don't accidentally remove what works!
+    elicit: true
+    owner: test-analyst
+    editors: [test-analyst, prototype-builder]
+
+  - id: open-questions
+    title: Open Questions & Further Research
+    type: bullet-list
+    instruction: |
+      What we still need to learn:
+      - Unanswered research questions
+      - New questions that emerged
+      - Edge cases to explore
+      - Segments to test
+
+      Plan next round of research
+    template: |
+      - Question: [What we need to know]
+      - Why: [Importance]
+      - How to answer: [Method]
+    owner: test-analyst
+    editors: [test-analyst, empathy-researcher]
+
+  - id: limitations
+    title: Study Limitations
+    instruction: |
+      Acknowledge constraints:
+      - Small sample size (if applicable)
+      - Prototype limitations
+      - Participant bias
+      - Context differences
+      - Time constraints
+
+      Be transparent about scope
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: confidence-level
+    title: Confidence in Findings
+    type: choice
+    choices: [High, Medium, Low]
+    instruction: |
+      Overall confidence in results:
+      - **High**: Large sample, consistent patterns, strong evidence
+      - **Medium**: Adequate sample, some variance, good evidence
+      - **Low**: Small sample, mixed signals, needs more validation
+
+      Selected: [Choose]
+      Rationale: [Why this level]
+    elicit: true
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: appendices
+    title: Appendices
+    instruction: |
+      Supporting materials:
+      - Test protocol used
+      - Participant demographics table
+      - Task scenarios tested
+      - Full quantitative data
+      - Session recordings (links)
+      - Raw notes and transcripts
+      - Detailed feedback forms
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: next-steps
+    title: Next Steps
+    type: checklist
+    template: |
+      - [ ] Share results with team
+      - [ ] Present findings to stakeholders
+      - [ ] Prioritize recommendations with team
+      - [ ] Create iteration plan
+      - [ ] Update prototype based on findings
+      - [ ] Schedule follow-up testing (if needed)
+      - [ ] Document learnings in project knowledge base
+    owner: test-analyst
+    editors: [test-analyst, prototype-builder, dt-master]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - Test protocol
+      - Observation notes
+      - Feedback forms
+      - Session recordings
+      - Iteration planning document
+      - Prototype specifications
+      - Next test plan
+    owner: test-analyst
+    editors: [test-analyst]

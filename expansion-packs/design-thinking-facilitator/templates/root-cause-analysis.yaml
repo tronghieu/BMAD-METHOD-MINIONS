@@ -1,0 +1,452 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: root-cause-analysis
+  name: Root Cause Analysis Template
+  version: 1.0
+  description: Dig deeper to find underlying causes of problems
+  output:
+    format: markdown
+    filename: "problem-definition/{{project_name}}-root-cause-analysis.md"
+    title: "Root Cause Analysis: {{problem_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: problem-definer
+  editable_sections:
+    - Problem Analysis
+    - Root Causes
+    - Insights
+
+sections:
+  - id: analysis-overview
+    title: Root Cause Analysis Overview
+    type: structured-data
+    instruction: |
+      Analysis session details:
+      - Problem being analyzed
+      - Date conducted
+      - Facilit ator/analyst
+      - Participants in analysis
+      - Analysis method(s) used
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer]
+
+  - id: surface-problem
+    title: Surface Problem Statement
+    type: long-text
+    instruction: |
+      Start with the observable problem:
+      - What is the symptom we're seeing?
+      - What complaint or issue brought us here?
+      - How is the problem currently described?
+
+      Example: "Users are abandoning their shopping carts"
+
+      This is what we see, not necessarily the real problem
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, empathy-researcher]
+
+  - id: five-whys
+    title: Five Whys Analysis
+    instruction: |
+      Iteratively ask "why" to peel back layers and find root cause.
+      Each "why" should dig one level deeper into causation.
+    sections:
+      - id: why1
+        title: "Why #1"
+        instruction: |
+          Why does this problem occur?
+          (First level - immediate cause)
+        type: long-text
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer]
+
+      - id: why2
+        title: "Why #2"
+        instruction: |
+          Why does that (Why #1) happen?
+          (Second level - underlying cause)
+        type: long-text
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer]
+
+      - id: why3
+        title: "Why #3"
+        instruction: |
+          Why does that (Why #2) happen?
+          (Third level - deeper cause)
+        type: long-text
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer]
+
+      - id: why4
+        title: "Why #4"
+        instruction: |
+          Why does that (Why #3) happen?
+          (Fourth level - systemic cause)
+        type: long-text
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer]
+
+      - id: why5
+        title: "Why #5"
+        instruction: |
+          Why does that (Why #4) happen?
+          (Fifth level - root cause)
+        type: long-text
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer]
+
+      - id: root-cause-from-whys
+        title: Root Cause Identified
+        type: long-text
+        instruction: |
+          Based on the Five Whys, what is the true root cause?
+          - This should be actionable
+          - Solving this should eliminate the surface problem
+          - May need more or fewer than 5 whys to reach root
+
+          Root Cause: [Statement of fundamental issue]
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer]
+
+  - id: problem-tree
+    title: Problem Tree Analysis
+    instruction: |
+      Visualize problem as a tree: effects above, root causes below
+    sections:
+      - id: effects
+        title: Effects (Consequences Above Ground)
+        type: bullet-list
+        instruction: |
+          What are the visible symptoms and consequences:
+          - User impact (frustrations, failures)
+          - Business impact (lost revenue, support costs)
+          - Organizational impact (team morale, reputation)
+          - Cascading effects (what else breaks)
+
+          These are the branches and leaves - what we see
+        template: |
+          - [Effect/Symptom] → Leads to [Secondary effect]
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer]
+
+      - id: core-problem
+        title: Core Problem (Trunk)
+        type: long-text
+        instruction: |
+          The main problem statement:
+          - Central issue connecting causes to effects
+          - Observable and measurable
+          - Clear and specific
+
+          This is the trunk - the central problem
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer]
+
+      - id: root-causes
+        title: Root Causes (Roots Below Ground)
+        type: bullet-list
+        instruction: |
+          Fundamental causes feeding the problem:
+          - Systemic issues
+          - Process failures
+          - Missing capabilities
+          - Wrong incentives
+          - Structural problems
+          - Resource constraints
+
+          These are the roots - what actually causes the problem
+        template: |
+          - **[Root cause]**: [Description]
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer]
+
+  - id: fishbone-analysis
+    title: Fishbone (Ishikawa) Diagram
+    instruction: |
+      Categorize potential causes by major factors.
+      Common categories: People, Process, Technology, Environment, Management
+    sections:
+      - id: people-causes
+        title: People Causes
+        type: bullet-list
+        instruction: |
+          Human factors:
+          - Skills or knowledge gaps
+          - Behaviors or habits
+          - Motivation issues
+          - Communication problems
+          - Training deficiencies
+        template: |
+          - [Cause related to people]
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer]
+
+      - id: process-causes
+        title: Process Causes
+        type: bullet-list
+        instruction: |
+          Workflow and procedure issues:
+          - Broken or unclear processes
+          - Inefficient workflows
+          - Missing steps
+          - Bottlenecks
+          - Handoff failures
+        template: |
+          - [Cause related to process]
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer]
+
+      - id: technology-causes
+        title: Technology Causes
+        type: bullet-list
+        instruction: |
+          Technical system issues:
+          - Tool limitations
+          - Integration problems
+          - Performance issues
+          - Missing features
+          - Technical debt
+        template: |
+          - [Cause related to technology]
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer]
+
+      - id: environment-causes
+        title: Environment Causes
+        type: bullet-list
+        instruction: |
+          Contextual factors:
+          - Physical workspace
+          - Organizational culture
+          - External pressures
+          - Market conditions
+          - Regulatory constraints
+        template: |
+          - [Cause related to environment]
+        owner: problem-definer
+        editors: [problem-definer]
+
+      - id: management-causes
+        title: Management/System Causes
+        type: bullet-list
+        instruction: |
+          Leadership and organizational issues:
+          - Misaligned incentives
+          - Poor resource allocation
+          - Conflicting priorities
+          - Lack of ownership
+          - Strategic misalignment
+        template: |
+          - [Cause related to management/systems]
+        owner: problem-definer
+        editors: [problem-definer]
+
+  - id: cause-validation
+    title: Cause Validation
+    type: table
+    columns: [Potential Cause, Evidence, Strength, Addressability]
+    instruction: |
+      Evaluate which causes are real and actionable:
+
+      | Potential Cause | Evidence | Strength | Addressability |
+      |-----------------|----------|----------|----------------|
+      | [Cause] | [Data/quotes] | H/M/L | H/M/L |
+
+      - **Evidence**: Research data supporting this cause
+      - **Strength**: How much does this contribute to problem?
+      - **Addressability**: Can we realistically solve this?
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, empathy-researcher]
+
+  - id: root-cause-selection
+    title: Selected Root Causes to Address
+    type: numbered-list
+    instruction: |
+      Choose 1-3 root causes to focus on:
+      - Primary root cause (biggest contributor)
+      - Secondary causes (if applicable)
+
+      Selection criteria:
+      - Strength of evidence
+      - Impact if solved
+      - Feasibility to address
+      - Strategic fit
+
+      For each selected cause:
+      1. Root cause statement
+      2. Why selected
+      3. Expected impact if solved
+      4. How we could address it
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: deferred-causes
+    title: Deferred or Out-of-Scope Causes
+    type: bullet-list
+    instruction: |
+      Causes not being addressed now:
+      - Lower impact causes
+      - Outside team's control
+      - Require organizational change beyond scope
+      - Addressed in future phases
+
+      Document why deferred
+    template: |
+      - [Cause] - Reason deferred: [Explanation]
+    owner: problem-definer
+    editors: [problem-definer]
+
+  - id: reframed-problem
+    title: Reframed Problem Statement
+    type: long-text
+    instruction: |
+      Based on root cause analysis, reframe the problem:
+      - Instead of surface symptom, address root cause
+      - More specific and actionable
+      - Grounded in deeper understanding
+
+      Before: [Original surface problem]
+      After: [Reframed problem based on root cause]
+
+      Example:
+      Before: "Users abandon shopping carts"
+      After: "Users lack confidence to complete purchase because
+      unexpected costs appear late, violating their mental model
+      of transparent pricing"
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer]
+
+  - id: design-implications
+    title: Design Implications
+    type: bullet-list
+    instruction: |
+      How should root cause findings inform solution design:
+      - What must solutions address?
+      - What approaches are suggested?
+      - What should be avoided?
+      - What constraints exist?
+    template: |
+      - [Implication for design/solutions]
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, ideation-coach]
+
+  - id: hmw-questions-from-roots
+    title: HMW Questions from Root Causes
+    type: bullet-list
+    instruction: |
+      Generate How Might We questions targeting root causes:
+      - HMW address [root cause]?
+      - HMW eliminate [systemic issue]?
+      - HMW change [underlying condition]?
+
+      These should dig deeper than surface-level HMWs
+    template: |
+      - How might we [address root cause]?
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, ideation-coach]
+
+  - id: systemic-leverage-points
+    title: Systemic Leverage Points
+    instruction: |
+      Where can we intervene for maximum impact:
+      - High-leverage changes (small effort, big impact)
+      - Systemic interventions (change the system)
+      - Cultural shifts (change mindsets/behaviors)
+      - Structural changes (change organizational setup)
+
+      Identify where design can create cascading positive effects
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: assumptions-to-test
+    title: Assumptions to Test
+    type: bullet-list
+    instruction: |
+      Validate assumptions about root causes:
+      - Which causes are we certain about?
+      - Which need more validation?
+      - How can we test during prototyping?
+      - What evidence would confirm/refute?
+    template: |
+      - Assumption: [About root cause]
+      - How to validate: [Testing approach]
+    owner: problem-definer
+    editors: [problem-definer, prototype-builder]
+
+  - id: success-criteria
+    title: Success Criteria
+    instruction: |
+      How will we know if we've solved the root cause:
+      - Observable changes in behavior
+      - Measurable improvements
+      - Symptoms that should disappear
+      - New positive outcomes
+
+      Link to success-metrics-framework
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: analysis-reflections
+    title: Analysis Reflections
+    type: long-text
+    instruction: |
+      Team reflections on the analysis:
+      - What surprised us?
+      - How did our understanding shift?
+      - What blindspots did we have?
+      - What needs more investigation?
+    owner: problem-definer
+    editors: [problem-definer, empathy-researcher, dt-master]
+
+  - id: next-steps
+    title: Next Steps
+    type: checklist
+    template: |
+      - [ ] Share root cause analysis with stakeholders
+      - [ ] Validate causes with additional research if needed
+      - [ ] Update POV statements based on root causes
+      - [ ] Generate HMW questions targeting root causes
+      - [ ] Prepare for ideation with root cause insights
+      - [ ] Define success metrics for root cause resolution
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to related documents:
+      - Research synthesis (evidence for causes)
+      - POV statements (updated with root cause insights)
+      - HMW questions
+      - Success metrics framework
+      - Journey maps (showing where causes surface)
+      - Opportunity map
+    owner: problem-definer
+    editors: [problem-definer, empathy-researcher]

@@ -1,0 +1,102 @@
+name: Process Improvement
+description: >
+  A workflow for redesigning internal business processes by treating employees
+  as the end-users and applying Design Thinking to improve efficiency and satisfaction.
+type: process-improvement
+duration: 4-8 weeks
+
+agents:
+  - dt-master
+  - empathy-researcher
+  - problem-definer
+  - ideation-coach
+  - prototype-builder
+  - test-analyst
+
+phases:
+  - name: Process Mapping & Empathy
+    description: Understand the current process and the experiences of the employees who use it.
+    duration: 1-2 weeks
+    lead-agent: empathy-researcher
+    activities:
+      - current-state-process-mapping:
+          output: as-is-process-map
+      - employee-interviews-and-shadowing:
+          output: employee-pain-points
+      - data-analysis:
+          output: performance-bottlenecks
+      - stakeholder-interviews:
+          output: business-impact-of-inefficiencies
+    deliverables:
+      - detailed-process-map
+      - employee-personas
+      - list-of-critical-pain-points
+
+  - name: Bottleneck Definition
+    description: Define the core problems and inefficiencies to be solved.
+    duration: 1-week
+    lead-agent: problem-definer
+    activities:
+      - synthesis-workshop:
+          output: insight-themes
+      - root-cause-analysis:
+          output: underlying-causes
+      - problem-framing:
+          output: hmw-questions
+      - success-metrics-definition:
+          output: efficiency-kpis
+    deliverables:
+      - prioritized-problem-areas
+      - reframed-problem-statements
+
+  - name: Solution Ideation
+    description: Generate ideas to streamline the process and improve employee experience.
+    duration: 1-2 weeks
+    lead-agent: ideation-coach
+    activities:
+      - brainstorming-sessions:
+          output: improvement-ideas
+      - future-state-process-mapping:
+          output: to-be-process-map
+      - concept-development:
+          output: solution-concepts
+      - impact-effort-prioritization:
+          output: quick-wins-and-major-projects
+    deliverables:
+      - portfolio-of-solutions
+      - future-state-process-design
+
+  - name: Process Piloting (Prototyping)
+    description: Test the new process with a small group.
+    duration: 2-weeks
+    lead-agent: prototype-builder
+    activities:
+      - pilot-planning:
+          output: pilot-protocol
+      - tool-and-template-creation:
+          output: new-job-aids-and-templates
+      - training-material-development:
+          output: pilot-training-guide
+      - pilot-execution:
+          output: pilot-group-feedback
+    deliverables:
+      - testable-new-process
+      - communication-plan
+
+  - name: Measurement & Iteration
+    description: Measure the impact of the changes and plan for rollout.
+    duration: 1-week
+    lead-agent: test-analyst
+    activities:
+      - kpi-measurement:
+          output: performance-comparison
+      - feedback-analysis:
+          output: qualitative-findings
+      - iteration-planning:
+          output: refinement-backlog
+      - rollout-strategy:
+          output: implementation-plan
+    deliverables:
+      - validated-process-improvements
+      - final-process-documentation
+      - rollout-and-change-management-plan

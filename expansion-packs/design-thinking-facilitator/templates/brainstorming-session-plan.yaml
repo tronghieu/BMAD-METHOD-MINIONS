@@ -1,0 +1,466 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: brainstorming-session-plan
+  name: Brainstorming Session Plan
+  version: 1.0
+  description: Complete plan for facilitating creative ideation sessions
+  output:
+    format: markdown
+    filename: "ideation/{{project_name}}-brainstorm-session-{{session_date}}.md"
+    title: "Brainstorm Session Plan: {{session_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: ideation-coach
+  editable_sections:
+    - Session Planning
+    - Facilitation Guide
+    - Session Output
+
+sections:
+  - id: session-overview
+    title: Session Overview
+    type: structured-data
+    instruction: |
+      Session logistics:
+      - Session name/title
+      - Date and time
+      - Duration (recommend 90-120 minutes)
+      - Location (physical/virtual/hybrid)
+      - Facilitator name
+      - Number of participants
+      - Session type (divergent, convergent, or both)
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, dt-master]
+
+  - id: session-objectives
+    title: Session Objectives
+    type: bullet-list
+    instruction: |
+      What do we want to achieve:
+      - Specific creative challenges to address
+      - Quantity goals (e.g., 100+ ideas)
+      - Quality goals (diversity, novelty)
+      - Decisions to make (if convergent)
+      - Deliverables expected
+
+      Example:
+      - Generate 50+ solutions for "How might we help users find relevant content faster?"
+      - Explore 3 different approach categories
+      - Select top 5 concepts for prototyping
+    template: |
+      - [Objective/Goal]
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer]
+
+  - id: hmw-questions
+    title: HMW Questions for This Session
+    type: numbered-list
+    instruction: |
+      List the How Might We questions to explore:
+      - Primary HMW (main focus)
+      - Secondary HMWs (alternative angles)
+
+      Copy from HMW question generator document
+    template: |
+      1. [Primary HMW question]
+      2. [Secondary HMW question]
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer]
+
+  - id: participants
+    title: Participant List
+    type: table
+    columns: [Name, Role, Expertise, Why Invited]
+    instruction: |
+      Who's participating and why:
+
+      | Name | Role | Expertise | Why Invited |
+      |------|------|-----------|-------------|
+      | [Name] | Designer | UX Design | Deep user empathy |
+      | [Name] | Engineer | Backend | Technical feasibility |
+
+      Aim for diversity:
+      - Mix of roles (design, engineering, business, support)
+      - Different expertise levels
+      - Fresh perspectives (not just core team)
+      - 5-8 people ideal
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, dt-master]
+
+  - id: context-materials
+    title: Pre-Session Context Materials
+    instruction: |
+      What participants should review beforehand:
+      - Research synthesis summary
+      - Personas (1-page)
+      - Journey maps
+      - POV statements
+      - Constraints and requirements
+      - Competitive examples (if relevant)
+
+      Keep it concise - max 15 minutes of reading
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer]
+
+  - id: session-agenda
+    title: Session Agenda
+    instruction: |
+      Detailed timeline for the session
+    sections:
+      - id: welcome-intro
+        title: "1. Welcome & Introduction (5 min)"
+        instruction: |
+          - Welcome participants
+          - State session objectives
+          - Review agenda
+          - Set ground rules:
+            * Defer judgment
+            * Go for quantity
+            * Build on others' ideas
+            * Stay focused on topic
+            * Encourage wild ideas
+            * Be visual
+        owner: ideation-coach
+        editors: [ideation-coach]
+
+      - id: warmup
+        title: "2. Creative Warm-up (10 min)"
+        instruction: |
+          Select warm-up exercise to unlock creativity:
+
+          Options:
+          - **30 Circles**: Transform circles into recognizable objects (5 min)
+          - **Alternative Uses**: Find 20 uses for a paperclip (5 min)
+          - **Worst Possible Idea**: Generate intentionally terrible solutions (5 min)
+          - **Mashup**: Combine two random concepts (5 min)
+
+          Selected warm-up: [Choose one]
+          Purpose: Get creative juices flowing, remove judgment
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach]
+
+      - id: context-setting
+        title: "3. Context Setting (10 min)"
+        instruction: |
+          Ground everyone in the challenge:
+          - Quick recap of user research highlights
+          - Present primary persona
+          - Show key pain points or journey moments
+          - State the HMW question(s)
+          - Review any constraints
+
+          Keep it punchy - they've read materials already
+        owner: ideation-coach
+        editors: [ideation-coach, problem-definer]
+
+      - id: divergent-ideation
+        title: "4. Divergent Ideation (40-60 min)"
+        instruction: |
+          Generate many diverse ideas using multiple techniques.
+          Plan 2-3 techniques, 15-20 minutes each.
+        sections:
+          - id: technique1
+            title: "Technique 1: [Name]"
+            instruction: |
+              Select and plan first ideation technique:
+
+              Options:
+              - Classic Brainstorming (open idea generation)
+              - SCAMPER (Substitute, Combine, Adapt, Modify, Put to use, Eliminate, Reverse)
+              - Crazy 8s (8 sketches in 8 minutes)
+              - Mind Mapping (visual branching)
+              - Six Thinking Hats (perspective-based)
+              - Analogical Thinking (borrow from other domains)
+              - Brainwriting (silent written ideation)
+
+              Selected technique: [Choose]
+              Duration: [15-20 min]
+              Instructions for participants: [Specific steps]
+            elicit: true
+            owner: ideation-coach
+            editors: [ideation-coach]
+
+          - id: technique2
+            title: "Technique 2: [Name]"
+            instruction: |
+              Select second ideation technique (different approach from first).
+
+              Build on ideas from Technique 1 or explore new angle.
+
+              Selected technique: [Choose]
+              Duration: [15-20 min]
+              Instructions for participants: [Specific steps]
+            elicit: true
+            owner: ideation-coach
+            editors: [ideation-coach]
+
+          - id: technique3
+            title: "Technique 3: [Name] (Optional)"
+            instruction: |
+              Optional third technique if time allows.
+
+              Selected technique: [Choose or skip]
+              Duration: [15-20 min]
+              Instructions for participants: [Specific steps]
+            owner: ideation-coach
+            editors: [ideation-coach]
+
+      - id: idea-sharing
+        title: "5. Idea Sharing & Gallery Walk (10 min)"
+        instruction: |
+          Make all ideas visible:
+          - Post all ideas on walls/digital board
+          - Silent gallery walk
+          - Dot stickers for interesting ideas (voting)
+          - Capture photos of all idea boards
+
+          No discussion yet, just exposure to all ideas
+        owner: ideation-coach
+        editors: [ideation-coach]
+
+      - id: break
+        title: "6. Break (5-10 min)"
+        instruction: |
+          Quick break before convergent phase.
+          Let ideas percolate.
+        owner: ideation-coach
+        editors: [ideation-coach]
+
+      - id: convergent-clustering
+        title: "7. Convergent Clustering (15 min)"
+        instruction: |
+          Organize ideas into themes:
+          - Group similar ideas together
+          - Name theme clusters
+          - Identify 5-8 major opportunity areas
+          - Note quantity in each cluster
+
+          This reveals patterns and focuses attention
+        owner: ideation-coach
+        editors: [ideation-coach]
+
+      - id: idea-selection
+        title: "8. Idea Selection (15 min)"
+        instruction: |
+          Narrow to most promising ideas:
+
+          Selection method: [Choose approach]
+          - Dot voting (3-5 votes per person)
+          - Impact/Effort matrix
+          - NUF Test (New, Useful, Feasible)
+          - Forced ranking
+          - Criteria-based scoring
+
+          Goal: Identify top 5-10 ideas to develop further
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach, problem-definer]
+
+      - id: concept-building
+        title: "9. Concept Building (15-20 min)"
+        instruction: |
+          Develop selected ideas into concepts:
+          - Break into small groups (2-3 people)
+          - Each group takes 1-2 top ideas
+          - Sketch the concept
+          - Name it (memorable title)
+          - Describe key features
+          - Explain user benefit
+          - Note assumptions to test
+
+          Use concept poster template
+        owner: ideation-coach
+        editors: [ideation-coach, prototype-builder]
+
+      - id: share-next-steps
+        title: "10. Share Out & Next Steps (10 min)"
+        instruction: |
+          Close the session:
+          - Each group presents their concept (2 min each)
+          - Capture feedback and questions
+          - Explain next steps (prototyping, testing)
+          - Thank participants
+          - Schedule follow-up if needed
+        owner: ideation-coach
+        editors: [ideation-coach, dt-master]
+
+  - id: materials-checklist
+    title: Materials & Setup Checklist
+    type: checklist
+    instruction: |
+      Everything needed for successful session:
+    template: |
+      Physical Materials (if in-person):
+      - [ ] Large sticky notes (multiple colors)
+      - [ ] Sharpies/markers (thick, multiple colors)
+      - [ ] Dot stickers for voting
+      - [ ] Large poster paper or whiteboards
+      - [ ] Timer (visible to all)
+      - [ ] Masking tape
+      - [ ] Blank printer paper for sketching
+      - [ ] Snacks and beverages
+
+      Digital Tools (if virtual):
+      - [ ] Virtual whiteboard (Miro, Mural, FigJam)
+      - [ ] Video conferencing setup tested
+      - [ ] Breakout rooms configured
+      - [ ] Templates loaded and ready
+      - [ ] Timer/countdown tool
+      - [ ] Screen sharing tested
+
+      Content Materials:
+      - [ ] HMW questions printed/displayed
+      - [ ] Persona posters/slides
+      - [ ] Research highlights summary
+      - [ ] Concept poster template
+      - [ ] Example ideas (if needed to spark thinking)
+
+      Room Setup:
+      - [ ] Wall space cleared for posting ideas
+      - [ ] Tables arranged for collaboration
+      - [ ] Good lighting
+      - [ ] Minimal distractions
+    owner: ideation-coach
+    editors: [ideation-coach]
+
+  - id: facilitation-tips
+    title: Facilitation Tips & Techniques
+    instruction: |
+      Guidance for leading the session:
+    sections:
+      - id: energy-management
+        title: Energy Management
+        instruction: |
+          - Start with high energy (warmup)
+          - Watch for energy dips (take break)
+          - Use energizers if needed
+          - Vary activities (individual → group → individual)
+          - Keep pace moving
+        owner: ideation-coach
+        editors: [ideation-coach]
+
+      - id: managing-dynamics
+        title: Managing Group Dynamics
+        instruction: |
+          - Balance voices (quieter people need space)
+          - Redirect dominant participants
+          - Use silent techniques if needed
+          - Acknowledge all contributions
+          - Build on "yes, and..." culture
+          - Gently redirect off-topic discussion
+        owner: ideation-coach
+        editors: [ideation-coach]
+
+      - id: handling-challenges
+        title: Handling Common Challenges
+        instruction: |
+          - **Premature convergence**: Push for more ideas, use quotas
+          - **Criticism/judgment**: Remind of ground rules, defer evaluation
+          - **Fixation**: Change techniques, introduce constraints
+          - **Low energy**: Take break, do energizer
+          - **Going too broad**: Refocus on HMW question
+          - **Technical debates**: "Park it" for later discussion
+        owner: ideation-coach
+        editors: [ideation-coach]
+
+  - id: session-output
+    title: Session Output
+    instruction: |
+      Document what was created:
+    sections:
+      - id: idea-count
+        title: Ideas Generated
+        instruction: |
+          - Total number of ideas: [X]
+          - Ideas per technique: [Breakdown]
+          - Number of themes/clusters: [X]
+          - Selected concepts: [X]
+        owner: ideation-coach
+        editors: [ideation-coach]
+
+      - id: selected-concepts
+        title: Selected Concepts Summary
+        type: numbered-list
+        instruction: |
+          List top concepts with brief description:
+
+          1. [Concept name] - [One-line description]
+          2. [Concept name] - [One-line description]
+          ...
+
+          Link to full concept posters
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach]
+
+      - id: themes-identified
+        title: Themes Identified
+        type: bullet-list
+        instruction: |
+          Major theme clusters from ideation:
+          - [Theme name] - [Number of ideas in cluster]
+        owner: ideation-coach
+        editors: [ideation-coach]
+
+      - id: interesting-insights
+        title: Interesting Insights
+        type: bullet-list
+        instruction: |
+          Surprising discoveries from the session:
+          - Unexpected connections
+          - Novel approaches suggested
+          - Tensions or trade-offs surfaced
+          - Assumptions challenged
+        owner: ideation-coach
+        editors: [ideation-coach, problem-definer]
+
+  - id: session-feedback
+    title: Session Feedback
+    instruction: |
+      Participant reflections (quick survey after):
+      - What worked well?
+      - What could be improved?
+      - Energy level (1-5)
+      - Feeling of creative freedom (1-5)
+      - Confidence in ideas generated (1-5)
+    owner: ideation-coach
+    editors: [ideation-coach]
+
+  - id: next-steps
+    title: Next Steps
+    type: checklist
+    template: |
+      - [ ] Compile all ideas into digital format
+      - [ ] Share session summary with participants
+      - [ ] Develop selected concepts into fuller proposals
+      - [ ] Prioritize concepts for prototyping
+      - [ ] Schedule prototype planning session
+      - [ ] Document ideas not pursued (for future reference)
+      - [ ] Thank participants for contributions
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder, dt-master]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - HMW questions
+      - Research synthesis
+      - Personas
+      - Concept posters (created during session)
+      - Idea capture board (all ideas)
+      - Photos of session boards
+      - Prototype planning (next phase)
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer, prototype-builder]

@@ -26,12 +26,16 @@ phases:
           output: competitive-analysis
       - user-interviews:
           output: interview-transcripts
+          tasks:
+            - conduct-user-interview.md
       - ethnographic-observation:
           output: observation-insights
       - stakeholder-mapping:
           output: ecosystem-map
       - journey-mapping:
           output: current-experience-map
+          tasks:
+            - map-user-journey.md
     deliverables:
       - research-report
       - user-personas
@@ -48,10 +52,16 @@ phases:
     activities:
       - synthesis-workshop:
           output: insight-themes
+          tasks:
+            - synthesize-insights.md
       - problem-framing:
           output: problem-statements
+          tasks:
+            - craft-problem-statement.md
       - success-metrics:
           output: kpi-framework
+          tasks:
+            - define-success-metrics.md
       - vision-setting:
           output: product-vision
     deliverables:
@@ -70,10 +80,16 @@ phases:
     activities:
       - brainstorming-sessions:
           output: idea-bank
+          tasks:
+            - run-brainstorm-session.md
       - concept-development:
           output: detailed-concepts
+          tasks:
+            - create-concept-sketches.md
       - feature-prioritization:
           output: feature-roadmap
+          tasks:
+            - evaluate-and-prioritize.md
       - technical-feasibility:
           output: feasibility-assessment
     deliverables:
@@ -92,8 +108,12 @@ phases:
     activities:
       - low-fi-prototyping:
           output: paper-prototypes
+          tasks:
+            - create-paper-prototype.md
       - digital-mockups:
           output: interactive-prototype
+          tasks:
+            - build-digital-mockup.md
       - technical-proof-of-concept:
           output: poc-demo
       - iteration-cycles:
@@ -115,12 +135,16 @@ phases:
     activities:
       - usability-testing:
           output: usability-findings
+          tasks:
+            - conduct-usability-test.md
       - a-b-testing:
           output: variant-performance
       - beta-testing:
           output: beta-feedback
       - iteration-planning:
           output: improvement-backlog
+          tasks:
+            - plan-iterations.md
     deliverables:
       - test-report
       - validated-learning

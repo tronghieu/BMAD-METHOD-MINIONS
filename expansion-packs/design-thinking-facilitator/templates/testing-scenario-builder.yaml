@@ -1,0 +1,499 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: testing-scenario-builder
+  name: Testing Scenario Builder
+  version: 1.0
+  description: Create realistic user testing scenarios and tasks
+  output:
+    format: markdown
+    filename: "testing/{{project_name}}-test-scenarios.md"
+    title: "Test Scenarios: {{project_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: prototype-builder
+  editable_sections:
+    - Test Scenarios
+    - Tasks
+    - Success Criteria
+
+sections:
+  - id: scenarios-overview
+    title: Scenarios Overview
+    type: structured-data
+    instruction: |
+      Test scenario details:
+      - Project/prototype name
+      - Date created
+      - Prototype version being tested
+      - Target user personas
+      - Number of scenarios
+      - Scenario author(s)
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: testing-objectives
+    title: Testing Objectives
+    type: bullet-list
+    instruction: |
+      What we want to learn from testing:
+      - Usability questions to answer
+      - Assumptions to validate
+      - Pain points to identify
+      - Value proposition to test
+      - Technical feasibility to prove
+
+      These objectives inform scenario design
+    template: |
+      - [Objective/Question]
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: test-personas
+    title: Target Test Personas
+    type: bullet-list
+    instruction: |
+      Which personas will test:
+      - Primary persona (most scenarios)
+      - Secondary personas (specific scenarios)
+      - Edge case personas (if applicable)
+
+      Link to persona documents
+    template: |
+      - [Persona name]: [Why testing with them]
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, empathy-researcher]
+
+  - id: scenario-principles
+    title: Scenario Design Principles
+    instruction: |
+      Good test scenarios are:
+      - **Realistic**: Based on actual user contexts
+      - **Specific**: Clear situation and goal
+      - **Task-focused**: What user wants to accomplish
+      - **Unbiased**: Don't lead users to features
+      - **Complete**: Include necessary context
+      - **Measurable**: Clear success criteria
+
+      Avoid telling users HOW to do something
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: test-scenarios
+    title: Test Scenarios
+    instruction: |
+      Create detailed scenarios for user testing.
+      Each scenario = realistic situation + goal + tasks
+    sections:
+      - id: scenario-template
+        title: "Scenario {{number}}: {{scenario_name}}"
+        repeatable: true
+        instruction: Duplicate for each test scenario (recommend 3-7 total)
+        sections:
+          - id: scenario-number
+            title: Scenario Number
+            type: number
+            instruction: Sequential scenario number
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: scenario-name
+            title: Scenario Name
+            type: text
+            instruction: |
+              Short descriptive name:
+              - "First Time Purchase"
+              - "Finding Specific Content"
+              - "Error Recovery"
+              - "Mobile Checkout"
+
+              Clear and specific
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: persona
+            title: Persona
+            type: text
+            instruction: |
+              Which persona for this scenario:
+              - Use persona name
+              - Or describe user type
+
+              Example: "Sarah, busy working parent"
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder, empathy-researcher]
+
+          - id: context-setting
+            title: Context & Situation
+            type: long-text
+            instruction: |
+              Set the scene (2-3 sentences):
+              - Where is the user?
+              - What's happening in their life?
+              - What triggered their need?
+              - Any time pressure or constraints?
+
+              Make it vivid and relatable
+
+              Example:
+              "You're Sarah, a working parent who just got home from a long day.
+              Your kids are hungry and you realize you have no dinner planned.
+              You have about 30 minutes before the kids start getting really cranky."
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder, empathy-researcher]
+
+          - id: user-goal
+            title: User Goal
+            type: template-text
+            template: |
+              You want to {{goal}} so that {{outcome}}.
+            instruction: |
+              What user is trying to achieve:
+              - Clear end state
+              - Why it matters to them
+              - Success looks like what?
+
+              Example: "You want to find a healthy dinner recipe that takes
+              less than 30 minutes so that you can feed your family without stress."
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: tasks
+            title: Tasks
+            type: numbered-list
+            instruction: |
+              Specific tasks for user to complete:
+
+              Format each as action-oriented instruction:
+              1. [Task 1 - specific action]
+              2. [Task 2 - specific action]
+              3. [Task 3 - specific action]
+
+              Tips:
+              - Start with verbs (Find, Create, Complete, etc.)
+              - Be specific but not prescriptive about HOW
+              - 2-5 tasks per scenario
+              - Progress from simple to complex
+
+              Example:
+              1. Find a dinner recipe that meets your criteria
+              2. Add ingredients to your shopping list
+              3. Start cooking mode for step-by-step instructions
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder, test-analyst]
+
+          - id: success-criteria
+            title: Success Criteria
+            type: bullet-list
+            instruction: |
+              How to know if user succeeded:
+              - Task completion (yes/no)
+              - Time threshold (if applicable)
+              - Quality criteria
+              - User satisfaction indicator
+
+              Observable and measurable
+            template: |
+              - [Criterion]: [How to measure]
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder, test-analyst]
+
+          - id: starting-point
+            title: Starting Point
+            instruction: |
+              Where does user begin:
+              - Which screen/URL
+              - Any pre-conditions
+              - Account state (logged in/out)
+              - Data setup needed
+
+              Ensure consistent starting point
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: expected-path
+            title: Expected Path (Don't Share with Users)
+            type: numbered-list
+            instruction: |
+              Internal note: Ideal user flow
+
+              1. Screen/action
+              2. Screen/action
+              3. Screen/action
+              ...
+
+              Use for facilitation and analysis only.
+              Don't tell users this path!
+            owner: prototype-builder
+            editors: [prototype-builder, test-analyst]
+
+          - id: alternate-paths
+            title: Alternate Valid Paths
+            instruction: |
+              Other ways to complete successfully:
+              - Describe alternate approaches
+              - Note which are valid
+              - Recognize different strategies
+
+              Users may not follow expected path
+            owner: prototype-builder
+            editors: [prototype-builder, test-analyst]
+
+          - id: common-obstacles
+            title: Potential Obstacles
+            type: bullet-list
+            instruction: |
+              Where users might struggle:
+              - Confusing UI elements
+              - Missing information
+              - Unclear labels
+              - Hidden features
+              - Error-prone steps
+
+              Watch for these during testing
+            template: |
+              - [Potential issue]: [What to observe]
+            owner: prototype-builder
+            editors: [prototype-builder, test-analyst]
+
+          - id: assumptions-tested
+            title: Assumptions Being Tested
+            type: bullet-list
+            instruction: |
+              What this scenario validates:
+              - Design assumptions
+              - User behavior predictions
+              - Feature value hypotheses
+              - Interaction model assumptions
+
+              Link to key assumptions from concept
+            template: |
+              - Assumption: [Statement]
+              - Evidence: [What would confirm/refute]
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder, ideation-coach]
+
+          - id: observation-focus
+            title: Observation Focus
+            type: bullet-list
+            instruction: |
+              What to watch for:
+              - Hesitation points
+              - Error recovery
+              - Emotional reactions
+              - Verbal comments
+              - Workarounds attempted
+              - Time spent on steps
+
+              Guide for test facilitator
+            template: |
+              - [What to observe]: [Why it matters]
+            owner: prototype-builder
+            editors: [prototype-builder, test-analyst]
+
+          - id: probing-questions
+            title: Follow-up Questions
+            type: bullet-list
+            instruction: |
+              Questions to ask after scenario:
+              - "What were you thinking at [moment]?"
+              - "How did you expect that to work?"
+              - "What would have made that easier?"
+              - "On a scale of 1-5, how difficult was that?"
+
+              Scenario-specific questions
+            template: |
+              - "[Question]" - When to ask: [Context]
+            owner: prototype-builder
+            editors: [prototype-builder, test-analyst]
+
+  - id: scenario-sequence
+    title: Scenario Testing Sequence
+    type: numbered-list
+    instruction: |
+      Order to present scenarios:
+
+      1. [Scenario name] - Start with: [Why]
+      2. [Scenario name] - Then: [Why]
+      3. [Scenario name] - Then: [Why]
+      ...
+
+      Consider:
+      - Simple to complex
+      - Learning from previous scenarios
+      - Energy management
+      - Time constraints
+
+      Typical test: 3-5 scenarios in 60-90 minutes
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: scenario-variations
+    title: Scenario Variations by User Type
+    instruction: |
+      How scenarios adapt for different users:
+      - First-time user variants
+      - Expert user variants
+      - Mobile vs. desktop variants
+      - Different persona variants
+
+      When to use which variation?
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: edge-case-scenarios
+    title: Edge Case Scenarios
+    type: bullet-list
+    instruction: |
+      Non-typical scenarios to test:
+      - Error recovery situations
+      - Unusual inputs
+      - Missing data
+      - Network issues (if applicable)
+      - Edge of feature limits
+
+      Test robustness and error handling
+    template: |
+      - [Edge case]: [What to test]
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: realistic-data-setup
+    title: Realistic Data Setup
+    type: table
+    columns: [Scenario, Data Needed, Source, Preparation]
+    instruction: |
+      Data required for each scenario:
+
+      | Scenario | Data Needed | Source | Preparation |
+      |----------|-------------|--------|-------------|
+      | Purchase | Product catalog | Fake data | Pre-populate |
+      | Search | User history | Test account | Create account |
+
+      Ensure consistency across test sessions
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: facilitation-notes
+    title: Facilitation Notes
+    instruction: |
+      Guidance for test facilitators:
+      - How to introduce each scenario
+      - When to intervene vs. observe
+      - How to handle user confusion
+      - Time limits per scenario
+      - How to transition between scenarios
+      - Recording requirements
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: metrics-to-capture
+    title: Metrics to Capture
+    type: table
+    columns: [Scenario, Quantitative Metrics, Qualitative Observations]
+    instruction: |
+      What to measure for each scenario:
+
+      | Scenario | Quantitative Metrics | Qualitative Observations |
+      |----------|---------------------|--------------------------|
+      | Scenario 1 | Task success (%), Time (sec), Errors (#) | Confusion points, Satisfaction quotes |
+      | Scenario 2 | Completion rate (%), Path taken | Feature discovery, Delight moments |
+
+      Balance numbers with stories
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: scenario-validation
+    title: Scenario Validation Checklist
+    type: checklist
+    instruction: |
+      Ensure scenarios are ready:
+    template: |
+      - [ ] Based on realistic user contexts
+      - [ ] Clear goals and success criteria
+      - [ ] Appropriate difficulty level
+      - [ ] Test key assumptions
+      - [ ] Not leading or biased
+      - [ ] Time-appropriate (not too long)
+      - [ ] Prototype supports all tasks
+      - [ ] Data/setup documented
+      - [ ] Reviewed by team
+      - [ ] Pilot tested with internal user
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: pilot-testing
+    title: Pilot Test Results
+    instruction: |
+      Run scenarios with internal users first:
+      - What worked well
+      - What was confusing
+      - Timing issues
+      - Technical glitches
+      - Scenario adjustments needed
+
+      Refine before real testing
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: backup-scenarios
+    title: Backup Scenarios
+    instruction: |
+      Alternative scenarios if needed:
+      - If primary scenarios too easy/hard
+      - If time remaining
+      - If user wants to explore more
+      - If technical issues block scenarios
+
+      Have backup options ready
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: next-steps
+    title: Next Steps
+    type: checklist
+    template: |
+      - [ ] Review scenarios with team
+      - [ ] Pilot test scenarios internally
+      - [ ] Refine based on pilot feedback
+      - [ ] Prepare data/setup for each scenario
+      - [ ] Brief test facilitators
+      - [ ] Create observation guides
+      - [ ] Set up recording/tracking
+      - [ ] Recruit test participants
+      - [ ] Conduct user testing
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst, dt-master]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - Prototype specification
+      - Test protocol
+      - Observation guide
+      - Persona profiles
+      - Concept poster
+      - Testing objectives
+      - Results analysis template
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst, empathy-researcher]

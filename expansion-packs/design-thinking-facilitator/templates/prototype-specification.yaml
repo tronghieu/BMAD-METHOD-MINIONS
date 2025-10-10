@@ -1,0 +1,515 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: prototype-specification
+  name: Prototype Specification
+  version: 1.0
+  description: Detailed technical and design specification for prototype implementation
+  output:
+    format: markdown
+    filename: "prototypes/{{prototype_name}}-specification.md"
+    title: "Prototype Spec: {{prototype_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: prototype-builder
+  editable_sections:
+    - Technical Specification
+    - Design Specification
+    - Implementation Guide
+
+sections:
+  - id: spec-overview
+    title: Specification Overview
+    type: structured-data
+    instruction: |
+      Specification details:
+      - Prototype name/version
+      - Date created
+      - Prototype type/platform
+      - Author(s)
+      - Review status
+      - Implementation target date
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: prototype-summary
+    title: Prototype Summary
+    type: long-text
+    instruction: |
+      Executive summary:
+      - What this prototype demonstrates
+      - Key features included
+      - Target fidelity level
+      - Testing objectives
+      - Estimated build time
+
+      High-level overview for stakeholders
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: functional-requirements
+    title: Functional Requirements
+    instruction: |
+      What the prototype must do
+    sections:
+      - id: core-features
+        title: Core Features
+        type: numbered-list
+        instruction: |
+          Essential functionality to implement:
+
+          For each feature:
+          1. **[Feature name]**
+             - Description: [What it does]
+             - User value: [Why it matters]
+             - Acceptance criteria: [How to verify]
+             - Priority: [Must have, Should have, Could have]
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder, ideation-coach]
+
+      - id: user-interactions
+        title: User Interactions
+        type: bullet-list
+        instruction: |
+          All interactive elements:
+          - Click/tap interactions
+          - Text input fields
+          - Form submissions
+          - Navigation actions
+          - Gestures (if mobile)
+          - Drag and drop
+          - Multi-select
+
+          Specify expected behavior for each
+        template: |
+          - **[Interaction]**: [Behavior description]
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+      - id: data-handling
+        title: Data Handling
+        instruction: |
+          How prototype handles data:
+          - Input validation rules
+          - Data persistence (or not)
+          - Pre-populated data
+          - Dynamic vs. static content
+          - Data sources (real, fake, manual)
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+  - id: technical-specifications
+    title: Technical Specifications
+    instruction: |
+      Implementation details
+    sections:
+      - id: technology-stack
+        title: Technology Stack
+        instruction: |
+          Tools and technologies:
+          - Prototyping tool (Figma, Framer, etc.)
+          - OR Code framework (React, Vue, etc.)
+          - Libraries/plugins needed
+          - Hosting/sharing platform
+          - Version control approach
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+      - id: platform-requirements
+        title: Platform Requirements
+        instruction: |
+          Target platforms and devices:
+          - Desktop (browsers, resolutions)
+          - Mobile (iOS, Android versions)
+          - Tablet
+          - Cross-platform considerations
+          - Offline capability (if any)
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+      - id: technical-constraints
+        title: Technical Constraints
+        type: bullet-list
+        instruction: |
+          Known limitations:
+          - Browser compatibility requirements
+          - Performance expectations
+          - File size limits
+          - API limitations
+          - Responsive breakpoints
+        template: |
+          - [Constraint]: [Implication]
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+  - id: design-specifications
+    title: Design Specifications
+    instruction: |
+      Visual and interaction design details
+    sections:
+      - id: visual-design
+        title: Visual Design
+        instruction: |
+          Design system elements:
+          - Color palette (hex codes)
+          - Typography (fonts, sizes, weights)
+          - Spacing system (margins, padding)
+          - Grid layout
+          - Elevation/shadows
+          - Border radius
+          - Icons and imagery style
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+      - id: component-library
+        title: Component Library
+        type: bullet-list
+        instruction: |
+          Reusable UI components:
+          - Buttons (types, states)
+          - Input fields (text, select, etc.)
+          - Cards and containers
+          - Navigation elements
+          - Modals and overlays
+          - Lists and tables
+          - Forms
+
+          Define once, use throughout
+        template: |
+          - **[Component]**: [Variants and states]
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+      - id: interaction-patterns
+        title: Interaction Patterns
+        instruction: |
+          Standard behaviors:
+          - Button hover/active states
+          - Loading indicators
+          - Success/error feedback
+          - Transitions and animations
+          - Focus states
+          - Touch feedback (mobile)
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+      - id: responsive-design
+        title: Responsive Design
+        instruction: |
+          Breakpoints and adaptations:
+          - Mobile: [< Xpx]
+          - Tablet: [X-Ypx]
+          - Desktop: [> Ypx]
+
+          Layout changes:
+          - Navigation collapse
+          - Grid adjustments
+          - Content stacking
+          - Image scaling
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+  - id: screen-specifications
+    title: Screen-by-Screen Specifications
+    instruction: |
+      Detailed specs for each screen
+    sections:
+      - id: screen-spec-template
+        title: "Screen: {{screen_name}}"
+        repeatable: true
+        instruction: Duplicate for each major screen
+        sections:
+          - id: screen-identifier
+            title: Screen ID & Name
+            instruction: |
+              - Screen ID: [Unique identifier]
+              - Screen name: [Descriptive name]
+              - URL/Route: [If applicable]
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: screen-layout
+            title: Layout Specification
+            instruction: |
+              - Layout type (full-width, centered, sidebar, etc.)
+              - Header/footer included (yes/no)
+              - Main content areas
+              - Sidebar or aside content
+              - Grid structure
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: content-elements
+            title: Content Elements
+            type: bullet-list
+            instruction: |
+              All content on screen:
+              - Headings (text, level)
+              - Body copy (sample text)
+              - Images (dimensions, source)
+              - Videos or media
+              - Data displays (tables, charts)
+            template: |
+              - [Element]: [Specifications]
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: interactive-elements-spec
+            title: Interactive Elements
+            type: table
+            columns: [Element, Type, Label, Action, State Variations]
+            instruction: |
+              Detail all interactive elements:
+
+              | Element | Type | Label | Action | State Variations |
+              |---------|------|-------|--------|------------------|
+              | CTA | Primary button | "Get Started" | Navigate to signup | Default, Hover, Active, Disabled |
+              | Search | Text input | "Search..." | Filter results | Empty, Filled, Focus, Error |
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: navigation-spec
+            title: Navigation
+            instruction: |
+              How to navigate from this screen:
+              - Primary action: [Where it goes]
+              - Secondary actions: [List]
+              - Back/cancel: [Where it goes]
+              - Menu/nav links: [Destinations]
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: state-variations-spec
+            title: State Variations
+            type: bullet-list
+            instruction: |
+              Different states of this screen:
+              - Default/loaded state
+              - Loading state
+              - Empty state
+              - Error state
+              - Success state
+              - First-time user state
+              - Returning user state
+
+              Which to build in prototype?
+            template: |
+              - [State]: [Include or skip] - [Notes]
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+  - id: user-flows-spec
+    title: User Flow Specifications
+    type: numbered-list
+    instruction: |
+      Define complete flows:
+
+      **Flow 1: [Flow Name]**
+      1. Start: [Screen/State]
+      2. User action: [Action]
+      3. System response: [Response]
+      4. Transition: [Next screen]
+      5. ...
+      N. End: [Success/completion screen]
+
+      Map all critical flows
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: data-specifications
+    title: Data Specifications
+    instruction: |
+      Data requirements and sources
+    sections:
+      - id: sample-data
+        title: Sample Data
+        type: table
+        columns: [Data Type, Sample Values, Source, Format]
+        instruction: |
+          All data used in prototype:
+
+          | Data Type | Sample Values | Source | Format |
+          |-----------|---------------|--------|--------|
+          | User name | "Sarah Johnson" | Fake data | String |
+          | Product price | "$29.99" | Fake data | Currency |
+          | User avatar | [image] | UI Faces | JPG 100x100 |
+
+          Ensure realistic, diverse data
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+      - id: validation-rules
+        title: Validation Rules
+        type: bullet-list
+        instruction: |
+          Input validation requirements:
+          - Email format
+          - Password requirements
+          - Number ranges
+          - Required fields
+          - Character limits
+          - Date formats
+
+          Define error messages for each
+        template: |
+          - **[Field]**: [Rule] - Error: "[Message]"
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+  - id: accessibility-specifications
+    title: Accessibility Specifications
+    type: bullet-list
+    instruction: |
+      Accessibility requirements:
+      - WCAG level target (A, AA, AAA)
+      - Color contrast ratios
+      - Keyboard navigation order
+      - Screen reader labels (ARIA)
+      - Focus indicators
+      - Alt text for images
+      - Heading hierarchy
+      - Touch target sizes (44x44px minimum)
+    template: |
+      - [Requirement]: [Specification]
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: performance-requirements
+    title: Performance Requirements
+    instruction: |
+      Expected performance (if applicable):
+      - Page load time targets
+      - Animation frame rates
+      - Response time for interactions
+      - File size budgets
+
+      Note: May not be realistic in prototype
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: asset-inventory
+    title: Asset Inventory
+    type: table
+    columns: [Asset Type, Filename, Dimensions, Source, Status]
+    instruction: |
+      All assets needed:
+
+      | Asset Type | Filename | Dimensions | Source | Status |
+      |------------|----------|------------|--------|--------|
+      | Logo | logo.svg | - | Brand kit | Have |
+      | Icon set | icons/ | 24x24 | Material | Need |
+      | Hero image | hero.jpg | 1920x1080 | Unsplash | Need |
+
+      Track what's ready and what's needed
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: prototype-limitations
+    title: Prototype Limitations
+    type: bullet-list
+    instruction: |
+      Explicitly document what prototype CANNOT do:
+      - Backend not functional (fake data)
+      - Limited error handling
+      - No real authentication
+      - Performance not representative
+      - Missing edge cases
+      - Incomplete flows
+      - Limited device testing
+
+      Important for setting test expectations
+    template: |
+      - [Limitation]: [Why it matters for testing]
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: testing-hooks
+    title: Testing Hooks & Instrumentation
+    instruction: |
+      How to track prototype usage:
+      - Analytics events to capture
+      - Click tracking
+      - Time-on-task measurement
+      - Error logging
+      - Session recording
+
+      What data will inform iteration?
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: handoff-notes
+    title: Handoff Notes
+    instruction: |
+      Information for test facilitators:
+      - How to access prototype
+      - Login credentials (if any)
+      - Known bugs to ignore
+      - How to reset between tests
+      - Troubleshooting tips
+      - Who to contact for issues
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: future-considerations
+    title: Future Considerations
+    type: bullet-list
+    instruction: |
+      If prototype evolves to production:
+      - Technical debt to address
+      - Scalability concerns
+      - Security requirements
+      - Performance optimizations
+      - Browser/device coverage
+      - Backend requirements
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: version-history
+    title: Version History
+    type: table
+    columns: [Version, Date, Changes, Author]
+    instruction: |
+      Track prototype iterations:
+
+      | Version | Date | Changes | Author |
+      |---------|------|---------|--------|
+      | 1.0 | 2024-01-15 | Initial build | [Name] |
+      | 1.1 | 2024-01-18 | Added error states | [Name] |
+
+      Maintain change log
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - Prototype planning canvas
+      - Interaction storyboard
+      - Design mockups
+      - Component library
+      - Test scenarios
+      - User flows
+      - Testing protocol
+    owner: prototype-builder
+    editors: [prototype-builder, ideation-coach, test-analyst]

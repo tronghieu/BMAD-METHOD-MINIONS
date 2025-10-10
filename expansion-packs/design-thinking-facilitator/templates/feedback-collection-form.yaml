@@ -1,0 +1,484 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: feedback-collection-form
+  name: Feedback Collection Form
+  version: 1.0
+  description: Structured form for gathering user feedback after testing
+  output:
+    format: markdown
+    filename: "testing/{{project_name}}-feedback-form.md"
+    title: "Feedback Form: {{project_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: true
+
+agent_config:
+  owner: test-analyst
+  editable_sections:
+    - Feedback Questions
+    - Survey Responses
+
+sections:
+  - id: form-overview
+    title: Form Overview
+    type: structured-data
+    instruction: |
+      Feedback form details:
+      - Test/product name
+      - Form version
+      - Date created
+      - When administered (during/after test)
+      - Format (digital/paper)
+      - Estimated completion time
+    elicit: true
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: form-introduction
+    title: Form Introduction
+    instruction: |
+      Text to show participants:
+
+      "Thank you for testing [Product Name]!
+
+      We'd love to hear your honest feedback about your experience.
+      This should take about 5-10 minutes to complete.
+
+      There are no right or wrong answers - we want to know what YOU think.
+      Your responses will help us make this better for people like you.
+
+      All feedback is confidential and will be aggregated with other participants."
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: participant-info
+    title: Participant Information
+    instruction: |
+      Basic demographics (keep minimal):
+    sections:
+      - id: participant-id
+        title: Participant ID
+        instruction: Unique identifier (e.g., P01, P02...)
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: demographics
+        title: Demographics
+        instruction: |
+          Only collect what's relevant:
+          - Age range: [18-24, 25-34, 35-44, 45-54, 55+]
+          - Gender: [Optional]
+          - Occupation/role: [Text field]
+          - Experience level: [Novice, Intermediate, Expert]
+
+          Keep anonymous, respect privacy
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: satisfaction-ratings
+    title: Satisfaction Ratings
+    instruction: |
+      Quantitative satisfaction measures
+    sections:
+      - id: overall-satisfaction
+        title: Overall Satisfaction
+        instruction: |
+          **Question**: Overall, how satisfied were you with this experience?
+
+          Rating scale: 1 (Very Dissatisfied) to 5 (Very Satisfied)
+          [ ] 1 - Very Dissatisfied
+          [ ] 2 - Dissatisfied
+          [ ] 3 - Neutral
+          [ ] 4 - Satisfied
+          [ ] 5 - Very Satisfied
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: ease-of-use
+        title: Ease of Use
+        instruction: |
+          **Question**: How easy or difficult was it to use?
+
+          Rating scale: 1 (Very Difficult) to 5 (Very Easy)
+          [ ] 1 - Very Difficult
+          [ ] 2 - Difficult
+          [ ] 3 - Moderate
+          [ ] 4 - Easy
+          [ ] 5 - Very Easy
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: value-perception
+        title: Value Perception
+        instruction: |
+          **Question**: How valuable would this be to you?
+
+          Rating scale: 1 (Not Valuable) to 5 (Extremely Valuable)
+          [ ] 1 - Not Valuable
+          [ ] 2 - Slightly Valuable
+          [ ] 3 - Moderately Valuable
+          [ ] 4 - Very Valuable
+          [ ] 5 - Extremely Valuable
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: likelihood-to-use
+        title: Likelihood to Use
+        instruction: |
+          **Question**: How likely would you be to use this if it were available?
+
+          Rating scale: 1 (Very Unlikely) to 5 (Very Likely)
+          [ ] 1 - Very Unlikely
+          [ ] 2 - Unlikely
+          [ ] 3 - Neutral
+          [ ] 4 - Likely
+          [ ] 5 - Very Likely
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: nps-score
+        title: Net Promoter Score (Optional)
+        instruction: |
+          **Question**: How likely are you to recommend this to a friend or colleague?
+
+          Rating scale: 0 (Not at all likely) to 10 (Extremely likely)
+          [ ] 0  [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+          [ ] 6  [ ] 7  [ ] 8  [ ] 9  [ ] 10
+
+          NPS calculation:
+          - Promoters (9-10): Enthusiastic advocates
+          - Passives (7-8): Satisfied but unenthusiastic
+          - Detractors (0-6): Unhappy, may discourage others
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: sus-questionnaire
+    title: System Usability Scale (SUS)
+    instruction: |
+      Standard 10-question usability assessment.
+      Rate agreement: 1 (Strongly Disagree) to 5 (Strongly Agree)
+    sections:
+      - id: sus-questions
+        title: SUS Questions
+        instruction: |
+          1. I think I would like to use this system frequently.
+             [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+
+          2. I found the system unnecessarily complex.
+             [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+
+          3. I thought the system was easy to use.
+             [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+
+          4. I think I would need the support of a technical person to use this system.
+             [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+
+          5. I found the various functions in this system were well integrated.
+             [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+
+          6. I thought there was too much inconsistency in this system.
+             [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+
+          7. I would imagine that most people would learn to use this system very quickly.
+             [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+
+          8. I found the system very cumbersome to use.
+             [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+
+          9. I felt very confident using the system.
+             [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+
+          10. I needed to learn a lot of things before I could get going with this system.
+              [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+
+          **SUS Scoring**: See sustest.com for calculation (score 0-100)
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: open-ended-feedback
+    title: Open-Ended Feedback
+    instruction: |
+      Qualitative insights through open questions
+    sections:
+      - id: liked-most
+        title: What Did You Like Most?
+        instruction: |
+          **Question**: What did you like most about this experience?
+
+          [Text area for response]
+
+          Look for: Features loved, moments of delight, unique value
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: frustrations
+        title: What Was Most Frustrating?
+        instruction: |
+          **Question**: What was most frustrating or confusing?
+
+          [Text area for response]
+
+          Look for: Pain points, confusion, unmet expectations
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: missing-features
+        title: What Was Missing?
+        instruction: |
+          **Question**: What features or capabilities did you expect to see but didn't?
+
+          [Text area for response]
+
+          Look for: Unmet needs, feature gaps, assumptions
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: improvements
+        title: How Would You Improve It?
+        instruction: |
+          **Question**: If you could change one thing to make this better, what would it be?
+
+          [Text area for response]
+
+          Look for: Prioritized improvements, user solutions
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: comparison
+        title: Comparison to Current Solution
+        instruction: |
+          **Question**: How does this compare to what you currently use to solve this problem?
+
+          [Text area for response]
+
+          Look for: Competitive insights, switching motivation
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: feature-specific-feedback
+    title: Feature-Specific Feedback
+    instruction: |
+      Questions about specific features tested
+    sections:
+      - id: feature-feedback-template
+        title: "Feature: {{feature_name}}"
+        repeatable: true
+        instruction: Duplicate for each key feature
+        sections:
+          - id: feature-usage
+            title: Feature Usage
+            instruction: |
+              **Question**: Did you use [Feature Name]?
+              [ ] Yes
+              [ ] No
+              [ ] Tried but couldn't figure it out
+
+              If No/Couldn't: Why not?
+              [Text response]
+            owner: test-analyst
+            editors: [test-analyst]
+
+          - id: feature-clarity
+            title: Feature Clarity
+            instruction: |
+              **Question**: Was it clear what [Feature Name] does?
+              [ ] Very clear
+              [ ] Somewhat clear
+              [ ] Unclear
+              [ ] Very unclear
+
+              Comments: [Text response]
+            owner: test-analyst
+            editors: [test-analyst]
+
+          - id: feature-value
+            title: Feature Value
+            instruction: |
+              **Question**: How valuable is [Feature Name] to you?
+              [ ] Essential - would use regularly
+              [ ] Useful - would use occasionally
+              [ ] Nice to have - rarely use
+              [ ] Not useful - would never use
+
+              Why? [Text response]
+            owner: test-analyst
+            editors: [test-analyst]
+
+  - id: task-specific-ratings
+    title: Task-Specific Ratings
+    instruction: |
+      If testing specific scenarios:
+    sections:
+      - id: task-rating-template
+        title: "Task: {{task_name}}"
+        repeatable: true
+        instruction: Duplicate for each major task
+        sections:
+          - id: task-difficulty
+            title: Task Difficulty
+            instruction: |
+              **Task**: [Task description]
+
+              **Question**: How difficult was this task?
+              [ ] Very Easy
+              [ ] Easy
+              [ ] Moderate
+              [ ] Difficult
+              [ ] Very Difficult
+            owner: test-analyst
+            editors: [test-analyst]
+
+          - id: task-feedback
+            title: Task Feedback
+            instruction: |
+              **Question**: Any comments about this task?
+              [Text response]
+
+              What made it easy/hard?
+            owner: test-analyst
+            editors: [test-analyst]
+
+  - id: willingness-to-pay
+    title: Willingness to Pay (Optional)
+    instruction: |
+      If testing pricing concepts:
+
+      **Question**: How much would you be willing to pay for this?
+      [ ] Nothing - would only use if free
+      [ ] $1-5 per month
+      [ ] $6-15 per month
+      [ ] $16-30 per month
+      [ ] $31-50 per month
+      [ ] $51+ per month
+
+      Why this amount? [Text response]
+
+      **Question**: Which pricing model would you prefer?
+      [ ] Free with ads
+      [ ] One-time purchase
+      [ ] Monthly subscription
+      [ ] Annual subscription
+      [ ] Freemium (basic free, premium paid)
+    owner: test-analyst
+    editors: [test-analyst, dt-master]
+
+  - id: usage-intent
+    title: Usage Intent
+    instruction: |
+      Future behavior questions:
+
+      **Question**: When would you use this?
+      [ ] Daily
+      [ ] Weekly
+      [ ] Monthly
+      [ ] Occasionally
+      [ ] One-time only
+      [ ] Never
+
+      **Question**: In what context would you use this?
+      [Text response]
+
+      **Question**: What would motivate you to start using this?
+      [Text response]
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: follow-up-interest
+    title: Follow-Up Interest
+    instruction: |
+      Future engagement:
+
+      **Question**: Would you be interested in:
+      [ ] Beta testing when available
+      [ ] Receiving updates about this product
+      [ ] Participating in future research
+      [ ] Trying it when it launches
+
+      **If yes**, please provide your email:
+      [Email field]
+
+      (We'll only contact you about this product, never spam)
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: additional-comments
+    title: Additional Comments
+    instruction: |
+      **Question**: Any other feedback or comments?
+
+      [Large text area]
+
+      Catch-all for anything not covered
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: thank-you
+    title: Thank You Message
+    instruction: |
+      Closing text:
+
+      "Thank you for your valuable feedback!
+
+      Your insights will directly improve this product for users like you.
+      We really appreciate you taking the time to share your honest thoughts.
+
+      [If compensation promised: Your [incentive] will be sent to [method] within [timeframe].]
+
+      Questions? Contact us at [email]"
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: form-administration
+    title: Form Administration Notes
+    instruction: |
+      How to use this form:
+      - When: Immediately after test session
+      - How: Digital form (Google Forms, Typeform) or paper
+      - Time: Allow 5-10 minutes
+      - Privacy: Assure anonymity
+      - Incentive: Provide after completion
+      - Thank you: Express genuine appreciation
+
+      Make it easy and respectful of their time
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: response-tracking
+    title: Response Tracking
+    type: table
+    columns: [Participant ID, Completion Date, Completion Time, Notes]
+    instruction: |
+      Track form completion:
+
+      | Participant ID | Completion Date | Completion Time | Notes |
+      |----------------|-----------------|-----------------|-------|
+      | P01 | 2024-01-15 | 7 min | Complete |
+      | P02 | 2024-01-15 | 12 min | Skipped SUS |
+
+      Monitor completion rates and timing
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - Test protocol
+      - Observation notes
+      - Test results summary
+      - Raw survey data
+      - Analysis report
+    owner: test-analyst
+    editors: [test-analyst]

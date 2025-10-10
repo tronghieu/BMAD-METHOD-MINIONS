@@ -1,0 +1,420 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: concept-poster-template
+  name: Concept Poster Template
+  version: 1.0
+  description: Visual one-pager for communicating solution concepts
+  output:
+    format: markdown
+    filename: "ideation/concepts/{{concept_name}}-poster.md"
+    title: "Concept: {{concept_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: ideation-coach
+  editable_sections:
+    - Concept Definition
+    - Concept Details
+    - Validation Plan
+
+sections:
+  - id: concept-header
+    title: Concept Header
+    type: structured-data
+    instruction: |
+      Basic concept information:
+      - Concept name (memorable, descriptive)
+      - Tagline (one sentence value proposition)
+      - Date created
+      - Concept author(s)
+      - Project name
+      - Version number
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: concept-sketch
+    title: Concept Sketch
+    instruction: |
+      Visual representation of the concept:
+      - Hand-drawn sketch
+      - Digital mockup
+      - Diagram or flowchart
+      - Storyboard sequence
+      - Reference to attached image file
+
+      Image file reference: [filename or path]
+
+      Visual should quickly communicate the core idea
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: elevator-pitch
+    title: Elevator Pitch (30 seconds)
+    type: long-text
+    instruction: |
+      Concise description of the concept (2-3 sentences):
+      - What is it?
+      - Who is it for?
+      - What problem does it solve?
+      - Why is it different/better?
+
+      Example:
+      "QuickCart is a one-tap checkout feature for mobile shopping apps.
+      It helps busy professionals complete purchases in seconds by
+      remembering preferences and payment info. Unlike standard checkouts,
+      it eliminates 90% of form fields and completes in under 5 seconds."
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: user-story
+    title: User Story
+    type: template-text
+    template: |
+      As a {{persona}},
+      I want {{capability}},
+      so that {{benefit}}.
+    instruction: |
+      Frame concept as a user story:
+      - Persona: Which user persona is this for?
+      - Capability: What can they do with this?
+      - Benefit: What value do they get?
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer]
+
+  - id: problem-addressed
+    title: Problem Being Addressed
+    type: long-text
+    instruction: |
+      What user problem or pain point does this solve:
+      - Reference specific research findings
+      - Quote user pain points
+      - Link to HMW question(s)
+      - Explain current workaround users have
+
+      Ground concept in research insights
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer]
+
+  - id: key-features
+    title: Key Features
+    type: bullet-list
+    instruction: |
+      List 3-5 core features/capabilities:
+      - What are the essential elements?
+      - What makes this work?
+      - Focus on user-facing features, not technical implementation
+
+      Keep it simple and clear
+    template: |
+      - **[Feature name]**: [Brief description]
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: user-benefits
+    title: User Benefits
+    type: bullet-list
+    instruction: |
+      How users benefit (outcomes, not features):
+      - Time saved
+      - Frustration eliminated
+      - Goals achieved
+      - Delight created
+      - Confidence gained
+
+      Focus on emotional and functional benefits
+    template: |
+      - [Benefit statement]
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer]
+
+  - id: how-it-works
+    title: How It Works (User Flow)
+    type: numbered-list
+    instruction: |
+      Step-by-step from user perspective:
+
+      1. User does [action]
+      2. System responds with [response]
+      3. User sees/experiences [outcome]
+      ...
+
+      Simple sequence (3-6 steps)
+      Focus on user actions and system responses
+    template: |
+      1. [Step description]
+      2. [Step description]
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: wow-factor
+    title: The "Wow" Factor
+    type: long-text
+    instruction: |
+      What makes this special or delightful:
+      - Unexpected surprise
+      - Clever insight
+      - Elegant simplicity
+      - Novel approach
+      - Emotional resonance
+
+      What will make users say "That's brilliant!"?
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: innovation-level
+    title: Innovation Level
+    type: choice
+    choices: [Incremental, Significant, Breakthrough]
+    instruction: |
+      Type of innovation:
+      - **Incremental**: Improvement to existing solution
+      - **Significant**: New approach to existing problem
+      - **Breakthrough**: Redefines problem or creates new category
+
+      Be honest about ambition level
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer]
+
+  - id: inspiration-sources
+    title: Inspiration & Analogies
+    type: bullet-list
+    instruction: |
+      What inspired this concept:
+      - Analogies from other domains
+      - Examples from other products/services
+      - Natural systems or processes
+      - Cultural references
+      - Technology enablers
+
+      Helps explain the concept through familiar references
+    template: |
+      - [Inspiration source]: [How it influenced the concept]
+    owner: ideation-coach
+    editors: [ideation-coach]
+
+  - id: business-value
+    title: Business Value Proposition
+    instruction: |
+      Why this matters to the business:
+      - Revenue impact (increase sales, ARPU, etc.)
+      - Cost savings (reduce support, operations, etc.)
+      - Strategic value (differentiation, market position)
+      - Risk mitigation
+      - Scalability potential
+
+      Connect user value to business outcomes
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, dt-master]
+
+  - id: feasibility-assessment
+    title: Initial Feasibility Assessment
+    instruction: |
+      Quick evaluation of feasibility:
+    sections:
+      - id: technical-feasibility
+        title: Technical Feasibility
+        type: choice
+        choices: [High, Medium, Low, Unknown]
+        instruction: |
+          Can we build this with current technology:
+          - **High**: Straightforward with existing tools
+          - **Medium**: Requires some new capabilities
+          - **Low**: Significant technical challenges
+          - **Unknown**: Need more investigation
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach, prototype-builder]
+
+      - id: resource-requirements
+        title: Resource Requirements
+        instruction: |
+          What's needed to build this:
+          - Development time estimate (rough)
+          - Special skills or expertise needed
+          - Third-party integrations or APIs
+          - Content or data requirements
+          - Design complexity
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach, prototype-builder]
+
+      - id: risks-and-constraints
+        title: Risks & Constraints
+        type: bullet-list
+        instruction: |
+          Known challenges or concerns:
+          - Technical risks
+          - User adoption barriers
+          - Regulatory or legal issues
+          - Privacy or security concerns
+          - Organizational resistance
+        template: |
+          - [Risk/Constraint]: [Description]
+        owner: ideation-coach
+        editors: [ideation-coach, dt-master]
+
+  - id: key-assumptions
+    title: Key Assumptions to Test
+    type: bullet-list
+    instruction: |
+      What assumptions does this concept rely on:
+      - User behavior assumptions
+      - Technology assumptions
+      - Business model assumptions
+      - Market assumptions
+
+      These need validation through prototyping and testing
+    template: |
+      - **Assumption**: [Statement]
+      - **How to test**: [Method]
+      - **Critical**: [Yes/No]
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder, test-analyst]
+
+  - id: success-metrics
+    title: Success Metrics
+    type: bullet-list
+    instruction: |
+      How we'll measure if this concept succeeds:
+      - User adoption metrics
+      - Usage metrics
+      - Satisfaction scores
+      - Business impact metrics
+      - Specific KPIs
+
+      Link to success-metrics-framework
+    template: |
+      - [Metric name]: Target [value]
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer]
+
+  - id: prototype-plan
+    title: Prototype Plan
+    instruction: |
+      How to bring this concept to life:
+    sections:
+      - id: prototype-fidelity
+        title: Recommended Prototype Fidelity
+        type: choice
+        choices: [Paper, Digital Mockup, Interactive Prototype, Coded MVP]
+        instruction: |
+          What fidelity is needed to test this concept:
+          - **Paper**: Sketches and role-play
+          - **Digital Mockup**: Clickable wireframes
+          - **Interactive Prototype**: High-fidelity simulation
+          - **Coded MVP**: Functional but minimal implementation
+
+          Choose based on what needs to be tested
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach, prototype-builder]
+
+      - id: critical-features-to-prototype
+        title: Critical Features to Prototype
+        type: bullet-list
+        instruction: |
+          What MUST be in the prototype to test the concept:
+          - Essential user interactions
+          - Key value moments
+          - Assumption testing points
+          - Risk mitigation elements
+
+          What can be faked or left out?
+        template: |
+          - [Feature to include]: Why critical: [Reason]
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach, prototype-builder]
+
+      - id: test-scenarios
+        title: Test Scenarios
+        type: bullet-list
+        instruction: |
+          How to test this with users:
+          - Scenario context to set up
+          - Tasks for users to attempt
+          - Questions to ask
+          - Behaviors to observe
+        template: |
+          - Scenario: [Description]
+          - Test: [What to validate]
+        owner: ideation-coach
+        editors: [ideation-coach, test-analyst]
+
+  - id: concept-evolution
+    title: Concept Evolution
+    type: bullet-list
+    instruction: |
+      How this concept emerged:
+      - Original idea(s) it built from
+      - Modifications made
+      - Who contributed what
+      - Feedback incorporated
+      - Related concepts
+
+      Tracks lineage and collaboration
+    template: |
+      - [Date/Version]: [What changed and why]
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: team-feedback
+    title: Team Feedback & Reactions
+    instruction: |
+      What team members think:
+      - Excitement level (1-5)
+      - Concerns raised
+      - Suggested improvements
+      - Questions to answer
+      - Alignment with vision
+
+      Capture raw reactions
+    owner: ideation-coach
+    editors: [ideation-coach, dt-master]
+
+  - id: next-steps
+    title: Next Steps
+    type: checklist
+    template: |
+      - [ ] Present concept to stakeholders
+      - [ ] Get technical feasibility review
+      - [ ] Create prototype
+      - [ ] Recruit test users
+      - [ ] Design test protocol
+      - [ ] Conduct user testing
+      - [ ] Analyze results and iterate
+      - [ ] Make go/no-go decision
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder, test-analyst]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - Idea capture board (source ideas)
+      - HMW questions
+      - Research insights
+      - Persona(s) this targets
+      - Prototype (once created)
+      - Test results (once tested)
+      - Other related concepts
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]

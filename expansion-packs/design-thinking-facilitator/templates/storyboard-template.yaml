@@ -1,0 +1,471 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: storyboard-template
+  name: Interaction Storyboard Template
+  version: 1.0
+  description: Frame-by-frame interaction flow for prototype screens
+  output:
+    format: markdown
+    filename: "prototypes/{{prototype_name}}-interaction-storyboard.md"
+    title: "Interaction Storyboard: {{prototype_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: prototype-builder
+  editable_sections:
+    - Screen Flows
+    - Interactions
+    - States
+
+sections:
+  - id: storyboard-overview
+    title: Storyboard Overview
+    type: structured-data
+    instruction: |
+      Interaction storyboard details:
+      - Prototype name
+      - Date created
+      - Flow type (onboarding, core task, etc.)
+      - Platform (web, mobile, tablet, multi)
+      - Starting point (which screen/state)
+      - Ending point (completion state)
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, ideation-coach]
+
+  - id: flow-purpose
+    title: Flow Purpose
+    type: long-text
+    instruction: |
+      What user flow is being storyboarded:
+      - What task is user completing?
+      - What's the entry point?
+      - What's the success state?
+      - Why is this flow important to prototype?
+
+      This storyboard shows screen-by-screen progression
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: screen-sequence
+    title: Screen Sequence
+    instruction: |
+      Map each screen/state in the interaction flow.
+      Each entry represents one screen or state transition.
+    sections:
+      - id: screen-template
+        title: "Screen {{number}}: {{screen_name}}"
+        repeatable: true
+        instruction: Duplicate for each screen in the flow
+        sections:
+          - id: screen-number
+            title: Screen Number
+            type: number
+            instruction: Sequential screen number in flow
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: screen-name
+            title: Screen Name
+            type: text
+            instruction: |
+              Descriptive screen name:
+              - Dashboard
+              - Product Details
+              - Checkout - Step 1
+              - Success Confirmation
+
+              Use consistent naming convention
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: screen-sketch
+            title: Screen Visual
+            instruction: |
+              Visual representation:
+              - Wireframe sketch
+              - Screenshot
+              - Mockup image
+              - Detailed description
+
+              Image reference: [filename or description]
+
+              Show key UI elements, layout, content
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: screen-purpose
+            title: Screen Purpose
+            instruction: |
+              What this screen accomplishes:
+              - Information displayed
+              - Decision user makes
+              - Action enabled
+              - Progress indication
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: user-action
+            title: User Action
+            type: choice
+            choices: [Tap button, Enter text, Select option, Swipe, Scroll, View content, Navigate back, Wait/loading]
+            instruction: |
+              Primary user action on this screen:
+              - What does user do here?
+              - Is action required or optional?
+
+              Selected action: [Choose]
+              Action details: [Specifics]
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: interactive-elements
+            title: Interactive Elements
+            type: bullet-list
+            instruction: |
+              All interactive elements on screen:
+              - Buttons (labels and actions)
+              - Input fields (what data)
+              - Links (where they go)
+              - Toggles, checkboxes, selects
+              - Gestures (swipe, pinch, etc.)
+            template: |
+              - [Element type]: [Label/Name] → [What happens]
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: system-response
+            title: System Response
+            instruction: |
+              How system responds to user action:
+              - Immediate feedback (animation, sound)
+              - Data processing
+              - Screen transition
+              - Error or validation message
+              - Loading indicator
+
+              What does user see/experience?
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: next-screen
+            title: Next Screen(s)
+            instruction: |
+              Where can user go from here:
+              - Primary path: Screen [#] - [Name]
+              - Alternate path: Screen [#] - [Name]
+              - Back/cancel: Screen [#] - [Name]
+              - Error state: Screen [#] - [Name]
+
+              Map all possible transitions
+            elicit: true
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: data-required
+            title: Data Required
+            instruction: |
+              What data this screen needs:
+              - User input data
+              - System/backend data
+              - Context from previous screens
+              - Default values
+
+              For prototype: Real, fake, or manual?
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: edge-cases
+            title: Edge Cases & States
+            type: bullet-list
+            instruction: |
+              Alternative states to consider:
+              - Empty state (no data)
+              - Loading state
+              - Error state
+              - Partial data
+              - Offline state
+              - First-time vs. returning user
+
+              Which to include in prototype?
+            template: |
+              - [State]: [Include or exclude]
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+          - id: implementation-notes
+            title: Implementation Notes
+            instruction: |
+              Technical notes for building:
+              - Component libraries to use
+              - Animation details
+              - Responsive behavior
+              - Accessibility considerations
+              - Performance notes
+            owner: prototype-builder
+            editors: [prototype-builder]
+
+  - id: flow-diagram
+    title: Flow Diagram
+    instruction: |
+      Visual representation of complete flow:
+
+      ```
+      [Screen 1] → [User Action] → [Screen 2]
+           ↓                            ↓
+      [Alt Path]                   [Screen 3]
+           ↓                            ↓
+      [Screen X] ← ← ← ← ← ← ← ← [Success]
+      ```
+
+      ASCII art or description of flow structure:
+      - Linear path
+      - Branches and decision points
+      - Loops or iterations
+      - Error recovery paths
+      - Exit points
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: happy-path-summary
+    title: Happy Path Summary
+    type: numbered-list
+    instruction: |
+      Ideal user journey (no errors):
+
+      1. Screen [#]: User [action] → System [response]
+      2. Screen [#]: User [action] → System [response]
+      3. ...
+
+      Quick reference for main flow
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: animations-and-transitions
+    title: Animations & Transitions
+    type: table
+    columns: [From Screen, To Screen, Transition Type, Duration, Notes]
+    instruction: |
+      Define screen transitions:
+
+      | From Screen | To Screen | Transition Type | Duration | Notes |
+      |-------------|-----------|-----------------|----------|-------|
+      | Home | Details | Slide left | 300ms | Card expands |
+      | Form | Success | Fade | 200ms | Show checkmark |
+
+      Specify only if needed for prototype fidelity
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: micro-interactions
+    title: Micro-interactions
+    type: bullet-list
+    instruction: |
+      Small interaction details that enhance UX:
+      - Button press states
+      - Loading spinners
+      - Success animations
+      - Haptic feedback (mobile)
+      - Sound effects
+      - Hover states
+      - Focus indicators
+
+      Which to include in prototype?
+    template: |
+      - [Interaction]: [Include or skip]
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: responsive-behavior
+    title: Responsive Behavior
+    instruction: |
+      How does flow adapt across devices:
+      - Mobile (portrait/landscape)
+      - Tablet
+      - Desktop
+
+      Key differences:
+      - Navigation patterns
+      - Layout changes
+      - Interaction methods
+      - Information hierarchy
+
+      What device(s) to prototype for?
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: accessibility-considerations
+    title: Accessibility Considerations
+    type: bullet-list
+    instruction: |
+      How to make flow accessible:
+      - Keyboard navigation path
+      - Screen reader labels
+      - Focus management
+      - Color contrast requirements
+      - Touch target sizes
+      - Alternative text for images
+
+      Critical for inclusive design
+    template: |
+      - [Consideration]: [Implementation approach]
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: error-handling-flow
+    title: Error Handling Flow
+    instruction: |
+      What happens when things go wrong:
+      - Validation errors (inline feedback)
+      - System errors (error pages)
+      - Network errors (retry mechanisms)
+      - Timeout scenarios
+      - Recovery paths back to success
+
+      Map error states on storyboard
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: first-time-vs-returning
+    title: First-Time vs. Returning User
+    instruction: |
+      Flow variations:
+      - First-time user (onboarding, tooltips)
+      - Returning user (shortcuts, personalization)
+      - Empty state vs. populated
+      - Default values remembered
+
+      Which version to prototype?
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: prototype-scope-mapping
+    title: Prototype Scope Mapping
+    type: table
+    columns: [Screen #, Screen Name, Fidelity Level, Status]
+    instruction: |
+      Track which screens to build:
+
+      | Screen # | Screen Name | Fidelity Level | Status |
+      |----------|-------------|----------------|--------|
+      | 1 | Home | High | Complete |
+      | 2 | Search | Medium | In progress |
+      | 3 | Results | Medium | Planned |
+      | 4 | Details | High | Planned |
+      | 5 | Error | Low/skip | Skipped |
+
+      Manage build progress
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: usability-considerations
+    title: Usability Considerations
+    type: bullet-list
+    instruction: |
+      Ensure flow is user-friendly:
+      - Clear progress indicators
+      - Undo/back functionality
+      - Confirmation for destructive actions
+      - Smart defaults
+      - Contextual help
+      - Clear error messages
+      - Save/auto-save capability
+    template: |
+      - [Consideration]: [How implemented]
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: content-requirements
+    title: Content Requirements
+    type: table
+    columns: [Screen, Content Type, Sample Content, Source]
+    instruction: |
+      Content needed for each screen:
+
+      | Screen | Content Type | Sample Content | Source |
+      |--------|--------------|----------------|--------|
+      | Home | Hero text | "Welcome to..." | Copywriter |
+      | List | Product names | Real product data | Database |
+      | Detail | Description | Lorem ipsum | Fake data |
+
+      Ensure realistic content for testing
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: test-scenario-mapping
+    title: Test Scenario Mapping
+    instruction: |
+      How test scenarios map to screens:
+
+      **Scenario 1**: [Name]
+      - Starts: Screen [#]
+      - Path: [#] → [#] → [#]
+      - Ends: Screen [#]
+      - What we're testing: [Focus]
+
+      **Scenario 2**: [Name]
+      - Starts: Screen [#]
+      - Path: [#] → [#] → [#]
+      - Ends: Screen [#]
+      - What we're testing: [Focus]
+
+      Ensures prototype supports all test cases
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: build-dependencies
+    title: Build Dependencies
+    instruction: |
+      What needs to be built in what order:
+      - Foundation screens first
+      - Dependent screens after
+      - Shared components (build once, reuse)
+      - Integration points
+
+      Optimize build sequence
+    owner: prototype-builder
+    editors: [prototype-builder]
+
+  - id: next-steps
+    title: Next Steps
+    type: checklist
+    template: |
+      - [ ] Review and approve storyboard
+      - [ ] Create detailed screen designs
+      - [ ] Build interactive prototype
+      - [ ] Test internal navigation flow
+      - [ ] Add required content
+      - [ ] Create facilitator guide
+      - [ ] Prepare for user testing
+    owner: prototype-builder
+    editors: [prototype-builder, test-analyst]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - Prototype planning canvas
+      - Solution storyboard (user narrative)
+      - Design mockups/wireframes
+      - Prototype specification
+      - Test scenarios
+      - UI component library
+    owner: prototype-builder
+    editors: [prototype-builder, ideation-coach]

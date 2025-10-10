@@ -1,0 +1,344 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: pov-statement-builder
+  name: Point of View (POV) Statement Builder
+  version: 1.0
+  description: Framework for crafting user-centered problem statements
+  output:
+    format: markdown
+    filename: "problem-definition/{{project_name}}-pov-statements.md"
+    title: "POV Statements: {{project_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: problem-definer
+  editable_sections:
+    - POV Statements
+    - Problem Framing
+
+sections:
+  - id: pov-overview
+    title: POV Statement Overview
+    type: structured-data
+    instruction: |
+      Context for problem framing:
+      - Project name
+      - Date created
+      - Based on research from (date range, sources)
+      - Team members involved in framing
+      - Key personas addressed
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, empathy-researcher]
+
+  - id: research-foundation
+    title: Research Foundation
+    instruction: |
+      Link to research that informs these POV statements:
+      - Empathy research synthesis
+      - User personas
+      - Journey maps
+      - Key insights
+      - Stakeholder input
+    owner: problem-definer
+    editors: [problem-definer, empathy-researcher]
+
+  - id: pov-statements
+    title: Point of View Statements
+    instruction: |
+      Create POV statements using the formula:
+      [User] needs [need] because [insight]
+
+      Guidelines:
+      - Be specific about the user (use persona names)
+      - Focus on needs, not solutions
+      - Ground in research insights
+      - Make it meaningful (not trivial)
+      - Keep it actionable
+    sections:
+      - id: pov-template
+        title: "POV Statement {{number}}"
+        repeatable: true
+        instruction: Create 5-10 POV statements exploring different problem angles
+        sections:
+          - id: pov-statement
+            title: POV Statement
+            type: template-text
+            template: |
+              {{user_persona}} needs {{need}} because {{insight}}
+            instruction: |
+              Complete the POV statement:
+              - User: Which persona or user segment?
+              - Need: What human need (verb-based)?
+              - Insight: Why does this need exist (research-based)?
+
+              Example: "Busy parents need quick, healthy meal solutions because
+              they value quality family time over food preparation time"
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer]
+
+          - id: user-persona
+            title: User/Persona
+            type: text
+            instruction: |
+              Specify the user:
+              - Persona name (if defined)
+              - User segment description
+              - Key characteristics relevant to this need
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer]
+
+          - id: need
+            title: Need
+            type: text
+            instruction: |
+              Articulate the need:
+              - Use action verbs (do, accomplish, achieve)
+              - Focus on the need, NOT the solution
+              - Keep it human-centered
+              - Make it specific enough to act on
+
+              Good: "organize complex information quickly"
+              Bad: "use a better app" (solution-focused)
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer]
+
+          - id: insight
+            title: Insight
+            type: long-text
+            instruction: |
+              Provide the "because" - the insight from research:
+              - Root cause or underlying reason
+              - Context that makes this need important
+              - Evidence from user research
+              - What makes this meaningful
+
+              This should reveal WHY the need exists
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer]
+
+          - id: supporting-evidence
+            title: Supporting Evidence
+            type: bullet-list
+            instruction: |
+              Link to research evidence:
+              - Interview quotes
+              - Observation notes
+              - Survey data
+              - Number of users who expressed this
+            template: |
+              - [Evidence] - Source: [Reference]
+            owner: problem-definer
+            editors: [problem-definer, empathy-researcher]
+
+          - id: pov-scope
+            title: Scope & Impact
+            instruction: |
+              Define the scope:
+              - How many users does this affect?
+              - How frequently does this need arise?
+              - What's the severity/urgency?
+              - Business impact if addressed?
+            owner: problem-definer
+            editors: [problem-definer]
+
+          - id: reframing-alternatives
+            title: Alternative Framings
+            type: bullet-list
+            instruction: |
+              Explore other ways to frame this same problem:
+              - Broader framing (zoom out)
+              - Narrower framing (zoom in)
+              - Different perspective (different user)
+              - Opposite framing (reverse the problem)
+            template: |
+              - [Alternative POV statement]
+            owner: problem-definer
+            editors: [problem-definer]
+
+  - id: pov-comparison
+    title: POV Statement Comparison
+    type: table
+    columns: [POV #, User, Need, Impact, Strategic Fit, Team Vote]
+    instruction: |
+      Compare POV statements to prioritize:
+
+      | POV # | User | Need | Impact | Strategic Fit | Team Vote |
+      |-------|------|------|--------|---------------|-----------|
+      | 1 | [User] | [Brief need] | H/M/L | H/M/L | 5 |
+      | 2 | [User] | [Brief need] | H/M/L | H/M/L | 3 |
+
+      Evaluate on:
+      - Impact: How many users, how severely affected
+      - Strategic Fit: Alignment with business goals
+      - Team Vote: Dot voting or similar prioritization
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: selected-pov
+    title: Selected POV for Development
+    instruction: |
+      Choose 1-3 POV statements to move forward:
+      - Primary POV (main focus)
+      - Secondary POV (if applicable)
+      - Tertiary POV (if applicable)
+
+      Document selection rationale:
+      - Why these were chosen
+      - How they complement each other
+      - What was deferred and why
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: problem-statement-expansion
+    title: Expanded Problem Statement
+    instruction: Develop selected POV into fuller problem statement
+    sections:
+      - id: problem-context
+        title: Problem Context
+        type: long-text
+        instruction: |
+          Provide background:
+          - Current situation
+          - Why this problem exists now
+          - Who is affected
+          - What's at stake
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer]
+
+      - id: problem-impact
+        title: Problem Impact
+        type: long-text
+        instruction: |
+          Describe consequences:
+          - User impact (frustration, time waste, goals blocked)
+          - Business impact (revenue, retention, efficiency)
+          - Opportunity cost (what's not happening)
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer]
+
+      - id: problem-scope
+        title: Problem Scope
+        instruction: |
+          Define boundaries:
+          - What's in scope for solving
+          - What's out of scope
+          - Related problems not being addressed
+          - Phase 1 vs future phases
+        owner: problem-definer
+        editors: [problem-definer, dt-master]
+
+      - id: success-vision
+        title: Success Vision
+        type: long-text
+        instruction: |
+          Paint picture of success:
+          - What does success look like?
+          - How will we know we've solved it?
+          - What changes for users?
+          - What business outcomes result?
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer]
+
+  - id: problem-validation
+    title: Problem Validation
+    instruction: Ensure problem is well-defined
+    sections:
+      - id: validation-checklist
+        title: Problem Definition Quality Checklist
+        type: checklist
+        template: |
+          - [ ] Rooted in user research (not assumptions)
+          - [ ] Specific and clear (not vague)
+          - [ ] Focused on problem (not solution)
+          - [ ] Meaningful to users (not trivial)
+          - [ ] Impactful to business (worth solving)
+          - [ ] Measurable (can track success)
+          - [ ] Actionable (can generate solutions)
+          - [ ] Validated with users (if possible)
+        owner: problem-definer
+        editors: [problem-definer]
+
+      - id: red-flags
+        title: Red Flags Check
+        instruction: |
+          Watch for these warning signs:
+          - [ ] Solution in disguise (implies specific solution)
+          - [ ] Too broad (trying to solve everything)
+          - [ ] Too narrow (trivial or obvious)
+          - [ ] Wrong user focus (not primary audience)
+          - [ ] Low impact (doesn't matter enough)
+          - [ ] Not grounded in research (assumptions)
+
+          If any checked, revisit problem definition
+        owner: problem-definer
+        editors: [problem-definer, dt-master]
+
+  - id: stakeholder-alignment
+    title: Stakeholder Alignment
+    instruction: |
+      Document stakeholder feedback on POV:
+      - Who reviewed the POV statements
+      - Key questions or concerns raised
+      - Areas of agreement
+      - Areas needing more discussion
+      - Final alignment status
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: assumptions-to-test
+    title: Assumptions to Test
+    type: bullet-list
+    instruction: |
+      List assumptions embedded in the POV:
+      - About users
+      - About needs
+      - About context
+      - About solutions
+
+      Which need validation during prototyping/testing?
+    template: |
+      - Assumption: [Statement]
+      - How to test: [Method]
+    owner: problem-definer
+    editors: [problem-definer]
+
+  - id: next-steps
+    title: Next Steps
+    type: checklist
+    template: |
+      - [ ] Share POV statements with team
+      - [ ] Validate selected POV with users (if possible)
+      - [ ] Generate How Might We questions from POV
+      - [ ] Define success metrics
+      - [ ] Schedule ideation session
+      - [ ] Prepare POV for ideation kickoff
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to related documents:
+      - Research synthesis
+      - Personas
+      - Journey maps
+      - Opportunity areas
+      - HMW questions (once created)
+      - Success metrics (once defined)
+    owner: problem-definer
+    editors: [problem-definer, empathy-researcher]

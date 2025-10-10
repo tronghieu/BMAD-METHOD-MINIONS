@@ -1,0 +1,326 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: user-journey-map
+  name: User Journey Map Template
+  version: 1.0
+  description: Visual map of user experience across touchpoints and emotions
+  output:
+    format: markdown
+    filename: "journey-maps/{{persona_name}}-{{scenario_name}}-journey.md"
+    title: "Journey Map: {{persona_name}} - {{scenario_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: empathy-researcher
+  editable_sections:
+    - Journey Phases
+    - Touchpoints
+    - Emotional Experience
+    - Opportunities
+
+sections:
+  - id: journey-overview
+    title: Journey Map Overview
+    type: structured-data
+    instruction: |
+      Define the journey scope:
+      - Persona name (which user is this for?)
+      - Scenario description (what journey are we mapping?)
+      - Journey type (current state, future state, or ideal)
+      - Timespan (hours, days, weeks, months?)
+      - Date created
+      - Research basis (interviews, observations used)
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: journey-goal
+    title: User's Goal for This Journey
+    type: template-text
+    template: |
+      {{persona_name}} wants to {{goal}} so that {{outcome}}
+    instruction: |
+      Define what the user is trying to accomplish:
+      - What triggered this journey?
+      - What does success look like?
+      - What is the desired end state?
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: journey-phases
+    title: Journey Phases
+    instruction: |
+      Break the journey into distinct phases (typically 4-8 phases).
+      Common frameworks:
+      - Awareness → Consideration → Decision → Retention → Advocacy
+      - Before → During → After
+      - Discover → Explore → Try → Use → Support
+
+      For each phase, document:
+      - Phase name
+      - Time duration
+      - User's mindset/focus
+      - Key activities
+      - Touchpoints
+      - Thoughts
+      - Emotions
+      - Pain points
+      - Opportunities
+    elicit: true
+    sections:
+      - id: phase-template
+        title: "Phase: {{phase_name}}"
+        repeatable: true
+        instruction: Duplicate this section for each journey phase
+        sections:
+          - id: phase-overview
+            title: Phase Overview
+            instruction: |
+              - Phase name
+              - Duration (e.g., "30 minutes", "2 weeks")
+              - User's primary objective in this phase
+            elicit: true
+            owner: empathy-researcher
+            editors: [empathy-researcher]
+
+          - id: user-actions
+            title: User Actions & Behaviors
+            type: bullet-list
+            instruction: |
+              What does the user do in this phase:
+              - Specific actions taken
+              - Tools or channels used
+              - Information sought
+              - Decisions made
+            elicit: true
+            owner: empathy-researcher
+            editors: [empathy-researcher]
+
+          - id: touchpoints
+            title: Touchpoints
+            type: bullet-list
+            instruction: |
+              All interaction points with product/service/brand:
+              - Website pages
+              - App screens
+              - Customer service calls
+              - Emails or notifications
+              - Physical locations
+              - Social media
+              - Marketing materials
+
+              For each touchpoint note:
+              - Channel type (digital, physical, human)
+              - Quality of experience (positive, neutral, negative)
+            template: |
+              - [Touchpoint name] - Channel: X, Experience: Y
+            elicit: true
+            owner: empathy-researcher
+            editors: [empathy-researcher]
+
+          - id: thoughts
+            title: User Thoughts & Questions
+            type: bullet-list
+            instruction: |
+              What is the user thinking:
+              - Internal monologue
+              - Questions they have
+              - Concerns or doubts
+              - Expectations
+
+              Use quotes from research when possible
+            template: |
+              - "Thought or question from user perspective"
+            elicit: true
+            owner: empathy-researcher
+            editors: [empathy-researcher]
+
+          - id: emotions
+            title: Emotional Experience
+            instruction: |
+              Document the emotional journey:
+              - Primary emotion (frustrated, excited, confused, confident, etc.)
+              - Emotional intensity (1-10 scale)
+              - Emotional triggers (what causes feeling changes)
+              - Direct quotes about feelings
+
+              Create emotion curve: Plot high points and low points
+            elicit: true
+            owner: empathy-researcher
+            editors: [empathy-researcher]
+
+          - id: pain-points
+            title: Pain Points & Friction
+            type: bullet-list
+            instruction: |
+              What frustrates or blocks the user:
+              - Obstacles encountered
+              - Confusion or uncertainty
+              - Time wasted
+              - Unmet needs
+              - Workarounds required
+
+              Rate each pain point:
+              - Severity (Critical, High, Medium, Low)
+              - Frequency (Every time, Often, Sometimes, Rare)
+            template: |
+              - [Pain point] - Severity: X, Frequency: Y
+            elicit: true
+            owner: empathy-researcher
+            editors: [empathy-researcher]
+
+          - id: delight-moments
+            title: Moments of Delight
+            type: bullet-list
+            instruction: |
+              What exceeds expectations or creates positive moments:
+              - Surprises that delight
+              - Smooth interactions
+              - Helpful features
+              - Positive emotions created
+            owner: empathy-researcher
+            editors: [empathy-researcher]
+
+          - id: opportunities
+            title: Opportunities for Improvement
+            type: bullet-list
+            instruction: |
+              Ideas for enhancing this phase:
+              - How might we eliminate this pain point?
+              - How might we amplify this positive moment?
+              - What's missing that users need?
+              - What could be removed or simplified?
+            elicit: true
+            owner: empathy-researcher
+            editors: [empathy-researcher, problem-definer]
+
+  - id: emotion-curve
+    title: Overall Emotional Curve
+    type: visualization
+    instruction: |
+      Create a visual representation of emotional highs and lows:
+      - X-axis: Journey phases over time
+      - Y-axis: Emotional state (positive to negative)
+      - Plot the emotional trajectory across all phases
+      - Annotate key moments (peaks, valleys, turning points)
+
+      ASCII visualization example:
+      ```
+      High  ^     *
+            |    / \
+            |   /   \    *
+      Med   |  /     \  / \
+            | /       \/   \
+      Low   |/             \__
+            +------------------→
+            Phase1 → Phase2 → Phase3
+      ```
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: key-insights
+    title: Key Journey Insights
+    type: bullet-list
+    instruction: |
+      Synthesize the most important findings:
+      - What are the critical moments (make-or-break points)?
+      - Where are the biggest pain points?
+      - What patterns emerge across phases?
+      - What surprised you about this journey?
+      - What hypotheses were confirmed or challenged?
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher, problem-definer]
+
+  - id: personas-and-variations
+    title: Personas & Journey Variations
+    instruction: |
+      Document how journey differs across personas:
+      - Is this journey the same for all user types?
+      - Where do different personas have different experiences?
+      - What alternative paths exist?
+      - Who has the most painful journey?
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: priority-opportunities
+    title: Priority Improvement Opportunities
+    type: numbered-list
+    instruction: |
+      Rank top 5-10 opportunities based on:
+      - Impact on user experience
+      - Alignment with business goals
+      - Feasibility to implement
+      - Strategic importance
+
+      For each opportunity:
+      1. Describe the opportunity
+      2. Which phase it affects
+      3. Expected impact
+      4. Complexity estimate (Low/Medium/High)
+    template: |
+      1. [Opportunity] - Phase: X, Impact: Y, Complexity: Z
+      2. [Opportunity] - Phase: X, Impact: Y, Complexity: Z
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher, problem-definer, dt-master]
+
+  - id: supporting-evidence
+    title: Supporting Evidence
+    instruction: |
+      Link to research that informed this journey map:
+      - Interview transcripts
+      - Observation notes
+      - Usability test recordings
+      - Customer support data
+      - Analytics data
+      - Survey results
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: stakeholder-feedback
+    title: Stakeholder Feedback & Validation
+    instruction: |
+      Document feedback from:
+      - Internal stakeholders (product, marketing, support)
+      - Users (if validated with them)
+      - Subject matter experts
+
+      Track:
+      - Who reviewed
+      - Date of review
+      - Key feedback
+      - Changes made
+    owner: empathy-researcher
+    editors: [empathy-researcher, dt-master]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to related documents:
+      - Persona profiles
+      - Empathy maps
+      - Problem statements derived from this journey
+      - Service blueprints (backend view)
+      - Other journey maps for comparison
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: next-steps
+    title: Next Steps
+    type: checklist
+    template: |
+      - [ ] Share journey map with stakeholders
+      - [ ] Validate journey with additional users
+      - [ ] Prioritize opportunities with team
+      - [ ] Create problem statements from pain points
+      - [ ] Update persona profiles with journey insights
+      - [ ] Map technical/operational requirements
+    owner: empathy-researcher
+    editors: [empathy-researcher, problem-definer, dt-master]

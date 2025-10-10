@@ -1,0 +1,378 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: hmw-question-generator
+  name: How Might We (HMW) Question Generator
+  version: 1.0
+  description: Transform problem statements into opportunity questions for ideation
+  output:
+    format: markdown
+    filename: "problem-definition/{{project_name}}-hmw-questions.md"
+    title: "How Might We Questions: {{project_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: problem-definer
+  editable_sections:
+    - HMW Questions
+    - Question Selection
+
+sections:
+  - id: hmw-overview
+    title: HMW Session Overview
+    type: structured-data
+    instruction: |
+      Session details:
+      - Project name
+      - Date created
+      - Based on POV statement(s)
+      - Team members participating
+      - Session duration
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer]
+
+  - id: source-pov
+    title: Source POV Statement(s)
+    type: long-text
+    instruction: |
+      List the POV statement(s) being transformed into HMW questions:
+
+      POV: [User] needs [need] because [insight]
+
+      Include 1-3 POV statements that will drive HMW generation
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, empathy-researcher]
+
+  - id: hmw-principles
+    title: HMW Question Principles
+    instruction: |
+      Good HMW questions are:
+      - Optimistic (assume solutions exist)
+      - Broad enough to explore (not too narrow)
+      - Narrow enough to be actionable (not too broad)
+      - Free from solutions (open to possibilities)
+      - Inspiring (energize the team)
+
+      Questions should start with "How might we..." and nothing else
+    owner: problem-definer
+    editors: [problem-definer]
+
+  - id: hmw-techniques
+    title: HMW Generation Techniques
+    instruction: |
+      Use these techniques to generate diverse HMW questions from your POV:
+
+      1. **Amp up the Good**: How might we make positive aspects even better?
+      2. **Remove the Bad**: How might we eliminate pain points?
+      3. **Explore the Opposite**: How might we approach this from the reverse angle?
+      4. **Question an Assumption**: How might we challenge our beliefs?
+      5. **Go After Adjectives**: How might we change the quality (faster, easier, cheaper)?
+      6. **Identify Unexpected Resources**: How might we leverage existing assets?
+      7. **Create an Analogy**: How might we apply lessons from other domains?
+      8. **Play with Prepositions**: Change "for" to "with," "from" to "by," etc.
+      9. **Break It Down**: Focus on one aspect of the problem
+      10. **Zoom Out**: Expand to the bigger picture
+    sections:
+      - id: amp-up-good
+        title: "Technique 1: Amp Up the Good"
+        type: bullet-list
+        instruction: |
+          HMW use existing successes to inspire more success?
+          HMW build on what's already working?
+          HMW amplify positive moments?
+        template: |
+          - How might we [amplify positive aspect]?
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer, ideation-coach]
+
+      - id: remove-bad
+        title: "Technique 2: Remove the Bad"
+        type: bullet-list
+        instruction: |
+          HMW eliminate frustrations?
+          HMW remove barriers?
+          HMW reduce friction?
+        template: |
+          - How might we [eliminate pain point]?
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer, ideation-coach]
+
+      - id: explore-opposite
+        title: "Technique 3: Explore the Opposite"
+        type: bullet-list
+        instruction: |
+          HMW approach this from the opposite direction?
+          HMW flip the problem on its head?
+          HMW reverse our assumptions?
+        template: |
+          - How might we [opposite approach]?
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer, ideation-coach]
+
+      - id: question-assumptions
+        title: "Technique 4: Question Assumptions"
+        type: bullet-list
+        instruction: |
+          HMW challenge conventional wisdom?
+          HMW question what we take for granted?
+          HMW break rules or norms?
+        template: |
+          - How might we [challenge assumption]?
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer, ideation-coach]
+
+      - id: go-after-adjectives
+        title: "Technique 5: Go After Adjectives"
+        type: bullet-list
+        instruction: |
+          HMW make it faster?
+          HMW make it easier?
+          HMW make it more affordable?
+          HMW make it more delightful?
+          HMW make it more accessible?
+        template: |
+          - How might we make [what] more [adjective]?
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer, ideation-coach]
+
+      - id: identify-resources
+        title: "Technique 6: Identify Unexpected Resources"
+        type: bullet-list
+        instruction: |
+          HMW leverage existing tools/assets?
+          HMW tap into underutilized resources?
+          HMW partner with unexpected allies?
+          HMW use technology in new ways?
+        template: |
+          - How might we leverage [resource] to [outcome]?
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer, ideation-coach]
+
+      - id: create-analogy
+        title: "Technique 7: Create an Analogy"
+        type: bullet-list
+        instruction: |
+          HMW apply lessons from [other industry]?
+          HMW solve this like [role model] would?
+          HMW use nature's approach?
+          HMW borrow from successful patterns elsewhere?
+        template: |
+          - How might we [apply analogy from other domain]?
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer, ideation-coach]
+
+      - id: break-down
+        title: "Technique 8: Break It Down"
+        type: bullet-list
+        instruction: |
+          Focus on specific aspects:
+          HMW address [specific sub-problem]?
+          HMW improve [specific touchpoint]?
+          HMW help [specific user segment]?
+          HMW solve for [specific context]?
+        template: |
+          - How might we [specific focused question]?
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer, ideation-coach]
+
+      - id: zoom-out
+        title: "Technique 9: Zoom Out"
+        type: bullet-list
+        instruction: |
+          Expand to bigger picture:
+          HMW address the systemic issue?
+          HMW change the entire experience?
+          HMW transform the industry/category?
+          HMW rethink the fundamental approach?
+        template: |
+          - How might we [broader systemic question]?
+        elicit: true
+        owner: problem-definer
+        editors: [problem-definer, ideation-coach]
+
+  - id: additional-hmw
+    title: Additional HMW Questions
+    type: bullet-list
+    instruction: |
+      Generate more HMW questions using free association:
+      - Rapid ideation of HMW questions
+      - Build on team members' questions
+      - Don't filter yet, capture all ideas
+
+      Aim for 30-50+ HMW questions total
+    template: |
+      - How might we [question]?
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, ideation-coach]
+
+  - id: hmw-clustering
+    title: HMW Question Clustering
+    instruction: |
+      Group similar HMW questions into themes:
+      - What patterns emerge?
+      - What opportunity areas cluster together?
+      - How do questions relate?
+    sections:
+      - id: cluster-template
+        title: "Cluster: {{theme_name}}"
+        repeatable: true
+        instruction: Create clusters of related HMW questions
+        sections:
+          - id: cluster-theme
+            title: Cluster Theme
+            type: text
+            instruction: Name this cluster of HMW questions
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer]
+
+          - id: cluster-questions
+            title: HMW Questions in This Cluster
+            type: bullet-list
+            instruction: List all related HMW questions
+            elicit: true
+            owner: problem-definer
+            editors: [problem-definer]
+
+          - id: cluster-opportunity
+            title: Opportunity This Represents
+            instruction: What design opportunity does this cluster reveal?
+            owner: problem-definer
+            editors: [problem-definer, ideation-coach]
+
+  - id: hmw-evaluation
+    title: HMW Question Evaluation
+    type: table
+    columns: [HMW Question, Scope, Inspiration, Actionability, Team Vote]
+    instruction: |
+      Evaluate HMW questions for ideation prioritization:
+
+      | HMW Question | Scope | Inspiration | Actionability | Team Vote |
+      |--------------|-------|-------------|---------------|-----------|
+      | HMW... | Good/Too broad/Too narrow | High/Med/Low | High/Med/Low | X votes |
+
+      Criteria:
+      - **Scope**: Is it appropriately scoped? (not too broad or narrow)
+      - **Inspiration**: Does it spark creative ideas?
+      - **Actionability**: Can we realistically address it?
+      - **Team Vote**: Which questions energize the team?
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, ideation-coach, dt-master]
+
+  - id: selected-hmw
+    title: Selected HMW Questions for Ideation
+    type: numbered-list
+    instruction: |
+      Choose 3-7 HMW questions to use in ideation:
+      - Primary HMW (main focus for brainstorming)
+      - Secondary HMWs (alternate angles)
+
+      Selection rationale:
+      - Why these questions?
+      - How do they complement each other?
+      - What range of solutions might they inspire?
+    template: |
+      1. [Primary HMW question] - Focus: [What this explores]
+      2. [Secondary HMW question] - Focus: [What this explores]
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, ideation-coach, dt-master]
+
+  - id: deferred-hmw
+    title: Deferred HMW Questions
+    instruction: |
+      Document interesting HMW questions not selected for first round:
+      - Questions to revisit later
+      - Questions for future phases
+      - Questions requiring more research
+      - Why deferred
+    owner: problem-definer
+    editors: [problem-definer]
+
+  - id: hmw-scope-definition
+    title: HMW Scope & Constraints
+    instruction: |
+      Define parameters for selected HMW questions:
+      - Time constraints (how quickly needed?)
+      - Budget constraints (resources available?)
+      - Technical constraints (feasibility limits?)
+      - Strategic constraints (business requirements?)
+      - User constraints (target audience boundaries?)
+
+      These constraints can inspire creative solutions
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: success-criteria
+    title: Success Criteria for Solutions
+    type: bullet-list
+    instruction: |
+      How will we know if solutions to these HMWs are successful:
+      - User success indicators
+      - Business success metrics
+      - Experience quality measures
+      - Innovation ambition level
+    template: |
+      - [Success criterion] - Measured by: [How]
+    elicit: true
+    owner: problem-definer
+    editors: [problem-definer, dt-master]
+
+  - id: ideation-prep
+    title: Ideation Session Preparation
+    type: checklist
+    instruction: Prepare for ideation with these HMW questions
+    template: |
+      - [ ] Finalize 3-7 HMW questions
+      - [ ] Share HMWs with ideation participants
+      - [ ] Prepare HMW question posters/slides
+      - [ ] Define success criteria
+      - [ ] Set ideation session date
+      - [ ] Brief ideation coach on context
+      - [ ] Gather research artifacts for reference
+      - [ ] Schedule diverse ideation participants
+    owner: problem-definer
+    editors: [problem-definer, ideation-coach, dt-master]
+
+  - id: hmw-evolution
+    title: HMW Evolution Log
+    type: table
+    columns: [Date, Change, Reason, Updated By]
+    instruction: |
+      Track how HMW questions evolve:
+      - Refinements based on feedback
+      - New insights that shift focus
+      - Scope adjustments
+      - Priority changes
+    owner: problem-definer
+    editors: [problem-definer, ideation-coach]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to related documents:
+      - POV statements
+      - Problem statements
+      - Research synthesis
+      - Personas
+      - Opportunity map
+      - Ideation session plans (once created)
+    owner: problem-definer
+    editors: [problem-definer, ideation-coach]

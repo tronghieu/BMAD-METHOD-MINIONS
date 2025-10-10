@@ -1,0 +1,300 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: user-interview-guide
+  name: User Interview Guide
+  version: 1.0
+  description: Structured guide for conducting empathetic user interviews
+  output:
+    format: markdown
+    filename: "user-interviews/{{project_name}}-interview-{{participant_id}}.md"
+    title: "User Interview: {{participant_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: empathy-researcher
+  editable_sections:
+    - Interview Planning
+    - Interview Transcript
+    - Key Observations
+    - Follow-up Actions
+
+sections:
+  - id: interview-metadata
+    title: Interview Metadata
+    type: structured-data
+    instruction: |
+      Capture essential interview details:
+      - Participant ID and name (anonymized if needed)
+      - Date, time, and duration
+      - Location (in-person, remote, field)
+      - Interviewer name
+      - Project/research objective
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: participant-profile
+    title: Participant Profile
+    instruction: |
+      Document participant background:
+      - Demographics (age range, occupation, location)
+      - Relevant experience with product/service/domain
+      - User segment/persona fit
+      - Recruitment source
+      - Consent obtained (yes/no)
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: interview-objectives
+    title: Interview Objectives
+    type: bullet-list
+    instruction: |
+      List 3-5 specific learning objectives for this interview:
+      - What behaviors do you want to understand?
+      - What pain points are you exploring?
+      - What decisions or motivations interest you?
+    template: |
+      - Understand [behavior/need]
+      - Explore [pain point/challenge]
+      - Learn about [decision/motivation]
+    elicit: true
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: interview-protocol
+    title: Interview Protocol
+    instruction: Guide the interview through these phases
+    sections:
+      - id: warmup
+        title: "Phase 1: Warm-up (5 min)"
+        instruction: |
+          Build rapport and set expectations:
+          - "Thank you for taking the time to speak with me today"
+          - "We're trying to understand [context/problem space]"
+          - "There are no right or wrong answers - I'm interested in your honest experience"
+          - "This will take about [X] minutes"
+          - "May I record/take notes?"
+
+          Opening question:
+          - "Tell me a bit about yourself and your role/background"
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: context-exploration
+        title: "Phase 2: Context Exploration (10 min)"
+        type: question-list
+        instruction: |
+          Understand the participant's world:
+
+          Sample questions (customize based on project):
+          - "Walk me through a typical day/week in your [role/life]"
+          - "What does success look like for you?"
+          - "What are your biggest priorities right now?"
+          - "What tools/products do you use regularly?"
+          - "Who do you collaborate/interact with most?"
+        elicit: true
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: experience-deep-dive
+        title: "Phase 3: Experience Deep Dive (20 min)"
+        type: question-list
+        instruction: |
+          Explore specific experiences and behaviors:
+
+          Trigger storytelling:
+          - "Tell me about the last time you [relevant activity]"
+          - "Walk me through what happened step by step"
+          - "What were you thinking at that moment?"
+          - "How did that make you feel?"
+
+          Probe for details:
+          - "Why did you do it that way?"
+          - "What would have made that easier?"
+          - "What alternatives did you consider?"
+          - "What happened next?"
+
+          Uncover workarounds:
+          - "Have you found any tricks or shortcuts?"
+          - "What do you do when [problem] occurs?"
+          - "How do you work around [limitation]?"
+        elicit: true
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: emotional-exploration
+        title: "Phase 4: Emotional Exploration (10 min)"
+        type: question-list
+        instruction: |
+          Understand feelings and motivations:
+
+          Emotional questions:
+          - "What's the most frustrating part about [activity]?"
+          - "When do you feel most confident/uncertain?"
+          - "What makes you excited about [topic]?"
+          - "What keeps you up at night regarding [problem]?"
+
+          Values exploration:
+          - "Why is this important to you?"
+          - "What would it mean if this problem was solved?"
+          - "What are you ultimately trying to achieve?"
+        elicit: true
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: future-thinking
+        title: "Phase 5: Future Thinking (10 min)"
+        type: question-list
+        instruction: |
+          Explore aspirations and ideal scenarios:
+
+          Aspirational questions:
+          - "If you had a magic wand, what would you change?"
+          - "What would the ideal solution look like?"
+          - "What would make this dramatically better?"
+          - "What stops you from achieving that ideal?"
+
+          Scenario testing (if applicable):
+          - Present concept/prototype
+          - "What's your first reaction to this?"
+          - "How would this fit into your workflow?"
+          - "What concerns do you have?"
+        elicit: true
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: closing
+        title: "Phase 6: Closing (5 min)"
+        instruction: |
+          Wrap up and gather final insights:
+
+          Final questions:
+          - "Is there anything I didn't ask that I should have?"
+          - "What's the most important thing for me to understand?"
+          - "Who else should I talk to about this?"
+
+          Thank participant:
+          - Express genuine gratitude
+          - Explain next steps
+          - Provide contact for follow-up
+          - Discuss compensation if applicable
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+  - id: interview-transcript
+    title: Interview Transcript / Notes
+    type: long-text
+    instruction: |
+      Document the interview conversation:
+      - Full transcript if recorded
+      - Detailed notes if not recorded
+      - Mark direct quotes with quotation marks
+      - Note non-verbal cues (pauses, emotions, gestures)
+      - Timestamp key moments
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: key-observations
+    title: Key Observations
+    instruction: Synthesize insights immediately after interview
+    sections:
+      - id: standout-quotes
+        title: Standout Quotes
+        type: bullet-list
+        instruction: |
+          Capture 5-7 memorable quotes that reveal insights:
+          - Use participant's exact words
+          - Include context for each quote
+          - Note emotional tone
+        template: |
+          - "Quote here" - [Context: when discussing X, tone: frustrated]
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: behavioral-patterns
+        title: Behavioral Patterns Observed
+        type: bullet-list
+        instruction: |
+          Note recurring behaviors, habits, or approaches:
+          - What did they do repeatedly?
+          - What workarounds did they mention?
+          - What tools/methods do they rely on?
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: pain-points
+        title: Pain Points Identified
+        type: bullet-list
+        instruction: |
+          List frustrations, challenges, and obstacles mentioned:
+          - Rate severity (high/medium/low)
+          - Note frequency (daily/weekly/rare)
+        template: |
+          - [Pain point] - Severity: X, Frequency: Y
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: needs-and-goals
+        title: Needs and Goals
+        type: bullet-list
+        instruction: |
+          Identify underlying needs and motivations:
+          - What are they trying to accomplish?
+          - What outcomes matter most?
+          - What would success look like?
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+      - id: surprises
+        title: Surprises & Contradictions
+        type: bullet-list
+        instruction: |
+          Note anything unexpected or contradictory:
+          - What surprised you?
+          - What contradicted your assumptions?
+          - What doesn't match other interviews?
+        owner: empathy-researcher
+        editors: [empathy-researcher]
+
+  - id: preliminary-insights
+    title: Preliminary Insights
+    type: long-text
+    instruction: |
+      Reflect on what this interview reveals:
+      - What patterns are emerging across interviews?
+      - What hypotheses are being confirmed or challenged?
+      - What questions should be added to future interviews?
+      - What areas need deeper exploration?
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: follow-up-actions
+    title: Follow-up Actions
+    type: checklist
+    instruction: Capture immediate next steps from this interview
+    template: |
+      - [ ] Send thank you note to participant
+      - [ ] Share recording/transcript with team
+      - [ ] Add insights to research synthesis board
+      - [ ] Schedule follow-up interview if needed
+      - [ ] Contact referred participants
+      - [ ] Update interview protocol based on learnings
+    owner: empathy-researcher
+    editors: [empathy-researcher]
+
+  - id: empathy-map-link
+    title: Related Artifacts
+    instruction: |
+      Link to related research documents:
+      - Empathy map generated from this interview
+      - Journey map connections
+      - Persona associations
+      - Related interview documents
+    owner: empathy-researcher
+    editors: [empathy-researcher, problem-definer]

@@ -26,15 +26,25 @@ phases:
       - expert-interviews:
           duration: 2-hours
           output: stakeholder-insights
+          tasks:
+            - conduct-user-interview.md
       - journey-mapping:
           duration: 2-hours
           output: current-state-map
+          tasks:
+            - map-user-journey.md
       - problem-definition:
           duration: 2-hours
           output: hmw-questions
+          tasks:
+            - craft-problem-statement.md
+            - generate-hmw-questions.md
       - target-selection:
           duration: 2-hours
           output: sprint-focus
+          tasks:
+            - synthesize-insights.md
+            - define-success-metrics.md
     deliverables:
       - journey-map
       - problem-statement
@@ -53,12 +63,17 @@ phases:
       - idea-generation:
           duration: 3-hours
           output: solution-sketches
+          tasks:
+            - run-brainstorm-session.md
+            - facilitate-idea-building.md
       - crazy-8s:
           duration: 1-hour
           output: rapid-concepts
       - solution-sketch:
           duration: 2-hours
           output: detailed-concepts
+          tasks:
+            - create-concept-sketches.md
     deliverables:
       - solution-gallery
       - concept-sketches
@@ -75,12 +90,18 @@ phases:
       - solution-review:
           duration: 2-hours
           output: heat-map
+          tasks:
+            - evaluate-and-prioritize.md
       - solution-critique:
           duration: 2-hours
           output: decision-matrix
+          tasks:
+            - evaluate-and-prioritize.md
       - storyboarding:
           duration: 3-hours
           output: prototype-plan
+          tasks:
+            - create-concept-sketches.md
       - task-assignment:
           duration: 1-hour
           output: build-plan
@@ -103,9 +124,14 @@ phases:
       - prototype-building:
           duration: 5-hours
           output: test-prototype
+          tasks:
+            - build-rapid-prototype.md
       - test-preparation:
           duration: 1-hour
           output: test-protocol
+          tasks:
+            - design-test-protocol.md
+            - recruit-test-participants.md
     deliverables:
       - functional-prototype
       - test-scenarios
@@ -122,15 +148,21 @@ phases:
       - user-interviews:
           duration: 5-hours
           output: test-sessions
+          tasks:
+            - conduct-usability-test.md
       - observation-notes:
           duration: concurrent
           output: observation-log
       - synthesis:
           duration: 2-hours
           output: findings-summary
+          tasks:
+            - analyze-test-results.md
       - next-steps:
           duration: 1-hour
           output: iteration-plan
+          tasks:
+            - plan-iterations.md
     deliverables:
       - test-report
       - key-insights

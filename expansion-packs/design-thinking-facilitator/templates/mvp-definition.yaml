@@ -1,0 +1,551 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: mvp-definition
+  name: MVP Definition Template
+  version: 1.0
+  description: Define Minimum Viable Product scope and features
+  output:
+    format: markdown
+    filename: "prototypes/{{product_name}}-mvp-definition.md"
+    title: "MVP Definition: {{product_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: prototype-builder
+  editable_sections:
+    - MVP Scope
+    - Feature Set
+    - Success Metrics
+
+sections:
+  - id: mvp-overview
+    title: MVP Overview
+    type: structured-data
+    instruction: |
+      MVP definition details:
+      - Product name
+      - Date created
+      - MVP version/iteration
+      - Target launch date
+      - Definition owner(s)
+      - Stakeholder approval status
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: mvp-philosophy
+    title: MVP Philosophy
+    instruction: |
+      Remember: MVP = Minimum VIABLE Product
+      - **Minimum**: Smallest feature set possible
+      - **Viable**: Still solves core problem
+      - **Product**: Real, usable by customers
+
+      MVP is not:
+      - A broken product
+      - Just a prototype
+      - Everything users might want
+      - A one-time release (it evolves)
+
+      Focus: Learn the most with least effort
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: vision-statement
+    title: Product Vision
+    type: long-text
+    instruction: |
+      Ultimate product vision (3-5 years):
+      - What will the product become?
+      - Who will use it?
+      - What transformation will it create?
+      - How will it change the market?
+
+      This vision guides MVP prioritization
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: mvp-vision
+    title: MVP Vision Statement
+    type: long-text
+    instruction: |
+      What MVP will achieve (6-12 months):
+      - Core value proposition
+      - Primary user problem solved
+      - Key differentiator
+      - Success looks like what?
+
+      Example:
+      "Our MVP will help busy parents find and cook healthy dinners in
+      under 30 minutes, starting with 100 curated recipes and smart
+      filters. Success means 1000 active weekly users with 60% retention."
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: target-users
+    title: Target Users for MVP
+    type: bullet-list
+    instruction: |
+      Who is the MVP for (be specific):
+      - Primary persona (main focus)
+      - Use cases included
+      - Use cases explicitly excluded
+      - Why this narrow focus?
+
+      Start narrow, expand later
+    template: |
+      - [User segment]: [Why included/excluded]
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, empathy-researcher]
+
+  - id: core-problem
+    title: Core Problem Being Solved
+    type: long-text
+    instruction: |
+      The ONE essential problem MVP addresses:
+      - What specific pain point?
+      - For whom?
+      - How painful is it?
+      - Current workarounds?
+      - Why existing solutions insufficient?
+
+      Stay laser-focused on this problem
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, problem-definer]
+
+  - id: value-proposition
+    title: Unique Value Proposition
+    type: template-text
+    template: |
+      For {{target_user}} who {{problem_or_need}},
+      {{product_name}} is a {{product_category}}
+      that {{key_benefit}}.
+      Unlike {{competition}},
+      our product {{unique_differentiator}}.
+    instruction: |
+      Complete the positioning statement:
+      - Target user
+      - Problem or need
+      - Product category
+      - Key benefit
+      - Competition
+      - Unique differentiator
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: mvp-scope
+    title: MVP Scope Definition
+    instruction: |
+      Define what's in and out of scope
+    sections:
+      - id: must-have-features
+        title: Must-Have Features (Core MVP)
+        type: numbered-list
+        instruction: |
+          Essential features only - cannot launch without:
+
+          For each feature:
+          1. **[Feature name]**
+             - User story: As [user], I want [capability] so that [benefit]
+             - Why essential: [Rationale]
+             - Acceptance criteria: [How to verify]
+             - Estimated effort: [S/M/L]
+
+          Limit to 3-7 core features
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder, dt-master]
+
+      - id: should-have-features
+        title: Should-Have Features (Phase 1.1)
+        type: bullet-list
+        instruction: |
+          Important but not for initial launch:
+          - Enhance core value
+          - Address common use cases
+          - Improve usability
+          - Build on MVP learnings
+
+          Target for weeks 4-12 post-launch
+        template: |
+          - [Feature]: [Why deferred]
+        owner: prototype-builder
+        editors: [prototype-builder, dt-master]
+
+      - id: could-have-features
+        title: Could-Have Features (Future)
+        type: bullet-list
+        instruction: |
+          Nice-to-haves for later:
+          - Edge cases
+          - Power user features
+          - Optimizations
+          - Integrations
+          - Advanced capabilities
+
+          Consider for future releases
+        template: |
+          - [Feature]: [When to revisit]
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+      - id: wont-have-features
+        title: Won't Have (Explicitly Out)
+        type: bullet-list
+        instruction: |
+          Features explicitly excluded:
+          - Out of scope for this product
+          - Conflicts with strategy
+          - Low value/high effort
+          - Solved differently
+
+          Document to prevent scope creep
+        template: |
+          - [Feature]: [Why excluded]
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder, dt-master]
+
+  - id: user-journeys
+    title: MVP User Journeys
+    type: numbered-list
+    instruction: |
+      Essential user flows in MVP:
+
+      **Journey 1: [Name]** (e.g., "First-Time User Onboarding")
+      1. User [action]
+      2. System [response]
+      3. User [action]
+      ...
+      N. Success state: [Outcome]
+
+      Map 2-5 critical journeys that must work
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, empathy-researcher]
+
+  - id: feature-prioritization
+    title: Feature Prioritization Matrix
+    type: table
+    columns: [Feature, User Value, Business Value, Effort, Risk, Priority]
+    instruction: |
+      Evaluate all considered features:
+
+      | Feature | User Value | Business Value | Effort | Risk | **Priority** |
+      |---------|------------|----------------|--------|------|--------------|
+      | Feature A | High | High | Low | Low | **MUST** |
+      | Feature B | High | Medium | Medium | Low | **SHOULD** |
+      | Feature C | Medium | Low | High | High | **WON'T** |
+
+      Scoring:
+      - User/Business Value: High/Med/Low
+      - Effort: Hours/Days/Weeks
+      - Risk: Technical, UX, Business risk (H/M/L)
+      - Priority: MUST / SHOULD / COULD / WON'T
+
+      Must-haves: High value, reasonable effort, manageable risk
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: technical-architecture
+    title: Technical Architecture (High-Level)
+    instruction: |
+      MVP technical approach:
+      - Platform choice (web, mobile, both)
+      - Technology stack
+      - Architecture pattern (monolith, microservices, etc.)
+      - Database approach
+      - Third-party services/APIs
+      - Hosting/infrastructure
+
+      Keep it simple for MVP
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: mvp-constraints
+    title: MVP Constraints
+    instruction: |
+      Limitations and boundaries:
+    sections:
+      - id: time-constraints
+        title: Time Constraints
+        instruction: |
+          - Launch deadline: [Date]
+          - Development time available: [X weeks]
+          - Why this timeline: [Rationale]
+
+          Time is fixed, scope must flex
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder, dt-master]
+
+      - id: budget-constraints
+        title: Budget Constraints
+        instruction: |
+          - Total budget: [$X]
+          - Development: [$X]
+          - Infrastructure: [$X]
+          - Marketing: [$X]
+          - Contingency: [$X]
+
+          Budget influences tech choices
+        owner: prototype-builder
+        editors: [prototype-builder, dt-master]
+
+      - id: resource-constraints
+        title: Resource Constraints
+        instruction: |
+          - Team size: [X people]
+          - Available skills: [List]
+          - Missing skills: [List]
+          - External dependencies: [List]
+
+          Must work within team capabilities
+        owner: prototype-builder
+        editors: [prototype-builder, dt-master]
+
+      - id: technical-constraints
+        title: Technical Constraints
+        instruction: |
+          - Platform limitations
+          - Integration requirements
+          - Performance requirements
+          - Security/compliance needs
+          - Scalability expectations
+
+          What must MVP support?
+        owner: prototype-builder
+        editors: [prototype-builder]
+
+  - id: success-criteria
+    title: MVP Success Criteria
+    instruction: |
+      How to measure MVP success:
+    sections:
+      - id: launch-criteria
+        title: Launch Readiness Criteria
+        type: checklist
+        instruction: |
+          Must be true before launching:
+        template: |
+          - [ ] Core features functional
+          - [ ] Critical bugs fixed
+          - [ ] Performance acceptable
+          - [ ] Security baseline met
+          - [ ] User testing validated
+          - [ ] Internal team approval
+          - [ ] Legal/compliance cleared
+          - [ ] Support process ready
+          - [ ] Analytics tracking live
+          - [ ] Rollback plan prepared
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder, dt-master]
+
+      - id: success-metrics
+        title: Success Metrics (3 months post-launch)
+        type: table
+        columns: [Metric, Minimum, Target, Stretch, Measurement]
+        instruction: |
+          Define success levels:
+
+          | Metric | Minimum | Target | Stretch | Measurement |
+          |--------|---------|--------|---------|-------------|
+          | Active users | 500 | 1000 | 2500 | Weekly actives |
+          | Retention | 40% | 60% | 80% | 30-day retention |
+          | NPS | 0 | 30 | 50 | Survey |
+          | Task success | 70% | 85% | 95% | Analytics |
+
+          - **Minimum**: Viable threshold
+          - **Target**: Expected success
+          - **Stretch**: Exceptional success
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder, problem-definer, dt-master]
+
+      - id: learning-objectives
+        title: Learning Objectives
+        type: bullet-list
+        instruction: |
+          Key questions MVP will answer:
+          - Will users adopt this solution?
+          - Do they understand the value prop?
+          - What features do they use most?
+          - Where do they struggle?
+          - What's the retention driver?
+          - What should we build next?
+
+          MVP is a learning vehicle
+        template: |
+          - Question: [What we need to learn]
+          - How measured: [Method]
+        elicit: true
+        owner: prototype-builder
+        editors: [prototype-builder, test-analyst]
+
+  - id: risks-and-assumptions
+    title: Risks & Assumptions
+    type: table
+    columns: [Risk/Assumption, Likelihood/Confidence, Impact, Mitigation/Validation]
+    instruction: |
+      Document what could go wrong:
+
+      | Risk/Assumption | Likelihood | Impact | Mitigation |
+      |-----------------|------------|--------|------------|
+      | Users won't understand feature X | Medium | High | Clear onboarding |
+      | Technical complexity underestimated | Low | High | Proof of concept first |
+      | Assumption: Users have Y | High | Medium | Validate in beta |
+
+      Plan for contingencies
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: go-to-market-strategy
+    title: MVP Go-to-Market Strategy
+    instruction: |
+      How to launch:
+      - Target launch date
+      - Launch type (public, beta, soft launch)
+      - Initial user acquisition plan
+      - Pricing strategy (if applicable)
+      - Marketing channels
+      - Launch partners
+      - PR/communications approach
+
+      Keep it lean for MVP
+    elicit: true
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: post-launch-roadmap
+    title: Post-Launch Roadmap
+    instruction: |
+      What happens after MVP:
+    sections:
+      - id: month1-priorities
+        title: Month 1: Stabilization
+        type: bullet-list
+        instruction: |
+          Immediate post-launch focus:
+          - Fix critical bugs
+          - Monitor metrics closely
+          - Gather user feedback
+          - Quick wins based on feedback
+        owner: prototype-builder
+        editors: [prototype-builder, dt-master]
+
+      - id: months2-3-priorities
+        title: Months 2-3: Iteration
+        type: bullet-list
+        instruction: |
+          First major updates:
+          - Should-have features
+          - Top user requests
+          - Usability improvements
+          - Retention features
+        owner: prototype-builder
+        editors: [prototype-builder, dt-master]
+
+      - id: months4-6-priorities
+        title: Months 4-6: Growth
+        type: bullet-list
+        instruction: |
+          Expand capabilities:
+          - Additional use cases
+          - Secondary personas
+          - Integration features
+          - Scalability improvements
+        owner: prototype-builder
+        editors: [prototype-builder, dt-master]
+
+  - id: decision-framework
+    title: Decision Framework
+    instruction: |
+      How to make MVP decisions:
+      - When feature requests come: [Process]
+      - When tech debt grows: [Threshold]
+      - When users complain: [Prioritization]
+      - When scope threatens timeline: [What to cut]
+
+      Principles for tough choices:
+      1. Core problem first
+      2. Learning over polish
+      3. Simplicity over features
+      4. Real users over hypothetical
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: team-roles
+    title: Team & Responsibilities
+    type: table
+    columns: [Role, Person, Responsibilities, % Time]
+    instruction: |
+      Who's building MVP:
+
+      | Role | Person | Responsibilities | % Time |
+      |------|--------|------------------|--------|
+      | Product Owner | [Name] | Vision, priorities | 50% |
+      | Tech Lead | [Name] | Architecture, code | 100% |
+      | Designer | [Name] | UX/UI | 75% |
+      | QA | [Name] | Testing | 50% |
+
+      Clarify ownership and capacity
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: stakeholder-alignment
+    title: Stakeholder Alignment
+    instruction: |
+      Document agreement:
+      - Who reviewed MVP definition: [Names]
+      - Feedback received: [Summary]
+      - Concerns raised: [List]
+      - Approval status: [Yes/No/Pending]
+      - Sign-off date: [Date]
+
+      Ensure shared understanding
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: next-steps
+    title: Next Steps
+    type: checklist
+    template: |
+      - [ ] Get stakeholder approval on MVP definition
+      - [ ] Create detailed feature specifications
+      - [ ] Set up development environment
+      - [ ] Break down features into sprint stories
+      - [ ] Design MVP user flows
+      - [ ] Plan beta testing approach
+      - [ ] Set up analytics and tracking
+      - [ ] Begin development sprints
+      - [ ] Establish feedback loops
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - Concept posters (inspiration)
+      - User personas
+      - User journey maps
+      - Technical architecture docs
+      - Feature specifications
+      - Success metrics framework
+      - Go-to-market plan
+      - Product roadmap
+    owner: prototype-builder
+    editors: [prototype-builder, dt-master, problem-definer]

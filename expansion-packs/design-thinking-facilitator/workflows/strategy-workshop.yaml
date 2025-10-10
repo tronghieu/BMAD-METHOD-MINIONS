@@ -1,0 +1,78 @@
+name: Strategy Workshop
+description: >
+  A focused, short-duration workflow for applying Design Thinking to complex
+  strategic questions, resulting in an actionable plan rather than a product.
+type: strategy
+duration: 1-3 days
+
+agents:
+  - dt-master
+  - empathy-researcher
+  - problem-definer
+  - ideation-coach
+
+phases:
+  - name: Challenge Framing
+    description: Deconstruct the strategic challenge and establish a clear focus.
+    duration: 0.5-day
+    lead-agent: dt-master
+    activities:
+      - problem-deconstruction:
+          output: key-questions-and-assumptions
+      - stakeholder-mapping:
+          output: influence-and-interest-map
+      - success-definition:
+          output: desired-outcomes-and-metrics
+    deliverables:
+      - reframed-strategic-challenge
+      - list-of-critical-unknowns
+
+  - name: Opportunity Mapping
+    description: Research and identify potential pathways and opportunity areas.
+    duration: 0.5-day
+    lead-agent: empathy-researcher
+    activities:
+      - analogous-research:
+          output: case-studies-from-other-domains
+      - market-and-trend-analysis:
+          output: key-trends-and-forces
+      - internal-capabilities-assessment:
+          output: strengths-and-weaknesses
+    deliverables:
+      - opportunity-map
+      - strategic-insights
+
+  - name: Strategic Ideation
+    description: Generate and develop a portfolio of strategic options.
+    duration: 1-day
+    lead-agent: ideation-coach
+    activities:
+      - scenario-brainstorming:
+          output: what-if-scenarios
+      - business-model-ideation:
+          output: potential-business-models
+      - strategic-option-development:
+          output: detailed-strategic-options
+      - impact-feasibility-analysis:
+          output: prioritized-options
+    deliverables:
+      - portfolio-of-strategic-options
+      - risk-assessment-for-each-option
+
+  - name: Action Planning
+    description: Detail the chosen strategy and create an implementation roadmap.
+    duration: 1-day
+    lead-agent: dt-master
+    activities:
+      - strategy-selection:
+          output: chosen-strategic-direction
+      - initiative-definition:
+          output: key-initiatives
+      - roadmap-creation:
+          output: phased-implementation-plan
+      - resource-and-kpi-planning:
+          output: resource-needs-and-success-metrics
+    deliverables:
+      - strategic-plan-document
+      - 12-month-roadmap
+      - list-of-first-projects-to-initiate

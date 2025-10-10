@@ -1,0 +1,424 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: idea-capture-board
+  name: Idea Capture Board
+  version: 1.0
+  description: Structured workspace for collecting and organizing all ideation output
+  output:
+    format: markdown
+    filename: "ideation/{{project_name}}-idea-capture-board.md"
+    title: "Idea Capture Board: {{project_name}}"
+
+workflow:
+  mode: collaborative
+  elicitation: advanced-elicitation
+  allow_skip: true
+
+agent_config:
+  owner: ideation-coach
+  editable_sections:
+    - Ideas Collection
+    - Clustering
+    - Selection
+
+sections:
+  - id: board-overview
+    title: Idea Board Overview
+    type: structured-data
+    instruction: |
+      Board details:
+      - Project name
+      - Ideation session date(s)
+      - HMW question(s) explored
+      - Total ideas captured
+      - Number of participants
+      - Session facilitator
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach]
+
+  - id: hmw-context
+    title: HMW Questions Explored
+    type: numbered-list
+    instruction: |
+      List the How Might We questions that generated these ideas:
+
+      1. [Primary HMW]
+      2. [Secondary HMW]
+      ...
+
+      This provides context for all captured ideas
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer]
+
+  - id: raw-ideas
+    title: Raw Ideas Collection
+    instruction: |
+      Capture ALL ideas generated, organized by technique or source.
+      Format: One idea per line, no judgment, include all.
+    sections:
+      - id: technique1-ideas
+        title: "Ideas from [Technique 1 Name]"
+        type: bullet-list
+        instruction: |
+          All ideas from first ideation technique:
+
+          Format options:
+          - Simple list: "- [Idea description]"
+          - With author: "- [Idea] (@PersonName)"
+          - With sketch reference: "- [Idea] (see photo #X)"
+
+          Capture verbatim, keep original wording
+        template: |
+          - [Idea description]
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach, dt-master]
+
+      - id: technique2-ideas
+        title: "Ideas from [Technique 2 Name]"
+        type: bullet-list
+        instruction: |
+          All ideas from second ideation technique
+        template: |
+          - [Idea description]
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach, dt-master]
+
+      - id: technique3-ideas
+        title: "Ideas from [Technique 3 Name]"
+        type: bullet-list
+        instruction: |
+          All ideas from third technique (if applicable)
+        template: |
+          - [Idea description]
+        owner: ideation-coach
+        editors: [ideation-coach, dt-master]
+
+      - id: emergent-ideas
+        title: "Emergent Ideas"
+        type: bullet-list
+        instruction: |
+          Ideas that emerged during discussion, building, or synthesis:
+          - Combinations of earlier ideas
+          - Refinements suggested during review
+          - Spontaneous insights
+        template: |
+          - [Idea] - Built from: [Source ideas]
+        owner: ideation-coach
+        editors: [ideation-coach, dt-master]
+
+  - id: idea-clustering
+    title: Idea Clustering & Themes
+    instruction: |
+      Group similar ideas into thematic clusters.
+      This helps identify patterns and opportunity areas.
+    sections:
+      - id: cluster-template
+        title: "Cluster: {{cluster_name}}"
+        repeatable: true
+        instruction: Create entry for each idea cluster (aim for 5-10 clusters)
+        sections:
+          - id: cluster-name
+            title: Cluster Theme Name
+            type: text
+            instruction: |
+              Name this cluster:
+              - Descriptive of the grouped ideas
+              - User-benefit focused if possible
+              - Memorable and clear
+
+              Example: "Personalized Recommendations", "Streamlined Checkout"
+            elicit: true
+            owner: ideation-coach
+            editors: [ideation-coach]
+
+          - id: cluster-description
+            title: Cluster Description
+            instruction: |
+              What ties these ideas together:
+              - Common approach or mechanism
+              - Similar user benefit
+              - Shared technology or resource
+              - Related touchpoint or moment
+            elicit: true
+            owner: ideation-coach
+            editors: [ideation-coach]
+
+          - id: ideas-in-cluster
+            title: Ideas in This Cluster
+            type: bullet-list
+            instruction: |
+              List all ideas that belong to this theme:
+              - Copy ideas from raw collection above
+              - Show count: (X ideas total)
+            template: |
+              - [Idea from raw list]
+            elicit: true
+            owner: ideation-coach
+            editors: [ideation-coach]
+
+          - id: cluster-potential
+            title: Cluster Potential
+            instruction: |
+              Why this cluster is interesting:
+              - How many user needs does it address?
+              - How novel is this approach?
+              - What's the potential impact?
+              - Any quick wins in this cluster?
+            owner: ideation-coach
+            editors: [ideation-coach, problem-definer]
+
+  - id: wild-ideas
+    title: Wild Ideas (High Risk, High Reward)
+    type: bullet-list
+    instruction: |
+      Highlight the most ambitious, unconventional ideas:
+      - Breakthrough innovations
+      - Challenge assumptions
+      - Seem impossible but inspiring
+      - Might spark more realistic ideas
+
+      Don't dismiss these - they push boundaries
+    template: |
+      - [Wild idea] - Why it's interesting: [Explanation]
+    owner: ideation-coach
+    editors: [ideation-coach]
+
+  - id: quick-wins
+    title: Quick Wins (Low Effort, High Value)
+    type: bullet-list
+    instruction: |
+      Ideas that could be implemented quickly:
+      - Simple but impactful
+      - Use existing resources
+      - Low technical complexity
+      - Could validate with minimal prototype
+
+      Great for building momentum
+    template: |
+      - [Quick win idea] - Effort: [Low], Impact: [High/Med]
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: idea-voting-results
+    title: Idea Voting Results
+    instruction: |
+      If dot voting or other selection method was used:
+    sections:
+      - id: top-voted-ideas
+        title: Top Voted Ideas
+        type: numbered-list
+        instruction: |
+          Ideas with most votes (ranked):
+
+          1. [Idea] - [X votes]
+          2. [Idea] - [Y votes]
+          3. [Idea] - [Z votes]
+          ...
+
+          Include top 10-15
+        elicit: true
+        owner: ideation-coach
+        editors: [ideation-coach]
+
+      - id: voting-patterns
+        title: Voting Patterns Observed
+        instruction: |
+          What can we learn from voting:
+          - Which clusters got most votes?
+          - Unanimous favorites vs. split opinions?
+          - Surprises in voting?
+          - Different stakeholder preferences?
+        owner: ideation-coach
+        editors: [ideation-coach, problem-definer]
+
+  - id: idea-evaluation
+    title: Idea Evaluation Matrix
+    type: table
+    columns: [Idea, Impact, Feasibility, Innovation, Strategic Fit, Score]
+    instruction: |
+      Evaluate top ideas across key dimensions:
+
+      | Idea | Impact | Feasibility | Innovation | Strategic Fit | Score |
+      |------|--------|-------------|------------|---------------|-------|
+      | [Idea summary] | H/M/L | H/M/L | H/M/L | H/M/L | Calculate |
+
+      Criteria:
+      - **Impact**: User value and problem-solving power
+      - **Feasibility**: Technical and resource constraints
+      - **Innovation**: Novelty and differentiation
+      - **Strategic Fit**: Alignment with business goals
+
+      Score: Assign weights and calculate priority
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer, dt-master]
+
+  - id: selected-ideas-for-development
+    title: Selected Ideas for Further Development
+    type: numbered-list
+    instruction: |
+      Final selection of ideas to develop into concepts:
+
+      For each selected idea:
+      1. [Idea name/summary]
+         - Why selected: [Rationale]
+         - Cluster: [Which theme]
+         - Votes received: [If applicable]
+         - Key assumption to test: [What needs validation]
+         - Next step: [Concept development or direct to prototype]
+
+      Aim for 3-7 ideas to develop
+    elicit: true
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer, dt-master]
+
+  - id: deferred-ideas
+    title: Deferred Ideas (Parking Lot)
+    type: bullet-list
+    instruction: |
+      Good ideas not pursuing right now:
+      - Future phase candidates
+      - Need more research first
+      - Require capabilities we don't have yet
+      - Good but lower priority
+
+      Document why deferred and when to revisit
+    template: |
+      - [Idea] - Deferred because: [Reason] - Revisit: [When]
+    owner: ideation-coach
+    editors: [ideation-coach, dt-master]
+
+  - id: rejected-ideas
+    title: Rejected Ideas & Why
+    type: bullet-list
+    instruction: |
+      Ideas explicitly rejected with rationale:
+      - Out of scope
+      - Doesn't solve core problem
+      - Technical infeasibility
+      - Strategic misalignment
+      - Already tried and failed
+
+      Document to avoid revisiting unnecessarily
+    template: |
+      - [Idea] - Rejected because: [Clear reason]
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer]
+
+  - id: combinable-ideas
+    title: Ideas That Could Be Combined
+    instruction: |
+      Note opportunities to merge complementary ideas:
+      - Which ideas work well together?
+      - What hybrid approaches could we create?
+      - How could we sequence ideas (Phase 1 + Phase 2)?
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder]
+
+  - id: cross-cutting-themes
+    title: Cross-Cutting Themes
+    type: bullet-list
+    instruction: |
+      Patterns across multiple clusters:
+      - Common mechanisms or approaches
+      - Shared principles or values
+      - Recurring user benefits
+      - Technology enablers
+      - Design implications
+
+      These might inform overall solution direction
+    template: |
+      - [Theme]: Appears in clusters [A], [B], [C]
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer]
+
+  - id: inspiration-sources
+    title: Inspiration Sources Referenced
+    type: bullet-list
+    instruction: |
+      External inspiration that informed ideas:
+      - Analogies from other industries
+      - Competitive products mentioned
+      - Natural systems referenced
+      - Cultural examples
+      - Technology trends
+
+      Track for future reference
+    owner: ideation-coach
+    editors: [ideation-coach]
+
+  - id: visual-documentation
+    title: Visual Documentation
+    instruction: |
+      Links to visual artifacts:
+      - Photos of physical boards
+      - Digital board screenshots
+      - Sketches and drawings
+      - Video recordings (if any)
+      - Miro/Mural board links
+
+      File references: [List files or links]
+    owner: ideation-coach
+    editors: [ideation-coach]
+
+  - id: participant-feedback
+    title: Participant Feedback
+    instruction: |
+      What participants said about the ideation:
+      - Favorite ideas
+      - Concerns raised
+      - Additional suggestions
+      - Energy level
+      - What worked well
+      - What could be improved
+
+      Helps improve future sessions
+    owner: ideation-coach
+    editors: [ideation-coach]
+
+  - id: next-steps
+    title: Next Steps
+    type: checklist
+    template: |
+      - [ ] Create concept posters for selected ideas
+      - [ ] Validate idea assumptions with research
+      - [ ] Sketch rough prototypes
+      - [ ] Share idea board with stakeholders
+      - [ ] Get feedback on selected directions
+      - [ ] Plan prototype development
+      - [ ] Archive deferred ideas for future reference
+      - [ ] Schedule concept development workshop
+    owner: ideation-coach
+    editors: [ideation-coach, prototype-builder, dt-master]
+
+  - id: related-artifacts
+    title: Related Artifacts
+    instruction: |
+      Link to connected documents:
+      - Brainstorming session plan
+      - HMW questions
+      - Research synthesis
+      - Personas
+      - Concept posters (to be created)
+      - Idea evaluation matrix (detailed version)
+      - Prototype planning (next phase)
+    owner: ideation-coach
+    editors: [ideation-coach, problem-definer, prototype-builder]
+
+  - id: board-evolution
+    title: Idea Board Evolution Log
+    type: table
+    columns: [Date, Changes, Reason, Updated By]
+    instruction: |
+      Track updates to the board:
+      - New ideas added
+      - Clustering changes
+      - Selection updates
+      - Priority shifts
+    owner: ideation-coach
+    editors: [ideation-coach, dt-master]

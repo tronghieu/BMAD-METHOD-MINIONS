@@ -1,150 +1,22 @@
-name: Design Thinking Full Team
-description: >
-  Complete Design Thinking facilitation team with all specialized agents
-  for comprehensive innovation projects. This team can handle any design
-  challenge from initial discovery through validated solutions.
-version: 1.0.0
-team-type: design-thinking
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+bundle:
+  name: Design Thinking Full Team
+  icon: "🤔"
+  description: >
+    Complete Design Thinking facilitation team with all specialized agents
+    for comprehensive innovation projects.
 
 agents:
-  core-facilitator:
-    - dt-master
-    description: Orchestrates the entire Design Thinking process
+  - dt-master
+  - empathy-researcher
+  - problem-definer
+  - ideation-coach
+  - prototype-builder
+  - test-analyst
 
-  phase-specialists:
-    - empathy-researcher
-    - problem-definer
-    - ideation-coach
-    - prototype-builder
-    - test-analyst
-    description: Expert agents for each Design Thinking phase
-
-capabilities:
-  - Full Design Thinking lifecycle management
-  - User research and empathy building
-  - Problem definition and reframing
-  - Creative ideation and concept development
-  - Rapid prototyping across fidelities
-  - Comprehensive testing and validation
-  - Iterative improvement cycles
-  - Stakeholder alignment and communication
-
-recommended-for:
-  - Innovation projects
-  - Product development
-  - Service design
-  - Process improvement
-  - Strategic problem-solving
-  - Digital transformation
-  - Customer experience design
-  - Organizational change
-
-workflow-compatibility:
-  - innovation-sprint
-  - product-development
-  - service-design
-  - process-improvement
-  - strategy-workshop
-
-team-dynamics:
-  coordination-model: hub-and-spoke
-  lead-agent: dt-master
-  handoff-protocol: phase-based
-  communication: continuous
-  decision-making: collaborative
-
-resource-requirements:
-  minimum-team-size: 3
-  optimal-team-size: 5-8
-  time-commitment: varies-by-project
-  tools-needed:
-    - Digital whiteboard
-    - Prototyping software
-    - User research tools
-    - Analytics platform
-
-quality-assurance:
-  - Phase completion checklists
-  - Peer review between agents
-  - User validation gates
-  - Continuous feedback loops
-  - Success metrics tracking
-
-startup-sequence:
-  1:
-    agent: dt-master
-    action: Initialize project and assess needs
-  2:
-    agent: dt-master
-    action: Assemble appropriate specialists
-  3:
-    agent: all
-    action: Load project context and constraints
-  4:
-    agent: dt-master
-    action: Define workflow and timeline
-  5:
-    agent: empathy-researcher
-    action: Begin discovery phase
-
-collaboration-protocols:
-  handoffs:
-    empathy-to-define:
-      from: empathy-researcher
-      to: problem-definer
-      artifacts:
-        - Research findings
-        - Empathy maps
-        - User insights
-    define-to-ideate:
-      from: problem-definer
-      to: ideation-coach
-      artifacts:
-        - Problem statements
-        - HMW questions
-        - Success criteria
-    ideate-to-prototype:
-      from: ideation-coach
-      to: prototype-builder
-      artifacts:
-        - Selected concepts
-        - Feature priorities
-        - Concept sketches
-    prototype-to-test:
-      from: prototype-builder
-      to: test-analyst
-      artifacts:
-        - Working prototypes
-        - Test scenarios
-        - Documentation
-
-  parallel-work:
-    - Empathy research while problem framing
-    - Ideation while prototype planning
-    - Testing while iteration planning
-
-success-metrics:
-  process:
-    - Phase completion rate
-    - Time to first prototype
-    - Iteration cycles completed
-    - User touchpoints
-  outcomes:
-    - User satisfaction score
-    - Problem-solution fit
-    - Innovation index
-    - Implementation readiness
-    - ROI projection
-
-escalation-path:
-  - First: Phase specialist handles issue
-  - Second: DT Master intervenes
-  - Third: Human facilitator consulted
-  - Fourth: Stakeholder alignment session
-
-continuous-improvement:
-  - Retrospectives after each phase
-  - Learning repository updates
-  - Process refinements
-  - Template improvements
-  - Tool optimization
+workflows:
+  - innovation-sprint.yaml
+  - product-development.yaml
+  - service-design.yaml
+  - process-improvement.yaml
+  - strategy-workshop.yaml

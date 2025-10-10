@@ -1,0 +1,173 @@
+# <!-- Powered by BMAD™ Design Thinking Facilitator -->
+---
+template:
+  id: iteration-learnings-template
+  name: Iteration Learnings
+  version: 1.0
+  description: Document key learnings from a design/test cycle to inform the next iteration.
+  output:
+    format: markdown
+    filename: "testing/{{project_name}}-learnings-{{date}}.md"
+    title: "Iteration Learnings: {{prototype_name}} - {{date}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  allow_skip: false
+
+agent_config:
+  owner: test-analyst
+  editable_sections:
+    - Learnings Summary
+    - Detailed Findings
+    - Next Steps
+
+sections:
+  - id: learnings-overview
+    title: Learnings Overview
+    type: structured-data
+    instruction: |
+      Summary of the iteration cycle:
+      - Prototype Tested: [Name and Version]
+      - Test Dates: [Start to End]
+      - Number of Participants: [X]
+      - Key Focus of This Cycle: [e.g., Onboarding flow, Core feature usability]
+    elicit: true
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: executive-summary
+    title: Executive Summary (TL;DR)
+    type: long-text
+    instruction: |
+      A brief, high-level summary of the most critical outcomes.
+      - What was the single most important thing we learned?
+      - Was our primary hypothesis confirmed or refuted?
+      - What is the top-priority recommendation for the next iteration?
+    elicit: true
+    owner: test-analyst
+    editors: [test-analyst, dt-master]
+
+  - id: hypotheses-validation
+    title: Hypotheses Validation
+    type: table
+    columns: [Hypothesis, Result, Evidence, Confidence]
+    instruction: |
+      Review the hypotheses that this prototype was designed to test.
+
+      | Hypothesis | Result | Evidence | Confidence |
+      |------------|--------|----------|------------|
+      | [Hypothesis 1] | ✓ Confirmed | [Quote or metric] | High |
+      | [Hypothesis 2] | ✗ Refuted | [Observation] | High |
+      | [Hypothesis 3] | ~ Inconclusive | [Mixed feedback] | Medium |
+
+      - **Result**: ✓ Confirmed, ✗ Refuted, ~ Inconclusive
+      - **Evidence**: The key data point (qualitative or quantitative) that proves the result.
+      - **Confidence**: How certain are we of this conclusion?
+    elicit: true
+    owner: test-analyst
+    editors: [test-analyst, prototype-builder]
+
+  - id: key-learnings
+    title: Key Learnings
+    instruction: |
+      What did we learn about our users, the problem, and our solution?
+    sections:
+      - id: what-worked
+        title: What Worked Well (Keep & Amplify)
+        type: bullet-list
+        instruction: |
+          Identify the successes and moments of delight.
+          - Which features were intuitive and well-received?
+          - What parts of the flow were seamless?
+          - What design elements resonated with users?
+        template: |
+          - [Successful element]: [Why it worked - e.g., "Users immediately understood the dashboard layout."]
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: what-didnt-work
+        title: What Didn't Work (Fix or Re-think)
+        type: bullet-list
+        instruction: |
+          Identify the failures and pain points.
+          - Where did users get stuck or confused?
+          - What features were ignored or misunderstood?
+          - What caused the most frustration?
+        template: |
+          - [Problem area]: [Description of the issue - e.g., "The checkout process was confusing for 4/5 users."]
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+      - id: surprises
+        title: Surprising Findings
+        type: bullet-list
+        instruction: |
+          Document the unexpected observations.
+          - What user behaviors did we not anticipate?
+          - What feedback contradicted our assumptions?
+          - Were there any creative or unintended uses of the prototype?
+        template: |
+          - [Surprising finding]: [Implication or question it raises]
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst]
+
+  - id: decision-making
+    title: Decisions & Actions
+    instruction: |
+      Based on the learnings, decide on the next steps.
+    sections:
+      - id: pivot-persevere-iterate
+        title: Pivot, Persevere, or Iterate?
+        type: choice
+        choices: [Pivot, Persevere, Iterate]
+        instruction: |
+          Based on the findings, what is the overall strategic decision?
+          - **Pivot**: A fundamental change in direction is needed. Our core hypothesis was wrong.
+          - **Persevere**: The core concept is validated. Proceed with minor changes.
+          - **Iterate**: The concept is promising but needs significant refinement. Go back to the prototype/ideate phase.
+
+          Decision: [Choose one]
+          Rationale: [Justification for the decision]
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst, dt-master]
+
+      - id: recommendations-for-next-iteration
+        title: Recommendations for Next Iteration
+        type: numbered-list
+        instruction: |
+          List specific, actionable recommendations for the next design cycle.
+
+          1. **[Recommendation]**: (e.g., "Redesign the main navigation.")
+             - **Rationale**: [Based on which finding - e.g., "Users couldn't find key features."]
+             - **Priority**: [High/Medium/Low]
+        elicit: true
+        owner: test-analyst
+        editors: [test-analyst, prototype-builder]
+
+  - id: open-questions
+    title: Open Questions
+    type: bullet-list
+    instruction: |
+      What new questions emerged from this cycle?
+      - What do we still not know?
+      - What should be the focus of the next round of research or testing?
+    template: |
+      - [New question to investigate]
+    owner: test-analyst
+    editors: [test-analyst]
+
+  - id: next-steps-summary
+    title: Next Steps Summary
+    type: checklist
+    template: |
+      - [ ] Update the prototype based on recommendations.
+      - [ ] Plan the next testing cycle.
+      - [ ] Share these learnings with all stakeholders.
+      - [ ] Update the project roadmap/backlog.
+    owner: test-analyst
+    editors: [test-analyst, dt-master]
