@@ -22,3 +22,5 @@ prettier.config.mjs
 /expansion-packs/bmad-infrastructure-devops/
 
 .DS_STORE
+
+node_modules

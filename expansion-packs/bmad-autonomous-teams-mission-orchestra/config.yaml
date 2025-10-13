@@ -1,0 +1,12 @@
+# <!-- Powered by BMAD™ Core -->
+name: bmad-autonomous-teams-mission-orchestra
+version: 1.1.0
+short-title: Autonomous Teams Mission Orchestra
+description: >-
+  Orchestrates autonomous teams through federated repository development,
+  supporting mission-level planning and cross-team coordination while
+  maintaining team independence. Includes triage-master, mission-orchestrator,
+  and integration-specialist agents with workflows for mission planning and
+  cross-team collaboration.
+author: BMad Method Community
+slashPrefix: bmad-atmo
