@@ -5,7 +5,6 @@
 /dist
 /bmad-docs
 /tools
-CHANGELOG.md
 CONTRIBUTING.md
 eslint.config.mjs
 LICENSE
@@ -24,3 +23,11 @@ prettier.config.mjs
 .DS_STORE
 
 node_modules
+# BMAD (local only)
+.bmad-core/
+.bmad-*/
+
+.claude
+.cursor
+.gemini
+.qwen

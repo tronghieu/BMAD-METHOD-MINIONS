@@ -17,7 +17,7 @@ This expansion pack extends BMAD Core to support **cross-team coordination** in 
 
 ### What You Get
 
-- **3 Orchestration Agents**: Triage Master, Mission Orchestrator, Integration Specialist
+- **5 Orchestration Agents**: Mission PM, Mission PO, Triage Master, Mission Orchestrator, Integration Specialist
 - **Mission-Level Planning**: Cross-team PRDs with RACI matrices
 - **Formal Alignment Process**: Team commitment ceremonies
 - **Automated Triage**: Route bugs/enhancements/features to correct teams
@@ -58,15 +58,15 @@ cd BMAD-METHOD
 
 ### Step 2: Add This Pack
 
-Copy `autonomous-teams-mission-orchestra` to `expansion-packs/`:
+Copy `bmad-autonomous-teams-mission-orchestra` to `expansion-packs/`:
 
 ```bash
 # From a zip/download
-unzip autonomous-teams-mission-orchestra.zip -d expansion-packs/
+unzip bmad-autonomous-teams-mission-orchestra.zip -d expansion-packs/
 
 # Or clone from your repository
 cd expansion-packs
-git clone <your-pack-repo> autonomous-teams-mission-orchestra
+git clone <your-pack-repo> bmad-autonomous-teams-mission-orchestra
 cd ..
 ```
 
@@ -80,26 +80,12 @@ npm run install:bmad
 **During installation:**
 
 1. Choose: **"Install BMAD Core + Expansion Packs"** (NOT "Expansion Packs Only")
-2. Select: **"autonomous-teams-mission-orchestra"**
+2. Select: **"Autonomous Teams Mission Orchestra"**
 3. Specify your target project directory
 
 The installer will integrate both BMAD Core and this pack into your project.
 
-### Step 4: Verify Installation
-
-```bash
-cd <your-project>
-
-# Check core agents exist (required)
-ls .bmad-core/agents/ | grep -E "analyst|pm|architect|po"
-
-# Check pack agents exist
-ls .bmad-core/agents/ | grep -E "triage-master|mission-orchestrator|integration-specialist"
-```
-
-All should be present. If core agents are missing, reinstall with "Core + Expansion Packs" option.
-
-### Step 5: Configure Your Teams
+### Step 4: Configure Your Teams
 
 Edit `.bmad-core/data/orchestra-config.yaml`:
 
@@ -152,8 +138,8 @@ integrations:
 # Start with project brief
 @analyst create-project-brief
 
-# Create Mission PRD from brief
-@pm create mission PRD
+# Create Mission PRD from brief (using Mission PM)
+@mission-pm create-mission-prd
 ```
 
 **Mission PRD includes:**
@@ -179,7 +165,8 @@ integrations:
 #### 4. Decompose to Teams
 
 ```bash
-@po shard mission to teams
+# Using Mission PO for cross-team decomposition
+@mission-po shard-mission-to-teams
 ```
 
 **Creates team handoff documents:**
@@ -187,15 +174,26 @@ integrations:
 - `docs/teams/backend/handoff-{mission}.md`
 - Each contains team-specific epics, dependencies, contracts
 
-#### 5. Team Execution
+#### 5. Create Team PRDs
+
+```bash
+# Mission PM creates focused PRDs for each team
+@mission-pm create-team-prd
+> Team: mobile
+> Creates: docs/teams/mobile/prd-{mission}.md
+
+@mission-pm create-team-prd
+> Team: backend
+> Creates: docs/teams/backend/prd-{mission}.md
+```
+
+#### 6. Team Execution
 
 Each team in their repository:
 
 ```bash
-@pm create team PRD from handoff
-
-# Standard BMAD dev workflow
-@sm create next story
+# Standard BMAD dev workflow with team PRD
+@sm create next story  # Using team's PRD
 @dev implement story
 @qa review story
 ```
@@ -204,7 +202,45 @@ Teams work autonomously with clear integration contracts.
 
 ---
 
-## The Three Orchestration Agents
+## The Five Orchestration Agents
+
+### 🎯 Mission PM (Dao)
+
+**Strategic mission orchestrator for cross-team product initiatives**
+
+```bash
+@mission-pm create-mission-prd    # Create cross-team mission PRD
+@mission-pm facilitate-alignment   # Run team alignment ceremony
+@mission-pm define-raci           # Create RACI matrix
+@mission-pm orchestrate-mission   # Execute full mission workflow
+@mission-pm create-team-prd       # Create team PRD from handoff
+```
+
+**Core Focus:**
+- Cross-team PRD creation with shared goals
+- RACI matrix for clear responsibilities
+- Team alignment facilitation
+- Team-specific PRD generation from handoffs
+- Mission orchestration workflow
+
+---
+
+### 🎭 Mission PO (Kiet)
+
+**Mission decomposer who breaks complex initiatives into team-specific work**
+
+```bash
+@mission-po shard-mission-to-teams  # Decompose mission PRD by team
+@mission-po route-work              # Route work to appropriate team
+@mission-po create-team-handoff     # Generate team-specific handoff
+```
+
+**Core Focus:**
+- Decompose mission PRDs by team
+- Route work items to correct teams
+- Create team-specific handoff documents
+
+---
 
 ### 🚦 Triage Master
 
@@ -292,7 +328,7 @@ Teams work autonomously with clear integration contracts.
 ┌─────────────────────────────────────────────────────────────────────────┐
 │  PHASE 2: DEFINITION (3-5 days)                                         │
 ├─────────────────────────────────────────────────────────────────────────┤
-│  @pm create mission PRD                                                 │
+│  @mission-pm create-mission-prd                                         │
 │  • Define shared goals across teams                                     │
 │  • Create RACI matrix                                                   │
 │  • Identify integration points                                          │
@@ -327,24 +363,27 @@ Teams work autonomously with clear integration contracts.
          │
          ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│  PHASE 4: DECOMPOSITION (2-3 days)                                      │
+│  PHASE 4: DECOMPOSITION & TEAM PRDs (2-3 days)                          │
 ├─────────────────────────────────────────────────────────────────────────┤
-│  @po shard mission to teams                                             │
+│  @mission-po shard-mission-to-teams                                     │
 │  • Decompose Mission PRD by team                                        │
 │  • Create team-specific handoff docs                                    │
-│  • Include only relevant information                                    │
 │                                                                          │
-│  OUTPUT: docs/teams/{team-id}/handoff-{mission}.md (per team)          │
+│  @mission-pm create-team-prd (for each team)                            │
+│  • Transform handoffs into team PRDs                                    │
+│  • Focus on team-specific requirements                                  │
+│                                                                          │
+│  OUTPUT: docs/teams/{team-id}/handoff-{mission}.md                      │
+│          docs/teams/{team-id}/prd-{mission}.md                          │
 └────────┬────────────────────────────────────────────────────────────────┘
          │
          ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
 │  PHASE 5: EXECUTION (variable duration)                                 │
 ├─────────────────────────────────────────────────────────────────────────┤
-│  Each team in their own repository:                                     │
+│  Each team in their own repository with their team PRD:                 │
 │                                                                          │
-│  @pm create team PRD from handoff                                       │
-│  @sm create stories                                                     │
+│  @sm create stories      # From docs/teams/{team}/prd-{mission}.md      │
 │  @dev implement features                                                │
 │  @qa test & validate                                                    │
 │                                                                          │
@@ -491,7 +530,7 @@ ls .bmad-core/agents/ | grep -E "analyst|pm|architect|po"
 cd <BMAD-METHOD-directory>
 npm run install:bmad
 # Choose: "Install BMAD Core + Expansion Packs"
-# Select: "autonomous-teams-mission-orchestra"
+# Select: "Autonomous Teams Mission Orchestra"
 ```
 
 **Common mistakes:**
@@ -530,7 +569,7 @@ npm run install:bmad
 
 ## Version
 
-**Pack Version:** 1.0.0
+**Pack Version:** 2.0.0
 **BMAD Core Compatibility:** v1.0.0+
 **License:** MIT
 

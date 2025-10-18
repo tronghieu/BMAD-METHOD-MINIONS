@@ -29,12 +29,12 @@ This repository contains two primary expansion packs:
 -   **Autonomous Teams Mission Orchestra**
     *   **Description**: Extends BMAD Core to support cross-team coordination in federated repository architectures (e.g., microservices, monorepos). It provides specialized agents and workflows to manage "missions" that span multiple autonomous teams while maintaining their independence.
     *   **When to Use**: Use this pack when a feature or work item requires collaboration between several distinct teams (e.g., mobile, backend, AI, data science). It's ideal for planning large-scale features, managing microservices developed by different teams, and routing work in a complex, multi-repository environment.
-    *   **[Read more about the Mission Orchestra Pack...](expansion-packs/autonomous-teams-mission-orchestra/README.md)**
+    *   **[Read more about the Mission Orchestra Pack...](expansion-packs/bmad-autonomous-teams-mission-orchestra/README.md)**
 
 -   **Design Thinking Facilitator**
     *   **Description**: A comprehensive toolkit that guides teams through the five phases of innovative, human-centered problem-solving: Empathize, Define, Ideate, Prototype, and Test. It combines BMAD's agentic planning with established design thinking principles.
     *   **When to Use**: Use this pack to tackle complex problems that require deep user understanding and creative solutions. It's suitable for new product development, service design, internal process improvement, or running focused innovation sprints.
-    *   **[Read more about the Design Thinking Facilitator Pack...](expansion-packs/design-thinking-facilitator/README.md)**
+    *   **[Read more about the Design Thinking Facilitator Pack...](expansion-packs/bmad-design-thinking-facilitator/README.md)**
 
 ## Real-World Use Cases
 
@@ -99,15 +99,15 @@ Assuming you clone `BMAD-METHOD-MINIONS` next to `BMAD-METHOD`:
 # From within the BMAD-METHOD directory:
 
 # Copy the Autonomous Teams Mission Orchestra pack
-cp -R ../BMAD-METHOD-MINIONS/expansion-packs/autonomous-teams-mission-orchestra ./expansion-packs/
+cp -R ../BMAD-METHOD-MINIONS/expansion-packs/bmad-autonomous-teams-mission-orchestra ./expansion-packs/
 
 # Copy the Design Thinking Facilitator pack
-cp -R ../BMAD-METHOD-MINIONS/expansion-packs/design-thinking-facilitator ./expansion-packs/
+cp -R ../BMAD-METHOD-MINIONS/expansion-packs/bmad-design-thinking-facilitator ./expansion-packs/
 ```
 
 After copying, your `expansion-packs` directory should contain:
-- `autonomous-teams-mission-orchestra/`
-- `design-thinking-facilitator/`
+- `bmad-autonomous-teams-mission-orchestra/`
+- `bmad-design-thinking-facilitator/`
 
 ### Step 3: Install BMAD with Expansion Packs
 
@@ -121,11 +121,11 @@ npm run install:bmad
 During the interactive installation process, make the following selections:
 
 1.  When prompted for installation type, choose **"Install BMAD Core + Expansion Packs"**.
-    *   **Note:** This is required for the `autonomous-teams-mission-orchestra` pack, which depends on core BMAD components.
+    *   **Note:** This is required for the Autonomous Teams Mission Orchestra pack, which depends on core BMAD components.
 
 2.  From the list of available expansion packs, use the spacebar to select:
-    - `[x] autonomous-teams-mission-orchestra`
-    - `[x] design-thinking-facilitator`
+    - `[x] Autonomous Teams Mission Orchestra`
+    - `[x] Design Thinking Facilitator`
 
 3.  Follow the remaining prompts to specify your target project directory.
 
