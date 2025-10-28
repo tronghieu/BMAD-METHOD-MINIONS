@@ -7,6 +7,86 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2025-10-28
+
+### Added - Release Management Expansion Pack
+
+- **New Expansion Pack: BMAD Release Management** (28 files, ~93,000 words)
+  - Comprehensive AI-powered framework for managing software releases following Agile methodologies
+  - Transforms releases from stressful chaos to predictable excellence
+  - Pack version: 1.0.0
+
+- **5 Specialized Agents** (with Vietnamese historical names):
+  - **Release Manager (Trần Hưng Đạo)**: Primary orchestrator for entire release lifecycle
+    - Commands: `*plan`, `*create-plan`, `*monitor`, `*retrospective`, `*status`, `*workflow`
+    - Dual-approach support: Manual guided workflow + Template-driven workflow
+  - **Scope Analyzer (Nguyễn Trãi)**: Strategic scope analysis and inclusion/deferral recommendations
+    - Commands: `*analyze`, `*recommend`, `*status`
+  - **Quality Gatekeeper (Lý Thường Kiệt)**: Quality gate validation across all dimensions
+    - Commands: `*validate`, `*report`, `*status`
+  - **Deployment Coordinator (Võ Nguyên Giáp)**: Deployment planning and execution
+    - Commands: `*plan`, `*execute`, `*rollback`, `*status`
+  - **Communication Specialist (Phan Bội Châu)**: Release communications for diverse audiences
+    - Commands: `*draft`, `*review`, `*template`
+
+- **3 Release Workflows**:
+  - `standard-release.yaml`: Regular releases (3-5 days, 6 phases)
+  - `hotfix-release.yaml`: Emergency fixes (2-8 hours, 6 phases)
+  - `major-release.yaml`: Breaking changes (4-12 weeks, 8 phases)
+
+- **1 Comprehensive Template**:
+  - `release-plan.yaml`: Interactive YAML template with 11 sections, 40+ subsections
+  - Supports both manual and template-driven document creation
+  - Structured elicitation with owner/editor permissions
+
+- **8 Comprehensive Tasks** (3,000-5,000 words each):
+  - `create-release-plan.md`: 9-phase manual workflow with git analysis and scope analysis
+  - `analyze-scope.md`: Systematic scope analysis with recommendations
+  - `run-quality-gates.md`: Comprehensive quality validation
+  - `plan-deployment.md`: Deployment strategy selection and planning
+  - `execute-deployment.md`: Step-by-step deployment execution
+  - `monitor-release.md`: 24-48 hour post-deployment monitoring
+  - `conduct-retrospective.md`: Structured learning and continuous improvement
+  - `rollback-release.md`: Emergency rollback procedures
+
+- **4 Validation Checklists**:
+  - `pre-release-checklist.md`: Quality gates validation
+  - `deployment-checklist.md`: Deployment execution steps
+  - `post-deployment-checklist.md`: 24-48 hour verification
+  - `rollback-checklist.md`: Emergency rollback decision tree
+
+- **4 Knowledge Base Files**:
+  - `release-management-kb.md`: Philosophy, principles, release types, best practices
+  - `versioning-strategies.md`: SemVer, CalVer guidance with decision trees
+  - `changelog-conventions.md`: Keep a Changelog, Conventional Commits standards
+  - `deployment-patterns.md`: Blue-Green, Canary, Rolling, Feature Flags, Recreate patterns
+
+- **Key Features**:
+  - Support for SemVer and CalVer versioning strategies
+  - Multiple deployment patterns (Blue-Green, Canary, Rolling, Feature Flags, Recreate)
+  - Comprehensive quality gates (testing, security, performance, documentation, compliance)
+  - Emergency rollback procedures with decision criteria
+  - Post-release monitoring and retrospectives
+  - Tool-agnostic approach (works with any CI/CD, monitoring tools)
+  - Dual-approach: Manual workflow (*plan) + Template-driven workflow (*create-plan)
+
+### Changed
+
+- **Main README.md**:
+  - Updated from 2 to 3 expansion packs
+  - Added Release Management to expansion packs list with description and use cases
+  - Added 3 real-world use cases for Release Management:
+    - Standard Sprint Release
+    - Emergency Hotfix
+    - Major Version with Breaking Changes
+  - Updated installation instructions to include Release Management pack
+
+### Documentation
+
+- Comprehensive `README.md` with quick start, workflows, agent descriptions, examples, best practices
+- `building-plan.md`: 4-session build log documenting architecture decisions and refactoring
+- `config.yaml`: Pack metadata and configuration
+
 ## [1.2.0] - 2025-10-18
 
 ### Added - Autonomous Teams Mission Orchestra v2.0.0
@@ -233,7 +313,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Report Issues](https://github.com/bmadcode/bmad-method/issues)
 - [Discord Community](https://discord.gg/gk8jAdXWmj)
 
-[Unreleased]: https://github.com/YOUR-USERNAME/BMAD-METHOD-MINIONS/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/YOUR-USERNAME/BMAD-METHOD-MINIONS/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/YOUR-USERNAME/BMAD-METHOD-MINIONS/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/YOUR-USERNAME/BMAD-METHOD-MINIONS/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/YOUR-USERNAME/BMAD-METHOD-MINIONS/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/YOUR-USERNAME/BMAD-METHOD-MINIONS/compare/v0.3.0...v1.0.0
