@@ -313,12 +313,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Report Issues](https://github.com/bmadcode/bmad-method/issues)
 - [Discord Community](https://discord.gg/gk8jAdXWmj)
 
-[Unreleased]: https://github.com/YOUR-USERNAME/BMAD-METHOD-MINIONS/compare/v1.3.0...HEAD
-[1.3.0]: https://github.com/YOUR-USERNAME/BMAD-METHOD-MINIONS/compare/v1.2.0...v1.3.0
-[1.2.0]: https://github.com/YOUR-USERNAME/BMAD-METHOD-MINIONS/compare/v1.1.0...v1.2.0
-[1.1.0]: https://github.com/YOUR-USERNAME/BMAD-METHOD-MINIONS/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/YOUR-USERNAME/BMAD-METHOD-MINIONS/compare/v0.3.0...v1.0.0
-[0.3.0]: https://github.com/YOUR-USERNAME/BMAD-METHOD-MINIONS/compare/v0.2.0...v0.3.0
-[0.2.0]: https://github.com/YOUR-USERNAME/BMAD-METHOD-MINIONS/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/YOUR-USERNAME/BMAD-METHOD-MINIONS/compare/v0.0.1...v0.1.0
-[0.0.1]: https://github.com/YOUR-USERNAME/BMAD-METHOD-MINIONS/releases/tag/v0.0.1
+[Unreleased]: https://github.com/tronghieu/BMAD-METHOD-MINIONS/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/tronghieu/BMAD-METHOD-MINIONS/compare/v1.2.0...v1.3.0
+[1.2.0]: https://github.com/tronghieu/BMAD-METHOD-MINIONS/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/tronghieu/BMAD-METHOD-MINIONS/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/tronghieu/BMAD-METHOD-MINIONS/compare/v0.3.0...v1.0.0
+[0.3.0]: https://github.com/tronghieu/BMAD-METHOD-MINIONS/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/tronghieu/BMAD-METHOD-MINIONS/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/tronghieu/BMAD-METHOD-MINIONS/compare/v0.0.1...v0.1.0
+[0.0.1]: https://github.com/tronghieu/BMAD-METHOD-MINIONS/releases/tag/v0.0.1
