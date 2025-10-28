@@ -1,0 +1,230 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: bug-doc-template-v1
+  name: Bug Document
+  version: 1.0
+  output:
+    format: markdown
+    filename: docs/bugs/{{bug_id}}.md
+    title: "Bug {{bug_id}}: {{title}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+agent_config:
+  editable_sections:
+    - Status
+    - Overview
+    - Steps to Reproduce
+    - Expected vs Actual
+    - Environment
+    - Evidence
+    - Triage Notes
+    - Reproduction Notes
+    - Fix Plan
+    - Verification
+    - Links
+    - Change Log
+    - QA Results
+    - Closure
+
+sections:
+  - id: status
+    title: Status
+    type: choice
+    choices: [New, Assigned, InProgress, Verification, Closed, Reopened]
+    instruction: Select the current bug status
+    owner: bug-coordinator
+    editors: [bug-coordinator]
+
+  - id: overview
+    title: Overview
+    instruction: Provide the basic context and metadata for the bug
+    owner: bug-coordinator
+    editors: [bug-coordinator]
+    sections:
+      - id: bug-id
+        title: Bug ID
+        type: template-text
+        template: "{{bug_id}}"
+      - id: title
+        title: Title
+        type: template-text
+        template: "{{title}}"
+        elicit: true
+      - id: severity
+        title: Severity
+        type: choice
+        choices: [S0, S1, S2, S3]
+        elicit: true
+      - id: priority
+        title: Priority
+        type: choice
+        choices: [P0, P1, P2, P3]
+        elicit: true
+      - id: reported-by
+        title: Reported By
+        elicit: true
+      - id: assigned-to
+        title: Assigned To
+        elicit: true
+      - id: component
+        title: Component / Area
+        elicit: true
+      - id: created-updated
+        title: Created/Updated
+        instruction: Record ISO timestamps
+        sections:
+          - id: created-at
+            title: Created At
+            type: template-text
+            template: "{{iso_created}}"
+          - id: updated-at
+            title: Updated At
+            type: template-text
+            template: "{{iso_updated}}"
+      - id: external-id
+        title: External Tracker ID
+        instruction: e.g., JIRA, GitHub issue; optional
+
+  - id: steps-to-reproduce
+    title: Steps to Reproduce
+    type: numbered-list
+    instruction: Provide clear, minimal steps to consistently reproduce the issue
+    elicit: true
+    owner: bug-coordinator
+
+  - id: expected-actual
+    title: Expected vs Actual
+    owner: bug-coordinator
+    editors: [bug-coordinator]
+    sections:
+      - id: expected
+        title: Expected
+        elicit: true
+      - id: actual
+        title: Actual
+        elicit: true
+
+  - id: environment
+    title: Environment
+    type: table
+    columns: [OS, BrowserOrDevice, AppVersion, Build, Locale]
+    instruction: Capture relevant environment details that affect reproduction
+    owner: bug-coordinator
+
+  - id: evidence
+    title: Evidence
+    type: bullet-list
+    instruction: "Link artifacts stored under docs/bugs/assets/{{bug_id}}/ (screenshots, logs, HAR, dumps)"
+    owner: bug-coordinator
+
+  - id: triage-notes
+    title: Triage Notes
+    instruction: Dedupe links, S/P rationale, ownership, SLA, decision
+    owner: bug-coordinator
+    sections:
+      - id: dedupe-links
+        title: Dedupe Links
+        type: bullet-list
+      - id: rationale
+        title: Severity/Priority Rationale
+      - id: routing
+        title: Routing / Ownership
+      - id: sla
+        title: SLA
+      - id: decision
+        title: Decision
+        type: choice
+        choices: [Accept, Defer, Park]
+
+  - id: reproduction-notes
+    title: Reproduction Notes
+    instruction: Minimal repro, env capture, logs/traces, bisect, suspected root cause
+    owner: repro-specialist
+    editors: [repro-specialist]
+    sections:
+      - id: minimal-repro
+        title: Minimal Repro Steps
+        type: numbered-list
+      - id: logs-traces
+        title: Logs / Traces
+        type: bullet-list
+      - id: bisect
+        title: Bisect / Introducing Change
+      - id: suspected-root-cause
+        title: Suspected Root Cause
+
+  - id: fix-plan
+    title: Fix Plan
+    instruction: Hypothesis, scope, tests to write, risk areas, backport/forward‑fix
+    owner: dev-agent
+    editors: [dev-agent]
+    sections:
+      - id: hypothesis
+        title: Hypothesis
+      - id: scope-of-change
+        title: Scope of Change (files/modules/components)
+        type: bullet-list
+      - id: tests-to-write
+        title: Tests to Write
+        sections:
+          - id: unit
+            title: Unit
+            type: bullet-list
+          - id: integration
+            title: Integration
+            type: bullet-list
+          - id: e2e
+            title: E2E
+            type: bullet-list
+      - id: risk-areas
+        title: Risk Areas / Impacted Paths
+        type: bullet-list
+      - id: backport-forward
+        title: Backport / Forward‑Fix
+        type: bullet-list
+
+  - id: verification
+    title: Verification
+    instruction: Test matrix summary, targeted regression, NFR summary, result
+    owner: qa-agent
+    editors: [qa-agent]
+    sections:
+      - id: cases-run
+        title: Cases Run
+        type: bullet-list
+      - id: targeted-regression
+        title: Targeted Regression
+        type: bullet-list
+      - id: nfr-summary
+        title: NFR Summary (security/perf/reliability/maintainability)
+      - id: result
+        title: Result (Pass/Fail) + Notes
+
+  - id: links
+    title: Links
+    type: bullet-list
+    instruction: Commits, PRs, release IDs, QA gate file, external issue
+    owner: bug-coordinator
+
+  - id: change-log
+    title: Change Log
+    type: table
+    columns: [Date, Description, Author]
+    instruction: Track changes to this bug document
+    owner: bug-coordinator
+
+  - id: qa-results
+    title: QA Results
+    instruction: Summary from QA review and gate outcome (link gate file if present)
+    owner: qa-agent
+    editors: [qa-agent]
+
+  - id: closure
+    title: Closure
+    instruction: Final notes, release linkage, changelog entry, backports verified
+    owner: bug-coordinator
+    editors: [bug-coordinator]
+

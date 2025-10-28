@@ -1,0 +1,47 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: fix-plan-template-v1
+  name: Fix Plan
+  version: 1.0
+  output:
+    format: markdown
+    filename: docs/bugs/{{bug_id}}.md
+    title: "Bug {{bug_id}}: Fix Plan"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+sections:
+  - id: fix-plan
+    title: Fix Plan
+    instruction: Hypothesis, scope, tests to write, risks, backport/forward-fix
+    owner: dev-agent
+    editors: [dev-agent]
+    sections:
+      - id: hypothesis
+        title: Hypothesis
+        elicit: true
+      - id: scope-of-change
+        title: Scope of Change (files/modules/components)
+        type: bullet-list
+        elicit: true
+      - id: tests-to-write
+        title: Tests to Write (failing test first)
+        sections:
+          - id: unit
+            title: Unit
+            type: bullet-list
+          - id: integration
+            title: Integration
+            type: bullet-list
+          - id: e2e
+            title: E2E
+            type: bullet-list
+      - id: risk-areas
+        title: Risk Areas / Impacted Paths
+        type: bullet-list
+      - id: backport-forward
+        title: Backport / Forward‑Fix Plan
+        type: bullet-list
+

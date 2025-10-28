@@ -1,0 +1,35 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: bug-closure-template-v1
+  name: Bug Closure
+  version: 1.0
+  output:
+    format: markdown
+    filename: docs/bugs/{{bug_id}}.md
+    title: "Bug {{bug_id}}: Closure"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+sections:
+  - id: closure
+    title: Closure
+    instruction: Summarize verification, link gate, releases, backports, and changelog
+    owner: bug-coordinator
+    editors: [bug-coordinator]
+    sections:
+      - id: verification-summary
+        title: Verification Summary
+      - id: gate-status
+        title: Gate Status / File Link
+      - id: release-link
+        title: Release / Hotfix Link
+      - id: backports
+        title: Backports Applied
+        type: bullet-list
+      - id: changelog-entry
+        title: Changelog Entry
+      - id: closure-notes
+        title: Closure Notes
+

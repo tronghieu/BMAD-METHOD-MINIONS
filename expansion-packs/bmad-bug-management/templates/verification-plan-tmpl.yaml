@@ -1,0 +1,32 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: verification-plan-template-v1
+  name: Verification Plan
+  version: 1.0
+  output:
+    format: markdown
+    filename: docs/bugs/{{bug_id}}.md
+    title: "Bug {{bug_id}}: Verification Plan"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+sections:
+  - id: verification
+    title: Verification
+    instruction: Define targeted verification, regression, and NFR checks
+    owner: qa-agent
+    editors: [qa-agent]
+    sections:
+      - id: cases-run
+        title: Cases to Run
+        type: bullet-list
+      - id: targeted-regression
+        title: Targeted Regression
+        type: bullet-list
+      - id: nfr-summary
+        title: NFR Checks (security/perf/reliability/maintainability)
+      - id: result-criteria
+        title: Pass/Fail Criteria
+

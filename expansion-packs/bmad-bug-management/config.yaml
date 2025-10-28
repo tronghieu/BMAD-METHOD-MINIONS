@@ -1,0 +1,12 @@
+# <!-- Powered by BMAD™ Core -->
+name: bmad-bug-management
+version: 1.0.0
+short-title: Bug Management
+description: >-
+  Balanced bug reporting and resolution pack aligned with BMAD core.
+  Standardizes the bug lifecycle (New → Assigned → In Progress → Verification → Closed)
+  with a re-open loop, YAML-driven templates, and integrations to core QA gates and
+  Release Management hotfix workflows. Focuses on reproducibility, failing test first,
+  targeted regression, and lightweight RCA to drive learning and prevention.
+author: BMAD Community
+slashPrefix: bmad-bug

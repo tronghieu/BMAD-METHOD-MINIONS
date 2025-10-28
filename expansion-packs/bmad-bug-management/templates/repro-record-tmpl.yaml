@@ -1,0 +1,40 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: repro-record-template-v1
+  name: Reproduction Record
+  version: 1.0
+  output:
+    format: markdown
+    filename: docs/bugs/{{bug_id}}.md
+    title: "Bug {{bug_id}}: Reproduction Record"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+sections:
+  - id: reproduction
+    title: Reproduction Notes
+    instruction: Create a minimal, reliable repro and capture evidence
+    owner: repro-specialist
+    editors: [repro-specialist]
+    sections:
+      - id: minimal-repro
+        title: Minimal Repro Steps
+        type: numbered-list
+      - id: environment
+        title: Environment Details
+        type: table
+        columns: [OS, BrowserOrDevice, AppVersion, Build, Locale]
+      - id: evidence
+        title: Evidence
+        type: bullet-list
+        instruction: "Store files under docs/bugs/assets/{{bug_id}}/ and link here"
+      - id: logs-traces
+        title: Logs / Traces
+        type: bullet-list
+      - id: bisect
+        title: Bisect / Introducing Change
+      - id: suspected-root-cause
+        title: Suspected Root Cause
+

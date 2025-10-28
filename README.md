@@ -10,6 +10,7 @@ This repository contains custom expansion packs, or "Minions," designed to exten
   - [Release Management](#release-management)
   - [Autonomous Teams Mission Orchestra](#autonomous-teams-mission-orchestra)
   - [Design Thinking Facilitator](#design-thinking-facilitator)
+  - [Bug Management](#bug-management)
 - [Installation](#installation)
   - [Step 1: Clone BMAD-METHOD](#step-1-clone-bmad-method)
   - [Step 2: Add Custom Expansion Packs](#step-2-add-custom-expansion-packs)
@@ -25,7 +26,7 @@ Our "Minions" are custom-built expansion packs designed to tackle specific, comp
 
 ## Our Custom Expansion Packs
 
-This repository contains three primary expansion packs:
+This repository contains these primary expansion packs:
 
 -   **Autonomous Teams Mission Orchestra**
     *   **Description**: Extends BMAD Core to support cross-team coordination in federated repository architectures (e.g., microservices, monorepos). It provides specialized agents and workflows to manage "missions" that span multiple autonomous teams while maintaining their independence.
@@ -41,6 +42,11 @@ This repository contains three primary expansion packs:
     *   **Description**: A comprehensive AI-powered framework for managing software releases following Agile methodologies. Five specialized agents guide teams through release planning, quality validation, deployment strategies, monitoring, and retrospectives—transforming releases from stressful chaos to predictable excellence.
     *   **When to Use**: Use this pack for managing regular software releases (sprints, monthly, quarterly), emergency hotfixes, or major version releases with breaking changes. It's ideal for Agile/DevOps teams seeking to standardize release processes, reduce deployment risk, and improve release predictability.
     *   **[Read more about the Release Management Pack...](expansion-packs/bmad-release-management/README.md)**
+
+-   **Bug Management**
+    *   **Description**: A balanced, standards-aligned pack that streamlines the bug lifecycle end-to-end: reporting, triage, reproduction, fixing (failing-test-first), verification, and closure. Reuses core Dev and QA agents and integrates with the Release Management hotfix workflow when needed.
+    *   **When to Use**: Use this pack to standardize bug handling in your repos, ensure reproducible fixes with regression protection, and link bugs to commits, QA gates, and releases.
+    *   **[Read more about the Bug Management Pack...](expansion-packs/bmad-bug-management/README.md)**
 
 ## Real-World Use Cases
 
@@ -98,6 +104,22 @@ This pack is your AI-powered guide for human-centered problem-solving, perfect f
     *   **Scenario**: As a business owner or entrepreneur, you have a promising idea for a new product or service but need to validate its potential with real customers before committing significant time and capital.
     *   **How it helps**: The "Innovation Sprint" workflow is a 5-day process designed for this. The `DT Master` will guide you from mapping out the problem on Day 1 to testing a realistic prototype with target customers on Day 5. This allows you to get critical feedback on your core value proposition and business model in just one week, dramatically reducing the risk of building something nobody wants.
 
+### Bug Management
+
+This pack standardizes bug handling and ensures reproducible fixes with clear traceability to tests, gates, and releases.
+
+*   **Use Case: Standard Sprint Bug Fix**
+    *   **Scenario**: A non‑production bug is found during sprint testing or by users in staging.
+    *   **How it helps**: The `Bug Coordinator` (Nguyễn Thị Bình) creates a structured bug doc and triages severity/priority and ownership. The `Repro Specialist` (Triệu Thị Trinh) produces a minimal repro with evidence. The `Dev` agent writes a failing test first and implements a focused fix with targeted regression. The `QA Verifier` (Bùi Thị Xuân) validates the fix and optionally records a QA gate. Closure links commits/PRs and any planned backports.
+
+*   **Use Case: P0 Production Incident (Hotfix)**
+    *   **Scenario**: A critical defect impacts production (outage, data loss, security issue).
+    *   **How it helps**: Run `hotfix-bug` workflow for rapid triage and minimal repro. Dev executes a short fix plan with failing test first, then fix + critical‑path coverage. `QA Verifier` performs focused verification and, if required, a formal gate. The bug then hands off to the Release pack’s `hotfix-release` workflow and links back for full traceability.
+
+*   **Use Case: Intermittent/Hard‑to‑Reproduce Issue**
+    *   **Scenario**: Flaky error reports without a deterministic repro.
+    *   **How it helps**: Use the Reproduction Guide to capture environment and high‑value evidence (logs, traces, HAR). If still non‑deterministic, record a decision to Park/Defer with SLA and monitoring plan in Triage Notes. Once repro stabilizes, continue with failing‑test‑first fix and verification, keeping all evidence centralized in the bug record.
+
 ## Installation
 
 This section guides you through the installation of our custom BMAD expansion packs.
@@ -134,6 +156,7 @@ After copying, your `expansion-packs` directory should contain:
 - `bmad-autonomous-teams-mission-orchestra/`
 - `bmad-design-thinking-facilitator/`
 - `bmad-release-management/`
+ - `bmad-bug-management/`
 
 ### Step 3: Install BMAD with Expansion Packs
 
@@ -153,6 +176,7 @@ During the interactive installation process, make the following selections:
     - `[x] Autonomous Teams Mission Orchestra`
     - `[x] Design Thinking Facilitator`
     - `[x] Release Management`
+    - `[x] Bug Management`
 
 3.  Follow the remaining prompts to specify your target project directory.
 

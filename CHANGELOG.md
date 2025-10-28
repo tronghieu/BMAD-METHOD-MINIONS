@@ -7,7 +7,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.3.0] - 2025-10-28
+## [1.5.0] - 2025-10-28
+
+### Added - Bug Management Expansion Pack
+
+- New Expansion Pack: BMAD Bug Management (balanced, standards-aligned)
+  - Purpose: Standardize the bug lifecycle end-to-end — reporting, triage, reproduction, fixing (failing-test-first), verification, and closure — with clear traceability to commits, QA gates, and releases.
+  - Pack version: 1.0.0
+
+- 3 Agents (Vietnamese women historical figures):
+  - Bug Coordinator (Nguyễn Thị Bình): intake, triage, assignment, closure, RCA
+  - Repro Specialist (Triệu Thị Trinh): minimal repro, environment capture, evidence, bisect
+  - QA Verifier (Bùi Thị Xuân): verification, targeted regression, optional QA gate (pairs with core QA)
+  - Reuse core Dev and QA agents for fix and gating respectively
+
+- 2 Workflows:
+  - bug-lifecycle.yaml — New → Assigned → In Progress → Verification → Closed (Reopen → In Progress)
+  - hotfix-bug.yaml — expedited P0/P1 flow with Release pack hotfix handoff
+
+- 7 YAML Templates:
+  - bug-doc-tmpl.yaml, triage-notes-tmpl.yaml, repro-record-tmpl.yaml, fix-plan-tmpl.yaml,
+    verification-plan-tmpl.yaml, rca-tmpl.yaml, bug-closure-tmpl.yaml
+
+- 5 Checklists:
+  - triage, reproduction, fix, verification, closure
+
+- 10 Tasks:
+  - report-bug, triage-bug, reproduce-bug, fix-plan, resolve-bug, coverage-check, verify-bug,
+    gate-update, close-bug, rca-and-prevention
+
+- 4 Data/KB files:
+  - severity-priority-rubric.md, repro-guide.md, testing-levels-for-bugs.md, rca-catalog.md
+
+- Documentation & Examples:
+  - Pack README updated with comprehensive guide, installation, usage guide, commands reference
+  - Two Mermaid diagrams: Bug Lifecycle and Comprehensive Flow (with QA gate + hotfix handoff)
+  - Example walkthrough: docs/examples/bug-lifecycle-example.md
+
+### Changed
+
+- Main README.md:
+  - Added Bug Management pack to expansion packs list with description and link
+  - Added Bug Management to installation selection list and packs directory example
+  - Added Real-World Use Cases section for Bug Management (3 scenarios)
+
+
+## [1.4.0] - 2025-10-28
 
 ### Added - Release Management Expansion Pack
 

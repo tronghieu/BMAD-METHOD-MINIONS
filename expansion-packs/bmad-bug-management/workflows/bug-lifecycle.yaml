@@ -1,0 +1,89 @@
+name: Bug Lifecycle
+description: End-to-end workflow for reporting, triaging, fixing, verifying, and closing bugs
+version: 1.0.0
+author: BMAD Community
+
+metadata:
+  lifecycle: bug
+  typical_duration: varies by severity
+  when_to_use: |
+    Use for all accepted bugs that require standard intake → triage → fix → verification → closure.
+
+phases:
+  - phase: 1_report
+    name: Report
+    agent: bug-coordinator
+    tasks:
+      - name: Report Bug
+        agent: bug-coordinator
+        action: "*report-bug"
+        outputs:
+          - Bug document created (docs/bugs/bug-<id>.md)
+
+  - phase: 2_triage
+    name: Triage & Assignment
+    agent: bug-coordinator
+    tasks:
+      - name: Triage Bug
+        agent: bug-coordinator
+        action: "*triage-bug"
+        outputs:
+          - Severity/Priority set with SLA
+          - Owner assigned; Status=Assigned
+
+  - phase: 3_reproduction
+    name: Reproduction & Isolation
+    agent: repro-specialist
+    tasks:
+      - name: Reproduce Bug
+        agent: repro-specialist
+        action: "*reproduce-bug"
+        outputs:
+          - Minimal repro, environment, evidence recorded
+
+  - phase: 4_fixing
+    name: Fixing & Tests
+    agent: dev
+    tasks:
+      - name: Fix Plan
+        agent: dev
+        action: "*task fix-plan"
+      - name: Resolve Bug
+        agent: dev
+        action: "*task resolve-bug"
+      - name: Coverage Check
+        agent: dev
+        action: "*task coverage-check"
+    gates:
+      - Failing test first committed
+      - Targeted regression tests added
+
+  - phase: 5_verification
+    name: Verification
+    agent: qa-verifier
+    tasks:
+      - name: Verify Bug
+        agent: qa-verifier
+        action: "*verify-bug"
+      - name: QA Gate (optional)
+        agent: qa-verifier
+        action: "*gate-update"
+    decision_point:
+      name: Verification Result
+      options:
+        - value: PASS
+          next: phase_6_closure
+        - value: FAIL
+          next: phase_4_fixing
+
+  - phase: 6_closure
+    name: Closure
+    agent: bug-coordinator
+    tasks:
+      - name: Close Bug
+        agent: bug-coordinator
+        action: "*close-bug"
+    gates:
+      - Bug status set to Closed
+      - Links updated (commits/PRs/release/gate)
+

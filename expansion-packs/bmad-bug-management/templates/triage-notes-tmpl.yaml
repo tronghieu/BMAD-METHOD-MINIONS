@@ -1,0 +1,45 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: triage-notes-template-v1
+  name: Triage Notes
+  version: 1.0
+  output:
+    format: markdown
+    filename: docs/bugs/{{bug_id}}.md
+    title: "Bug {{bug_id}}: Triage Notes"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+sections:
+  - id: triage
+    title: Triage Notes
+    instruction: Dedupe, classify, prioritize, assign, set SLA, and record decision
+    owner: bug-coordinator
+    editors: [bug-coordinator]
+    sections:
+      - id: dedupe-links
+        title: Dedupe Links
+        type: bullet-list
+      - id: severity
+        title: Severity
+        type: choice
+        choices: [S0, S1, S2, S3]
+      - id: priority
+        title: Priority
+        type: choice
+        choices: [P0, P1, P2, P3]
+      - id: component
+        title: Component / Area
+      - id: owner
+        title: Owner / Assignee
+      - id: sla
+        title: SLA (e.g., P0 <= 24h)
+      - id: decision
+        title: Decision
+        type: choice
+        choices: [Accept, Defer, Park]
+      - id: rationale
+        title: Rationale
+

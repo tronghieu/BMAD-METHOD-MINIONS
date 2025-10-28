@@ -1,0 +1,39 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: rca-template-v1
+  name: Root Cause Analysis
+  version: 1.0
+  output:
+    format: markdown
+    filename: docs/bugs/{{bug_id}}.md
+    title: "Bug {{bug_id}}: Root Cause Analysis"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+sections:
+  - id: rca
+    title: Root Cause Analysis
+    instruction: 5 Whys, cause category, contributing factors, prevention actions
+    owner: bug-coordinator
+    editors: [bug-coordinator, qa-agent]
+    sections:
+      - id: five-whys
+        title: 5 Whys
+        type: numbered-list
+      - id: cause-category
+        title: Cause Category
+        type: choice
+        choices: [Requirements, Regression, Concurrency, DataShape, Dependency, Design, Implementation, TestCoverage]
+      - id: contributing-factors
+        title: Contributing Factors
+        type: bullet-list
+      - id: prevention-actions
+        title: Prevention Actions
+        type: bullet-list
+      - id: owners-dates
+        title: Owners & Dates
+        type: table
+        columns: [Action, Owner, Due]
+

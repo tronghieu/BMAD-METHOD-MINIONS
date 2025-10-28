@@ -1,0 +1,80 @@
+name: Hotfix Bug
+description: Expedited workflow for critical production bugs (P0/P1) with Release hotfix handoff
+version: 1.0.0
+author: BMAD Community
+
+metadata:
+  lifecycle: bug-hotfix
+  typical_duration: 2–8 hours
+  when_to_use: |
+    Use for production-impacting P0/P1 bugs requiring immediate resolution.
+
+phases:
+  - phase: 1_rapid_triage
+    name: Rapid Triage
+    agent: bug-coordinator
+    tasks:
+      - name: Report & Rapid Triage
+        agent: bug-coordinator
+        action: "*report-bug && *triage-bug"
+        outputs:
+          - Severity=P0/P1 confirmed; owner assigned
+
+  - phase: 2_repro
+    name: Reproduction (Fast)
+    agent: repro-specialist
+    tasks:
+      - name: Minimal Repro
+        agent: repro-specialist
+        action: "*reproduce-bug"
+
+  - phase: 3_fix
+    name: Fix (Failing Test First)
+    agent: dev
+    tasks:
+      - name: Fix Plan (Short)
+        agent: dev
+        action: "*task fix-plan"
+      - name: Resolve
+        agent: dev
+        action: "*task resolve-bug"
+      - name: Coverage (Critical paths)
+        agent: dev
+        action: "*task coverage-check"
+
+  - phase: 4_verify
+    name: Verify (Critical Gates)
+    agent: qa-verifier
+    tasks:
+      - name: Verify Fix
+        agent: qa-verifier
+        action: "*verify-bug"
+      - name: QA Gate (Critical Only)
+        agent: qa-verifier
+        action: "*gate-update"
+    decision_point:
+      name: Verification Result
+      options:
+        - value: PASS
+          next: phase_5_release_handoff
+        - value: FAIL
+          next: phase_3_fix
+
+  - phase: 5_release_handoff
+    name: Release Handoff (Hotfix)
+    agent: bug-coordinator
+    tasks:
+      - name: Handoff to Release Hotfix
+        agent: bug-coordinator
+        description: Link to Release Management `hotfix-release` workflow and populate closure
+        outputs:
+          - Links to release workflow and changelog entry prepared
+
+  - phase: 6_closure
+    name: Closure
+    agent: bug-coordinator
+    tasks:
+      - name: Close Bug
+        agent: bug-coordinator
+        action: "*close-bug"
+
