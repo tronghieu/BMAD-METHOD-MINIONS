@@ -7,6 +7,7 @@ This repository contains custom expansion packs, or "Minions," designed to exten
 - [About BMAD and Expansion Packs](#about-bmad-and-expansion-packs)
 - [Our Custom Expansion Packs](#our-custom-expansion-packs)
 - [Real-World Use Cases](#real-world-use-cases)
+  - [Release Management](#release-management)
   - [Autonomous Teams Mission Orchestra](#autonomous-teams-mission-orchestra)
   - [Design Thinking Facilitator](#design-thinking-facilitator)
 - [Installation](#installation)
@@ -24,7 +25,7 @@ Our "Minions" are custom-built expansion packs designed to tackle specific, comp
 
 ## Our Custom Expansion Packs
 
-This repository contains two primary expansion packs:
+This repository contains three primary expansion packs:
 
 -   **Autonomous Teams Mission Orchestra**
     *   **Description**: Extends BMAD Core to support cross-team coordination in federated repository architectures (e.g., microservices, monorepos). It provides specialized agents and workflows to manage "missions" that span multiple autonomous teams while maintaining their independence.
@@ -36,9 +37,30 @@ This repository contains two primary expansion packs:
     *   **When to Use**: Use this pack to tackle complex problems that require deep user understanding and creative solutions. It's suitable for new product development, service design, internal process improvement, or running focused innovation sprints.
     *   **[Read more about the Design Thinking Facilitator Pack...](expansion-packs/bmad-design-thinking-facilitator/README.md)**
 
+-   **Release Management**
+    *   **Description**: A comprehensive AI-powered framework for managing software releases following Agile methodologies. Five specialized agents guide teams through release planning, quality validation, deployment strategies, monitoring, and retrospectives—transforming releases from stressful chaos to predictable excellence.
+    *   **When to Use**: Use this pack for managing regular software releases (sprints, monthly, quarterly), emergency hotfixes, or major version releases with breaking changes. It's ideal for Agile/DevOps teams seeking to standardize release processes, reduce deployment risk, and improve release predictability.
+    *   **[Read more about the Release Management Pack...](expansion-packs/bmad-release-management/README.md)**
+
 ## Real-World Use Cases
 
 Here are some examples of how you can use these "Minion" packs to solve complex, real-world problems.
+
+### Release Management
+
+This pack transforms software releases from anxious events into routine, predictable processes.
+
+*   **Use Case: Standard Sprint Release**
+    *   **Scenario**: Your Agile team completes a 2-week sprint with new features and bug fixes ready for production deployment.
+    *   **How it helps**: The `Release Manager` (Trần Hưng Đạo) guides you through comprehensive release planning with versioning, changelog generation, and scope analysis. The `Quality Gatekeeper` (Lý Thường Kiệt) validates all quality gates (tests, security, performance), while the `Deployment Coordinator` (Võ Nguyên Giáp) plans deployment strategy (Blue-Green, Canary, or Rolling) with detailed rollback procedures. Post-deployment monitoring ensures issues are caught early, and retrospectives drive continuous improvement.
+
+*   **Use Case: Emergency Hotfix**
+    *   **Scenario**: A critical security vulnerability is discovered in production requiring immediate fix and deployment (2-8 hour window).
+    *   **How it helps**: The `hotfix-release` workflow streamlines the process—validating only the fix, expedited quality gates, immediate deployment with monitoring, and post-mortem analysis. The `Rollback Checklist` ensures you can revert instantly if issues arise.
+
+*   **Use Case: Major Version with Breaking Changes**
+    *   **Scenario**: Your team is releasing v2.0.0 with API breaking changes requiring customer migration over 4-8 weeks.
+    *   **How it helps**: The `major-release` workflow orchestrates the complex process—beta releases, staged deployment, comprehensive migration guides drafted by the `Communication Specialist` (Phan Bội Châu), extended monitoring periods, and phased customer communications. The `Scope Analyzer` (Nguyễn Trãi) ensures only fully-ready features are included, deferring anything incomplete.
 
 ### Autonomous Teams Mission Orchestra
 
@@ -103,11 +125,15 @@ cp -R ../BMAD-METHOD-MINIONS/expansion-packs/bmad-autonomous-teams-mission-orche
 
 # Copy the Design Thinking Facilitator pack
 cp -R ../BMAD-METHOD-MINIONS/expansion-packs/bmad-design-thinking-facilitator ./expansion-packs/
+
+# Copy the Release Management pack
+cp -R ../BMAD-METHOD-MINIONS/expansion-packs/bmad-release-management ./expansion-packs/
 ```
 
 After copying, your `expansion-packs` directory should contain:
 - `bmad-autonomous-teams-mission-orchestra/`
 - `bmad-design-thinking-facilitator/`
+- `bmad-release-management/`
 
 ### Step 3: Install BMAD with Expansion Packs
 
@@ -126,6 +152,7 @@ During the interactive installation process, make the following selections:
 2.  From the list of available expansion packs, use the spacebar to select:
     - `[x] Autonomous Teams Mission Orchestra`
     - `[x] Design Thinking Facilitator`
+    - `[x] Release Management`
 
 3.  Follow the remaining prompts to specify your target project directory.
 

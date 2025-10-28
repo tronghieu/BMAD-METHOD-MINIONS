@@ -1,0 +1,461 @@
+name: Hotfix Release
+description: Fast-track workflow for critical production fixes
+version: 1.0.0
+author: BMAD Community
+
+# Workflow metadata
+metadata:
+  release_type: hotfix
+  typical_duration: 2-8 hours (urgent)
+  when_to_use: |
+    Use this workflow for critical production issues:
+    - Critical bugs affecting production users
+    - Security vulnerabilities requiring immediate patching
+    - Data corruption issues
+    - Production completely down
+    - Severe performance degradation
+    - Critical business functionality broken
+  not_for: |
+    - Regular bug fixes (use standard-release)
+    - New features (use standard-release)
+    - Breaking changes (use major-release)
+    - Non-critical issues (wait for next standard release)
+  severity_criteria: |
+    Hotfix is warranted when:
+    - Severity: P0 (critical) or P1 (high)
+    - Impact: >10% of users OR critical functionality
+    - Business impact: Revenue loss, legal/compliance risk, security breach
+
+# Workflow phases (streamlined for speed)
+phases:
+  - phase: 1_rapid_assessment
+    name: Rapid Assessment & Planning
+    description: Quick assessment and minimal planning
+    duration: 30-60 minutes
+    agent: release-manager
+    tasks:
+      - name: Assess Urgency
+        agent: release-manager
+        description: Determine if hotfix is truly needed
+        steps:
+          - Verify severity and impact
+          - Assess business risk of NOT fixing immediately
+          - Confirm hotfix warranted vs deferring to next release
+          - Determine version number (patch bump)
+        decision_point:
+          name: Hotfix Required?
+          options:
+            - value: YES_HOTFIX
+              description: Critical issue, proceed with hotfix
+              next: rapid_planning
+            - value: NO_CAN_WAIT
+              description: Can wait for standard release
+              next: add_to_next_release_scope
+
+      - name: Rapid Planning
+        agent: release-manager
+        description: Minimal planning focused on the fix
+        steps:
+          - Identify specific fix needed
+          - Create minimal release plan (streamlined)
+          - Define success criteria
+          - Estimate timeline
+          - Assemble on-call team
+        outputs:
+          - Hotfix release plan (minimal, focused)
+          - Version number (e.g., v2.1.1)
+          - Fix scope defined
+          - Team assembled
+
+      - name: Immediate Communication
+        agent: communication-specialist
+        description: Alert stakeholders
+        steps:
+          - Create incident channel
+          - Notify leadership of critical issue
+          - Brief support team on issue and workarounds
+          - Prepare status page update (if needed)
+        outputs:
+          - Stakeholders alerted
+          - Incident channel active
+          - Support team briefed
+
+    gates:
+      - Hotfix justified and approved
+      - Fix identified
+      - Team assembled
+      - Stakeholders informed
+
+  - phase: 2_focused_development
+    name: Focused Development & Testing
+    description: Develop and test the fix
+    duration: 1-3 hours
+    tasks:
+      - name: Develop Fix
+        description: Create minimal fix for critical issue
+        steps:
+          - Create hotfix branch from production tag
+          - Implement minimal fix (no scope creep!)
+          - Write/update tests for the fix
+          - Code review (expedited but thorough)
+        outputs:
+          - Fix implemented
+          - Tests passing
+          - Code reviewed
+
+      - name: Targeted Testing
+        description: Test the fix thoroughly
+        steps:
+          - Unit tests for fix
+          - Integration tests for affected area
+          - Manual testing of critical path
+          - Regression testing (ensure no new issues)
+          - Test in staging/pre-production
+        outputs:
+          - All tests passing
+          - Fix validated in staging
+          - No regressions identified
+
+    gates:
+      - Fix implemented and tested
+      - Code reviewed
+      - Staging validation successful
+
+  - phase: 3_expedited_quality_check
+    name: Expedited Quality Check
+    description: Focused quality validation for the fix
+    duration: 30-60 minutes
+    agent: quality-gatekeeper
+    tasks:
+      - name: Validate Critical Gates
+        agent: quality-gatekeeper
+        action: "*validate"
+        description: Focus on critical quality gates only
+        expedited_gates:
+          critical_only:
+            - Fix testing: Verified working
+            - Regression testing: No new issues
+            - Security: No new vulnerabilities introduced
+            - Code review: Completed
+            - Staging validation: Successful
+
+          skip_for_speed:
+            - Full test coverage analysis (check only fix coverage)
+            - Complete security scan (check only changed code)
+            - Performance benchmarking (unless performance fix)
+            - Documentation review (update post-deployment)
+
+        steps:
+          - Verify fix tested and working
+          - Confirm no regressions
+          - Quick security check of changes
+          - Review code quality of fix
+          - Make go/no-go recommendation
+        outputs:
+          - Expedited quality assessment
+          - Go/no-go decision
+
+    gates:
+      - Critical quality gates passed
+      - Go decision made
+
+  - phase: 4_rapid_deployment
+    name: Rapid Deployment
+    description: Deploy hotfix to production
+    duration: 30-90 minutes
+    agent: deployment-coordinator
+    tasks:
+      - name: Streamlined Deployment Planning
+        agent: deployment-coordinator
+        description: Quick deployment plan
+        steps:
+          - Select fastest safe deployment strategy
+          - Usually: Blue-Green for instant rollback
+          - Create minimal deployment runbook
+          - Verify rollback plan ready
+        outputs:
+          - Deployment strategy selected
+          - Runbook (minimal)
+          - Rollback plan ready
+
+      - name: Execute Hotfix Deployment
+        agent: deployment-coordinator
+        action: "*execute"
+        description: Deploy fix to production
+        steps:
+          - Pre-deployment check (backup, health)
+          - Deploy hotfix (using selected strategy)
+          - Smoke test critical functionality
+          - Verify fix working in production
+          - Monitor metrics closely
+        outputs:
+          - Hotfix deployed
+          - Fix verified working
+          - Metrics stable
+
+      - name: Status Updates
+        agent: communication-specialist
+        description: Keep stakeholders informed
+        frequency: Every 30 minutes or at each milestone
+        outputs:
+          - Regular status updates
+
+    gates:
+      - Hotfix deployed successfully
+      - Fix verified working in production
+      - No new issues introduced
+
+  - phase: 5_intensive_monitoring
+    name: Intensive Monitoring
+    description: Close monitoring of hotfix
+    duration: 4-8 hours intensive, then 24 hours extended
+    agent: release-manager
+    tasks:
+      - name: Monitor Hotfix
+        agent: release-manager
+        action: "*monitor"
+        description: Monitor hotfix closely
+        monitoring_schedule:
+          first_hour:
+            frequency: Every 10 minutes
+            focus:
+              - Issue fixed (verify)
+              - No new errors introduced
+              - System stability
+              - User impact resolved
+
+          hours_2_to_4:
+            frequency: Every 30 minutes
+            focus:
+              - Sustained stability
+              - No delayed issues
+              - Business metrics recovering
+
+          hours_4_to_24:
+            frequency: Every 2-4 hours
+            focus:
+              - Long-term stability
+              - Complete issue resolution
+              - User satisfaction
+
+        outputs:
+          - Monitoring reports
+          - Issue resolution confirmed
+          - Stability verified
+
+      - name: Incident Resolution Communication
+        agent: communication-specialist
+        when: After 2-4 hours of stability
+        description: Communicate resolution
+        steps:
+          - Update status page (resolved)
+          - Send resolution email to affected users
+          - Notify internal stakeholders
+          - Post incident summary
+        outputs:
+          - Resolution communicated
+          - Incident closed
+
+    gates:
+      - Issue confirmed fixed
+      - 4+ hours of stable operation
+      - No new issues introduced
+      - Users/stakeholders informed
+
+  - phase: 6_post_hotfix_activities
+    name: Post-Hotfix Activities
+    description: Follow-up and learning
+    duration: 1-2 hours + retrospective
+    timing: Within 24-48 hours of hotfix
+    tasks:
+      - name: Complete Documentation
+        description: Update documentation missed during hotfix
+        steps:
+          - Update changelog
+          - Write user-facing release notes
+          - Document the fix in knowledge base
+          - Update deployment runbook if needed
+        outputs:
+          - Documentation complete
+          - Changelog updated
+
+      - name: Backport Fix
+        description: Merge fix to development branch
+        steps:
+          - Merge hotfix to main/development branch
+          - Update version numbers
+          - Ensure fix included in next standard release
+        outputs:
+          - Fix backported
+          - Branches synchronized
+
+      - name: Incident Post-Mortem
+        agent: release-manager
+        action: "*retrospective"
+        timing: Within 48 hours
+        description: Learn from the incident
+        steps:
+          - Review incident timeline
+          - Identify root cause
+          - Discuss what went well
+          - Identify improvements
+          - Create prevention measures
+          - Document learnings
+        outputs:
+          - Post-mortem document
+          - Prevention action items
+          - Process improvements
+
+    gates:
+      - Documentation complete
+      - Fix backported to development
+      - Post-mortem conducted
+      - Learnings captured
+
+# Rollback procedure (for hotfix)
+rollback:
+  name: Hotfix Rollback
+  agent: deployment-coordinator
+  action: "*rollback"
+  when: |
+    If hotfix introduces new issues:
+    - New errors introduced
+    - Fix doesn't work
+    - Worse than original issue
+  steps:
+    - Rollback to previous version immediately
+    - Verify original service restored
+    - Communicate rollback
+    - Reassess hotfix approach
+    - Develop improved fix
+  next_steps:
+    - Return to phase 2 (development)
+    - Improve fix
+    - Re-test thoroughly
+    - Deploy again
+
+# Success criteria
+success_criteria:
+  - Critical issue fixed in production
+  - No new issues introduced
+  - Minimal downtime/impact
+  - Fast resolution (2-8 hours)
+  - Stakeholders informed throughout
+  - Learnings captured to prevent recurrence
+
+# Typical timeline (fast track)
+typical_timeline:
+  hour_0: Incident identified
+  hour_0_to_1: Rapid assessment and planning
+  hour_1_to_4: Development and testing
+  hour_4_to_5: Quality check and deployment
+  hour_5_to_9: Intensive monitoring
+  hour_9_to_24: Extended monitoring
+  day_2: Post-mortem and documentation
+
+# Key differences from standard release
+differences_from_standard:
+  scope:
+    standard: Multiple features/fixes
+    hotfix: Single critical fix only
+  planning:
+    standard: Comprehensive (1-2 days)
+    hotfix: Minimal (30-60 minutes)
+  quality_gates:
+    standard: All gates validated
+    hotfix: Critical gates only
+  testing:
+    standard: Full test suite
+    hotfix: Targeted testing of fix
+  deployment:
+    standard: Scheduled window
+    hotfix: As soon as ready
+  monitoring:
+    standard: 24-48 hours
+    hotfix: Intensive first hours, then 24 hours
+  documentation:
+    standard: Complete before deployment
+    hotfix: Complete after deployment
+
+# Hotfix decision tree
+decision_tree:
+  question: Is this issue critical enough for hotfix?
+  criteria:
+    severity:
+      - P0 (Critical): Production down, data loss, security breach → HOTFIX
+      - P1 (High): Major functionality broken, >10% users affected → HOTFIX
+      - P2 (Medium): Moderate impact, workarounds exist → STANDARD RELEASE
+      - P3 (Low): Minor issue, cosmetic → STANDARD RELEASE
+
+    business_impact:
+      - Revenue loss >$X/hour → HOTFIX
+      - Legal/compliance risk → HOTFIX
+      - Security vulnerability (CVSS >7.0) → HOTFIX
+      - User experience degraded but functional → STANDARD RELEASE
+      - Internal tools only → STANDARD RELEASE
+
+    user_impact:
+      - >50% users affected → HOTFIX
+      - 10-50% users affected → Consider hotfix
+      - <10% users affected → STANDARD RELEASE (unless critical feature)
+
+# Hotfix versioning
+versioning:
+  pattern: Patch version bump
+  examples:
+    - Current: v2.1.0 → Hotfix: v2.1.1
+    - Current: v3.0.2 → Hotfix: v3.0.3
+  note: |
+    Hotfixes increment the PATCH version only.
+    If multiple hotfixes needed, increment sequentially: v2.1.1, v2.1.2, etc.
+
+# Communication templates
+communication_templates:
+  incident_notification:
+    subject: "Critical Issue Detected - Hotfix in Progress"
+    content: |
+      We've identified a critical issue affecting [functionality].
+      Our team is working on a hotfix with expected resolution in [timeframe].
+      We'll provide updates every [frequency].
+
+  resolution_notification:
+    subject: "Issue Resolved - Hotfix Deployed Successfully"
+    content: |
+      The issue affecting [functionality] has been resolved.
+      Fix deployed: [timestamp]
+      All systems operating normally.
+      We apologize for any inconvenience.
+
+# Related workflows
+related_workflows:
+  - standard-release: For regular planned releases
+  - major-release: For breaking changes
+
+# Notes
+notes: |
+  Hotfix workflow prioritizes SPEED and SAFETY:
+
+  Speed:
+  - Streamlined planning (minimal but sufficient)
+  - Expedited quality gates (critical only)
+  - Fast deployment (usually Blue-Green for instant rollback)
+  - Focused scope (single fix, no scope creep)
+
+  Safety:
+  - Thorough testing of the fix
+  - Code review (expedited but not skipped)
+  - Staged deployment with rollback ready
+  - Intensive monitoring
+
+  Remember:
+  - Only fix the critical issue (resist scope creep!)
+  - Test thoroughly despite time pressure
+  - Document decisions and shortcuts taken
+  - Complete missed documentation after deployment
+  - Conduct post-mortem to prevent recurrence
+
+  A good hotfix is:
+  - Fast but not reckless
+  - Minimal but complete
+  - Urgent but not panicked
+  - Focused but not careless

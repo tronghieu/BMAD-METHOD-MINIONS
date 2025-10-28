@@ -1,0 +1,720 @@
+name: Major Release
+description: Comprehensive workflow for major version releases with breaking changes
+version: 1.0.0
+author: BMAD Community
+
+# Workflow metadata
+metadata:
+  release_type: major
+  typical_duration: 4-12 weeks
+  when_to_use: |
+    Use this workflow for major version releases:
+    - Breaking API changes
+    - Removed or significantly changed features
+    - Major architectural changes
+    - Database schema breaking changes
+    - Dependency major version upgrades
+    - Significant behavioral changes requiring user adaptation
+  not_for: |
+    - Backwards-compatible features (use standard-release)
+    - Bug fixes (use standard-release or hotfix-release)
+    - Non-breaking enhancements (use standard-release)
+  versioning: |
+    Major releases increment the MAJOR version number:
+    - v1.9.3 → v2.0.0
+    - v2.5.1 → v3.0.0
+
+# Workflow phases (comprehensive for breaking changes)
+phases:
+  - phase: 1_strategic_planning
+    name: Strategic Planning & Preparation
+    description: Long-term planning for major release
+    duration: 1-4 weeks (before development)
+    agent: release-manager
+    tasks:
+      - name: Define Major Release Vision
+        agent: release-manager
+        description: Establish goals and scope for major release
+        steps:
+          - Define strategic goals (why major release?)
+          - Identify breaking changes planned
+          - Assess user impact and migration complexity
+          - Set timeline and milestones
+          - Plan deprecation strategy
+          - Determine version number
+        outputs:
+          - Major release vision document
+          - High-level scope and goals
+          - Timeline with milestones
+          - Version number (e.g., v3.0.0)
+
+      - name: Deprecation Planning
+        description: Plan deprecation notices for features to be removed
+        timing: 1-2 versions before major release
+        steps:
+          - Identify features/APIs to deprecate
+          - Add deprecation warnings in current version
+          - Document migration paths
+          - Set deprecation timeline
+          - Communicate to users early
+        outputs:
+          - Deprecation notices added
+          - Migration guides published
+          - Users warned in advance
+
+      - name: Breaking Changes Assessment
+        agent: scope-analyzer
+        description: Catalog all breaking changes
+        steps:
+          - List all breaking API changes
+          - Identify removed features
+          - Document behavioral changes
+          - Assess user migration effort
+          - Categorize by impact (high/medium/low)
+        outputs:
+          - Breaking changes catalog
+          - User impact assessment
+          - Migration complexity estimate
+
+    gates:
+      - Strategic vision defined
+      - Breaking changes cataloged
+      - Deprecation notices communicated
+      - Timeline established
+
+  - phase: 2_migration_preparation
+    name: Migration Path Development
+    description: Create comprehensive migration resources
+    duration: 2-4 weeks
+    agent: communication-specialist
+    tasks:
+      - name: Create Migration Guides
+        agent: communication-specialist
+        description: Write detailed migration documentation
+        steps:
+          - Document each breaking change
+          - Provide before/after code examples
+          - Write step-by-step migration instructions
+          - Create automated migration tools (if feasible)
+          - Prepare FAQ for common issues
+          - Create video tutorials (if needed)
+        outputs:
+          - Comprehensive migration guide
+          - Code examples for each breaking change
+          - Migration tools/scripts
+          - FAQ document
+          - Video tutorials
+
+      - name: Beta/RC Program Planning
+        description: Plan early access program
+        steps:
+          - Define beta testing timeline
+          - Recruit beta testers (key users, partners)
+          - Prepare beta documentation
+          - Set up feedback channels
+          - Plan RC (release candidate) releases
+        outputs:
+          - Beta program plan
+          - Beta testers recruited
+          - Feedback mechanisms ready
+
+      - name: Support Team Training
+        description: Prepare support for user questions
+        steps:
+          - Brief support team on all changes
+          - Provide migration guide training
+          - Create support scripts for common issues
+          - Set up escalation paths
+          - Plan extended support hours for launch
+        outputs:
+          - Support team trained
+          - Support materials prepared
+          - Extended support scheduled
+
+    gates:
+      - Migration guides complete
+      - Beta program ready
+      - Support team trained
+
+  - phase: 3_beta_releases
+    name: Beta & Release Candidate Releases
+    description: Iterative testing with real users
+    duration: 4-8 weeks
+    tasks:
+      - name: Beta 1 Release
+        description: First beta release to testers
+        version: v3.0.0-beta.1
+        steps:
+          - Deploy beta version to beta environment
+          - Invite beta testers
+          - Collect feedback
+          - Monitor usage and issues
+          - Iterate on feedback
+        outputs:
+          - Beta 1 released
+          - Feedback collected
+          - Issues logged
+
+      - name: Beta 2-N Releases
+        description: Iterative beta releases
+        versions: v3.0.0-beta.2, beta.3, etc.
+        steps:
+          - Fix issues from previous beta
+          - Deploy new beta version
+          - Collect more feedback
+          - Refine migration guides
+          - Repeat until stable
+        outputs:
+          - Multiple beta versions
+          - Issues addressed
+          - Migration guides refined
+
+      - name: Release Candidate
+        description: Final pre-release testing
+        version: v3.0.0-rc.1
+        steps:
+          - Feature complete, bug fixing only
+          - Broader testing (all beta users + more)
+          - Final migration guide review
+          - Intensive testing and validation
+          - Prepare for final release
+        outputs:
+          - RC version stable
+          - Migration validated by users
+          - Ready for final release
+
+    gates:
+      - Beta feedback incorporated
+      - RC stable and tested
+      - Migration guides validated
+      - Major issues resolved
+
+  - phase: 4_comprehensive_planning
+    name: Final Release Planning
+    description: Detailed planning for major release launch
+    duration: 1-2 weeks
+    agent: release-manager
+    tasks:
+      - name: Create Release Plan
+        agent: release-manager
+        action: "*plan"
+        description: Comprehensive release plan
+        steps:
+          - Finalize scope (all breaking changes)
+          - Generate complete changelog
+          - Write compelling release notes
+          - Create release announcement
+          - Plan deployment timeline
+          - Coordinate cross-functional teams
+        outputs:
+          - Complete release plan
+          - Changelog (technical)
+          - Release notes (user-facing)
+          - Deployment timeline
+          - Team coordination plan
+
+      - name: Analyze Final Scope
+        agent: scope-analyzer
+        action: "*analyze"
+        description: Final scope validation
+        steps:
+          - Review all changes since last major version
+          - Verify all breaking changes documented
+          - Confirm migration guides complete
+          - Make final inclusion recommendations
+          - Defer any risky last-minute changes
+        outputs:
+          - Final scope confirmed
+          - All breaking changes documented
+          - Deferred items for v3.1.0
+
+      - name: Communication Strategy
+        agent: communication-specialist
+        description: Major release communications plan
+        steps:
+          - Draft release announcement (blog post)
+          - Prepare email campaign
+          - Create social media content
+          - Plan webinar/demo (if applicable)
+          - Coordinate with marketing/sales
+          - Schedule press release (if major enough)
+        outputs:
+          - Communication plan
+          - All materials drafted
+          - Campaign scheduled
+
+    gates:
+      - Release plan complete
+      - All breaking changes documented
+      - Migration guides finalized
+      - Communications ready
+
+  - phase: 5_intensive_quality_validation
+    name: Intensive Quality Validation
+    description: Extra thorough quality checks for major release
+    duration: 1-2 weeks
+    agent: quality-gatekeeper
+    tasks:
+      - name: Comprehensive Quality Gates
+        agent: quality-gatekeeper
+        action: "*validate"
+        description: Exhaustive quality validation
+        quality_gates:
+          testing:
+            - Unit test coverage >80%
+            - Integration tests (all critical paths)
+            - E2E tests (full user journeys)
+            - Regression tests (no old functionality broken)
+            - Migration tests (upgrade path tested)
+            - Performance tests (no regressions)
+            - Load tests (production scale)
+
+          security:
+            - SAST scans clean
+            - DAST scans clean
+            - Dependency audits clean
+            - Penetration testing (if high stakes)
+            - Security review of breaking changes
+
+          compatibility:
+            - Browser compatibility tested
+            - Mobile compatibility tested
+            - API compatibility (backward compatibility where claimed)
+            - Database migration tested (both upgrade and rollback)
+
+          documentation:
+            - All breaking changes documented
+            - Migration guides complete and tested
+            - API documentation updated
+            - User guides updated
+            - Video tutorials created (if needed)
+
+          user_acceptance:
+            - Beta user feedback positive
+            - Key customers validated migration
+            - Support team confident
+            - Sales/marketing briefed
+
+        outputs:
+          - Comprehensive quality report
+          - Go/no-go recommendation
+          - Risk assessment
+
+    gates:
+      - All critical quality gates passed
+      - Migration path thoroughly tested
+      - Documentation complete
+      - Go decision made
+
+  - phase: 6_staged_deployment
+    name: Staged Deployment Strategy
+    description: Careful, staged rollout of major release
+    duration: 1-2 weeks
+    agent: deployment-coordinator
+    tasks:
+      - name: Plan Phased Rollout
+        agent: deployment-coordinator
+        action: "*plan"
+        description: Create staged deployment plan
+        deployment_strategy: Canary or Feature Flag recommended
+        stages:
+          stage_1_internal:
+            percentage: Internal teams only
+            duration: 24-48 hours
+            purpose: Internal validation
+
+          stage_2_beta:
+            percentage: 1-5% (beta users)
+            duration: 2-3 days
+            purpose: Early adopters, willing to migrate
+
+          stage_3_gradual:
+            percentage: 10% → 25% → 50%
+            duration: 3-5 days
+            purpose: Gradual expansion, monitor impact
+
+          stage_4_full:
+            percentage: 100%
+            duration: After confirming stability
+            purpose: Full rollout
+
+        steps:
+          - Select Canary deployment strategy
+          - Plan percentage rollout schedule
+          - Define success criteria for each stage
+          - Create rollback plan for each stage
+          - Assign monitoring responsibilities
+        outputs:
+          - Phased rollout plan
+          - Stage success criteria
+          - Rollback plan for each stage
+
+      - name: Execute Stage 1 (Internal)
+        agent: deployment-coordinator
+        action: "*execute"
+        description: Deploy to internal teams first
+        steps:
+          - Deploy v3.0.0 to internal environment
+          - Internal team validates
+          - Collect internal feedback
+          - Fix any critical issues
+        gates:
+          - Internal teams successfully migrated
+          - No critical issues
+
+      - name: Execute Stage 2 (Beta)
+        description: Deploy to beta users
+        steps:
+          - Enable v3.0.0 for beta user segment
+          - Monitor closely (hourly)
+          - Collect migration feedback
+          - Address issues quickly
+        gates:
+          - Beta users successfully migrated
+          - No major migration issues
+
+      - name: Execute Stage 3 (Gradual)
+        description: Gradual rollout to all users
+        steps:
+          - Increase to 10% of users
+          - Monitor for 1-2 days
+          - Increase to 25%
+          - Monitor for 1-2 days
+          - Increase to 50%
+          - Monitor for 1-2 days
+        gates:
+          - Each stage stable
+          - No significant issues
+
+      - name: Execute Stage 4 (Full Rollout)
+        description: Complete rollout
+        steps:
+          - Enable for 100% of users
+          - Announce general availability
+          - Monitor intensively
+        outputs:
+          - Major release fully deployed
+
+      - name: Deployment Communications
+        agent: communication-specialist
+        description: Update users at each stage
+        steps:
+          - Stage 1: Internal announcement
+          - Stage 2: Beta users notified
+          - Stage 3: Gradual rollout updates
+          - Stage 4: Public announcement
+        outputs:
+          - Users informed at each stage
+
+    gates:
+      - All stages completed successfully
+      - No rollbacks needed
+      - Users migrating successfully
+
+  - phase: 7_extended_monitoring
+    name: Extended Monitoring & Support
+    description: Long-term monitoring and migration support
+    duration: 2-4 weeks
+    agent: release-manager
+    tasks:
+      - name: Intensive Monitoring
+        agent: release-manager
+        action: "*monitor"
+        description: Extended monitoring period
+        monitoring_schedule:
+          first_week:
+            frequency: Every 4 hours
+            focus:
+              - Migration success rate
+              - Error rates (especially migration errors)
+              - Support ticket volume
+              - User sentiment
+              - Business metrics
+
+          second_week:
+            frequency: Daily
+            focus:
+              - Adoption rate
+              - Remaining users on v2.x
+              - Support issues declining
+              - Performance stability
+
+          weeks_3_4:
+            frequency: Every 2-3 days
+            focus:
+              - Long-term stability
+              - Feature adoption
+              - Business impact
+              - User satisfaction
+
+        outputs:
+          - Daily monitoring reports
+          - Issue tracking
+          - Migration progress reports
+
+      - name: Migration Support
+        description: Active support for user migration
+        duration: 2-4 weeks
+        steps:
+          - Monitor support tickets closely
+          - Identify common migration issues
+          - Update migration guide FAQ
+          - Provide direct support to key customers
+          - Create additional examples/tutorials as needed
+        outputs:
+          - Updated migration resources
+          - Common issues resolved
+          - User success stories
+
+      - name: Legacy Version Support
+        description: Support users still on v2.x
+        timeline: |
+          - First 30 days: Full support for v2.x
+          - 30-90 days: Critical bug fixes only for v2.x
+          - 90+ days: v2.x deprecated, security fixes only
+        steps:
+          - Communicate deprecation timeline
+          - Encourage migration
+          - Provide migration assistance
+          - Plan final sunset date for v2.x
+        outputs:
+          - Clear deprecation timeline
+          - Migration assistance available
+
+    gates:
+      - >90% users migrated successfully
+      - Support ticket volume normal
+      - No major migration blockers
+      - Stable operation for 2+ weeks
+
+  - phase: 8_retrospective_and_celebration
+    name: Retrospective & Celebration
+    description: Learn from major release and celebrate success
+    duration: 1 week
+    timing: 2-4 weeks after full rollout
+    agent: release-manager
+    tasks:
+      - name: Major Release Retrospective
+        agent: release-manager
+        action: "*retrospective"
+        description: Comprehensive learning session
+        steps:
+          - Review entire major release process (planning to deployment)
+          - Gather feedback from all teams
+          - Identify what worked well
+          - Identify improvements for next major release
+          - Document lessons learned
+          - Create action items
+        outputs:
+          - Major release retrospective document
+          - Lessons learned
+          - Process improvements for next major release
+
+      - name: Success Metrics Analysis
+        description: Analyze major release success
+        metrics:
+          technical:
+            - Deployment success rate
+            - Rollback count
+            - Bug count (compared to previous major release)
+            - Performance vs baseline
+
+          user_adoption:
+            - Migration rate (% users on v3.0)
+            - Time to 90% adoption
+            - Support ticket volume
+            - User satisfaction scores
+
+          business:
+            - Feature adoption rates
+            - Business metric impact
+            - Customer retention
+            - Revenue impact
+
+        outputs:
+          - Success metrics report
+          - Comparison to previous major releases
+
+      - name: Celebrate Success
+        description: Recognize team effort
+        steps:
+          - Team celebration event
+          - Recognize individual contributions
+          - Share success story internally
+          - Blog post about major release journey
+          - Thank beta testers publicly
+        outputs:
+          - Team morale boosted
+          - Success celebrated
+
+    gates:
+      - Retrospective conducted
+      - Metrics analyzed
+      - Team recognized
+
+# Rollback considerations for major releases
+rollback:
+  name: Major Release Rollback Strategy
+  complexity: HIGH
+  notes: |
+    Rollback is complex for major releases due to:
+    - Database schema changes (may not be reversible)
+    - Deprecated features removed (can't bring back easily)
+    - User data created in new format
+    - Breaking API changes
+
+  strategies:
+    - Use Canary deployment for gradual rollout
+    - Keep v2.x infrastructure running during migration
+    - Database migrations use Expand-Contract pattern (reversible)
+    - Feature flags to disable v3.0 features if needed
+    - Plan for dual-version support during transition
+
+  if_rollback_needed:
+    - Stop further rollout (reduce canary percentage to 0)
+    - Keep affected users on v3.0, new users on v2.x
+    - Fix critical issue
+    - Resume gradual rollout when fixed
+
+# Success criteria
+success_criteria:
+  - Major release deployed successfully
+  - >90% users migrated
+  - Breaking changes well-communicated
+  - Migration path clear and working
+  - Support ticket volume manageable
+  - Business metrics positive or neutral
+  - User satisfaction maintained or improved
+  - Learnings captured for next major release
+
+# Typical timeline (comprehensive)
+typical_timeline:
+  week_minus_8_to_minus_4: Strategic planning, deprecation notices
+  week_minus_4_to_minus_2: Migration guide creation, beta planning
+  week_minus_2_to_plus_6: Beta and RC releases (iterative)
+  week_0: Final planning and quality validation
+  week_1: Staged deployment (internal → beta → gradual → full)
+  week_2_to_4: Extended monitoring and migration support
+  week_4_to_6: Retrospective and celebration
+
+# Key differences from standard release
+differences_from_standard:
+  planning:
+    standard: 1-2 days
+    major: 1-4 weeks (strategic planning)
+
+  scope:
+    standard: Backwards-compatible changes
+    major: Breaking changes allowed
+
+  testing:
+    standard: Standard quality gates
+    major: Intensive testing + beta program
+
+  deployment:
+    standard: Blue-Green or Rolling
+    major: Canary (staged rollout)
+
+  monitoring:
+    standard: 24-48 hours
+    major: 2-4 weeks extended
+
+  migration:
+    standard: None needed
+    major: Comprehensive migration guides and support
+
+  version_bump:
+    standard: Minor or patch (v2.1.0, v2.0.1)
+    major: Major version (v3.0.0)
+
+# Communication emphasis for major releases
+communication_priorities:
+  before_release:
+    - Deprecation warnings (1-2 versions early)
+    - Migration guides (detailed and tested)
+    - Beta program announcements
+    - Timeline communication
+
+  during_release:
+    - Phased rollout status
+    - Migration support available
+    - Success stories from early adopters
+
+  after_release:
+    - Migration assistance
+    - FAQ updates
+    - User success stories
+    - Feature highlights
+
+# Risk management for major releases
+risk_management:
+  breaking_changes:
+    risk: Users struggle to migrate
+    mitigation:
+      - Comprehensive migration guides
+      - Automated migration tools
+      - Beta testing with real users
+      - Direct migration support
+
+  database_migrations:
+    risk: Irreversible schema changes
+    mitigation:
+      - Expand-Contract pattern (reversible)
+      - Thorough testing
+      - Backup before migration
+      - Staged rollout
+
+  user_adoption:
+    risk: Users refuse to upgrade
+    mitigation:
+      - Clear value proposition
+      - Migration support
+      - Gradual deprecation timeline
+      - Compelling new features
+
+  support_overload:
+    risk: Too many migration questions
+    mitigation:
+      - Excellent documentation
+      - FAQ for common issues
+      - Extended support hours
+      - Self-service resources
+
+# Related workflows
+related_workflows:
+  - standard-release: For regular releases after major version
+  - hotfix-release: For critical fixes on major version
+
+# Notes
+notes: |
+  Major releases are significant undertakings requiring:
+
+  Planning:
+  - Start planning months in advance
+  - Communicate early and often
+  - Provide clear migration paths
+  - Test thoroughly with real users
+
+  Execution:
+  - Use staged rollout (Canary)
+  - Support users through migration
+  - Monitor extensively
+  - Be patient with adoption
+
+  Communication:
+  - Honest about breaking changes
+  - Clear about migration effort
+  - Supportive during transition
+  - Celebrate successes
+
+  Remember:
+  - Breaking changes are a chance to improve, not just to break things
+  - User trust is earned through excellent migration support
+  - Beta testing is essential for major releases
+  - Plan for 2-3x longer timeline than standard release
+
+  A successful major release:
+  - Delivers significant value that justifies breaking changes
+  - Provides excellent migration experience
+  - Maintains user trust through transparency
+  - Leaves the product in a better state for future evolution

@@ -1,0 +1,12 @@
+# <!-- Powered by BMAD™ Core -->
+name: bmad-release-management
+version: 1.0.0
+short-title: Release Management Studio
+description: >-
+  Comprehensive AI-powered release management framework for Agile software teams.
+  Provides specialized agents, workflows, and tools to plan, execute, and learn from
+  software releases. Includes 5 specialized agents, 3 release workflows (standard,
+  hotfix, major), 8 core tasks, and 4 quality checklists for repeatable, high-quality
+  releases following Agile methodologies.
+author: BMAD Community
+slashPrefix: bmad-rm

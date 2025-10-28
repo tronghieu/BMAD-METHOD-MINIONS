@@ -1,0 +1,384 @@
+name: Standard Release
+description: End-to-end workflow for regular planned releases (minor/patch versions)
+version: 1.0.0
+author: BMAD Community
+
+# Workflow metadata
+metadata:
+  release_type: standard
+  typical_duration: 3-5 days
+  when_to_use: |
+    Use this workflow for regular planned releases:
+    - Minor version releases (new features, backwards-compatible)
+    - Patch version releases (bug fixes, small improvements)
+    - Scheduled quarterly/monthly releases
+    - Non-breaking changes
+  not_for: |
+    - Hotfix releases (use hotfix-release workflow)
+    - Major version releases with breaking changes (use major-release workflow)
+
+# Workflow phases
+phases:
+  - phase: 1_planning
+    name: Release Planning
+    description: Create comprehensive release plan with scope and timelines
+    duration: 1-2 days
+    agent: release-manager
+    tasks:
+      - name: Initiate Release Planning
+        agent: release-manager
+        action: "*plan"
+        description: Release Manager guides through comprehensive planning
+        steps:
+          - Determine release version number (SemVer or CalVer)
+          - Analyze scope with Scope Analyzer
+          - Generate technical changelog from git history
+          - Write user-friendly release notes
+          - Set deployment timeline
+          - Create release plan document
+        outputs:
+          - Release plan document (docs/release/v{{version}}-release-plan.md)
+          - Version number decided
+          - Scope finalized
+          - Changelog generated
+          - Release notes drafted
+          - Timeline established
+
+      - name: Analyze Release Scope
+        agent: scope-analyzer
+        action: "*analyze"
+        description: Scope Analyzer reviews completed work and recommends inclusion/deferral
+        steps:
+          - Review git commits since last release
+          - Check closed issues and PRs
+          - Categorize changes (features, fixes, enhancements)
+          - Assess readiness of each item
+          - Identify dependencies
+          - Make inclusion/deferral recommendations
+        outputs:
+          - Scope analysis with recommendations
+          - Dependency map
+          - Items to include vs defer
+
+      - name: Draft Communications Plan
+        agent: communication-specialist
+        action: "*draft"
+        description: Communication Specialist prepares stakeholder communications
+        steps:
+          - Draft release announcement
+          - Prepare internal team briefing
+          - Create deployment status update template
+          - Plan stakeholder notification schedule
+        outputs:
+          - Release announcement draft
+          - Communication schedule
+
+    gates:
+      - Release scope approved
+      - Release plan documented
+      - Communications drafted
+      - Team aligned on timeline
+
+  - phase: 2_quality_validation
+    name: Quality Gate Validation
+    description: Comprehensive quality assessment before deployment
+    duration: 2-4 hours
+    agent: quality-gatekeeper
+    tasks:
+      - name: Run Quality Gates
+        agent: quality-gatekeeper
+        action: "*validate"
+        description: Quality Gatekeeper validates all quality criteria
+        steps:
+          - Verify test coverage (unit, integration, e2e)
+          - Run security scans (SAST, DAST, dependencies)
+          - Execute performance benchmarks
+          - Review code quality metrics
+          - Check documentation completeness
+          - Validate compliance requirements
+          - Make go/no-go recommendation
+        outputs:
+          - Quality assessment report
+          - Go/no-go recommendation
+          - List of any acceptable risks
+
+        decision_point:
+          name: Go/No-Go Decision
+          options:
+            - value: GO
+              description: All critical gates passed, proceed to deployment
+              next: phase_3_deployment_preparation
+            - value: NO_GO
+              description: Critical gates failed, must fix before deployment
+              next: fix_issues_then_revalidate
+            - value: CONDITIONAL_GO
+              description: Some gates failed with acceptable risks
+              next: document_risks_then_proceed
+
+    gates:
+      - All critical quality gates passed
+      - Go decision made and documented
+      - Any risks accepted and documented
+
+  - phase: 3_deployment_preparation
+    name: Deployment Preparation
+    description: Plan and prepare for deployment
+    duration: 2-3 hours
+    agent: deployment-coordinator
+    tasks:
+      - name: Plan Deployment Strategy
+        agent: deployment-coordinator
+        action: "*plan"
+        description: Deployment Coordinator creates detailed deployment plan
+        steps:
+          - Select deployment strategy (Blue-Green, Canary, Rolling, etc.)
+          - Plan database migration approach
+          - Create detailed deployment runbook
+          - Define rollback procedures
+          - Assign team roles
+          - Schedule deployment window
+        outputs:
+          - Deployment runbook with step-by-step commands
+          - Rollback plan
+          - Team roles assigned
+          - Deployment window scheduled
+
+      - name: Pre-Deployment Briefing
+        agent: communication-specialist
+        description: Brief all teams on deployment
+        steps:
+          - Send deployment announcement to team
+          - Brief support team on changes
+          - Notify sales/marketing of new features
+          - Update status page (scheduled maintenance if needed)
+        outputs:
+          - Team briefed and ready
+          - Stakeholders informed
+
+    gates:
+      - Deployment runbook complete
+      - Rollback plan tested
+      - Team briefed and ready
+      - Deployment window confirmed
+
+  - phase: 4_deployment_execution
+    name: Deployment Execution
+    description: Execute deployment following runbook
+    duration: 1-3 hours (varies by strategy)
+    agent: deployment-coordinator
+    tasks:
+      - name: Execute Deployment
+        agent: deployment-coordinator
+        action: "*execute"
+        description: Deployment Coordinator executes deployment
+        steps:
+          - Pre-deployment checks (health, backup, team ready)
+          - Database migration (if needed)
+          - Application deployment (following selected strategy)
+          - Smoke testing
+          - Traffic cutover
+          - Post-deployment verification
+        outputs:
+          - Deployment executed
+          - Smoke tests passed
+          - Traffic switched to new version
+          - Initial metrics healthy
+
+        monitoring:
+          - Error rates
+          - Response times
+          - Resource usage
+          - Business metrics
+
+        rollback_triggers:
+          - Error rate >5%
+          - Production completely down
+          - Core functionality broken
+          - Data corruption detected
+
+      - name: Deployment Status Updates
+        agent: communication-specialist
+        description: Provide regular status updates
+        frequency: Every 30 minutes during deployment
+        outputs:
+          - Status updates to stakeholders
+          - Incident channel active
+
+    gates:
+      - Deployment successful
+      - Smoke tests passed
+      - Metrics within acceptable range
+      - No rollback triggered
+
+  - phase: 5_post_deployment_monitoring
+    name: Post-Deployment Monitoring
+    description: Intensive monitoring and validation
+    duration: 24-48 hours
+    agent: release-manager
+    tasks:
+      - name: Monitor Release
+        agent: release-manager
+        action: "*monitor"
+        description: Release Manager coordinates monitoring
+        monitoring_schedule:
+          intensive_period:
+            duration: 4 hours
+            frequency: Every 15-30 minutes
+            metrics:
+              - Error rates
+              - Response times
+              - Resource usage
+              - User activity
+              - Support tickets
+              - Business KPIs
+
+          extended_period:
+            duration: 20 hours
+            frequency: Every 4 hours
+            metrics:
+              - Same as intensive + trend analysis
+
+          final_assessment:
+            at: 24 hours
+            actions:
+              - Generate health report
+              - Compare to baseline
+              - Document any issues
+              - Declare success or plan hotfix
+
+        outputs:
+          - Monitoring reports
+          - Issue log
+          - Health assessment
+
+      - name: Release Announcement
+        agent: communication-specialist
+        when: After 4 hours of stability
+        description: Announce release publicly
+        steps:
+          - Publish release notes
+          - Send user announcement
+          - Post on social media
+          - Update documentation site
+        outputs:
+          - Release announced
+          - Users informed
+
+    gates:
+      - 24-48 hours of stable operation
+      - Metrics within acceptable range
+      - No critical issues
+      - Users successfully using new features
+
+  - phase: 6_retrospective
+    name: Retrospective
+    description: Learn and improve from release
+    duration: 60-90 minutes
+    timing: Within 2-3 days after deployment
+    agent: release-manager
+    tasks:
+      - name: Conduct Retrospective
+        agent: release-manager
+        action: "*retrospective"
+        description: Release Manager facilitates learning session
+        steps:
+          - Gather release metrics and data
+          - Facilitate retrospective meeting
+          - Discuss what went well
+          - Identify improvements
+          - Create action items
+          - Update release plan with learnings
+        outputs:
+          - Retrospective summary
+          - Action items for next release
+          - Process improvements identified
+          - Metrics for historical comparison
+
+    gates:
+      - Retrospective conducted
+      - Learnings documented
+      - Action items created and assigned
+      - Release plan completed
+
+# Rollback procedure (can be triggered from phase 4 or 5)
+rollback:
+  name: Emergency Rollback
+  agent: deployment-coordinator
+  action: "*rollback"
+  when: |
+    Triggered if deployment fails or issues detected post-deployment:
+    - Error rate >5%
+    - Production completely down
+    - Core functionality broken
+    - Data corruption detected
+  steps:
+    - Assess severity and make rollback decision
+    - Execute rollback (method depends on deployment strategy)
+    - Verify service restoration
+    - Communicate incident
+    - Document rollback details
+    - Schedule post-mortem
+  next_steps:
+    - Investigate root cause
+    - Plan hotfix or defer features
+    - Update release plan
+    - Conduct incident retrospective
+
+# Success criteria for entire workflow
+success_criteria:
+  - Release deployed successfully
+  - No critical incidents
+  - Metrics within acceptable range
+  - Users successfully using new features
+  - Stakeholders informed throughout
+  - Learnings captured for future releases
+
+# Typical timeline
+typical_timeline:
+  day_1: Planning and scope analysis
+  day_2: Quality validation and deployment planning
+  day_3: Deployment execution and initial monitoring
+  day_4_5: Extended monitoring and validation
+  day_6_7: Retrospective and wrap-up
+
+# Key metrics to track
+metrics:
+  planning:
+    - Lead time (planning start to deployment)
+    - Scope size (number of changes)
+    - Scope change rate (items deferred)
+
+  quality:
+    - Test coverage percentage
+    - Number of critical/high vulnerabilities
+    - Performance vs baseline
+
+  deployment:
+    - Deployment duration
+    - Rollback triggered (yes/no)
+    - Downtime (if any)
+
+  post_deployment:
+    - Incidents count
+    - Hotfixes required
+    - User satisfaction
+    - Business metric impact
+
+# Related workflows
+related_workflows:
+  - hotfix-release: For emergency production fixes
+  - major-release: For breaking changes and major versions
+
+# Notes for users
+notes: |
+  This workflow provides the recommended sequence for standard releases.
+  You can adapt it to your team's needs:
+
+  - Adjust timelines based on your release complexity
+  - Skip phases that don't apply (e.g., if no database changes)
+  - Add organization-specific approval gates
+  - Customize communication templates
+  - Modify monitoring duration based on risk
+
+  The agents will guide you through each phase. You can call them directly
+  or follow this workflow sequence for a complete release process.
