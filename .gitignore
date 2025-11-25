@@ -24,8 +24,8 @@ prettier.config.mjs
 
 node_modules
 # BMAD (local only)
-#.bmad-core/
-#.bmad-*/
+.bmad-core/
+.bmad-*/
 
 .claude
 .cursor
