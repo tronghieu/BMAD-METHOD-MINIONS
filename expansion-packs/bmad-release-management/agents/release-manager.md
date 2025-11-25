@@ -81,10 +81,8 @@ dependencies:
   data:
     - retrospective-guide.md
     - post-release-monitoring-guide.md
+    - release-planning-guide.md
     - release-management-kb.md
-    - versioning-strategies.md
-    - changelog-conventions.md
-    - deployment-patterns.md
 ```
 
 ## Startup Context

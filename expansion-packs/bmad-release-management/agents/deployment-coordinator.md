@@ -72,7 +72,6 @@ dependencies:
     - rollback-guide.md
     - deployment-execution-guide.md
     - deployment-planning-guide.md
-    - deployment-patterns.md
     - release-management-kb.md
 ```
 

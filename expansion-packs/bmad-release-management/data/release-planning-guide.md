@@ -11,7 +11,7 @@ The goal of release planning is to create a single source of truth that aligns a
 This initial phase establishes the "who, what, why, and when" of the release.
 
 #### 1.1 Determine Version Number
-Consult with the user to determine the nature of the changes. Based on the changes, apply the appropriate versioning strategy as defined in `data/versioning-strategies.md`.
+Consult with the user to determine the nature of the changes. Based on the changes, apply the appropriate Semantic Versioning (SemVer) or Calendar Versioning (CalVer) strategy.
 - **Breaking changes?** → MAJOR version bump (e.g., v1.5.2 → v2.0.0)
 - **New backward-compatible features?** → MINOR version bump (e.g., v1.5.2 → v1.6.0)
 - **Only bug fixes?** → PATCH version bump (e.g., v1.5.2 → v1.5.3)
@@ -45,7 +45,7 @@ The goal of this phase is to define exactly what is and is not included in the r
 ## Phase 3: Generate Changelog
 Create a technical, commit-by-commit changelog. This is for developers and internal stakeholders.
 - **Parse Git History:** Use `git log` and conventions (e.g., Conventional Commits) to generate a raw list.
-- **Categorize Changes:** Group commits under standard headings (`Added`, `Fixed`, `Breaking Changes`, etc.) as defined in `data/changelog-conventions.md`.
+- **Categorize Changes:** Group commits under standard headings (`Added`, `Fixed`, `Breaking Changes`, etc.) based on established conventions like "Keep a Changelog".
 - **Review and Edit:** Clean up the raw log, combine related commits, and rewrite messages for clarity.
 
 ## Phase 4: Write Release Notes
@@ -64,7 +64,7 @@ This phase is owned by the `Quality Gatekeeper`. The goal is to get a formal "Go
 
 ## Phase 6: Deployment Planning
 This phase is owned by the `Deployment Coordinator`. The output is a detailed, step-by-step runbook.
-- **Select Deployment Pattern:** Choose the best strategy (Blue-Green, Canary, etc.) from `data/deployment-patterns.md` based on the release's risk profile.
+- **Select Deployment Pattern:** Choose the best deployment strategy (e.g., Blue-Green, Canary) based on the release's risk profile.
 - **Plan Database Migrations:** Detail the migration scripts, order, and rollback plan.
 - **Define Rollback Procedures:** Document the exact triggers and steps for a rollback.
 - **Create Deployment Steps:** Outline the entire deployment, phase by phase, with verification steps.

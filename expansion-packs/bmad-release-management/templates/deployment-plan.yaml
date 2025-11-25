@@ -28,7 +28,7 @@ sections:
         title: Deployment Strategy
         type: choice
         choices: [Blue-Green, Canary, Rolling, Feature-Flags, Recreate]
-        instruction: Select deployment pattern from deployment-patterns.md
+        instruction: Select the most appropriate deployment pattern (e.g., Blue-Green, Canary) based on the release's risk profile.
         elicit: true
 
       - id: pre-deployment-tasks
@@ -78,7 +78,7 @@ sections:
 metadata:
   references:
     knowledge-base:
-      - deployment-patterns.md
+      - deployment-planning-guide.md
     checklists:
       - deployment-checklist.md
       - rollback-checklist.md

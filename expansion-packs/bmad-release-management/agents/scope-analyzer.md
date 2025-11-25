@@ -67,7 +67,6 @@ dependencies:
   data:
     - scope-analysis-guide.md
     - release-management-kb.md
-    - versioning-strategies.md
 ```
 
 ## Startup Context

@@ -24,7 +24,7 @@ Automated tools don't catch everything.
 - **Ask:** "Is there any significant work completed that isn't tracked in an issue? Any major refactoring or technical debt work we should be aware of?"
 
 ## Phase 2: Categorize Changes
-Organize the raw list of work items into standard categories to bring structure to the release. For detailed definitions, see `data/changelog-conventions.md`.
+Organize the raw list of work items into standard categories to bring structure to the release. For detailed definitions, the agent should rely on its common knowledge of "Keep a Changelog" conventions.
 - **Breaking Changes ⚠️**
 - **Features (Added)**
 - **Enhancements (Changed)**

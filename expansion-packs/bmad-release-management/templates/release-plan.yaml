@@ -40,7 +40,7 @@ sections:
           - **Release Type:** {{release_type}} *(Major / Minor / Patch / Hotfix)*
           - **Target Release Date:** {{target_release_date}}
           - **Deployment Window:** {{deployment_start_time}} - {{deployment_end_time}}
-        instruction: Determine version number using versioning-strategies.md guidance
+        instruction: Determine version number using Semantic Versioning (SemVer) or Calendar Versioning (CalVer).
         elicit: true
 
       - id: release-goals
@@ -110,7 +110,7 @@ sections:
   - id: changelog
     title: Changelog (Technical)
     type: structured
-    instruction: Generate technical changelog from git history using changelog-conventions.md
+    instruction: Generate technical changelog from git history using established conventions (e.g., Conventional Commits).
     owner: release-manager
     editors: [release-manager]
     subsections:
@@ -337,9 +337,7 @@ metadata:
   references:
     knowledge-base:
       - release-management-kb.md
-      - versioning-strategies.md
-      - changelog-conventions.md
-      - deployment-patterns.md
+      - release-planning-guide.md
     checklists:
       - pre-release-checklist.md
       - deployment-checklist.md
@@ -354,13 +352,13 @@ workflow_guidance:
   planning_phase:
     - Start with release-overview to understand the "why" and "what"
     - Work through scope with Scope Analyzer for inclusion/deferral decisions
-    - Determine version number using versioning-strategies.md
-    - Generate changelog from git history using changelog-conventions.md
+    - Determine version number based on common conventions (SemVer, CalVer).
+    - Generate changelog from git history using established conventions.
     - Transform technical changelog into user-friendly release notes
 
   quality_deployment:
     - Run through pre-release-checklist.md for quality assessment
-    - Create deployment plan based on deployment-patterns.md
+    - Create deployment plan based on standard deployment patterns.
     - Select appropriate deployment strategy
     - Plan database migrations using Expand-Contract pattern
     - Create comprehensive rollback plan
@@ -394,7 +392,7 @@ interactive_guidance:
 
   agent_behaviors:
     - Ask clarifying questions when scope is unclear
-    - Suggest best practices from deployment-patterns.md
+    - Suggest best practices for deployment patterns.
     - Help assess risks objectively
     - Encourage transparency about known issues
     - Remind to involve stakeholders at key decision points

@@ -62,7 +62,6 @@ dependencies:
     - release-plan.yaml
   data:
     - release-management-kb.md
-    - changelog-conventions.md
 ```
 
 ## Startup Context

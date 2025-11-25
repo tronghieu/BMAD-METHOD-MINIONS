@@ -343,11 +343,8 @@ bmad-release-management/
 │   ├── rollback-checklist.md       # Rollback procedures
 │   └── scope-analysis-checklist.md # Systematic guide for scope analysis
 │
-├── data/                            # 4 knowledge base files
-│   ├── release-management-kb.md    # Philosophy, principles, best practices
-│   ├── versioning-strategies.md    # SemVer, CalVer, version numbering
-│   ├── changelog-conventions.md    # Keep a Changelog, Conventional Commits
-│   └── deployment-patterns.md      # Blue-Green, Canary, Rolling, etc.
+├── data/                            # 1 core knowledge base file
+│   └── release-management-kb.md    # Philosophy, principles, best practices
 │
 ├── config.yaml                      # Pack metadata
 └── README.md                        # This file
@@ -355,19 +352,18 @@ bmad-release-management/
 
 ### 📚 Total Content
 
-- **5 Agents**: ~20,000 words of agent definitions
+- **5 Agents**: ~2,000 words of agent definitions
 - **3 Workflows**: Comprehensive orchestration
-- **8 Tasks**: ~40,000 words of step-by-step guides
+- **8 Tasks**: ~4,000 words of lean, executable checklists
 - **4 Templates**: Focused documents for specific phases
-- **4 Checklists**: Validation and execution
-- **4 Knowledge Base Files**: ~20,000 words of best practices
+- **5 Checklists**: Validation and execution
+- **~10 Knowledge Base Files**: ~20,000 words of best practices and detailed guides
 
 ---
 
 ## Example Usage
 
 ### Scenario 1: Planning a Standard Release
-
 ```
 You: "We need to plan v2.1.0 release"
 
@@ -400,7 +396,6 @@ Result: Initial release plan saved to docs/releases/v2.1.0-release-plan.md (addi
 ---
 
 ### Scenario 2: Quality Gate Validation
-
 ```
 You: "Are we ready to deploy v2.1.0?"
 
@@ -437,7 +432,6 @@ All critical gates passed. I recommend proceeding with deployment."
 ---
 
 ### Scenario 3: Emergency Hotfix
-
 ```
 User: "Production is down! Users can't log in!"
 
@@ -465,7 +459,6 @@ Result: Production restored in under 2 hours, post-mortem scheduled
 ---
 
 ### Scenario 4: Major Release with Breaking Changes
-
 ```
 You: "We're planning v3.0.0 with breaking API changes"
 
@@ -492,7 +485,7 @@ minimal support burden, positive user feedback
 
 - **Start early**: Begin planning 1-2 weeks before deployment
 - **Analyze scope objectively**: Use Scope Analyzer to make inclusion/deferral decisions based on readiness, not pressure
-- **Version consistently**: Follow SemVer or CalVer consistently (see `data/versioning-strategies.md`)
+- **Version consistently**: Follow standard practices for SemVer or CalVer.
 - **Write user-focused release notes**: Explain value, not just technical changes
 
 ### 2. Quality Gates
@@ -504,7 +497,7 @@ minimal support burden, positive user feedback
 
 ### 3. Deployment
 
-- **Choose the right strategy**: Blue-Green for instant rollback, Canary for gradual rollout, Rolling for cost-effectiveness
+- **Choose the right strategy**: Blue-Green for instant rollback, Canary for gradual rollout, Rolling for cost-effectiveness.
 - **Always have rollback plan**: Test rollback procedures before deployment
 - **Monitor intensively**: First 4 hours are critical—watch metrics every 15-30 minutes
 - **Communicate proactively**: Update stakeholders every 30 minutes during deployment
@@ -558,7 +551,7 @@ minimal support burden, positive user feedback
 4. **Customize** templates and checklists for your organization:
    - Edit `templates/release-plan.yaml` with your organization's specifics
    - Adjust quality gate thresholds in `checklists/pre-release-checklist.md`
-   - Customize deployment patterns in `data/deployment-patterns.md`
+   - Review and customize the guides in `data/` to match your team's process.
 
 ---
 
@@ -566,18 +559,11 @@ minimal support burden, positive user feedback
 
 ### Versioning Strategy
 
-Choose your versioning approach in `data/versioning-strategies.md`:
-- **SemVer** (Semantic Versioning): v2.1.0 (MAJOR.MINOR.PATCH)
-- **CalVer** (Calendar Versioning): v2025.01.0 (YYYY.MM.MINOR)
+Agents will rely on their common knowledge of SemVer (v2.1.0) and CalVer (v2025.01.0). The choice between them should be based on your project's needs.
 
 ### Deployment Patterns
 
-Configure your preferred deployment strategy in `data/deployment-patterns.md`:
-- **Blue-Green**: Zero downtime, instant rollback (requires 2x infrastructure)
-- **Canary**: Gradual rollout with monitoring (5% → 25% → 50% → 100%)
-- **Rolling**: Cost-effective, brief disruption
-- **Feature Flags**: Decouple deployment from release
-- **Recreate**: Simple, downtime acceptable
+Agents will rely on their common knowledge of standard deployment patterns (Blue-Green, Canary, Rolling, etc.). You can customize the specific parameters for these strategies in your CI/CD pipelines and infrastructure configuration.
 
 ### Quality Gates
 

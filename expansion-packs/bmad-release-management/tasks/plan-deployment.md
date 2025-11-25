@@ -55,6 +55,6 @@ As the Deployment Coordinator, your goal is to create the official deployment ru
 
 ## Related Resources
 - **Methodology Guide**: `data/deployment-planning-guide.md`
-- **Pattern Library**: `data/deployment-patterns.md`
+- **Methodology Guide**: `data/deployment-planning-guide.md`
 - **Execution Checklists**: `checklists/deployment-checklist.md`, `checklists/rollback-checklist.md`
 - **Output Template**: `templates/deployment-plan.yaml`

@@ -47,4 +47,4 @@ As the Scope Analyzer, your goal is to produce a definitive list of items to be 
 ## Related Resources
 - **Execution Checklist**: `checklists/scope-analysis-checklist.md`
 - **Methodology Guide**: `data/scope-analysis-guide.md`
-- **Supporting Data**: `data/changelog-conventions.md`
+- **Supporting Data**: `data/release-management-kb.md`

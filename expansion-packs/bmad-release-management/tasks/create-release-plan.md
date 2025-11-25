@@ -60,5 +60,5 @@ This task follows a phase-based approach to ensure all aspects of the release ar
 
 ## Related Resources
 - **Primary Guide**: `data/release-planning-guide.md`
-- **Supporting Data**: `data/versioning-strategies.md`, `data/changelog-conventions.md`, `data/deployment-patterns.md`
+- **Supporting Data**: `data/release-planning-guide.md`
 - **Checklists**: `checklists/pre-release-checklist.md`, `checklists/scope-analysis-checklist.md`

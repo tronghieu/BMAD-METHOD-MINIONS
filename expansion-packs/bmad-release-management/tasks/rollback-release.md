@@ -49,4 +49,5 @@ As the Deployment Coordinator, you are now in an emergency response situation. Y
 ## Related Resources
 - **Execution Checklist**: `checklists/rollback-checklist.md`
 - **Methodology Guide**: `data/rollback-guide.md`
-- **Supporting Data**: `data/deployment-patterns.md` (for pattern-specific rollback steps)
+- **Methodology Guide**: `data/rollback-guide.md`
+- **Knowledge Base**: `data/release-management-kb.md`

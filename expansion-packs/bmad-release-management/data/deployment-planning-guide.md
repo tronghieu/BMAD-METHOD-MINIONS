@@ -14,22 +14,22 @@ A deployment plan, or runbook, is a detailed, step-by-step set of instructions f
 ## Deployment Planning Phases
 
 ### Phase 1: Select Deployment Strategy
-The first and most important decision is choosing *how* to deploy. This choice depends on the release's risk, the application's architecture, and business requirements. For detailed explanations of each pattern, refer to `data/deployment-patterns.md`.
+The first and most important decision is choosing *how* to deploy. This choice depends on the release's risk, the application's architecture, and business requirements. For detailed explanations of each pattern, the agent should rely on its built-in knowledge.
 
-- **Action:** Assess the release risk (breaking changes, user impact, rollback complexity).
-- **Action:** Select the most appropriate deployment pattern:
+- **Action**: Assess the release risk (breaking changes, user impact, rollback complexity).
+- **Action**: Select the most appropriate deployment pattern:
   - **Blue-Green:** Best for high-risk releases needing instant rollback.
   - **Canary:** Best for gradually testing new features with a subset of users.
   - **Rolling:** A good default for standard, backward-compatible releases.
   - **Feature Flags:** Best for decoupling code deployment from feature release.
   - **Recreate:** Only for non-critical systems where downtime is acceptable.
-- **Action:** Document the chosen strategy and the rationale behind it.
+- **Action**: Document the chosen strategy and the rationale behind it.
 
 ### Phase 2: Plan Database Migrations
 Database changes are often the riskiest part of a deployment.
-- **Action:** List all required database migration scripts in the order they must be executed.
-- **Action:** For breaking schema changes, plan to use the **Expand-Contract pattern** to ensure zero-downtime and rollback safety. This is detailed in `data/deployment-patterns.md`.
-- **Action:** Create and test a specific rollback plan for the database migrations. This may involve "down" migration scripts or restoring from a backup (a last resort).
+- **Action**: List all required database migration scripts in the order they must be executed.
+- **Action**: For breaking schema changes, plan to use the **Expand-Contract pattern** to ensure zero-downtime and rollback safety.
+- **Action**: Create and test a specific rollback plan for the database migrations. This may involve "down" migration scripts or restoring from a backup (a last resort).
 
 ### Phase 3: Define Deployment Phases (Create the Runbook)
 Break the entire deployment process into a clear, chronological sequence of phases and steps.
