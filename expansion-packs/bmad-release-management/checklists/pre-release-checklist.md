@@ -124,13 +124,12 @@ Use this checklist to validate that a release meets quality standards before dep
 
 ### Planning & Communication
 
-- [ ] **Release plan complete**: All sections filled in release plan document
+- [ ] **Planning documents complete**: The `release-plan`, `quality-assessment-plan`, and `deployment-plan` (runbook) are finalized and reviewed.
 - [ ] **Scope finalized**: What's in and what's deferred
 - [ ] **Version number determined**: SemVer or CalVer version selected
 - [ ] **Target date confirmed**: Release window scheduled
 - [ ] **Rollback plan documented**: How to revert if issues arise
 - [ ] **Feature flags configured**: Flags set to appropriate values
-- [ ] **Deployment runbook ready**: Step-by-step deployment guide
 
 ### Stakeholder Alignment
 

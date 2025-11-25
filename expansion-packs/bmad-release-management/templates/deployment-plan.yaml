@@ -1,0 +1,84 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: deployment-plan-template-v1
+  name: Deployment Plan Document
+  version: 1.0
+  output:
+    format: markdown
+    filename: docs/releases/{{release_version}}-deployment-plan.md
+    title: "Deployment Plan: {{release_version}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+agent_config:
+  editable_sections:
+    - deployment-plan
+
+sections:
+  - id: deployment-plan
+    title: Deployment Plan
+    type: structured
+    instruction: Detailed deployment strategy and procedures
+    owner: deployment-coordinator
+    editors: [deployment-coordinator]
+    subsections:
+      - id: deployment-strategy
+        title: Deployment Strategy
+        type: choice
+        choices: [Blue-Green, Canary, Rolling, Feature-Flags, Recreate]
+        instruction: Select deployment pattern from deployment-patterns.md
+        elicit: true
+
+      - id: pre-deployment-tasks
+        title: Pre-Deployment Tasks
+        type: checklist
+        template: |
+          **T-24 Hours:**
+          - [ ] Database backup created and verified
+          - [ ] Deployment runbook reviewed by team
+          - [ ] On-call coverage confirmed
+          - [ ] Stakeholders notified
+
+          **T-1 Hour:**
+          - [ ] Production health check completed
+          - [ ] No ongoing incidents
+          - [ ] Deployment team assembled
+        instruction: Pre-deployment checklist from deployment-checklist.md
+
+      - id: deployment-steps
+        title: Deployment Steps
+        type: numbered-list
+        instruction: Step-by-step deployment procedure with specific commands
+        elicit: true
+
+      - id: database-migrations
+        title: Database Migrations
+        type: text
+        instruction: Database migration scripts and strategy (Expand-Contract pattern)
+        elicit: true
+
+      - id: verification-steps
+        title: Verification Steps
+        type: checklist
+        template: |
+          - [ ] Health endpoints returning 200 OK
+          - [ ] Error rate < {{threshold}}%
+          - [ ] Response time < {{threshold}}ms
+          - [ ] No critical errors in logs
+        instruction: Post-deployment verification checks
+
+      - id: rollback-procedures
+        title: Rollback Procedures
+        type: text
+        instruction: Detailed rollback steps for this deployment pattern
+        elicit: true
+
+metadata:
+  references:
+    knowledge-base:
+      - deployment-patterns.md
+    checklists:
+      - deployment-checklist.md
+      - rollback-checklist.md

@@ -1,0 +1,78 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: quality-assessment-plan-template-v1
+  name: Quality Assessment Plan
+  version: 1.0
+  output:
+    format: markdown
+    filename: docs/releases/{{release_version}}-quality-assessment.md
+    title: "Quality Assessment: {{release_version}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+agent_config:
+  editable_sections:
+    - quality-assessment
+
+sections:
+  - id: quality-assessment
+    title: Quality Assessment
+    type: structured
+    instruction: Quality gate validation results
+    owner: quality-gatekeeper
+    editors: [quality-gatekeeper]
+    subsections:
+      - id: test-coverage
+        title: Test Coverage
+        type: key-value
+        template: |
+          - Unit Test Coverage: {{coverage_percentage}}% (Target: {{target_percentage}}%)
+          - Integration Tests: {{pass_count}}/{{total_count}} passing
+          - End-to-End Tests: {{pass_count}}/{{total_count}} passing
+        instruction: Report test coverage and pass rates
+
+      - id: security-scans
+        title: Security
+        type: key-value
+        template: |
+          - SAST Scan: {{scan_status}} - {{critical_count}} critical, {{high_count}} high
+          - DAST Scan: {{scan_status}} - {{critical_count}} critical, {{high_count}} high
+          - Dependency Scan: {{vulnerability_count}} vulnerabilities
+        instruction: Report security scan results
+
+      - id: performance
+        title: Performance
+        type: key-value
+        template: |
+          - Response Time (p50): {{p50_ms}}ms (Baseline: {{baseline_p50}}ms)
+          - Response Time (p95): {{p95_ms}}ms (Baseline: {{baseline_p95}}ms)
+          - Response Time (p99): {{p99_ms}}ms (Baseline: {{baseline_p99}}ms)
+        instruction: Report performance benchmarks vs baseline
+
+      - id: quality-gates
+        title: Quality Gate Status
+        type: checklist
+        template: |
+          - [ ] All tests passing
+          - [ ] No critical security vulnerabilities
+          - [ ] Performance benchmarks met
+          - [ ] Documentation complete
+          - [ ] All PRs reviewed and approved
+        instruction: Check off critical quality gates
+
+      - id: go-no-go
+        title: Go/No-Go Decision
+        type: choice
+        choices: [GO, NO-GO, CONDITIONAL-GO]
+        instruction: Final deployment decision based on quality assessment
+        owner: quality-gatekeeper
+        editors: [quality-gatekeeper, release-manager]
+
+metadata:
+  references:
+    knowledge-base:
+      - release-management-kb.md
+    checklists:
+      - pre-release-checklist.md

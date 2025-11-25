@@ -1,0 +1,72 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: retrospective-plan-template-v1
+  name: Retrospective Plan Document
+  version: 1.0
+  output:
+    format: markdown
+    filename: docs/releases/{{release_version}}-retrospective.md
+    title: "Retrospective: {{release_version}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+agent_config:
+  editable_sections:
+    - retrospective
+
+sections:
+  - id: retrospective
+    title: Retrospective
+    type: structured
+    instruction: Post-release learning and continuous improvement (conducted 2-3 days after deployment)
+    owner: release-manager
+    editors: [release-manager]
+    subsections:
+      - id: release-summary
+        title: Release Summary
+        type: key-value
+        template: |
+          - Deployment Success: {{success_status}}
+          - Lead Time: {{days}} days
+          - Deployment Time: {{minutes}} minutes
+          - Incident Count: {{count}}
+          - Rollback: {{yes_no}}
+        instruction: Summarize key release metrics
+
+      - id: what-went-well
+        title: What Went Well
+        type: bullet-list
+        instruction: Celebrate successes and identify practices to continue
+        elicit: true
+
+      - id: improvements
+        title: What Could Be Improved
+        type: bullet-list
+        instruction: Identify improvement areas with specific solutions
+        elicit: true
+
+      - id: lessons-learned
+        title: Lessons Learned
+        type: bullet-list
+        instruction: Capture key insights and unexpected learnings
+        elicit: true
+
+      - id: action-items
+        title: Action Items
+        type: table
+        columns: [Action-Item, Owner, Priority, Due-Date, Status]
+        instruction: Create specific, assigned action items for next release
+        elicit: true
+
+      - id: metrics-comparison
+        title: Metrics Comparison (Historical)
+        type: table
+        columns: [Release, Lead-Time, Deploy-Time, Incidents, Rollback]
+        instruction: Track trends over multiple releases
+
+metadata:
+  references:
+    knowledge-base:
+      - release-management-kb.md

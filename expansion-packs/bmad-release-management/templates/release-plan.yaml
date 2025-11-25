@@ -5,7 +5,7 @@ template:
   version: 1.0
   output:
     format: markdown
-    filename: docs/release/{{release_version}}-release-plan.md
+    filename: docs/releases/{{release_version}}-release-plan.md
     title: "Release Plan: {{release_version}}"
 
 workflow:
@@ -18,13 +18,10 @@ agent_config:
     - scope
     - changelog
     - release-notes
-    - quality-assessment
-    - deployment-plan
     - communications-plan
     - monitoring-plan
     - execution-log
     - post-release-monitoring
-    - retrospective
 
 sections:
   - id: release-overview
@@ -191,117 +188,6 @@ sections:
         type: bullet-list
         instruction: Document any known issues with workarounds
 
-  - id: quality-assessment
-    title: Quality Assessment
-    type: structured
-    instruction: Quality gate validation results
-    owner: quality-gatekeeper
-    editors: [quality-gatekeeper]
-    subsections:
-      - id: test-coverage
-        title: Test Coverage
-        type: key-value
-        template: |
-          - Unit Test Coverage: {{coverage_percentage}}% (Target: {{target_percentage}}%)
-          - Integration Tests: {{pass_count}}/{{total_count}} passing
-          - End-to-End Tests: {{pass_count}}/{{total_count}} passing
-        instruction: Report test coverage and pass rates
-
-      - id: security-scans
-        title: Security
-        type: key-value
-        template: |
-          - SAST Scan: {{scan_status}} - {{critical_count}} critical, {{high_count}} high
-          - DAST Scan: {{scan_status}} - {{critical_count}} critical, {{high_count}} high
-          - Dependency Scan: {{vulnerability_count}} vulnerabilities
-        instruction: Report security scan results
-
-      - id: performance
-        title: Performance
-        type: key-value
-        template: |
-          - Response Time (p50): {{p50_ms}}ms (Baseline: {{baseline_p50}}ms)
-          - Response Time (p95): {{p95_ms}}ms (Baseline: {{baseline_p95}}ms)
-          - Response Time (p99): {{p99_ms}}ms (Baseline: {{baseline_p99}}ms)
-        instruction: Report performance benchmarks vs baseline
-
-      - id: quality-gates
-        title: Quality Gate Status
-        type: checklist
-        template: |
-          - [ ] All tests passing
-          - [ ] No critical security vulnerabilities
-          - [ ] Performance benchmarks met
-          - [ ] Documentation complete
-          - [ ] All PRs reviewed and approved
-        instruction: Check off critical quality gates
-
-      - id: go-no-go
-        title: Go/No-Go Decision
-        type: choice
-        choices: [GO, NO-GO, CONDITIONAL-GO]
-        instruction: Final deployment decision based on quality assessment
-        owner: quality-gatekeeper
-        editors: [quality-gatekeeper, release-manager]
-
-  - id: deployment-plan
-    title: Deployment Plan
-    type: structured
-    instruction: Detailed deployment strategy and procedures
-    owner: deployment-coordinator
-    editors: [deployment-coordinator]
-    subsections:
-      - id: deployment-strategy
-        title: Deployment Strategy
-        type: choice
-        choices: [Blue-Green, Canary, Rolling, Feature-Flags, Recreate]
-        instruction: Select deployment pattern from deployment-patterns.md
-        elicit: true
-
-      - id: pre-deployment-tasks
-        title: Pre-Deployment Tasks
-        type: checklist
-        template: |
-          **T-24 Hours:**
-          - [ ] Database backup created and verified
-          - [ ] Deployment runbook reviewed by team
-          - [ ] On-call coverage confirmed
-          - [ ] Stakeholders notified
-
-          **T-1 Hour:**
-          - [ ] Production health check completed
-          - [ ] No ongoing incidents
-          - [ ] Deployment team assembled
-        instruction: Pre-deployment checklist from deployment-checklist.md
-
-      - id: deployment-steps
-        title: Deployment Steps
-        type: numbered-list
-        instruction: Step-by-step deployment procedure with specific commands
-        elicit: true
-
-      - id: database-migrations
-        title: Database Migrations
-        type: text
-        instruction: Database migration scripts and strategy (Expand-Contract pattern)
-        elicit: true
-
-      - id: verification-steps
-        title: Verification Steps
-        type: checklist
-        template: |
-          - [ ] Health endpoints returning 200 OK
-          - [ ] Error rate < {{threshold}}%
-          - [ ] Response time < {{threshold}}ms
-          - [ ] No critical errors in logs
-        instruction: Post-deployment verification checks
-
-      - id: rollback-procedures
-        title: Rollback Procedures
-        type: text
-        instruction: Detailed rollback steps for this deployment pattern
-        elicit: true
-
   - id: communications-plan
     title: Communications Plan
     type: structured
@@ -446,63 +332,6 @@ sections:
         type: choice
         choices: [Continue-Monitoring, Hotfix-Required, Rollback-Recommended, Stable]
         instruction: Final recommendation after monitoring period
-
-  - id: retrospective
-    title: Retrospective
-    type: structured
-    instruction: Post-release learning and continuous improvement (conducted 2-3 days after deployment)
-    owner: release-manager
-    editors: [release-manager]
-    subsections:
-      - id: release-summary
-        title: Release Summary
-        type: key-value
-        template: |
-          - Deployment Success: {{success_status}}
-          - Lead Time: {{days}} days
-          - Deployment Time: {{minutes}} minutes
-          - Incident Count: {{count}}
-          - Rollback: {{yes_no}}
-        instruction: Summarize key release metrics
-
-      - id: what-went-well
-        title: What Went Well
-        type: bullet-list
-        instruction: Celebrate successes and identify practices to continue
-        elicit: true
-
-      - id: improvements
-        title: What Could Be Improved
-        type: bullet-list
-        instruction: Identify improvement areas with specific solutions
-        elicit: true
-
-      - id: lessons-learned
-        title: Lessons Learned
-        type: bullet-list
-        instruction: Capture key insights and unexpected learnings
-        elicit: true
-
-      - id: action-items
-        title: Action Items
-        type: table
-        columns: [Action-Item, Owner, Priority, Due-Date, Status]
-        instruction: Create specific, assigned action items for next release
-        elicit: true
-
-      - id: metrics-comparison
-        title: Metrics Comparison (Historical)
-        type: table
-        columns: [Release, Lead-Time, Deploy-Time, Incidents, Rollback]
-        instruction: Track trends over multiple releases
-
-  - id: change-log
-    title: Change Log
-    type: table
-    columns: [Date, Version, Description, Author]
-    instruction: Track changes made to this release plan document
-    owner: release-manager
-    editors: [release-manager, quality-gatekeeper, deployment-coordinator, communication-specialist]
 
 metadata:
   references:

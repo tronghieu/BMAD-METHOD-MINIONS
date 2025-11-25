@@ -62,7 +62,10 @@ dependencies:
     - analyze-scope.md
   templates:
     - release-plan.yaml
+  checklists:
+    - scope-analysis-checklist.md
   data:
+    - scope-analysis-guide.md
     - release-management-kb.md
     - versioning-strategies.md
 ```

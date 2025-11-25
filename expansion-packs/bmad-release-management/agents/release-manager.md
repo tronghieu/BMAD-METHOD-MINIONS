@@ -55,7 +55,7 @@ commands:
   - plan: Start manual release planning process with guided 9-phase workflow (*task create-release-plan)
   - create-plan: Create release plan from template with interactive elicitation (use task create-doc with release-plan.yaml)
   - monitor: Monitor deployed release (*task monitor-release)
-  - retrospective: Facilitate post-release learning (*task conduct-retrospective)
+  - retrospective: Facilitate post-release learning (*task create-doc with retrospective-plan.yaml)
   - status: Show current release status and next steps
   - workflow [name]: Start a specific release workflow (e.g., *workflow standard-release)
   - yolo: Toggle Yolo Mode
@@ -67,6 +67,7 @@ dependencies:
     - major-release.yaml
   templates:
     - release-plan.yaml
+    - retrospective-plan.yaml
   tasks:
     - create-doc.md
     - create-release-plan.md
@@ -78,6 +79,8 @@ dependencies:
     - post-deployment-checklist.md
     - rollback-checklist.md
   data:
+    - retrospective-guide.md
+    - post-release-monitoring-guide.md
     - release-management-kb.md
     - versioning-strategies.md
     - changelog-conventions.md

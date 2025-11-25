@@ -63,6 +63,7 @@ dependencies:
   checklists:
     - pre-release-checklist.md
   data:
+    - quality-gates-guide.md
     - release-management-kb.md
 ```
 

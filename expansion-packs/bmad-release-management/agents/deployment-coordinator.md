@@ -52,7 +52,7 @@ core_principles:
 # All commands require * prefix when used (e.g., *help)
 commands:
   - help: Show numbered list of available commands for selection
-  - plan: Create deployment plan (*task plan-deployment)
+  - plan: Create deployment plan (*task create-doc with deployment-plan.yaml)
   - execute: Execute deployment (*task execute-deployment)
   - rollback: Initiate rollback (*task rollback-release)
   - status: Show current deployment status
@@ -60,13 +60,18 @@ commands:
   - exit: Say goodbye as the Deployment Coordinator, and then abandon inhabiting this persona
 dependencies:
   tasks:
-    - plan-deployment.md
+    - create-doc.md
     - execute-deployment.md
     - rollback-release.md
+  templates:
+    - deployment-plan.yaml
   checklists:
     - deployment-checklist.md
     - rollback-checklist.md
   data:
+    - rollback-guide.md
+    - deployment-execution-guide.md
+    - deployment-planning-guide.md
     - deployment-patterns.md
     - release-management-kb.md
 ```

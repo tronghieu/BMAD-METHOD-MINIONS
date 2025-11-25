@@ -103,7 +103,7 @@ Both approaches guide you through:
 - Planning deployment
 - Setting timeline
 
-*Both generate the same comprehensive release plan document.*
+*Both generate the initial sections of the release plan document.*
 
 ### 2. Follow the Workflow
 
@@ -330,14 +330,18 @@ bmad-release-management/
 │   ├── conduct-retrospective.md    # Structured learning sessions
 │   └── rollback-release.md         # Emergency rollback procedures
 │
-├── templates/                       # 1 comprehensive template
-│   └── release-plan.md             # All-in-one release plan document
+├── templates/                       # 4 focused templates
+│   ├── release-plan.yaml            # Main release plan (planning phases)
+│   ├── quality-assessment-plan.yaml # Quality gates validation
+│   ├── deployment-plan.yaml         # Deployment strategy and procedures
+│   └── retrospective-plan.yaml      # Post-release learning and improvements
 │
-├── checklists/                      # 4 validation checklists
+├── checklists/                      # 5 validation checklists
 │   ├── pre-release-checklist.md    # Quality gates validation
 │   ├── deployment-checklist.md     # Deployment execution steps
 │   ├── post-deployment-checklist.md # Post-deployment verification
-│   └── rollback-checklist.md       # Rollback procedures
+│   ├── rollback-checklist.md       # Rollback procedures
+│   └── scope-analysis-checklist.md # Systematic guide for scope analysis
 │
 ├── data/                            # 4 knowledge base files
 │   ├── release-management-kb.md    # Philosophy, principles, best practices
@@ -354,7 +358,7 @@ bmad-release-management/
 - **5 Agents**: ~20,000 words of agent definitions
 - **3 Workflows**: Comprehensive orchestration
 - **8 Tasks**: ~40,000 words of step-by-step guides
-- **1 Template**: All-in-one release plan
+- **4 Templates**: Focused documents for specific phases
 - **4 Checklists**: Validation and execution
 - **4 Knowledge Base Files**: ~20,000 words of best practices
 
@@ -390,7 +394,7 @@ Let me call in Nguyễn Trãi to analyze the scope..."
 
 [Communication Specialist drafts announcement]
 
-Result: Complete release plan saved to docs/release/v2.1.0-release-plan.md
+Result: Initial release plan saved to docs/releases/v2.1.0-release-plan.md (additional documents generated later in workflow)
 ```
 
 ---
@@ -552,7 +556,7 @@ minimal support burden, positive user feedback
    ```
 
 4. **Customize** templates and checklists for your organization:
-   - Edit `templates/release-plan.md` with your organization's specifics
+   - Edit `templates/release-plan.yaml` with your organization's specifics
    - Adjust quality gate thresholds in `checklists/pre-release-checklist.md`
    - Customize deployment patterns in `data/deployment-patterns.md`
 
@@ -656,10 +660,13 @@ These legendary figures inspire the strategic thinking, careful planning, and ex
 
 ### File Locations
 
-- **Release Plans**: `docs/release/v{version}-release-plan.md`
+- **Main Release Plan**: `docs/releases/v{version}-release-plan.md`
+- **Quality Assessment**: `docs/releases/v{version}-quality-assessment.md`
+- **Deployment Plans**: `docs/releases/v{version}-deployment-plan.md`
+- **Retrospective Reports**: `docs/releases/v{version}-retrospective.md`
 - **Checklists**: `checklists/*.md`
 - **Knowledge Base**: `data/*.md`
-- **Templates**: `templates/release-plan.md`
+- **Templates**: `templates/*.yaml`
 
 ---
 
