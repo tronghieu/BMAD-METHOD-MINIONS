@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.1] - 2025-11-25
+
+### Changed - Release Management Pack Optimization
+
+- **Refactored Tasks for Token Efficiency**:
+  - All verbose task files (`tasks/*.md`) in `bmad-release-management` were rewritten to be concise, high-level checklists.
+  - Detailed, instructional content was extracted into new methodology guides (`data/*.md`).
+  - This significantly reduces token consumption when agents execute tasks.
+
+- **Modularized Release Plan Templates**:
+  - The monolithic `templates/release-plan.yaml` was split into smaller, agent-specific templates for quality assessment, deployment planning, and retrospectives.
+  - `release-plan.yaml` (main planning)
+  - `quality-assessment-plan.yaml` (quality gate validation)
+  - `deployment-plan.yaml` (deployment strategy and procedures)
+  - `retrospective-plan.yaml` (post-release learning and improvements)
+
+- **Updated `README.md` and Agent Dependencies**:
+  - `README.md` was updated to accurately reflect the new modular template structure and cleaner task definitions.
+  - Agent dependencies were adjusted to point to the new guides and templates, ensuring proper execution flow.
+
+### Added - Release Management Pack Enhancements
+
+- **New Methodology Guides**:
+  - `data/release-planning-guide.md`
+  - `data/scope-analysis-guide.md`
+  - `data/quality-gates-guide.md`
+  - `data/deployment-planning-guide.md`
+  - `data/deployment-execution-guide.md`
+  - `data/post-release-monitoring-guide.md`
+  - `data/retrospective-guide.md`
+  - `data/rollback-guide.md`
+  - These guides provide the detailed context for the streamlined tasks.
+
+- **New Scope Analysis Checklist**:
+  - `checklists/scope-analysis-checklist.md` was added to standardize the process of defining a release's scope.
+
+### Removed - Token Optimization
+
+- **Common Knowledge Data Files**: Deleted `data/versioning-strategies.md`, `data/changelog-conventions.md`, and `data/deployment-patterns.md`. Agents will now rely on their inherent knowledge for these industry-standard concepts, further saving token consumption.
+
 ## [1.5.0] - 2025-10-28
 
 ### Added - Bug Management Expansion Pack
